@@ -1,0 +1,28 @@
+.projects
+    ul
+        width 100%
+        margin 0
+        padding 0
+        li
+            display block
+            width 100%
+            margin 5px 0 5px 0
+    .categories
+        li
+            display inline-block
+            width auto
+            a
+                color $color1
+                border-bottom 1px solid $color2
+                padding 0 0 5px 0
+                transition border-color 0.5s ease
+                &:hover
+                &.active
+                    border-bottom 1px solid $color1
+    section
+        width 31%
+        display inline-block
+        vertical-align top
+        @media screen and (max-width: 600px)
+            width 100%
+            display block
