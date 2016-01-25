@@ -429,6 +429,7 @@ main h2 {
 main p {
   font-size: 0.8em;
   max-width: 432px;
+  line-height: 1.2em;
 }
 .index,
 .icono {
