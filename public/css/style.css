@@ -490,6 +490,15 @@ aside.right {
   -ms-transform: rotate(90deg) translate(-100%, 0);
   transform: rotate(90deg) translate(-100%, 0);
 }
+.post {
+  color: #000;
+}
+.post img {
+  display: block;
+  width: 50%;
+  height: 50%;
+  margin: auto;
+}
 footer {
   width: 100%;
   width: 100%;
