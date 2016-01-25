@@ -499,6 +499,20 @@ aside.right {
   height: auto;
   margin: auto;
 }
+.post .video-wrapper {
+  position: relative;
+  padding-bottom: 56, 25%;
+  overflow: hidden;
+  width: 100% !important;
+  height: 0 !important;
+}
+.post .video-wrapper .iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
 footer {
   width: 100%;
   width: 100%;
