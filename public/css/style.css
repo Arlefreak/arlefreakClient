@@ -482,6 +482,16 @@ article {
   margin: 1vh 0 1vh 0;
   overflow: hidden;
 }
+.center {
+  text-align: center;
+  margin: auto;
+}
+a.center {
+  font-weight: 300;
+  display: block;
+  width: 100%;
+  margin: 20vh 0 0 0;
+}
 aside {
   display: block;
   width: 10vw;
