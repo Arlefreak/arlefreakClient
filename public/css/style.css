@@ -352,8 +352,8 @@ body .wrapper {
 }
 header {
   width: 100%;
-  height: 18.8vh;
-  padding: 6.8vh 0 0 0;
+  height: 15vh;
+  padding: 2vh 0 2vh 0;
   display: block;
   position: fixed;
   background: #fff;
@@ -413,7 +413,7 @@ header nav a.active {
   border-bottom: 1px solid #000;
 }
 main {
-  margin: 18.8vh 0 18.8vh 0;
+  margin: 15vh 0 15vh 0;
 }
 main h1,
 main h2,
@@ -462,24 +462,24 @@ main a:hover {
   width: 8vw;
   height: auto;
   position: fixed;
-  right: 1vw;
+  right: 1.5vw;
   z-index: 1;
 }
 .icono {
-  bottom: 1vw;
+  bottom: 1.5vw;
   max-width: 50px;
 }
 .index {
-  top: 1vw;
+  top: 1.5vw;
   height: 103px;
   width: auto;
 }
 article {
-  min-height: 62.4vh;
+  min-height: 70vh;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  margin: 1vh 0 1vh 0;
+  margin: 1.5vh 0 1.5vh 0;
   overflow: hidden;
 }
 .center {
@@ -487,7 +487,6 @@ article {
   margin: auto;
 }
 a.center {
-  font-weight: 300;
   display: block;
   width: 100%;
   margin: 20vh 0 0 0;
@@ -595,8 +594,8 @@ aside.right {
 footer {
   width: 100%;
   width: 100%;
-  height: 18.8vh;
-  padding: 0 0 3.8vh 0;
+  height: 15vh;
+  padding: 2vh 0 2vh 0;
   background: #fff;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;

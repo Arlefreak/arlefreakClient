@@ -2,7 +2,6 @@
 var i = 1;
 console.log(i);
 
-
 var Dispatcher = require('./dispatcher');
 var assign = require('object-assign');
 
@@ -72,3 +71,4 @@ Dispatcher.prototype = assign({}, Dispatcher.prototype, {
 });
 
 module.exports = Dispatcher;
+
