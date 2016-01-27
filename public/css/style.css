@@ -586,6 +586,12 @@ aside.right {
     display: block;
   }
 }
+.error img {
+  margin: 15vh 0 0 0;
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
 footer {
   width: 100%;
   width: 100%;
