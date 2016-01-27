@@ -11,10 +11,11 @@ var flatten     = require('gulp-flatten');
 var rename      = require('gulp-rename');
 var gulpFilter  = require('gulp-filter');
 var browserify  = require('browserify');
+var babelify    = require('babelify');
 var source      = require('vinyl-source-stream');
-var buffer      = require('vinyl-buffer');
-var sourcemaps  = require('gulp-sourcemaps');
-var gutil      = require('gulp-util');
+// var buffer      = require('vinyl-buffer');
+// var sourcemaps  = require('gulp-sourcemaps');
+var gutil       = require('gulp-util');
 var nib         = require('nib');
 var stylus      = require('gulp-stylus');
 var connect     = require('gulp-connect');
@@ -63,23 +64,21 @@ gulp.task('bower', function() {
   .pipe(gulp.dest(dest_path + '/fonts'));
 });
 
-gulp.task('browserify', function() {
-  var b = browserify({
-    entries: './src/js/app.js',
-    debug: true
-  });
 
-  return b.bundle()
-  .pipe(source('app.js'))
-  .pipe(buffer())
-  .pipe(sourcemaps.init({
-    loadMaps: true
-  }))
+gulp.task('browserify', function() {
+  return browserify()
   .on('error', gutil.log)
-  .pipe(sourcemaps.write('./'))
-  .pipe(gulp.dest('./public/js/'))
-  .pipe(connect.reload());
+  .require('./src/js/app.js', { 
+    entry: true,  
+    extensions: ['.js', 'jsx'], 
+    debug: true 
+  })
+  .transform(babelify, {presets: ["es2015", "react"]})
+  .bundle()
+  .pipe(source('bundle.js'))
+  .pipe(gulp.dest('./public/js'));
 });
+
 
 gulp.task('js', function() {
   return gulp.src(['src/js/**/*.js', '!src/js/templates/**/*.js'])
@@ -141,6 +140,7 @@ gulp.task('init', ['css', 'bower', 'react', 'img', 'html', 'files']);
 gulp.task('watch', ['css', 'react', 'img', 'html', 'connect'], function() {
   gulp.watch('src/css/**/*.styl', ['css']);
   gulp.watch('src/js/**/*.js', ['react']);
+  gulp.watch('src/js/**/*.jsx', ['react']);
   gulp.watch('src/img/**/*', ['img']);
   gulp.watch('src/*.html', ['html']);
 });

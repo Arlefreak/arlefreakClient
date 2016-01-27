@@ -14,7 +14,7 @@
 
     "node" : true,
     "browser" : true,
-
+    "esversion" : 6,
     "boss" : false,
     "curly": false,
     "debug": false,
