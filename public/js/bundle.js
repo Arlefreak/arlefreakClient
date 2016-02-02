@@ -19057,57 +19057,61 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var apiURL = 'http://api.arlefreak.com/';
 
 var ArlefreakApp = function (_React$Component) {
-  _inherits(ArlefreakApp, _React$Component);
+    _inherits(ArlefreakApp, _React$Component);
 
-  function ArlefreakApp(props) {
-    _classCallCheck(this, ArlefreakApp);
+    function ArlefreakApp(props) {
+        _classCallCheck(this, ArlefreakApp);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ArlefreakApp).call(this, props));
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ArlefreakApp).call(this, props));
 
-    _this.state = {
-      projects: [],
-      categories: []
-    };
-    return _this;
-  }
-
-  _createClass(ArlefreakApp, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      var _this2 = this;
-
-      fetch(apiURL + 'projects').then(function (response) {
-        console.log("Response:");
-        return response.json();
-      }).then(function (projects) {
-        console.log("Projects:");
-        _this2.setState({ projects: projects });
-      });
-
-      fetch(apiURL + 'projectsCategories').then(function (response) {
-        console.log("Response:");
-        return response.json();
-      }).then(function (categories) {
-        console.log("Projects:");
-        _this2.setState({ categories: categories });
-      });
+        _this.state = {
+            projects: [],
+            categories: []
+        };
+        return _this;
     }
-  }, {
-    key: 'render',
-    value: function render() {
-      if (this.state.projects.length > 0) {
-        console.log(this.state.projects);
-        return _react2.default.createElement(_list2.default, Object.assign({}, this.props, {
-          list: this.state.projects,
-          nav: this.state.categories
-        }));
-      } else {
-        return _react2.default.createElement(_loading2.default);
-      }
-    }
-  }]);
 
-  return ArlefreakApp;
+    _createClass(ArlefreakApp, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            var _this2 = this;
+
+            fetch(apiURL + 'projects').then(function (response) {
+                console.log('Response:');
+                return response.json();
+            }).then(function (projects) {
+                console.log('Projects:');
+                _this2.setState({
+                    projects: projects
+                });
+            });
+
+            fetch(apiURL + 'projectsCategories').then(function (response) {
+                console.log('Response:');
+                return response.json();
+            }).then(function (categories) {
+                console.log('Projects:');
+                _this2.setState({
+                    categories: categories
+                });
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            if (this.state.projects.length > 0) {
+                console.log(this.state.projects);
+                return _react2.default.createElement(_list2.default, Object.assign({}, this.props, {
+                    list: this.state.projects,
+                    nav: this.state.categories
+                }));
+            } else {
+                return _react2.default.createElement(_loading2.default);
+            }
+        }
+    }]);
+
+    return ArlefreakApp;
 }(_react2.default.Component);
 
 var app = _react2.default.createElement(ArlefreakApp);

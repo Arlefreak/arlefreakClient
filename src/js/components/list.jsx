@@ -1,7 +1,6 @@
 import React from 'react';
 import Row from './row.jsx';
 
-
 class List extends React.Component {
   constructor(props) {
     super(props);
