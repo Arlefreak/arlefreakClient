@@ -5,7 +5,6 @@ class Soon extends React.Component {
         return (
             <article>
                 <h1>Work in progress</h1>
-                <a href="#projects" className="center">Scroll</a>
             </article>
         );
     }
