@@ -24270,6 +24270,10 @@ var _about = require('./about.jsx');
 
 var _about2 = _interopRequireDefault(_about);
 
+var _soon = require('./soon.jsx');
+
+var _soon2 = _interopRequireDefault(_soon);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24296,6 +24300,7 @@ var Routes = function (_React$Component) {
                 _react2.default.createElement(
                     _reactRouter.Route,
                     { path: '/', component: _app2.default },
+                    _react2.default.createElement(_reactRouter.IndexRoute, { component: _soon2.default }),
                     _react2.default.createElement(_reactRouter.Route, { path: 'projects', component: _projects2.default }),
                     _react2.default.createElement(_reactRouter.Route, { path: 'about', component: _about2.default })
                 )
@@ -24308,7 +24313,7 @@ var Routes = function (_React$Component) {
 
 exports.default = Routes;
 
-},{"./about.jsx":219,"./app.jsx":220,"./projects.jsx":223,"react":214,"react-router":79}],225:[function(require,module,exports){
+},{"./about.jsx":219,"./app.jsx":220,"./projects.jsx":223,"./soon.jsx":226,"react":214,"react-router":79}],225:[function(require,module,exports){
 "use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -24359,5 +24364,60 @@ var Row = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Row;
+
+},{"react":214}],226:[function(require,module,exports){
+"use strict";
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Soon = function (_React$Component) {
+    _inherits(Soon, _React$Component);
+
+    function Soon() {
+        _classCallCheck(this, Soon);
+
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(Soon).apply(this, arguments));
+    }
+
+    _createClass(Soon, [{
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement(
+                "article",
+                null,
+                _react2.default.createElement(
+                    "h1",
+                    null,
+                    "Work in progress"
+                ),
+                _react2.default.createElement(
+                    "a",
+                    { href: "#projects", className: "center" },
+                    "Scroll"
+                )
+            );
+        }
+    }]);
+
+    return Soon;
+}(_react2.default.Component);
+
+exports.default = Soon;
 
 },{"react":214}]},{},[217]);
