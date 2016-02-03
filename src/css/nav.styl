@@ -1,0 +1,22 @@
+nav
+    display block
+    width 100%
+    margin 2vh 0 2vh 0
+    ul
+        display inline-block
+        li
+            display inline-block
+            margin 0 10px 0 0 
+
+    a
+        color $color1
+        padding 0 0 5px 0
+        text-decoration none
+        border-bottom 1px solid $color2
+        transition border-color 0.5s ease
+        font-size 0.8em
+        @media screen and (max-width: 820px)
+            font-size 0.6em
+        &:hover
+        &.active
+            border-bottom 1px solid $color1

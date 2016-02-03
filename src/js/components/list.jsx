@@ -11,6 +11,23 @@ class List extends React.Component {
         return (
             <article className="projects">
                 <h2>Projects</h2>
+                <nav>
+                    <ul>
+                        {
+                            <Row key="0" name="All" />
+                        }
+                        {
+                            this.props.nav.map((cat) => {
+                                return (
+                                    <Row
+                                        key={ cat.id }
+                                        name={ cat.name }
+                                    />
+                                );
+                            })
+                        }
+                    </ul>
+                </nav>
                 <ul>
                     {
                         this.props.list.map((single) => {

@@ -1,6 +1,9 @@
 import React from 'react';
 import List from './list.jsx';
 import Loading from './Loading.jsx';
+import fetch from 'isomorphic-fetch';
+// require('es6-promise').polyfill();
+// require('isomorphic-fetch');
 
 const apiURL = 'http://api.arlefreak.com/';
 

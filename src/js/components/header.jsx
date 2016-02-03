@@ -11,7 +11,7 @@ class Header extends React.Component {
                         <h1 className="hideMobile">Mario Carballo Zama</h1>
                     </div>
                     <nav>
-                        <ul className="menu">
+                        <ul>
                             <li><IndexLink to="/">Home</IndexLink></li>
                             <li><Link to="/about">About</Link></li>
                             <li><Link to="/projects">Projects</Link></li>
