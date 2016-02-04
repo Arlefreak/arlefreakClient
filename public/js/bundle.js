@@ -24206,7 +24206,7 @@ var routes = _react2.default.createElement(_routes2.default); // import { create
 _reactDom2.default.render(routes, document.getElementById('application'));
 
 },{"./components/routes.jsx":227,"react":215,"react-dom":52}],220:[function(require,module,exports){
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -24214,7 +24214,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -24236,13 +24236,9 @@ var Loading = function (_React$Component) {
     }
 
     _createClass(Loading, [{
-        key: 'render',
+        key: "render",
         value: function render() {
-            return _react2.default.createElement(
-                'h1',
-                null,
-                ' Loading... '
-            );
+            return _react2.default.createElement("div", { className: "sk-rotating-plane" });
         }
     }]);
 

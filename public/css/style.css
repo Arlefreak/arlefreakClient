@@ -423,6 +423,9 @@ main a {
 main a:hover {
   color: #000;
 }
+.sk-rotating-plane {
+  margin: 45vh auto 0 auto;
+}
 .index,
 .icono {
   display: block;
