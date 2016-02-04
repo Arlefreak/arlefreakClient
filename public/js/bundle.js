@@ -24238,7 +24238,7 @@ var Loading = function (_React$Component) {
     _createClass(Loading, [{
         key: "render",
         value: function render() {
-            return _react2.default.createElement("div", { className: "sk-rotating-plane" });
+            return _react2.default.createElement("div", { className: "sk-spinner sk-spinner-pulse" });
         }
     }]);
 
