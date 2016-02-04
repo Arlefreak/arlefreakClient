@@ -24429,7 +24429,7 @@ var Header = function (_React$Component) {
                                 null,
                                 _react2.default.createElement(
                                     _reactRouter.IndexLink,
-                                    { to: '/' },
+                                    { to: '/', activeClassName: 'active' },
                                     'Home'
                                 )
                             ),
@@ -24438,7 +24438,7 @@ var Header = function (_React$Component) {
                                 null,
                                 _react2.default.createElement(
                                     _reactRouter.Link,
-                                    { to: '/about' },
+                                    { to: '/about', activeClassName: 'active' },
                                     'About'
                                 )
                             ),
@@ -24447,7 +24447,7 @@ var Header = function (_React$Component) {
                                 null,
                                 _react2.default.createElement(
                                     _reactRouter.Link,
-                                    { to: '/projects' },
+                                    { to: '/projects', activeClassName: 'active' },
                                     'Projects'
                                 )
                             ),
