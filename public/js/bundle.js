@@ -24293,7 +24293,7 @@ var Loading = function (_React$Component) {
                     null,
                     "I'm Mario Carballo Zama a game and full web stack developer with great learning skills and a keen eye for UI UX, I am passionate about games with good visual style and simple and fun mechanics, I'm always looking for new technologies to learn and new projects to implement them."
                 ),
-                _react2.default.createElement("img", { className: "index hideMobile", src: "img/a.svg", alt: "Icono" })
+                _react2.default.createElement("img", { className: "index", src: "img/a.svg", alt: "Icono" })
             );
         }
     }]);
@@ -24569,7 +24569,7 @@ var List = function (_React$Component) {
                         });
                     })
                 ),
-                _react2.default.createElement('img', { className: 'index hideMobile', src: 'img/p.svg', alt: 'Icono' })
+                _react2.default.createElement('img', { className: 'index', src: 'img/p.svg', alt: 'Icono' })
             );
         }
     }]);
@@ -24670,7 +24670,7 @@ var Project = function (_React$Component) {
                             );
                         })
                     ),
-                    _react2.default.createElement('img', { className: 'index hideMobile', src: 'img/p.svg', alt: 'Icono' })
+                    _react2.default.createElement('img', { className: 'index', src: 'img/p.svg', alt: 'Icono' })
                 );
             } else {
                 return _react2.default.createElement(_Loading2.default);
@@ -24947,7 +24947,7 @@ var Soon = function (_React$Component) {
                     null,
                     "Work in progress"
                 ),
-                _react2.default.createElement("img", { className: "index hideMobile", src: "img/h.svg", alt: "Icono" })
+                _react2.default.createElement("img", { className: "index", src: "img/h.svg", alt: "Icono" })
             );
         }
     }]);

@@ -39,7 +39,7 @@ class List extends React.Component {
                                 );})
                     }
                 </ul>
-                <img className="index hideMobile" src="img/p.svg" alt="Icono"/>
+                <img className="index" src="img/p.svg" alt="Icono"/>
             </article>
         );
     }

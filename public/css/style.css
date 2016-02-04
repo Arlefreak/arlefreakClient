@@ -445,6 +445,11 @@ main a:hover {
   height: 103px;
   width: auto;
 }
+@media screen and (max-width: 820px) {
+  .index {
+    height: 33px;
+  }
+}
 article {
   min-height: 70vh;
   -webkit-box-sizing: border-box;
