@@ -14,16 +14,15 @@ class List extends React.Component {
                 <nav>
                     <ul>
                         {
-                            <Row key="0" name="All" />
-                        }
+                            <li><a href="#">All</a></li>
+                         }
                         {
                             this.props.nav.map((cat) => {
                                 return (
-                                    <Row
-                                        key={ cat.id }
-                                        name={ cat.name }
-                                    />
-                                );
+                                    <li>
+                                        <a href="#">{ cat.name }</a>
+                                    </li>
+                                    );
                             })
                         }
                     </ul>
@@ -34,13 +33,13 @@ class List extends React.Component {
                             return (
                                 <Row
                                     key={ single.id }
+                                    id={ single.id }
                                     name={ single.name }
-                                    category={ single.category }
                                 />
-                            );})
+                                );})
                     }
                 </ul>
-            </article>
+                </article>
         );
     }
 }

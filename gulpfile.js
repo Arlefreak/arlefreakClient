@@ -139,7 +139,8 @@ gulp.task('files', function() {
 gulp.task('connect', function() {
     connect.server({
         root: 'public',
-        livereload: true
+        livereload: true,
+        fallback: 'public/index.html'
     });
 });
 

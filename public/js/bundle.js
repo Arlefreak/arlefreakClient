@@ -24205,7 +24205,7 @@ var routes = _react2.default.createElement(_routes2.default); // import { create
 
 _reactDom2.default.render(routes, document.getElementById('application'));
 
-},{"./components/routes.jsx":226,"react":215,"react-dom":52}],220:[function(require,module,exports){
+},{"./components/routes.jsx":227,"react":215,"react-dom":52}],220:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -24330,6 +24330,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 var App = function (_React$Component) {
     _inherits(App, _React$Component);
@@ -24537,12 +24539,25 @@ var List = function (_React$Component) {
                     _react2.default.createElement(
                         'ul',
                         null,
-                        _react2.default.createElement(_row2.default, { key: '0', name: 'All' }),
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                'a',
+                                { href: '#' },
+                                'All'
+                            )
+                        ),
                         this.props.nav.map(function (cat) {
-                            return _react2.default.createElement(_row2.default, {
-                                key: cat.id,
-                                name: cat.name
-                            });
+                            return _react2.default.createElement(
+                                'li',
+                                null,
+                                _react2.default.createElement(
+                                    'a',
+                                    { href: '#' },
+                                    cat.name
+                                )
+                            );
                         })
                     )
                 ),
@@ -24552,8 +24567,8 @@ var List = function (_React$Component) {
                     this.props.list.map(function (single) {
                         return _react2.default.createElement(_row2.default, {
                             key: single.id,
-                            name: single.name,
-                            category: single.category
+                            id: single.id,
+                            name: single.name
                         });
                     })
                 )
@@ -24566,7 +24581,95 @@ var List = function (_React$Component) {
 
 exports.default = List;
 
-},{"./row.jsx":227,"react":215}],225:[function(require,module,exports){
+},{"./row.jsx":228,"react":215}],225:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _isomorphicFetch = require('isomorphic-fetch');
+
+var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+
+var _Loading = require('./Loading.jsx');
+
+var _Loading2 = _interopRequireDefault(_Loading);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var apiURL = 'http://api.arlefreak.com/projects/';
+
+var Project = function (_React$Component) {
+    _inherits(Project, _React$Component);
+
+    function Project(props) {
+        _classCallCheck(this, Project);
+
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Project).call(this, props));
+
+        _this.state = {
+            projec: {}
+        };
+        return _this;
+    }
+
+    _createClass(Project, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            (0, _isomorphicFetch2.default)(apiURL + this.props.params.id).then(function (response) {
+                return response.json();
+            }).then(function (project) {
+                _this2.setState({
+                    project: project
+                });
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            if (this.state.project !== undefined) {
+                console.log(this.state.project);
+                return _react2.default.createElement(
+                    'article',
+                    null,
+                    _react2.default.createElement(
+                        'h2',
+                        null,
+                        this.state.project.name
+                    ),
+                    _react2.default.createElement(
+                        'p',
+                        null,
+                        this.state.project.description
+                    )
+                );
+            } else {
+                return _react2.default.createElement(_Loading2.default);
+            }
+        }
+    }]);
+
+    return Project;
+}(_react2.default.Component);
+
+exports.default = Project;
+
+},{"./Loading.jsx":220,"isomorphic-fetch":49,"react":215}],226:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -24598,9 +24701,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// require('es6-promise').polyfill();
-// require('isomorphic-fetch');
 
 var apiURL = 'http://api.arlefreak.com/';
 
@@ -24664,7 +24764,7 @@ var Projects = function (_React$Component) {
 
 exports.default = Projects;
 
-},{"./Loading.jsx":220,"./list.jsx":224,"isomorphic-fetch":49,"react":215}],226:[function(require,module,exports){
+},{"./Loading.jsx":220,"./list.jsx":224,"isomorphic-fetch":49,"react":215}],227:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -24695,6 +24795,10 @@ var _soon = require('./soon.jsx');
 
 var _soon2 = _interopRequireDefault(_soon);
 
+var _project = require('./project.jsx');
+
+var _project2 = _interopRequireDefault(_project);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24722,7 +24826,8 @@ var Routes = function (_React$Component) {
                     _reactRouter.Route,
                     { path: '/', component: _app2.default },
                     _react2.default.createElement(_reactRouter.IndexRoute, { component: _soon2.default }),
-                    _react2.default.createElement(_reactRouter.Route, { path: 'projects', component: _projects2.default }),
+                    _react2.default.createElement(_reactRouter.Route, { path: '/projects', component: _projects2.default }),
+                    _react2.default.createElement(_reactRouter.Route, { path: '/projects/:id', component: _project2.default }),
                     _react2.default.createElement(_reactRouter.Route, { path: 'about', component: _about2.default })
                 )
             );
@@ -24734,8 +24839,8 @@ var Routes = function (_React$Component) {
 
 exports.default = Routes;
 
-},{"./about.jsx":221,"./app.jsx":222,"./projects.jsx":225,"./soon.jsx":228,"react":215,"react-router":80}],227:[function(require,module,exports){
-"use strict";
+},{"./about.jsx":221,"./app.jsx":222,"./project.jsx":225,"./projects.jsx":226,"./soon.jsx":229,"react":215,"react-router":80}],228:[function(require,module,exports){
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -24743,9 +24848,11 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _reactRouter = require('react-router');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24765,14 +24872,14 @@ var Row = function (_React$Component) {
     }
 
     _createClass(Row, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                "li",
+                'li',
                 null,
                 _react2.default.createElement(
-                    "a",
-                    { href: "/projects" },
+                    _reactRouter.Link,
+                    { to: '/projects/' + this.props.id },
                     this.props.name
                 )
             );
@@ -24784,7 +24891,7 @@ var Row = function (_React$Component) {
 
 exports.default = Row;
 
-},{"react":215}],228:[function(require,module,exports){
+},{"react":215,"react-router":80}],229:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
