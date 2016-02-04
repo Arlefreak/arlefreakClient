@@ -17,9 +17,9 @@ class List extends React.Component {
                             <li><a href="#">All</a></li>
                          }
                         {
-                            this.props.nav.map((cat) => {
+                            this.props.nav.map((cat, index) => {
                                 return (
-                                    <li>
+                                    <li key={index}>
                                         <a href="#">{ cat.name }</a>
                                     </li>
                                     );

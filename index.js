@@ -8,7 +8,7 @@ var express = require('express'),
     port = parseInt(process.env.PORT, 10) || 8000;
 
 app.use(express.static(__dirname + '/public'));
-app.get('*', function (request, response){
+app.get('/*', function (request, response){
     response.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
 
@@ -17,7 +17,6 @@ app.use(methodOverride());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-
 
 app.use(errorHandler({
     dumpExceptions: true,

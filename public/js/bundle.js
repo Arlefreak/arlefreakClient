@@ -24544,10 +24544,10 @@ var List = function (_React$Component) {
                                 'All'
                             )
                         ),
-                        this.props.nav.map(function (cat) {
+                        this.props.nav.map(function (cat, index) {
                             return _react2.default.createElement(
                                 'li',
-                                null,
+                                { key: index },
                                 _react2.default.createElement(
                                     'a',
                                     { href: '#' },
@@ -24639,10 +24639,9 @@ var Project = function (_React$Component) {
         key: 'render',
         value: function render() {
             if (this.state.project !== undefined) {
-                console.log(this.state.project);
                 return _react2.default.createElement(
                     'article',
-                    null,
+                    { className: 'projects' },
                     _react2.default.createElement(
                         'h2',
                         null,
@@ -24652,6 +24651,22 @@ var Project = function (_React$Component) {
                         'p',
                         null,
                         this.state.project.description
+                    ),
+                    _react2.default.createElement(
+                        'ul',
+                        { className: 'tags' },
+                        this.state.project.tags.map(function (single, index) {
+                            console.log(single);
+                            return _react2.default.createElement(
+                                'li',
+                                { key: index },
+                                _react2.default.createElement(
+                                    'a',
+                                    { href: '#' },
+                                    single
+                                )
+                            );
+                        })
                     )
                 );
             } else {
@@ -24817,14 +24832,15 @@ var Routes = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 _reactRouter.Router,
-                { history: _reactRouter.browserHistory },
+                { history: _reactRouter.hashHistory },
                 _react2.default.createElement(
                     _reactRouter.Route,
                     { path: '/', component: _app2.default },
                     _react2.default.createElement(_reactRouter.IndexRoute, { component: _soon2.default }),
                     _react2.default.createElement(_reactRouter.Route, { path: '/projects', component: _projects2.default }),
                     _react2.default.createElement(_reactRouter.Route, { path: '/projects/:id', component: _project2.default }),
-                    _react2.default.createElement(_reactRouter.Route, { path: 'about', component: _about2.default })
+                    _react2.default.createElement(_reactRouter.Route, { path: 'about', component: _about2.default }),
+                    _react2.default.createElement(_reactRouter.Route, { path: '*', component: _soon2.default })
                 )
             );
         }

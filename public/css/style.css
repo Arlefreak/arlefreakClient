@@ -550,15 +550,25 @@ aside.right {
   top: 0;
   left: 0;
 }
-.projects ul.vertical-list {
+.projects ul {
   width: 100%;
-  margin: 0;
   padding: 0;
+}
+.projects ul.vertical-list {
+  margin: 0;
 }
 .projects ul.vertical-list li {
   display: block;
   width: 100%;
   margin: 5px 0 5px 0;
+}
+.projects ul.tags {
+  margin: 2vh 0 2vh 0;
+  font-size: 0.8em;
+}
+.projects ul.tags li {
+  display: inline-block;
+  margin: 0 10px 0 0;
 }
 .projects section {
   width: 31%;

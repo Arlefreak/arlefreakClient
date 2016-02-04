@@ -7,8 +7,6 @@ class App extends React.Component {
         return (
             <div>
                 <Header></Header>
-                {
-                }
                 <main>
                     <div className="wrapper">
                         { this.props.children }

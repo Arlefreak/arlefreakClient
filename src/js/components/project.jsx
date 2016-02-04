@@ -27,11 +27,22 @@ class Project extends React.Component {
 
     render() {
         if (this.state.project !== undefined) {
-            console.log(this.state.project);
             return(
-                <article>
+                <article className="projects">
                     <h2>{ this.state.project.name }</h2>
                     <p>{this.state.project.description}</p>
+                    <ul className="tags">
+                        {
+                            this.state.project.tags.map((single, index) => {
+                                console.log(single);
+                                return (
+                                    <li key={index}>
+                                        <a href="#">{ single }</a>
+                                    </li>
+                                    );
+                            })
+                        }
+                    </ul>
                 </article>
             );
         } else {
