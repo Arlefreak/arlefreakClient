@@ -24248,7 +24248,7 @@ var Loading = function (_React$Component) {
 exports.default = Loading;
 
 },{"react":215}],221:[function(require,module,exports){
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -24256,7 +24256,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -24278,21 +24278,22 @@ var Loading = function (_React$Component) {
     }
 
     _createClass(Loading, [{
-        key: 'render',
+        key: "render",
         value: function render() {
             return _react2.default.createElement(
-                'article',
+                "article",
                 null,
                 _react2.default.createElement(
-                    'h2',
+                    "h2",
                     null,
-                    'About'
+                    "About"
                 ),
                 _react2.default.createElement(
-                    'p',
+                    "p",
                     null,
-                    'I\'m Mario Carballo Zama a game and full web stack developer with great learning skills and a keen eye for UI UX, I am passionate about games with good visual style and simple and fun mechanics, I\'m always looking for new technologies to learn and new projects to implement them.'
-                )
+                    "I'm Mario Carballo Zama a game and full web stack developer with great learning skills and a keen eye for UI UX, I am passionate about games with good visual style and simple and fun mechanics, I'm always looking for new technologies to learn and new projects to implement them."
+                ),
+                _react2.default.createElement("img", { className: "index hideMobile", src: "img/a.svg", alt: "Icono" })
             );
         }
     }]);
@@ -24567,7 +24568,8 @@ var List = function (_React$Component) {
                             name: single.name
                         });
                     })
-                )
+                ),
+                _react2.default.createElement('img', { className: 'index hideMobile', src: 'img/p.svg', alt: 'Icono' })
             );
         }
     }]);
@@ -24667,7 +24669,8 @@ var Project = function (_React$Component) {
                                 )
                             );
                         })
-                    )
+                    ),
+                    _react2.default.createElement('img', { className: 'index hideMobile', src: 'img/p.svg', alt: 'Icono' })
                 );
             } else {
                 return _react2.default.createElement(_Loading2.default);
@@ -24904,7 +24907,7 @@ var Row = function (_React$Component) {
 exports.default = Row;
 
 },{"react":215,"react-router":80}],229:[function(require,module,exports){
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -24912,7 +24915,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -24934,16 +24937,17 @@ var Soon = function (_React$Component) {
     }
 
     _createClass(Soon, [{
-        key: 'render',
+        key: "render",
         value: function render() {
             return _react2.default.createElement(
-                'article',
+                "article",
                 null,
                 _react2.default.createElement(
-                    'h1',
+                    "h1",
                     null,
-                    'Work in progress'
-                )
+                    "Work in progress"
+                ),
+                _react2.default.createElement("img", { className: "index hideMobile", src: "img/h.svg", alt: "Icono" })
             );
         }
     }]);

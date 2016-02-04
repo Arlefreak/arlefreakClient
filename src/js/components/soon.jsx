@@ -5,6 +5,7 @@ class Soon extends React.Component {
         return (
             <article>
                 <h1>Work in progress</h1>
+                <img className="index hideMobile" src="img/h.svg" alt="Icono"/>
             </article>
         );
     }

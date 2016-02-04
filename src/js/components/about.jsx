@@ -10,6 +10,7 @@ class Loading extends React.Component {
                     I am passionate about games with good visual style and simple and fun mechanics,
                     I'm always looking for new technologies to learn and new projects to implement them.
                 </p>
+                <img className="index hideMobile" src="img/a.svg" alt="Icono"/>
             </article>
         );
     }

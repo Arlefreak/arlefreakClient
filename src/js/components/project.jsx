@@ -43,6 +43,7 @@ class Project extends React.Component {
                             })
                         }
                     </ul>
+                    <img className="index hideMobile" src="img/p.svg" alt="Icono"/>
                 </article>
             );
         } else {
