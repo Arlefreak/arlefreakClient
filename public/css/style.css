@@ -572,7 +572,7 @@ aside.right {
   margin: 5px 0 5px 0;
 }
 .projects ul.tags {
-  margin: 2vh 0 2vh 0;
+  margin: 10px 0 10px 0;
   font-size: 0.8em;
 }
 .projects ul.tags li {
@@ -580,7 +580,7 @@ aside.right {
   margin: 0 10px 0 0;
 }
 .projects ul.links {
-  margin: 2vh 0 2vh 0;
+  margin: 10px 0 10px 0;
   font-size: 0.8em;
 }
 .projects ul.links li {
