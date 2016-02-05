@@ -399,8 +399,8 @@ main h2 {
   font-weight: 700;
   margin: 0 0 2vh 0;
   border-bottom: 1px solid;
-  height: 6vh;
-  padding: 0 0 2vh 0;
+  height: 40px;
+  padding: 0 0 10px 0;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -615,7 +615,7 @@ aside.right {
   margin: 2vh auto 0 auto;
 }
 .projects section.gallery img:first-child {
-  margin: 6vh auto 0 auto;
+  margin: 40px auto 0 auto;
 }
 .error img {
   margin: 15vh 0 0 0;
