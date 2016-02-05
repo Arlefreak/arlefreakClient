@@ -2,25 +2,36 @@ import React from 'react';
 import fetch from 'isomorphic-fetch';
 import Loading from './Loading.jsx';
 
-const apiURL = 'http://api.arlefreak.com/projects/';
+const apiURL = 'http://api.arlefreak.com/';
 
 class Project extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            projec: {}
+            projec: {},
+            links: []
         };
     }
 
     componentDidMount() {
-        fetch(apiURL + this.props.params.id)
+        fetch(apiURL + 'projects/' + this.props.params.id)
         .then((response) => {
             return response.json();
         })
         .then((project) => {
             this.setState({
                 project: project
+            });
+        });
+
+        fetch(apiURL + 'projectsLinks/?project__id=' + this.props.params.id)
+        .then((response) => {
+            return response.json();
+        })
+        .then((links) => {
+            this.setState({
+                links: links
             });
         });
     }
@@ -30,6 +41,18 @@ class Project extends React.Component {
             return(
                 <article className="projects">
                     <h2>{ this.state.project.name }</h2>
+                    <ul className="links">
+                        {
+                            this.state.links.map((single) => {
+                                console.log(single);
+                                return (
+                                    <li key={single.id}>
+                                        <a href={single.link} alt={ single.name }><img src={ single.category.image } /></a>
+                                    </li>
+                                    );
+                            })
+                        }
+                    </ul>
                     <p>{this.state.project.description}</p>
                     <ul className="tags">
                         {

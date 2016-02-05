@@ -24560,7 +24560,7 @@ var List = function (_React$Component) {
                 ),
                 _react2.default.createElement(
                     'ul',
-                    null,
+                    { className: 'vertical-list' },
                     this.props.list.map(function (single) {
                         return _react2.default.createElement(_row2.default, {
                             key: single.id,
@@ -24608,7 +24608,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var apiURL = 'http://api.arlefreak.com/projects/';
+var apiURL = 'http://api.arlefreak.com/';
 
 var Project = function (_React$Component) {
     _inherits(Project, _React$Component);
@@ -24619,7 +24619,8 @@ var Project = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Project).call(this, props));
 
         _this.state = {
-            projec: {}
+            projec: {},
+            links: []
         };
         return _this;
     }
@@ -24629,11 +24630,19 @@ var Project = function (_React$Component) {
         value: function componentDidMount() {
             var _this2 = this;
 
-            (0, _isomorphicFetch2.default)(apiURL + this.props.params.id).then(function (response) {
+            (0, _isomorphicFetch2.default)(apiURL + 'projects/' + this.props.params.id).then(function (response) {
                 return response.json();
             }).then(function (project) {
                 _this2.setState({
                     project: project
+                });
+            });
+
+            (0, _isomorphicFetch2.default)(apiURL + 'projectsLinks/?project__id=' + this.props.params.id).then(function (response) {
+                return response.json();
+            }).then(function (links) {
+                _this2.setState({
+                    links: links
                 });
             });
         }
@@ -24648,6 +24657,22 @@ var Project = function (_React$Component) {
                         'h2',
                         null,
                         this.state.project.name
+                    ),
+                    _react2.default.createElement(
+                        'ul',
+                        { className: 'links' },
+                        this.state.links.map(function (single) {
+                            console.log(single);
+                            return _react2.default.createElement(
+                                'li',
+                                { key: single.id },
+                                _react2.default.createElement(
+                                    'a',
+                                    { href: single.link, alt: single.name },
+                                    _react2.default.createElement('img', { src: single.category.image })
+                                )
+                            );
+                        })
                     ),
                     _react2.default.createElement(
                         'p',

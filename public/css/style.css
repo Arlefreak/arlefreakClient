@@ -575,6 +575,21 @@ aside.right {
   display: inline-block;
   margin: 0 10px 0 0;
 }
+.projects ul.links {
+  margin: 2vh 0 2vh 0;
+  font-size: 0.8em;
+}
+.projects ul.links li {
+  display: inline-block;
+  margin: 0 10px 0 0;
+  width: 20px;
+  height: 20px;
+}
+.projects ul.links li img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .projects section {
   width: 31%;
   display: inline-block;

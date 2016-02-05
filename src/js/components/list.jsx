@@ -27,7 +27,7 @@ class List extends React.Component {
                         }
                     </ul>
                 </nav>
-                <ul>
+                <ul className="vertical-list">
                     {
                         this.props.list.map((single) => {
                             return (
