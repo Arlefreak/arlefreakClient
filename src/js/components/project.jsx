@@ -1,6 +1,7 @@
 import React from 'react';
 import fetch from 'isomorphic-fetch';
 import Loading from './Loading.jsx';
+import Images from './images.jsx';
 
 const apiURL = 'http://api.arlefreak.com/';
 
@@ -10,7 +11,8 @@ class Project extends React.Component {
         super(props);
         this.state = {
             projec: {},
-            links: []
+            links: [],
+            gallery: []
         };
     }
 
@@ -34,38 +36,53 @@ class Project extends React.Component {
                 links: links
             });
         });
+
+        fetch(apiURL + 'images/?project__id=' + this.props.params.id + '&imgType=gal')
+        .then((response) => {
+            return response.json();
+        })
+        .then((gallery) => {
+            this.setState({
+                gallery: gallery
+            });
+        });
     }
 
     render() {
         if (this.state.project !== undefined) {
             return(
                 <article className="projects">
-                    <h2>{ this.state.project.name }</h2>
-                    <ul className="links">
-                        {
-                            this.state.links.map((single) => {
-                                console.log(single);
-                                return (
-                                    <li key={single.id}>
-                                        <a href={single.link} alt={ single.name }><img src={ single.category.image } /></a>
-                                    </li>
-                                    );
-                            })
-                        }
-                    </ul>
-                    <p>{this.state.project.description}</p>
-                    <ul className="tags">
-                        {
-                            this.state.project.tags.map((single, index) => {
-                                console.log(single);
-                                return (
-                                    <li key={index}>
-                                        <a href="#">{ single }</a>
-                                    </li>
-                                    );
-                            })
-                        }
-                    </ul>
+                    <section>
+                        <h2>{ this.state.project.name }</h2>
+                        <ul className="links">
+                            {
+                                this.state.links.map((single) => {
+                                    console.log(single);
+                                    return (
+                                        <li key={single.id}>
+                                            <a href={single.link} alt={ single.name }><img src={ single.category.image } /></a>
+                                        </li>
+                                        );
+                                })
+                            }
+                        </ul>
+                        <p>{this.state.project.description}</p>
+                        <ul className="tags">
+                            {
+                                this.state.project.tags.map((single, index) => {
+                                    console.log(single);
+                                    return (
+                                        <li key={index}>
+                                            <a href="#">{ single }</a>
+                                        </li>
+                                        );
+                                })
+                            }
+                        </ul>
+                    </section>
+                    <Images
+                        id={this.state.project.id}
+                    /> 
                     <img className="index" src="img/p.svg" alt="Icono"/>
                 </article>
             );

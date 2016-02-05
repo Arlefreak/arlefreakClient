@@ -24205,7 +24205,7 @@ var routes = _react2.default.createElement(_routes2.default); // import { create
 
 _reactDom2.default.render(routes, document.getElementById('application'));
 
-},{"./components/routes.jsx":227,"react":215,"react-dom":52}],220:[function(require,module,exports){
+},{"./components/routes.jsx":228,"react":215,"react-dom":52}],220:[function(require,module,exports){
 "use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -24495,6 +24495,92 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _isomorphicFetch = require('isomorphic-fetch');
+
+var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+
+var _Loading = require('./Loading.jsx');
+
+var _Loading2 = _interopRequireDefault(_Loading);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var apiURL = 'http://api.arlefreak.com/';
+
+var Project = function (_React$Component) {
+    _inherits(Project, _React$Component);
+
+    function Project(props) {
+        _classCallCheck(this, Project);
+
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Project).call(this, props));
+
+        _this.state = {
+            gallery: []
+        };
+        return _this;
+    }
+
+    _createClass(Project, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            (0, _isomorphicFetch2.default)(apiURL + 'images/?project__id=' + this.props.id + '&imgType=gal').then(function (response) {
+                return response.json();
+            }).then(function (gallery) {
+                _this2.setState({
+                    gallery: gallery
+                });
+            });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            console.log(this.state.gallery);
+            if (this.state.gallery !== undefined) {
+                if (this.state.gallery.length > 0) {
+                    return _react2.default.createElement(
+                        'section',
+                        { className: 'gallery' },
+                        this.state.gallery.map(function (single, index) {
+                            console.log(single);
+                            return _react2.default.createElement('img', { key: index, src: single.image });
+                        })
+                    );
+                } else {
+                    return false;
+                }
+            } else {
+                return _react2.default.createElement(_Loading2.default);
+            }
+        }
+    }]);
+
+    return Project;
+}(_react2.default.Component);
+
+exports.default = Project;
+
+},{"./Loading.jsx":220,"isomorphic-fetch":49,"react":215}],225:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
 var _row = require('./row.jsx');
 
 var _row2 = _interopRequireDefault(_row);
@@ -24579,7 +24665,7 @@ var List = function (_React$Component) {
 
 exports.default = List;
 
-},{"./row.jsx":228,"react":215}],225:[function(require,module,exports){
+},{"./row.jsx":229,"react":215}],226:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -24599,6 +24685,10 @@ var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 var _Loading = require('./Loading.jsx');
 
 var _Loading2 = _interopRequireDefault(_Loading);
+
+var _images = require('./images.jsx');
+
+var _images2 = _interopRequireDefault(_images);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24620,7 +24710,8 @@ var Project = function (_React$Component) {
 
         _this.state = {
             projec: {},
-            links: []
+            links: [],
+            gallery: []
         };
         return _this;
     }
@@ -24645,6 +24736,14 @@ var Project = function (_React$Component) {
                     links: links
                 });
             });
+
+            (0, _isomorphicFetch2.default)(apiURL + 'images/?project__id=' + this.props.params.id + '&imgType=gal').then(function (response) {
+                return response.json();
+            }).then(function (gallery) {
+                _this2.setState({
+                    gallery: gallery
+                });
+            });
         }
     }, {
         key: 'render',
@@ -24654,47 +24753,54 @@ var Project = function (_React$Component) {
                     'article',
                     { className: 'projects' },
                     _react2.default.createElement(
-                        'h2',
+                        'section',
                         null,
-                        this.state.project.name
+                        _react2.default.createElement(
+                            'h2',
+                            null,
+                            this.state.project.name
+                        ),
+                        _react2.default.createElement(
+                            'ul',
+                            { className: 'links' },
+                            this.state.links.map(function (single) {
+                                console.log(single);
+                                return _react2.default.createElement(
+                                    'li',
+                                    { key: single.id },
+                                    _react2.default.createElement(
+                                        'a',
+                                        { href: single.link, alt: single.name },
+                                        _react2.default.createElement('img', { src: single.category.image })
+                                    )
+                                );
+                            })
+                        ),
+                        _react2.default.createElement(
+                            'p',
+                            null,
+                            this.state.project.description
+                        ),
+                        _react2.default.createElement(
+                            'ul',
+                            { className: 'tags' },
+                            this.state.project.tags.map(function (single, index) {
+                                console.log(single);
+                                return _react2.default.createElement(
+                                    'li',
+                                    { key: index },
+                                    _react2.default.createElement(
+                                        'a',
+                                        { href: '#' },
+                                        single
+                                    )
+                                );
+                            })
+                        )
                     ),
-                    _react2.default.createElement(
-                        'ul',
-                        { className: 'links' },
-                        this.state.links.map(function (single) {
-                            console.log(single);
-                            return _react2.default.createElement(
-                                'li',
-                                { key: single.id },
-                                _react2.default.createElement(
-                                    'a',
-                                    { href: single.link, alt: single.name },
-                                    _react2.default.createElement('img', { src: single.category.image })
-                                )
-                            );
-                        })
-                    ),
-                    _react2.default.createElement(
-                        'p',
-                        null,
-                        this.state.project.description
-                    ),
-                    _react2.default.createElement(
-                        'ul',
-                        { className: 'tags' },
-                        this.state.project.tags.map(function (single, index) {
-                            console.log(single);
-                            return _react2.default.createElement(
-                                'li',
-                                { key: index },
-                                _react2.default.createElement(
-                                    'a',
-                                    { href: '#' },
-                                    single
-                                )
-                            );
-                        })
-                    ),
+                    _react2.default.createElement(_images2.default, {
+                        id: this.state.project.id
+                    }),
                     _react2.default.createElement('img', { className: 'index', src: 'img/p.svg', alt: 'Icono' })
                 );
             } else {
@@ -24708,7 +24814,7 @@ var Project = function (_React$Component) {
 
 exports.default = Project;
 
-},{"./Loading.jsx":220,"isomorphic-fetch":49,"react":215}],226:[function(require,module,exports){
+},{"./Loading.jsx":220,"./images.jsx":224,"isomorphic-fetch":49,"react":215}],227:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -24803,7 +24909,7 @@ var Projects = function (_React$Component) {
 
 exports.default = Projects;
 
-},{"./Loading.jsx":220,"./list.jsx":224,"isomorphic-fetch":49,"react":215}],227:[function(require,module,exports){
+},{"./Loading.jsx":220,"./list.jsx":225,"isomorphic-fetch":49,"react":215}],228:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -24879,7 +24985,7 @@ var Routes = function (_React$Component) {
 
 exports.default = Routes;
 
-},{"./about.jsx":221,"./app.jsx":222,"./project.jsx":225,"./projects.jsx":226,"./soon.jsx":229,"react":215,"react-router":80}],228:[function(require,module,exports){
+},{"./about.jsx":221,"./app.jsx":222,"./project.jsx":226,"./projects.jsx":227,"./soon.jsx":230,"react":215,"react-router":80}],229:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -24931,7 +25037,7 @@ var Row = function (_React$Component) {
 
 exports.default = Row;
 
-},{"react":215,"react-router":80}],229:[function(require,module,exports){
+},{"react":215,"react-router":80}],230:[function(require,module,exports){
 "use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
