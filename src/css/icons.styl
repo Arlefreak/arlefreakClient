@@ -1,0 +1,18 @@
+@keyframes stick {
+    0%{transform: rotate(0deg);}
+    25%{transform: rotate(25deg);}
+    50%{transform: rotate(0deg);}
+    75%{transform: rotate(-25deg);}
+    100%{transform: rotate(0deg);}
+}
+
+#stick{
+    fill: #333333;
+    transform-origin: 50% 100%;
+    transform: rotate(0deg);
+    /* animation: dash 1s ease infinite; */ 
+}
+
+svg:hover #stick{
+    animation: stick 1s ease infinite; 
+}

@@ -103,6 +103,28 @@
         </footer>
 
         <script src="js/bundle.js"></script>
+        <script src="lib/js/svg-injector.js"></script>
+        
+        <script>
+            // Elements to inject
+            var mySVGsToInject = document.querySelectorAll('img.inject-me');
+
+            // Options
+            var injectorOptions = {
+              evalScripts: 'once',
+              pngFallback: 'assets/png',
+              each: function (svg) {
+                // Callback after each SVG is injected
+                console.log('SVG injected: ' + svg.getAttribute('id'));
+              }
+            };
+
+            // Trigger the injection
+            SVGInjector(mySVGsToInject, injectorOptions, function (totalSVGsInjected) {
+              // Callback after all SVGs are injected
+              console.log('We injected ' + totalSVGsInjected + ' SVG(s)!');
+            });
+        </script>
 
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

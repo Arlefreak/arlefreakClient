@@ -2,6 +2,8 @@ import React from 'react';
 import fetch from 'isomorphic-fetch';
 import Loading from './Loading.jsx';
 import Images from './images.jsx';
+import Isvg from 'react-inlinesvg';
+
 
 const apiURL = 'http://api.arlefreak.com/';
 
@@ -60,7 +62,14 @@ class Project extends React.Component {
                                     console.log(single);
                                     return (
                                         <li key={single.id}>
-                                            <a href={single.link} alt={ single.name }><img src={ single.category.image } /></a>
+                                            <a href={single.link} alt={ single.name }>
+                                                <Isvg 
+                                                    src={ single.category.image } 
+                                                    uniquifyIDs={false}
+                                                >
+                                                    <img src={ single.category.name }/>
+                                                </Isvg>
+                                            </a>
                                         </li>
                                         );
                                 })
