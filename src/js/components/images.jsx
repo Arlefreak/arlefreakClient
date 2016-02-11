@@ -1,8 +1,9 @@
 import React from 'react';
 import fetch from 'isomorphic-fetch';
 import Loading from './Loading.jsx';
+import constants from './constants.js';
 
-const apiURL = 'http://api.arlefreak.com/';
+const apiURL = constants.APIURL;
 
 class Project extends React.Component {
 
