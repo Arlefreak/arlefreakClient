@@ -1,6 +1,6 @@
 import React from 'react';
 import List from './list.jsx';
-import Loading from './Loading.jsx';
+import Loading from './loading.jsx';
 import fetch from 'isomorphic-fetch';
 import constants from './constants.js';
 
