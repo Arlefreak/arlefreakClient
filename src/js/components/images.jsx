@@ -1,6 +1,6 @@
 import React from 'react';
 import fetch from 'isomorphic-fetch';
-import Loading from './Loading.jsx';
+import Loading from './loading.jsx';
 import constants from './constants.js';
 
 const apiURL = constants.APIURL;
