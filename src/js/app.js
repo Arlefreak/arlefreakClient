@@ -1,19 +1,23 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Routes from './components/routes.jsx';
+import { fetchPosts } from './actions/actions';
 import portfolioApp from './reducers/reducers';
-import { VisibilityFilters , setVisibilityFilter} from './actions/actions';
 
-let store = createStore( portfolioApp);
-console.log(store.getState());
-let unsubscribe = store.subscribe(() => {
-    console.log(store.getState());
-});
+const loggerMiddleware = createLogger();
 
-store.dispatch(setVisibilityFilter(VisibilityFilters.SHOW_BY_CATEGORY));
+const store = createStore(
+    portfolioApp,
+    applyMiddleware(
+        thunkMiddleware, // lets us dispatch() functions
+        loggerMiddleware // neat middleware that logs actions
+    )
+);
 
-unsubscribe();
+store.dispatch(fetchPosts());
 
 var routes = React.createElement(Routes);
 ReactDOM.render(routes, document.getElementById('application'));
