@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import App from './app.jsx';
-import Projects from './projects.jsx';
+import Projects from './projectList.jsx';
 import About from './about.jsx';
 import Soon from './soon.jsx';
 import Project from './project.jsx';

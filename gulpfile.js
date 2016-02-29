@@ -94,7 +94,6 @@ gulp.task('js', function() {
         .pipe(lint({
             devel: DEBUG
         }))
-        // .pipe(lint.reporter('jshint-stylish'))
         .pipe(lint.format())
         .pipe(gulpif(!DEBUG, uglify()))
         .pipe(concat('script.js'))

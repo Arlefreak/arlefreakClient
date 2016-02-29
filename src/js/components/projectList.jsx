@@ -1,24 +1,26 @@
-import React, { PropTypes } from 'react'
-import smallProject from './smallProject.jsx'
+import React, { PropTypes } from 'react';
+import Project from './projectRow.jsx';
 
-const ProjectList = ({ projects }) => (
-    <ul className="vertical-list">
+const ProjectList = ({ projects, onProjectClick }) => (
+    <ul>
         {
-            todos.map(project =>
-                      <smallProject
-                          key={project.id}
-                          {...project}
-                      />
-                      )
+            projects.map( project =>
+                         <Project
+                             key={project.id}
+                             {...project}
+                             onClick={() => onProjectClick(project.id)}
+                         />
+                         )
         }
     </ul>
-)
+);
 
-TodoList.propTypes = {
+ProjectList.propTypes = {
     projects: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired
-    }).isRequired).isRequired
-}
+    }).isRequired).isRequired,
+    onProjectClick: PropTypes.func.isRequired
+};
 
-export default ProjectList
+export default ProjectList;

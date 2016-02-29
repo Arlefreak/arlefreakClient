@@ -3,10 +3,11 @@ import constants from '../components/constants.js';
 const apiURL = constants.APIURL;
 
 export const SET_CATEGORY_FILTER = 'SET_CATEGORY_FILTER';
-export function setCategoryFilter(id) {
+export function setCategoryFilter(id, name) {
     return {
         type: SET_CATEGORY_FILTER,
-        id
+        id,
+        name
     };
 }
 
@@ -14,10 +15,11 @@ export const ADD_TAG_FILTER = 'ADD_TAG_FILTER';
 export const DELETE_TAG_FILTER = 'DELETE_TAG_FILTER';
 export const CLEAR_ALL_TAG_FILTERS = 'CLEAR_ALL_TAG_FILTERS';
 
-export function addTagFilter(id) {
+export function addTagFilter(id, name) {
     return { 
         type: ADD_TAG_FILTER,
-        id
+        id,
+        name
     };
 }
 
@@ -39,7 +41,7 @@ export const RECEIVE_PROJECTS = 'RECEIVE_PROJECTS';
 export function receivePosts(json) {
     return {
         type: RECEIVE_PROJECTS,
-        projects: json.data.children.map(child => child.data),
+        projects: json,
         receivedAt: Date.now()
     };
 }

@@ -1,20 +1,20 @@
 import React, { PropTypes } from 'react';
-import Category from './categoryRow.jsx';
+import Tag from './tagRow.jsx';
 
-const CategoryList = ({ tags, onTagClick }) => (
-    <ul>
+const TagList = ({ tags, onTagClick }) => (
+    <ul class="tags" >
         {
             tags.map( project =>
-                     <Category
-                         key={category.id}
-                         {...category}
-                         onClick={() => onTagClick(category.id)}
+                     <Tag
+                         key={tag.id}
+                         {...tag}
+                         onClick={() => onTagClick(tag.id)}
                      />
                      )}
                  </ul>
 );
 
-CategoryList.propTypes = {
+TagList.propTypes = {
     tags: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired
@@ -22,4 +22,4 @@ CategoryList.propTypes = {
     onTagClick: PropTypes.func.isRequired
 };
 
-export default CategoryList;
+export default TagList;
