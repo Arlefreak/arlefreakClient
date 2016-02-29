@@ -2,17 +2,20 @@ import React, { PropTypes } from 'react';
 import Project from './projectRow.jsx';
 
 const ProjectList = ({ projects, onProjectClick }) => (
-    <ul>
-        {
-            projects.map( project =>
-                         <Project
-                             key={project.id}
-                             {...project}
-                             onClick={() => onProjectClick(project.id)}
-                         />
-                         )
-        }
-    </ul>
+    <article className="projects">
+        <h2>Projects</h2>
+        <ul className="vertical-list">
+            {
+                projects.map( project =>
+                             <Project
+                                 key={project.id}
+                                 {...project}
+                                 onClick={() => onProjectClick(project.id)}
+                             />
+                             )
+            }
+        </ul>
+    </article>
 );
 
 ProjectList.propTypes = {

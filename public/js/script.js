@@ -5,11 +5,82 @@ import Routes from './components/routes.jsx';
 var routes = React.createElement(Routes);
 ReactDOM.render(routes, document.getElementById('application'));
 
+const APIURL = 'http://api.arlefreak.com/';
+module.exports = {
+    APIURL:APIURL
+};
+
 var i = 1;
 console.log(i);
 
+import { connect } from 'react-redux';
+import { setCategoryFilter } from '../actions';
+import  CategoryList from '../components/categoryList.jsx';;
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        categoryFilter: {
+            id: ownProps.id,
+            name: ownProps.name
+        }
+    };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        onClick: () => {
+            dispatch(setCategoryFilter(ownProps.id, ownProps.name));
+        }
+    };
+};
+
+const CategoryFilter = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CategoryList);
+
+export default CategoryFilter;
+
+
+import { connect } from 'react-redux';
+import ProjecList from '../components/projectList.jsx';
+
+const getVisibleProjects = (projects, category) => {
+    return projects;
+    // switch (category) {
+    //     case 'SHOW_ALL':
+    //         return todos;
+    //     case 'SHOW_COMPLETED':
+    //         return todos.filter(t => t.completed);
+    //     case 'SHOW_ACTIVE':
+    //         return todos.filter(t => !t.completed);
+    // }
+};
+
+const mapStateToProps = (state) => {
+    return {
+        projects: getVisibleProjects(state.projects.items)
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onProjectClick: (id) => {
+            console.log('project click: ' + id);
+            // dispatch(toggleTodo(id));
+        }
+    };
+};
+
+const VisibleProjects = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ProjecList);
+
+export default VisibleProjects;
+
 import fetch from 'isomorphic-fetch';
-import constants from '../components/constants.js';
+import constants from '../constants.js';
 const apiURL = constants.APIURL;
 
 export const SET_CATEGORY_FILTER = 'SET_CATEGORY_FILTER';
@@ -68,33 +139,30 @@ export function fetchPosts() {
     };
 }
 
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
+import { fetchPosts, addTagFilter, setCategoryFilter } from './actions/actions';
+import portfolioApp from './reducers/reducers';
 
-import { connect } from 'react-redux';
-import ProjectList from '../components/projectList.jsx';
+const loggerMiddleware = createLogger();
 
-const getVisibleProjects = (todos, filter) => {
-    switch (filter) {
-        case 'SHOW_ALL':
-            return todos;
-        case 'SHOW_BY_CATEGORY':
-            return todos.filter(t => t.completed);
-        case 'SHOW_BY_TAG':
-            return todos.filter(t => !t.completed);
-    }
-};
+// const store = createStore(
+//     applyMiddleware(
+//         thunkMiddleware, // lets us dispatch() functions
+//         loggerMiddleware // neat middleware that logs actions
+//     ),
+//     portfolioApp
+// );
 
-const mapStateToProps = (state) => {
-    return {
-        projects: getVisibleProjects(state.todos, state.visibilityFilter)
-    };
-};
+let store =  applyMiddleware(
+    thunkMiddleware,
+    loggerMiddleware
+)(createStore)(portfolioApp);
 
-
-const VisibleProjectList = connect(
-    mapStateToProps
-)(ProjectList);
-
-export default VisibleProjectList;
+store.dispatch(fetchPosts());
+store.dispatch(addTagFilter(1, 'phaser'));
+store.dispatch(setCategoryFilter(1, 'Games'));
 
 import { combineReducers } from 'redux';
 import { REQUEST_PROJECTS, RECEIVE_PROJECTS, SET_CATEGORY_FILTER, ADD_TAG_FILTER, DELETE_TAG_FILTER, CLEAR_ALL_TAG_FILTERS } from '../actions/actions';
@@ -163,28 +231,3 @@ const portfolioApp = combineReducers({
 });
 
 export default portfolioApp;
-
-import { createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import createLogger from 'redux-logger';
-import { fetchPosts, addTagFilter, setCategoryFilter } from './actions/actions';
-import portfolioApp from './reducers/reducers';
-
-const loggerMiddleware = createLogger();
-
-// const store = createStore(
-//     applyMiddleware(
-//         thunkMiddleware, // lets us dispatch() functions
-//         loggerMiddleware // neat middleware that logs actions
-//     ),
-//     portfolioApp
-// );
-
-let store =  applyMiddleware(
-    thunkMiddleware,
-    loggerMiddleware
-)(createStore)(portfolioApp);
-
-store.dispatch(fetchPosts());
-store.dispatch(addTagFilter(1, 'phaser'));
-store.dispatch(setCategoryFilter(1, 'Games'));

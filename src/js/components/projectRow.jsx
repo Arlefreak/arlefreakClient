@@ -3,9 +3,9 @@ import React, { PropTypes } from 'react';
 const ProjectRow = ({ onClick, name }) => (
     <li
         onClick={onClick}
-    >
-        {name}
-    </li>
+    ><a>
+            {name}
+    </a></li>
 );
 
 ProjectRow.propTypes = {

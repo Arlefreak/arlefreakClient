@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import constants from '../components/constants.js';
+import constants from '../constants.js';
 const apiURL = constants.APIURL;
 
 export const SET_CATEGORY_FILTER = 'SET_CATEGORY_FILTER';
