@@ -8,7 +8,9 @@ const LinkRow = ({ name , link, category }) => (
                 src= { category.image }
                 uniquifyIDs={false}
             >
-                <img src= "https://apiarlefreak.s3.amazonaws.com/images/Link20160218213223.svg"/>
+                <img 
+                    src= { category.image }
+                />
             </Isvg>
         </a>
     </li>

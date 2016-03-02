@@ -10,7 +10,6 @@ const mapStateToProps = (state, ownProps) => {
         isFetching: true,
         items: []
     };
-    const isFetching = projects.isFetching;
     const project = projects.items[id] || {
         id: 0,
         name: '',
@@ -25,7 +24,8 @@ const mapStateToProps = (state, ownProps) => {
         isFetching: true,
         items: []
     };
-    console.log(project.tags);
+    const isFetching = projects.isFetching && images.isFetching && links.isFetching;
+    console.log(images);
     return {
         isFetching: isFetching,
         project: project,
@@ -37,7 +37,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     const { id } = ownProps.params;
     dispatch(apiFetchIfNeeded('projectsLinks/?project__id=' + id));
-    dispatch(apiFetchIfNeeded('images/?imgType=gal&project__id' + id));
+    dispatch(apiFetchIfNeeded('images/?imgType=gal&project__id=' + id));
     return {
         onTagClick: (id) => { console.log(id); },
         onImageClick : () => { console.log('ImageClick'); }

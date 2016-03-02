@@ -8,7 +8,7 @@ const ImageList = ({ images, onImageClick }) => (
                          <Image
                              key={image.id}
                              {...image}
-                             onClick={() => onImageClick(image.id)}
+                             onImageClick={ onImageClick }
                          />
                          )
         }
@@ -18,7 +18,8 @@ const ImageList = ({ images, onImageClick }) => (
 ImageList.propTypes = {
     images: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired
+        name: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired
     }).isRequired).isRequired,
     onImageClick: PropTypes.func.isRequired
 };

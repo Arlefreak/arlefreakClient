@@ -27916,9 +27916,7 @@ var ImageList = function ImageList(_ref) {
             return _react2.default.createElement(_imageRow2.default, _extends({
                 key: image.id
             }, image, {
-                onClick: function onClick() {
-                    return onImageClick(image.id);
-                }
+                onImageClick: onImageClick
             }));
         })
     );
@@ -27927,7 +27925,8 @@ var ImageList = function ImageList(_ref) {
 ImageList.propTypes = {
     images: _react.PropTypes.arrayOf(_react.PropTypes.shape({
         id: _react.PropTypes.number.isRequired,
-        name: _react.PropTypes.string.isRequired
+        name: _react.PropTypes.string.isRequired,
+        image: _react.PropTypes.string.isRequired
     }).isRequired).isRequired,
     onImageClick: _react.PropTypes.func.isRequired
 };
@@ -27935,9 +27934,34 @@ ImageList.propTypes = {
 exports.default = ImageList;
 
 },{"./imageRow.jsx":270,"react":244}],270:[function(require,module,exports){
-"use strict";
+'use strict';
 
-},{}],271:[function(require,module,exports){
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ImageRow = function ImageRow(_ref) {
+    var name = _ref.name;
+    var image = _ref.image;
+    var onImageClick = _ref.onImageClick;
+    return _react2.default.createElement('img', { src: image, alt: name, onClick: onImageClick });
+};
+
+ImageRow.propTypes = {
+    name: _react.PropTypes.string.isRequired,
+    image: _react.PropTypes.string.isRequired,
+    onImageClick: _react.PropTypes.func.isRequired
+};
+
+exports.default = ImageRow;
+
+},{"react":244}],271:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28016,7 +28040,9 @@ var LinkRow = function LinkRow(_ref) {
                     src: category.image,
                     uniquifyIDs: false
                 },
-                _react2.default.createElement('img', { src: 'https://apiarlefreak.s3.amazonaws.com/images/Link20160218213223.svg' })
+                _react2.default.createElement('img', {
+                    src: category.image
+                })
             )
         )
     );
@@ -28786,7 +28812,6 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
         isFetching: true,
         items: []
     };
-    var isFetching = projects.isFetching;
     var project = projects.items[id] || {
         id: 0,
         name: '',
@@ -28801,7 +28826,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
         isFetching: true,
         items: []
     };
-    console.log(project.tags);
+    var isFetching = projects.isFetching && images.isFetching && links.isFetching;
+    console.log(images);
     return {
         isFetching: isFetching,
         project: project,
@@ -28814,7 +28840,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     var id = ownProps.params.id;
 
     dispatch((0, _actions.apiFetchIfNeeded)('projectsLinks/?project__id=' + id));
-    dispatch((0, _actions.apiFetchIfNeeded)('images/?imgType=gal&project__id' + id));
+    dispatch((0, _actions.apiFetchIfNeeded)('images/?imgType=gal&project__id=' + id));
     return {
         onTagClick: function onTagClick(id) {
             console.log(id);
