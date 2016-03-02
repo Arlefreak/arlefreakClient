@@ -250,18 +250,18 @@ import  TagList from '../components/tagList.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
     const { apiCalls } = state;
-    // const {
-    //     isFetching,
-    //     lastUpdated,
-    //     items: categories
-    // } = apiCalls['projectsCategories'] || {
-    //     isFetching: true,
-    //     items: []
-    // };
+    const {
+        isFetching,
+        lastUpdated,
+        items: tags
+    } = apiCalls['tags'] || {
+        isFetching: true,
+        items: []
+    };
     return {
-        tags: []
-        // isFetching,
-        // lastUpdated
+        tags: tags,
+        isFetching,
+        lastUpdated
     };
 };
 

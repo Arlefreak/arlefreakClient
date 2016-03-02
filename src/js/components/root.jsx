@@ -15,6 +15,7 @@ class Root extends Component {
         const { dispatch, children } = this.props;
         dispatch(apiFetchIfNeeded('projects'));
         dispatch(apiFetchIfNeeded('projectsCategories'));
+        dispatch(apiFetchIfNeeded('tags'));
     }
 
     render() {

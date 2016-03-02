@@ -28405,6 +28405,7 @@ var Root = function (_Component) {
 
             dispatch((0, _actions.apiFetchIfNeeded)('projects'));
             dispatch((0, _actions.apiFetchIfNeeded)('projectsCategories'));
+            dispatch((0, _actions.apiFetchIfNeeded)('tags'));
         }
     }, {
         key: 'render',
@@ -28593,10 +28594,10 @@ var TagList = function TagList(_ref) {
     return _react2.default.createElement(
         'ul',
         { className: 'tags' },
-        tags.map(function (tag, id) {
+        tags.map(function (tag) {
             return _react2.default.createElement(_tagRow2.default, {
-                key: id,
-                name: tag,
+                key: tag.id,
+                name: tag.name,
                 onClick: function onClick() {
                     return onTagClick(tag.id);
                 }
@@ -28606,11 +28607,10 @@ var TagList = function TagList(_ref) {
 };
 
 TagList.propTypes = {
-    // tags: PropTypes.arrayOf(PropTypes.shape({
-    //     id: PropTypes.number.isRequired,
-    //     name: PropTypes.string.isRequired
-    // }).isRequired).isRequired,
-    tags: _react.PropTypes.arrayOf(_react.PropTypes.string).isRequired,
+    tags: _react.PropTypes.arrayOf(_react.PropTypes.shape({
+        id: _react.PropTypes.number.isRequired,
+        name: _react.PropTypes.string.isRequired
+    }).isRequired).isRequired,
     onTagClick: _react.PropTypes.func.isRequired
 };
 
@@ -28876,19 +28876,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
     var apiCalls = state.apiCalls;
-    // const {
-    //     isFetching,
-    //     lastUpdated,
-    //     items: categories
-    // } = apiCalls['projectsCategories'] || {
-    //     isFetching: true,
-    //     items: []
-    // };
+
+    var _ref = apiCalls['tags'] || {
+        isFetching: true,
+        items: []
+    };
+
+    var isFetching = _ref.isFetching;
+    var lastUpdated = _ref.lastUpdated;
+    var tags = _ref.items;
 
     return {
-        tags: []
-        // isFetching,
-        // lastUpdated
+        tags: tags,
+        isFetching: isFetching,
+        lastUpdated: lastUpdated
     };
 };
 
