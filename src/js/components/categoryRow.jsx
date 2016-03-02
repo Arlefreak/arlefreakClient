@@ -1,16 +1,19 @@
 import React, { PropTypes } from 'react';
 
-const CategoryRow = ({ onClick, name }) => (
+const CategoryRow = ({ onClick, category, active}) => (
     <li>
-        <a onClick={ onClick }>
-            {name}
+        <a 
+            className={ active && 'active'}
+            onClick={ onClick }>
+            {category.name}
         </a>
     </li>
 );
 
 CategoryRow.propTypes = {
     onClick: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired
+    category: PropTypes.object.isRequired,
+    active: PropTypes.bool.isRequired
 };
 
 export default CategoryRow;

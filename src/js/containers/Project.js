@@ -1,22 +1,46 @@
 import { connect } from 'react-redux';
 import { setCategoryFilter } from '../actions/actions';
 import  Project from '../components/project.jsx';;
+import { apiFetchIfNeeded } from '../actions/actions';
 
 const mapStateToProps = (state, ownProps) => {
+    const { id } = ownProps.params;
+    const { apiCalls } = state;
+    const projects = apiCalls['projects'] || {
+        isFetching: true,
+        items: []
+    };
+    const isFetching = projects.isFetching;
+    const project = projects.items[id] || {
+        id: 0,
+        name: '',
+        description: '',
+        tags: []
+    };
+    const links = apiCalls['projectsLinks/?project__id=' + id] || {
+        isFetching: true,
+        items: []
+    };
+    const images = apiCalls['images/?imgType=gal&project__id=' + id] || {
+        isFetching: true,
+        items: []
+    };
+    console.log(project.tags);
     return {
-        categoryFilter: {
-            id: ownProps.id,
-            name: ownProps.name
-        },
-        categories: state.apiCalls.projectsCategories.items
+        isFetching: isFetching,
+        project: project,
+        links: links,
+        images: images
     };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
+    const { id } = ownProps.params;
+    dispatch(apiFetchIfNeeded('projectsLinks/?project__id=' + id));
+    dispatch(apiFetchIfNeeded('images/?imgType=gal&project__id' + id));
     return {
-        onCategoryClick: (id, name) => {
-            dispatch(setCategoryFilter(id, name));
-        }
+        onTagClick: (id) => { console.log(id); },
+        onImageClick : () => { console.log('ImageClick'); }
     };
 };
 

@@ -1,13 +1,15 @@
 import { connect } from 'react-redux';
-import { apiFetchIfNeeded } from '../actions/actions';
 import PortfolioV from '../components/portfolio.jsx';
 
 const mapStateToProps = (state) => {
-    return {};
-};
-
-const mapDispatchToProps = (dispatch) => {
+    const { apiCalls } = state;
+    const {
+        isFetching
+    } = apiCalls['projects'] || {
+        isFetching: true
+    };
     return {
+        isFetching
     };
 };
 

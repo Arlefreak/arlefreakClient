@@ -27537,7 +27537,7 @@ function apiFetchIfNeeded(endPoint) {
     };
 }
 
-},{"../constants.js":282,"isomorphic-fetch":61}],263:[function(require,module,exports){
+},{"../constants.js":283,"isomorphic-fetch":61}],263:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -27682,22 +27682,20 @@ var App = function (_Component) {
 
 exports.default = App;
 
-},{"../reducers/reducers":288,"./routes.jsx":278,"react":244,"react-redux":70,"redux":252,"redux-logger":245,"redux-thunk":246}],266:[function(require,module,exports){
+},{"../reducers/reducers":290,"./routes.jsx":279,"react":244,"react-redux":70,"redux":252,"redux-logger":245,"redux-thunk":246}],266:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _categoryRow = require('./categoryRow.jsx');
+var _Category = require('../containers/Category.js');
 
-var _categoryRow2 = _interopRequireDefault(_categoryRow);
+var _Category2 = _interopRequireDefault(_Category);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27711,13 +27709,13 @@ var CategoryList = function CategoryList(_ref) {
             'ul',
             null,
             categories.map(function (category) {
-                return _react2.default.createElement(_categoryRow2.default, _extends({
-                    key: category.id
-                }, category, {
+                return _react2.default.createElement(_Category2.default, {
+                    key: category.id,
+                    category: category,
                     onClick: function onClick() {
                         return onCategoryClick(category.id, category.name);
                     }
-                }));
+                });
             })
         )
     );
@@ -27733,7 +27731,7 @@ CategoryList.propTypes = {
 
 exports.default = CategoryList;
 
-},{"./categoryRow.jsx":267,"react":244}],267:[function(require,module,exports){
+},{"../containers/Category.js":284,"react":244}],267:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27748,21 +27746,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var CategoryRow = function CategoryRow(_ref) {
     var onClick = _ref.onClick;
-    var name = _ref.name;
+    var category = _ref.category;
+    var active = _ref.active;
     return _react2.default.createElement(
         'li',
         null,
         _react2.default.createElement(
             'a',
-            { onClick: onClick },
-            name
+            {
+                className: active && 'active',
+                onClick: onClick },
+            category.name
         )
     );
 };
 
 CategoryRow.propTypes = {
     onClick: _react.PropTypes.func.isRequired,
-    name: _react.PropTypes.string.isRequired
+    category: _react.PropTypes.object.isRequired,
+    active: _react.PropTypes.bool.isRequired
 };
 
 exports.default = CategoryRow;
@@ -27956,7 +27958,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var LinkList = function LinkList(_ref) {
     var links = _ref.links;
-    var onLinkClick = _ref.onLinkClick;
     return _react2.default.createElement(
         'ul',
         { className: 'links' },
@@ -27965,7 +27966,7 @@ var LinkList = function LinkList(_ref) {
                 key: link.id
             }, link, {
                 onClick: function onClick() {
-                    return onProjectClick(link.id);
+                    return onLinkClick(link.id);
                 }
             }));
         })
@@ -27975,9 +27976,9 @@ var LinkList = function LinkList(_ref) {
 LinkList.propTypes = {
     links: _react.PropTypes.arrayOf(_react.PropTypes.shape({
         id: _react.PropTypes.number.isRequired,
-        name: _react.PropTypes.string.isRequired
-    }).isRequired).isRequired,
-    onLinkClick: _react.PropTypes.func.isRequired
+        name: _react.PropTypes.string.isRequired,
+        link: _react.PropTypes.string.isRequired
+    }).isRequired).isRequired
 };
 
 exports.default = LinkList;
@@ -27999,19 +28000,20 @@ var _reactInlinesvg2 = _interopRequireDefault(_reactInlinesvg);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var CategoryRow = function CategoryRow(_ref) {
-    var onClick = _ref.onClick;
+var LinkRow = function LinkRow(_ref) {
     var name = _ref.name;
+    var link = _ref.link;
+    var category = _ref.category;
     return _react2.default.createElement(
         'li',
         null,
         _react2.default.createElement(
             'a',
-            { onClick: onClick },
+            { href: link },
             _react2.default.createElement(
                 _reactInlinesvg2.default,
                 {
-                    src: 'https://apiarlefreak.s3.amazonaws.com/images/Link20160218213223.svg',
+                    src: category.image,
                     uniquifyIDs: false
                 },
                 _react2.default.createElement('img', { src: 'https://apiarlefreak.s3.amazonaws.com/images/Link20160218213223.svg' })
@@ -28020,14 +28022,60 @@ var CategoryRow = function CategoryRow(_ref) {
     );
 };
 
-CategoryRow.propTypes = {
-    onClick: _react.PropTypes.func.isRequired,
-    name: _react.PropTypes.string.isRequired
+LinkRow.propTypes = {
+    name: _react.PropTypes.string.isRequired,
+    link: _react.PropTypes.string.isRequired,
+    category: _react.PropTypes.shape({
+        name: _react.PropTypes.string.isRequired,
+        image: _react.PropTypes.string.isRequired
+    }).isRequired
 };
 
-exports.default = CategoryRow;
+exports.default = LinkRow;
 
 },{"react":244,"react-inlinesvg":67}],273:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Loading = function (_React$Component) {
+    _inherits(Loading, _React$Component);
+
+    function Loading() {
+        _classCallCheck(this, Loading);
+
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(Loading).apply(this, arguments));
+    }
+
+    _createClass(Loading, [{
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement("div", { className: "sk-spinner sk-spinner-pulse" });
+        }
+    }]);
+
+    return Loading;
+}(_react2.default.Component);
+
+exports.default = Loading;
+
+},{"react":244}],274:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28050,41 +28098,41 @@ var _TagFilter = require('../containers/TagFilter.js');
 
 var _TagFilter2 = _interopRequireDefault(_TagFilter);
 
+var _loading = require('./loading.jsx');
+
+var _loading2 = _interopRequireDefault(_loading);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Portfolio = function Portfolio() {
+var Portfolio = function Portfolio(_ref) {
+    var isFetching = _ref.isFetching;
     return _react2.default.createElement(
         'article',
         { className: 'projects' },
-        _react2.default.createElement(
-            'h2',
+        isFetching && _react2.default.createElement(_loading2.default, null),
+        !isFetching && _react2.default.createElement(
+            'div',
             null,
-            'Projects'
+            _react2.default.createElement(
+                'h2',
+                null,
+                'Projects'
+            ),
+            _react2.default.createElement(_CategoryFilter2.default, null),
+            _react2.default.createElement(_VisibleProjects2.default, null),
+            _react2.default.createElement(_TagFilter2.default, null)
         ),
-        _react2.default.createElement(_CategoryFilter2.default, null),
-        _react2.default.createElement(_VisibleProjects2.default, null),
-        _react2.default.createElement(_TagFilter2.default, null)
+        _react2.default.createElement('img', { className: 'index', src: 'img/p.svg', alt: 'Icono' })
     );
 };
 
 Portfolio.propTypes = {
-    // projects: PropTypes.arrayOf(PropTypes.shape({
-    //     id: PropTypes.number.isRequired,
-    //     name: PropTypes.string.isRequired
-    // }).isRequired).isRequired,
-    // categories: PropTypes.arrayOf(PropTypes.shape({
-    //     id: PropTypes.number.isRequired,
-    //     name: PropTypes.string.isRequired
-    // }).isRequired).isRequired,
-    // tags: PropTypes.arrayOf(PropTypes.shape({
-    //     id: PropTypes.number.isRequired,
-    //     name: PropTypes.string.isRequired
-    // }).isRequired).isRequired
+    isFetching: _react.PropTypes.bool
 };
 
 exports.default = Portfolio;
 
-},{"../containers/CategoryFilter.js":283,"../containers/TagFilter.js":286,"../containers/VisibleProjects.js":287,"react":244}],274:[function(require,module,exports){
+},{"../containers/CategoryFilter.js":285,"../containers/TagFilter.js":288,"../containers/VisibleProjects.js":289,"./loading.jsx":273,"react":244}],275:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28111,65 +28159,84 @@ var _tagList = require('./tagList.jsx');
 
 var _tagList2 = _interopRequireDefault(_tagList);
 
+var _loading = require('./loading.jsx');
+
+var _loading2 = _interopRequireDefault(_loading);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Project = function Project(_ref) {
+    var isFetching = _ref.isFetching;
     var project = _ref.project;
     var links = _ref.links;
-    var tags = _ref.tags;
     var images = _ref.images;
+    var onTagClick = _ref.onTagClick;
+    var onImageClick = _ref.onImageClick;
     return _react2.default.createElement(
         'article',
         { className: 'projects' },
-        _react2.default.createElement(
-            'section',
+        isFetching && _react2.default.createElement(_loading2.default, null),
+        !isFetching && _react2.default.createElement(
+            'div',
             null,
             _react2.default.createElement(
-                'h2',
+                'section',
                 null,
-                project.name
+                _react2.default.createElement(
+                    'h2',
+                    null,
+                    project.name
+                ),
+                _react2.default.createElement(_linkList2.default, {
+                    links: links.items
+                }),
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    project.description
+                ),
+                _react2.default.createElement(_tagList2.default, {
+                    tags: project.tags,
+                    onTagClick: onTagClick
+                })
             ),
-            _react2.default.createElement(_linkList2.default, {
-                links: links
+            _react2.default.createElement(_imageList2.default, {
+                images: images.items,
+                onImageClick: onImageClick
             }),
-            _react2.default.createElement(
-                'p',
-                null,
-                project.description
-            ),
-            _react2.default.createElement(_tagList2.default, {
-                tags: tags
-            })
-        ),
-        _react2.default.createElement(_imageList2.default, {
-            images: images
-        }),
-        _react2.default.createElement('img', { className: 'index', src: 'img/p.svg', alt: 'Icono' })
+            _react2.default.createElement('img', { className: 'index', src: 'img/p.svg', alt: 'Icono' })
+        )
     );
 };
 
 Project.propTypes = {
+    isFetching: _react.PropTypes.bool.isRequired,
     project: _react.PropTypes.shape({
         id: _react.PropTypes.number.isRequired,
         name: _react.PropTypes.string.isRequired,
-        description: _react.PropTypes.string.isRequired
+        description: _react.PropTypes.string.isRequired,
+        tags: _react.PropTypes.array.isRequired
+    }).isRequired,
+    links: _react.PropTypes.shape({
+        isFetching: _react.PropTypes.bool.isRequired,
+        items: _react.PropTypes.arrayOf(_react.PropTypes.shape({
+            id: _react.PropTypes.number.isRequired,
+            name: _react.PropTypes.string.isRequired
+        }).isRequired).isRequired
     }),
-    links: _react.PropTypes.arrayOf(_react.PropTypes.shape({
-        id: _react.PropTypes.number.isRequired,
-        name: _react.PropTypes.string.isRequired
-    }).isRequired).isRequired,
-    tags: _react.PropTypes.arrayOf(_react.PropTypes.shape({
-        id: _react.PropTypes.number.isRequired,
-        name: _react.PropTypes.string.isRequired
-    }).isRequired).isRequired,
-    images: _react.PropTypes.arrayOf(_react.PropTypes.shape({
-        id: _react.PropTypes.number.isRequired,
-        name: _react.PropTypes.string.isRequired
-    }).isRequired).isRequired
+    images: _react.PropTypes.shape({
+        isFetching: _react.PropTypes.bool.isRequired,
+        items: _react.PropTypes.arrayOf(_react.PropTypes.shape({
+            id: _react.PropTypes.number.isRequired,
+            name: _react.PropTypes.string.isRequired
+        }).isRequired).isRequired
+    }),
+    onTagClick: _react.PropTypes.func.isRequired,
+    onImageClick: _react.PropTypes.func.isRequired
 };
 exports.default = Project;
 
-},{"./imageList.jsx":269,"./linkList.jsx":271,"./tagList.jsx":280,"react":244,"react-inlinesvg":67}],275:[function(require,module,exports){
+},{"./imageList.jsx":269,"./linkList.jsx":271,"./loading.jsx":273,"./tagList.jsx":281,"react":244,"react-inlinesvg":67}],276:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28186,10 +28253,15 @@ var _projectRow = require('./projectRow.jsx');
 
 var _projectRow2 = _interopRequireDefault(_projectRow);
 
+var _loading = require('./loading.jsx');
+
+var _loading2 = _interopRequireDefault(_loading);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ProjectList = function ProjectList(_ref) {
     var projects = _ref.projects;
+    var isFetching = _ref.isFetching;
     return _react2.default.createElement(
         'ul',
         { className: 'vertical-list' },
@@ -28211,12 +28283,13 @@ ProjectList.propTypes = {
     projects: _react.PropTypes.arrayOf(_react.PropTypes.shape({
         id: _react.PropTypes.number.isRequired,
         name: _react.PropTypes.string.isRequired
-    }).isRequired).isRequired
+    }).isRequired).isRequired,
+    isFetching: _react.PropTypes.bool
 };
 
 exports.default = ProjectList;
 
-},{"./projectRow.jsx":276,"react":244}],276:[function(require,module,exports){
+},{"./loading.jsx":273,"./projectRow.jsx":277,"react":244}],277:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28252,7 +28325,7 @@ ProjectRow.propTypes = {
 
 exports.default = ProjectRow;
 
-},{"react":244,"react-router":104}],277:[function(require,module,exports){
+},{"react":244,"react-router":104}],278:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28344,7 +28417,7 @@ Root.propTypes = {
 
 exports.default = (0, _reactRedux.connect)()(Root);
 
-},{"../actions/actions":262,"./header.jsx":268,"react":244,"react-addons-css-transition-group":65,"react-redux":70,"redux":252}],278:[function(require,module,exports){
+},{"../actions/actions":262,"./header.jsx":268,"react":244,"react-addons-css-transition-group":65,"react-redux":70,"redux":252}],279:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28420,7 +28493,7 @@ var Routes = function (_Component) {
 
 exports.default = Routes;
 
-},{"../containers/Portfolio.js":284,"../containers/Project.js":285,"./about.jsx":264,"./root.jsx":277,"./soon.jsx":279,"react":244,"react-router":104}],279:[function(require,module,exports){
+},{"../containers/Portfolio.js":286,"../containers/Project.js":287,"./about.jsx":264,"./root.jsx":278,"./soon.jsx":280,"react":244,"react-router":104}],280:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28471,14 +28544,12 @@ var Soon = function (_React$Component) {
 
 exports.default = Soon;
 
-},{"react":244}],280:[function(require,module,exports){
+},{"react":244}],281:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = require('react');
 
@@ -28496,29 +28567,30 @@ var TagList = function TagList(_ref) {
     return _react2.default.createElement(
         'ul',
         { className: 'tags' },
-        tags.map(function (tag) {
-            return _react2.default.createElement(_tagRow2.default, _extends({
-                key: tag.id
-            }, tag, {
+        tags.map(function (tag, id) {
+            return _react2.default.createElement(_tagRow2.default, {
+                key: id,
+                name: tag,
                 onClick: function onClick() {
                     return onTagClick(tag.id);
                 }
-            }));
+            });
         })
     );
 };
 
 TagList.propTypes = {
-    tags: _react.PropTypes.arrayOf(_react.PropTypes.shape({
-        id: _react.PropTypes.number.isRequired,
-        name: _react.PropTypes.string.isRequired
-    }).isRequired).isRequired,
+    // tags: PropTypes.arrayOf(PropTypes.shape({
+    //     id: PropTypes.number.isRequired,
+    //     name: PropTypes.string.isRequired
+    // }).isRequired).isRequired,
+    tags: _react.PropTypes.arrayOf(_react.PropTypes.string).isRequired,
     onTagClick: _react.PropTypes.func.isRequired
 };
 
 exports.default = TagList;
 
-},{"./tagRow.jsx":281,"react":244}],281:[function(require,module,exports){
+},{"./tagRow.jsx":282,"react":244}],282:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28532,29 +28604,25 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var TagRow = function TagRow(_ref) {
-    var onClick = _ref.onClick;
     var name = _ref.name;
     return _react2.default.createElement(
         'li',
         null,
         _react2.default.createElement(
             'a',
-            {
-                onClick: onClick
-            },
+            null,
             name
         )
     );
 };
 
 TagRow.propTypes = {
-    onClick: _react.PropTypes.func.isRequired,
     name: _react.PropTypes.string.isRequired
 };
 
 exports.default = TagRow;
 
-},{"react":244}],282:[function(require,module,exports){
+},{"react":244}],283:[function(require,module,exports){
 'use strict';
 
 var APIURL = 'http://api.arlefreak.com/';
@@ -28562,7 +28630,46 @@ module.exports = {
     APIURL: APIURL
 };
 
-},{}],283:[function(require,module,exports){
+},{}],284:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _reactRedux = require('react-redux');
+
+var _categoryRow = require('../components/categoryRow.jsx');
+
+var _categoryRow2 = _interopRequireDefault(_categoryRow);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+;
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+    var apiCalls = state.apiCalls;
+    var categoryFilter = state.categoryFilter;
+    var category = ownProps.category;
+
+    var active = false;
+
+    if (categoryFilter) {
+        if (categoryFilter.id === category.id) {
+            active = true;
+        }
+    }
+    return {
+        category: category,
+        active: active
+    };
+};
+
+var Category = (0, _reactRedux.connect)(mapStateToProps)(_categoryRow2.default);
+
+exports.default = Category;
+
+},{"../components/categoryRow.jsx":267,"react-redux":70}],285:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28583,6 +28690,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
     var apiCalls = state.apiCalls;
+    var categoryFilter = state.categoryFilter;
 
     var _ref = apiCalls['projectsCategories'] || {
         isFetching: true,
@@ -28618,7 +28726,7 @@ var CategoryFilter = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProp
 
 exports.default = CategoryFilter;
 
-},{"../actions/actions":262,"../components/categoryList.jsx":266,"react-redux":70}],284:[function(require,module,exports){
+},{"../actions/actions":262,"../components/categoryList.jsx":266,"react-redux":70}],286:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28627,8 +28735,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _reactRedux = require('react-redux');
 
-var _actions = require('../actions/actions');
-
 var _portfolio = require('../components/portfolio.jsx');
 
 var _portfolio2 = _interopRequireDefault(_portfolio);
@@ -28636,18 +28742,24 @@ var _portfolio2 = _interopRequireDefault(_portfolio);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
-    return {};
-};
+    var apiCalls = state.apiCalls;
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-    return {};
+    var _ref = apiCalls['projects'] || {
+        isFetching: true
+    };
+
+    var isFetching = _ref.isFetching;
+
+    return {
+        isFetching: isFetching
+    };
 };
 
 var Portfolio = (0, _reactRedux.connect)(mapStateToProps)(_portfolio2.default);
 
 exports.default = Portfolio;
 
-},{"../actions/actions":262,"../components/portfolio.jsx":273,"react-redux":70}],285:[function(require,module,exports){
+},{"../components/portfolio.jsx":274,"react-redux":70}],287:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28667,19 +28779,48 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 ;
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+    var id = ownProps.params.id;
+    var apiCalls = state.apiCalls;
+
+    var projects = apiCalls['projects'] || {
+        isFetching: true,
+        items: []
+    };
+    var isFetching = projects.isFetching;
+    var project = projects.items[id] || {
+        id: 0,
+        name: '',
+        description: '',
+        tags: []
+    };
+    var links = apiCalls['projectsLinks/?project__id=' + id] || {
+        isFetching: true,
+        items: []
+    };
+    var images = apiCalls['images/?imgType=gal&project__id=' + id] || {
+        isFetching: true,
+        items: []
+    };
+    console.log(project.tags);
     return {
-        categoryFilter: {
-            id: ownProps.id,
-            name: ownProps.name
-        },
-        categories: state.apiCalls.projectsCategories.items
+        isFetching: isFetching,
+        project: project,
+        links: links,
+        images: images
     };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+    var id = ownProps.params.id;
+
+    dispatch((0, _actions.apiFetchIfNeeded)('projectsLinks/?project__id=' + id));
+    dispatch((0, _actions.apiFetchIfNeeded)('images/?imgType=gal&project__id' + id));
     return {
-        onCategoryClick: function onCategoryClick(id, name) {
-            dispatch((0, _actions.setCategoryFilter)(id, name));
+        onTagClick: function onTagClick(id) {
+            console.log(id);
+        },
+        onImageClick: function onImageClick() {
+            console.log('ImageClick');
         }
     };
 };
@@ -28688,7 +28829,7 @@ var ProjectV = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_pr
 
 exports.default = ProjectV;
 
-},{"../actions/actions":262,"../components/project.jsx":274,"react-redux":70}],286:[function(require,module,exports){
+},{"../actions/actions":262,"../components/project.jsx":275,"react-redux":70}],288:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28737,7 +28878,7 @@ var TagFilter = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_t
 
 exports.default = TagFilter;
 
-},{"../actions/actions":262,"../components/tagList.jsx":280,"react-redux":70}],287:[function(require,module,exports){
+},{"../actions/actions":262,"../components/tagList.jsx":281,"react-redux":70}],289:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28791,7 +28932,7 @@ var VisibleProjects = (0, _reactRedux.connect)(mapStateToProps)(_projectList2.de
 
 exports.default = VisibleProjects;
 
-},{"../components/projectList.jsx":275,"react-redux":70}],288:[function(require,module,exports){
+},{"../components/projectList.jsx":276,"react-redux":70}],290:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

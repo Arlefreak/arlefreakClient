@@ -1,9 +1,8 @@
 import React, { PropTypes } from 'react';
 
-const TagRow = ({ onClick, name }) => (
+const TagRow = ({ name }) => (
     <li>
         <a
-            onClick={onClick}
         >
             {name}
         </a>
@@ -11,7 +10,6 @@ const TagRow = ({ onClick, name }) => (
 );
 
 TagRow.propTypes = {
-    onClick: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired
 };
 

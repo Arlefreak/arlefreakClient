@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import Isvg from 'react-inlinesvg';
 
-const CategoryRow = ({ onClick, name }) => (
+const LinkRow = ({ name , link, category }) => (
     <li>
-        <a onClick={ onClick }>
+        <a href={ link }>
             <Isvg
-                src= "https://apiarlefreak.s3.amazonaws.com/images/Link20160218213223.svg"
+                src= { category.image }
                 uniquifyIDs={false}
             >
                 <img src= "https://apiarlefreak.s3.amazonaws.com/images/Link20160218213223.svg"/>
@@ -14,9 +14,13 @@ const CategoryRow = ({ onClick, name }) => (
     </li>
 );
 
-CategoryRow.propTypes = {
-    onClick: PropTypes.func.isRequired,
-    name: PropTypes.string.isRequired
+LinkRow.propTypes = {
+    name: PropTypes.string.isRequired,
+    link: PropTypes.string.isRequired,
+    category: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired
+    }).isRequired
 };
 
-export default CategoryRow;
+export default LinkRow;

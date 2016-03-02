@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
 import Project from './projectRow.jsx';
+import Loading from './loading.jsx';
 
-const ProjectList = ({ projects }) => (
+const ProjectList = ({ projects, isFetching }) => (
     <ul className="vertical-list">
         {
             projects.map( project =>
@@ -21,7 +22,8 @@ ProjectList.propTypes = {
     projects: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired
-    }).isRequired).isRequired
+    }).isRequired).isRequired,
+    isFetching: PropTypes.bool
 };
 
 export default ProjectList;

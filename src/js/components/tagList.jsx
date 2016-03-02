@@ -4,10 +4,10 @@ import Tag from './tagRow.jsx';
 const TagList = ({ tags, onTagClick }) => (
     <ul className="tags" >
         {
-            tags.map( tag =>
+            tags.map((tag ,id)=>
                      <Tag
-                         key={tag.id}
-                         {...tag}
+                         key={ id }
+                         name={ tag }
                          onClick={() => onTagClick(tag.id)}
                      />
                      )}
@@ -15,10 +15,11 @@ const TagList = ({ tags, onTagClick }) => (
 );
 
 TagList.propTypes = {
-    tags: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired
-    }).isRequired).isRequired,
+    // tags: PropTypes.arrayOf(PropTypes.shape({
+    //     id: PropTypes.number.isRequired,
+    //     name: PropTypes.string.isRequired
+    // }).isRequired).isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
     onTagClick: PropTypes.func.isRequired
 };
 

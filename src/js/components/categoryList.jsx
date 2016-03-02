@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Category from './categoryRow.jsx';
+import Category from '../containers/Category.js';
 
 const CategoryList = ({ categories, onCategoryClick }) => (
     <nav>
@@ -8,7 +8,7 @@ const CategoryList = ({ categories, onCategoryClick }) => (
             categories.map( category =>
                      <Category
                          key={category.id}
-                         {...category}
+                         category={category}
                          onClick={
                              () => onCategoryClick(category.id,category.name)
                          }

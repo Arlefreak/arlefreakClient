@@ -503,7 +503,8 @@ nav ul {
   display: inline-block;
 }
 nav ul li {
-  display: inline-block;
+  display: block;
+  float: left;
   margin: 0 10px 0 0;
 }
 nav a {

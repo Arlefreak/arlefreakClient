@@ -13,174 +13,6 @@ module.exports = {
 var i = 1;
 console.log(i);
 
-import { connect } from 'react-redux';
-import { setCategoryFilter } from '../actions/actions';
-import  CategoryList from '../components/categoryList.jsx';;
-
-const mapStateToProps = (state, ownProps) => {
-    const { apiCalls } = state;
-    const {
-        isFetching,
-        lastUpdated,
-        items: categories
-    } = apiCalls['projectsCategories'] || {
-        isFetching: true,
-        items: []
-    };
-    if(categories.length > 0 && categories[0].id !== 0 ){
-        categories.unshift({
-            id: 0,
-            name:'All'
-        });
-    }
-    return {
-        categories: categories,
-        isFetching,
-        lastUpdated
-    };
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        onCategoryClick: (id, name) => {
-            dispatch(setCategoryFilter(id, name));
-        }
-    };
-};
-
-const CategoryFilter = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(CategoryList);
-
-export default CategoryFilter;
-
-import { connect } from 'react-redux';
-import { apiFetchIfNeeded } from '../actions/actions';
-import PortfolioV from '../components/portfolio.jsx';
-
-const mapStateToProps = (state) => {
-    return {};
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-    };
-};
-
-const Portfolio = connect(
-    mapStateToProps
-)(PortfolioV);
-
-export default Portfolio;
-
-import { connect } from 'react-redux';
-import { setCategoryFilter } from '../actions/actions';
-import  Project from '../components/project.jsx';;
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        categoryFilter: {
-            id: ownProps.id,
-            name: ownProps.name
-        },
-        categories: state.apiCalls.projectsCategories.items
-    };
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        onCategoryClick: (id, name) => {
-            dispatch(setCategoryFilter(id, name));
-        }
-    };
-};
-
-const ProjectV = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Project);
-
-export default ProjectV;
-
-import { connect } from 'react-redux';
-import { addTagFilter, deleteTagFilter } from '../actions/actions';
-import  TagList from '../components/tagList.jsx';;
-
-const mapStateToProps = (state, ownProps) => {
-    const { apiCalls } = state;
-    // const {
-    //     isFetching,
-    //     lastUpdated,
-    //     items: categories
-    // } = apiCalls['projectsCategories'] || {
-    //     isFetching: true,
-    //     items: []
-    // };
-    return {
-        tags: []
-        // isFetching,
-        // lastUpdated
-    };
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        onTagClick: (id, name) => {
-            dispatch(AddTagFilter(id, name));
-        }
-    };
-};
-
-const TagFilter = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(TagList);
-
-export default TagFilter;
-
-import { connect } from 'react-redux';
-import ProjectList from '../components/projectList.jsx';
-
-const getVisibleProjects = (projects, category, tags) => {
-    if(projects.length > 0){
-        if(category.id === 0){
-            return projects;
-        }else{
-            return projects.filter(t => t.category === category.id);
-        }
-    }else{
-        return [];
-    }
-};
-
-const mapStateToProps = (state) => {
-    const { apiCalls, categoryFilter, tagFilter } = state;
-    const {
-        isFetching,
-        lastUpdated,
-        items: projects
-    } = apiCalls['projects'] || {
-        isFetching: true,
-        items: []
-    };
-    return {
-        projects: getVisibleProjects(
-            projects,
-            categoryFilter,
-            tagFilter
-        ),
-        isFetching,
-        lastUpdated
-    };
-};
-
-const VisibleProjects = connect(
-    mapStateToProps
-)(ProjectList);
-
-export default VisibleProjects;
-
 import fetch from 'isomorphic-fetch';
 import constants from '../constants.js';
 const apiURL = constants.APIURL;
@@ -270,6 +102,225 @@ export function apiFetchIfNeeded(endPoint){
         }
     };
 }
+
+import { connect } from 'react-redux';
+import  CategoryRow from '../components/categoryRow.jsx';;
+
+const mapStateToProps = (state, ownProps) => {
+    const { apiCalls, categoryFilter } = state;
+    const { category } = ownProps;
+    let active = false;
+
+    if(categoryFilter){
+        if(categoryFilter.id === category.id){
+            active = true;
+        }
+    }
+    return {
+        category,
+        active
+    };
+};
+
+const Category = connect(
+    mapStateToProps
+)(CategoryRow);
+
+export default Category;
+
+import { connect } from 'react-redux';
+import { setCategoryFilter } from '../actions/actions';
+import  CategoryList from '../components/categoryList.jsx';;
+
+const mapStateToProps = (state, ownProps) => {
+    const { apiCalls, categoryFilter } = state;
+    const {
+        isFetching,
+        lastUpdated,
+        items: categories
+    } = apiCalls['projectsCategories'] || {
+        isFetching: true,
+        items: []
+    };
+    if(categories.length > 0 && categories[0].id !== 0 ){
+        categories.unshift({
+            id: 0,
+            name:'All',
+        });
+    }
+    return {
+        categories: categories,
+        isFetching,
+        lastUpdated
+    };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        onCategoryClick: (id, name) => {
+            dispatch(setCategoryFilter(id, name));
+        }
+    };
+};
+
+const CategoryFilter = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CategoryList);
+
+export default CategoryFilter;
+
+import { connect } from 'react-redux';
+import PortfolioV from '../components/portfolio.jsx';
+
+const mapStateToProps = (state) => {
+    const { apiCalls } = state;
+    const {
+        isFetching
+    } = apiCalls['projects'] || {
+        isFetching: true
+    };
+    return {
+        isFetching
+    };
+};
+
+const Portfolio = connect(
+    mapStateToProps
+)(PortfolioV);
+
+export default Portfolio;
+
+import { connect } from 'react-redux';
+import { setCategoryFilter } from '../actions/actions';
+import  Project from '../components/project.jsx';;
+import { apiFetchIfNeeded } from '../actions/actions';
+
+const mapStateToProps = (state, ownProps) => {
+    const { id } = ownProps.params;
+    const { apiCalls } = state;
+    const projects = apiCalls['projects'] || {
+        isFetching: true,
+        items: []
+    };
+    const isFetching = projects.isFetching;
+    const project = projects.items[id] || {
+        id: 0,
+        name: '',
+        description: '',
+        tags: []
+    };
+    const links = apiCalls['projectsLinks/?project__id=' + id] || {
+        isFetching: true,
+        items: []
+    };
+    const images = apiCalls['images/?imgType=gal&project__id=' + id] || {
+        isFetching: true,
+        items: []
+    };
+    console.log(project.tags);
+    return {
+        isFetching: isFetching,
+        project: project,
+        links: links,
+        images: images
+    };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    const { id } = ownProps.params;
+    dispatch(apiFetchIfNeeded('projectsLinks/?project__id=' + id));
+    dispatch(apiFetchIfNeeded('images/?imgType=gal&project__id' + id));
+    return {
+        onTagClick: (id) => { console.log(id); },
+        onImageClick : () => { console.log('ImageClick'); }
+    };
+};
+
+const ProjectV = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Project);
+
+export default ProjectV;
+
+import { connect } from 'react-redux';
+import { addTagFilter, deleteTagFilter } from '../actions/actions';
+import  TagList from '../components/tagList.jsx';;
+
+const mapStateToProps = (state, ownProps) => {
+    const { apiCalls } = state;
+    // const {
+    //     isFetching,
+    //     lastUpdated,
+    //     items: categories
+    // } = apiCalls['projectsCategories'] || {
+    //     isFetching: true,
+    //     items: []
+    // };
+    return {
+        tags: []
+        // isFetching,
+        // lastUpdated
+    };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        onTagClick: (id, name) => {
+            dispatch(AddTagFilter(id, name));
+        }
+    };
+};
+
+const TagFilter = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(TagList);
+
+export default TagFilter;
+
+import { connect } from 'react-redux';
+import ProjectList from '../components/projectList.jsx';
+
+const getVisibleProjects = (projects, category, tags) => {
+    if(projects.length > 0){
+        if(category.id === 0){
+            return projects;
+        }else{
+            return projects.filter(t => t.category === category.id);
+        }
+    }else{
+        return [];
+    }
+};
+
+const mapStateToProps = (state) => {
+    const { apiCalls, categoryFilter, tagFilter } = state;
+    const {
+        isFetching,
+        lastUpdated,
+        items: projects
+    } = apiCalls['projects'] || {
+        isFetching: true,
+        items: []
+    };
+    return {
+        projects: getVisibleProjects(
+            projects,
+            categoryFilter,
+            tagFilter
+        ),
+        isFetching,
+        lastUpdated
+    };
+};
+
+const VisibleProjects = connect(
+    mapStateToProps
+)(ProjectList);
+
+export default VisibleProjects;
 
 import { combineReducers } from 'redux';
 import { API_REQUEST, API_RESPONSE, SET_CATEGORY_FILTER, ADD_TAG_FILTER, DELETE_TAG_FILTER, CLEAR_ALL_TAG_FILTERS } from '../actions/actions';

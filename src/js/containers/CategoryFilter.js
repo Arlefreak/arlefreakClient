@@ -3,7 +3,7 @@ import { setCategoryFilter } from '../actions/actions';
 import  CategoryList from '../components/categoryList.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
-    const { apiCalls } = state;
+    const { apiCalls, categoryFilter } = state;
     const {
         isFetching,
         lastUpdated,
@@ -15,7 +15,7 @@ const mapStateToProps = (state, ownProps) => {
     if(categories.length > 0 && categories[0].id !== 0 ){
         categories.unshift({
             id: 0,
-            name:'All'
+            name:'All',
         });
     }
     return {

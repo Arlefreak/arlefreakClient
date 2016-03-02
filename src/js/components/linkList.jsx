@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react';
 import Link from './linkRow.jsx';
 
-const LinkList = ({ links, onLinkClick }) => (
+const LinkList = ({ links }) => (
     <ul className="links">
         {
             links.map( link =>
                       <Link
                           key={link.id}
                           {...link}
-                          onClick={() => onProjectClick(link.id)}
+                          onClick={() => onLinkClick(link.id)}
                       />
                       )
         }
@@ -18,9 +18,9 @@ const LinkList = ({ links, onLinkClick }) => (
 LinkList.propTypes = {
     links: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired
-    }).isRequired).isRequired,
-    onLinkClick: PropTypes.func.isRequired
+        name: PropTypes.string.isRequired,
+        link: PropTypes.string.isRequired,
+    }).isRequired).isRequired
 };
 
 export default LinkList;
