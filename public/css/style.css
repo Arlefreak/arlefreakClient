@@ -619,6 +619,9 @@ aside.right {
   width: 100%;
   height: 100%;
 }
+.projects ul a {
+  cursor: pointer;
+}
 .projects section {
   width: 48%;
   display: inline-block;

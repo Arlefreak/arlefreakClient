@@ -1,10 +1,12 @@
 import React, { PropTypes } from 'react';
 
 const TagRow = ({ onClick, name }) => (
-    <li
-        onClick={onClick}
-    >
-        {name}
+    <li>
+        <a
+            onClick={onClick}
+        >
+            {name}
+        </a>
     </li>
 );
 

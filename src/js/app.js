@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Routes from './components/routes.jsx';
+import App from './components/app.jsx';
 
-var routes = React.createElement(Routes);
+var routes = React.createElement(App);
 ReactDOM.render(routes, document.getElementById('application'));

@@ -1,20 +1,34 @@
 import { connect } from 'react-redux';
-import { setCategoryFilter } from '../actions';
+import { setCategoryFilter } from '../actions/actions';
 import  CategoryList from '../components/categoryList.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
+    const { apiCalls } = state;
+    const {
+        isFetching,
+        lastUpdated,
+        items: categories
+    } = apiCalls['projectsCategories'] || {
+        isFetching: true,
+        items: []
+    };
+    if(categories.length > 0 && categories[0].id !== 0 ){
+        categories.unshift({
+            id: 0,
+            name:'All'
+        });
+    }
     return {
-        categoryFilter: {
-            id: ownProps.id,
-            name: ownProps.name
-        }
+        categories: categories,
+        isFetching,
+        lastUpdated
     };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        onClick: () => {
-            dispatch(setCategoryFilter(ownProps.id, ownProps.name));
+        onCategoryClick: (id, name) => {
+            dispatch(setCategoryFilter(id, name));
         }
     };
 };

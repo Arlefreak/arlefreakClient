@@ -30,30 +30,60 @@ export function deleteTagFilter(id) {
     };
 }
 
-export const REQUEST_PROJECTS = 'REQUEST_PROJECTS';
-function requestProjects() {
+export const API_REQUEST = 'API_REQUEST';
+function apiRequest(endPoint) {
     return {
-        type: REQUEST_PROJECTS
+        type: API_REQUEST,
+        endPoint
     };
 }
 
-export const RECEIVE_PROJECTS = 'RECEIVE_PROJECTS';
-export function receivePosts(json) {
+export const API_RESPONSE = 'API_RESPONSE';
+export function apiResponse(json, endPoint) {
     return {
-        type: RECEIVE_PROJECTS,
+        type: API_RESPONSE,
+        endPoint,
         projects: json,
         receivedAt: Date.now()
     };
 }
 
-export function fetchPosts() {
-
+export function apiFetch(endPoint) {
     return function (dispatch) {
-        dispatch(requestProjects());
-        return fetch(apiURL + 'projects')
+        dispatch(apiRequest(endPoint));
+        return fetch(apiURL + endPoint)
         .then(response => response.json())
         .then(json =>
-              dispatch(receivePosts(json))
+              dispatch(apiResponse(json, endPoint))
              );
+    };
+}
+
+function apiShouldFetch(state, endPoint) {
+    const apiCall = state.apiCalls[endPoint];
+    if (!apiCall) {
+        return true;
+    } else if (apiCall.isFetching) {
+        return false;
+    } else {
+        return false;
+    }
+}
+
+export function apiFetchIfNeeded(endPoint){
+    // Note that the function also receives getState()
+    // which lets you choose what to dispatch next.
+
+    // This is useful for avoiding a network request if
+    // a cached value is already available.
+
+    return (dispatch, getState) => {
+        if (apiShouldFetch(getState(), endPoint)) {
+            // Dispatch a thunk from thunk!
+            return dispatch(apiFetch(endPoint));
+        } else {
+            // Let the calling code know there's nothing to wait for.
+            return Promise.resolve();
+        }
     };
 }

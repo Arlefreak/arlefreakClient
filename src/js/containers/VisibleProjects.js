@@ -1,36 +1,41 @@
 import { connect } from 'react-redux';
-import ProjecList from '../components/projectList.jsx';
+import ProjectList from '../components/projectList.jsx';
 
-const getVisibleProjects = (projects, category) => {
-    return projects;
-    // switch (category) {
-    //     case 'SHOW_ALL':
-    //         return todos;
-    //     case 'SHOW_COMPLETED':
-    //         return todos.filter(t => t.completed);
-    //     case 'SHOW_ACTIVE':
-    //         return todos.filter(t => !t.completed);
-    // }
+const getVisibleProjects = (projects, category, tags) => {
+    if(projects.length > 0){
+        if(category.id === 0){
+            return projects;
+        }else{
+            return projects.filter(t => t.category === category.id);
+        }
+    }else{
+        return [];
+    }
 };
 
 const mapStateToProps = (state) => {
-    return {
-        projects: getVisibleProjects(state.projects.items)
+    const { apiCalls, categoryFilter, tagFilter } = state;
+    const {
+        isFetching,
+        lastUpdated,
+        items: projects
+    } = apiCalls['projects'] || {
+        isFetching: true,
+        items: []
     };
-};
-
-const mapDispatchToProps = (dispatch) => {
     return {
-        onProjectClick: (id) => {
-            console.log('project click: ' + id);
-            // dispatch(toggleTodo(id));
-        }
+        projects: getVisibleProjects(
+            projects,
+            categoryFilter,
+            tagFilter
+        ),
+        isFetching,
+        lastUpdated
     };
 };
 
 const VisibleProjects = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ProjecList);
+    mapStateToProps
+)(ProjectList);
 
 export default VisibleProjects;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Images from './imageList.jsx';
 import Isvg from 'react-inlinesvg';
 import LinkList from './linkList.jsx';
@@ -41,7 +41,6 @@ Project.propTypes = {
     images: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired
-    }).isRequired).isRequired,
-    onProjectClick: PropTypes.func.isRequired
+    }).isRequired).isRequired
 };
 export default Project;

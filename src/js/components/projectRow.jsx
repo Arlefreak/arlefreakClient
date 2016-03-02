@@ -1,15 +1,14 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 
-const ProjectRow = ({ onClick, name }) => (
-    <li
-        onClick={onClick}
-    ><a>
-            {name}
-    </a></li>
+const ProjectRow = ({ id, name }) => (
+    <li>
+            <Link to={'/projects/' + id }>{ name }</Link>
+    </li>
 );
 
 ProjectRow.propTypes = {
-    onClick: PropTypes.func.isRequired,
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired
 };
 

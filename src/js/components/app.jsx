@@ -1,21 +1,23 @@
-import React from 'react';
-import Header from './header.jsx';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import Routes from './routes.jsx';
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
+import portfolioApp from '../reducers/reducers';
 
-export default function App({ children }) {
-    return (
-        <div>
-            <Header></Header>
-            <main>
-                <ReactCSSTransitionGroup 
-                    component="div"
-                    className="wrapper"
-                    transitionName="example"
-                    transitionEnterTimeout={500}
-                    transitionLeaveTimeout={300}>
-                    { children }
-                </ReactCSSTransitionGroup>
-            </main>
-        </div>
-    );
+const loggerMiddleware = createLogger();
+let store =  applyMiddleware(
+    thunkMiddleware,
+    loggerMiddleware
+)(createStore)(portfolioApp);
+
+export default class App extends Component {
+    render() {
+        return (
+            <Provider store={store}>
+            <Routes />
+            </Provider>
+        );
+    }
 }

@@ -2,9 +2,9 @@ import React, { PropTypes } from 'react';
 import Tag from './tagRow.jsx';
 
 const TagList = ({ tags, onTagClick }) => (
-    <ul class="tags" >
+    <ul className="tags" >
         {
-            tags.map( project =>
+            tags.map( tag =>
                      <Tag
                          key={tag.id}
                          {...tag}
