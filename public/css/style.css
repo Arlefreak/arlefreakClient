@@ -422,8 +422,10 @@ main h3 {
 main h1 {
   font-size: 3em;
   font-weight: 700;
-  margin: 25vh 0 0 0;
   text-align: center;
+}
+main h1.center {
+  margin: 25vh auto 0 auto;
 }
 main h2 {
   font-size: 2em;

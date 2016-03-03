@@ -4,7 +4,7 @@ class Soon extends React.Component {
     render() {
         return (
             <article>
-                <h1>Work in progress</h1>
+                <h1 className="center">Work in progress</h1>
                 <img className="index" src="img/h.svg" alt="Icono"/>
             </article>
         );

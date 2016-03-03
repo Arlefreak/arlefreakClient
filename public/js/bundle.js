@@ -28688,7 +28688,7 @@ var Soon = function (_React$Component) {
                 null,
                 _react2.default.createElement(
                     "h1",
-                    null,
+                    { className: "center" },
                     "Work in progress"
                 ),
                 _react2.default.createElement("img", { className: "index", src: "img/h.svg", alt: "Icono" })
