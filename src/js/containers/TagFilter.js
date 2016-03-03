@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { addTagFilter, deleteTagFilter } from '../actions/actions';
 import  TagList from '../components/tagList.jsx';;
 
 const mapStateToProps = (state, ownProps) => {

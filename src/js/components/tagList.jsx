@@ -1,10 +1,12 @@
 import React, { PropTypes } from 'react';
 import Tag from '../containers/Tag.js';
+import ClearAllTags from '../containers/ClearAllTags.js';
 
 const TagList = ({ tags }) => (
     <ul className="tags" >
+        <ClearAllTags/>
         {
-            tags.map(tag =>
+            tags.map((tag, i)=>
                      <Tag
                          key={ tag.id }
                          tag={ tag }

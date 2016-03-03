@@ -45,6 +45,12 @@ export function deleteTagFilter(id) {
     };
 }
 
+export function clearTagFilter() {
+    return {
+        type: CLEAR_ALL_TAG_FILTERS
+    };
+}
+
 export const API_REQUEST = 'API_REQUEST';
 function apiRequest(endPoint) {
     return {
@@ -171,6 +177,40 @@ const CategoryFilter = connect(
 export default CategoryFilter;
 
 import { connect } from 'react-redux';
+import { clearTagFilter } from '../actions/actions';
+import TagRow from '../components/clearAllTagsRow.jsx';;
+
+const mapStateToProps = (state, ownProps) => {
+    const { apiCalls, tagFilter } = state;
+    let active = false;
+
+    if(!tagFilter){
+        active = true;
+    }else if(tagFilter.length === 0){
+        active = true;
+    }
+    return {
+        active
+    };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    const { tag } = ownProps;
+    return {
+        onClick: () => {
+            dispatch(clearTagFilter());
+        }
+    };
+};
+
+const Tag = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(TagRow);
+
+export default Tag;
+
+import { connect } from 'react-redux';
 import PortfolioV from '../components/portfolio.jsx';
 
 const mapStateToProps = (state) => {
@@ -245,6 +285,46 @@ const ProjectV = connect(
 export default ProjectV;
 
 import { connect } from 'react-redux';
+import { addTagFilter, clearTagFilter } from '../actions/actions';
+import TagRow from '../components/projectTagRow.jsx';;
+
+const mapStateToProps = (state, ownProps) => {
+    const { apiCalls, tagFilter } = state;
+    const { tag } = ownProps;
+    let active = false;
+
+    if(tagFilter){
+        var i = 0;
+        for(i; i < tagFilter.length; i++){
+            if(tagFilter[i].id === tag.id){
+                active = true;
+            }
+        }
+    }
+    return {
+        tag,
+        active
+    };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    const { tag } = ownProps;
+    return {
+        onClick: () => {
+            dispatch(clearTagFilter());
+            dispatch(addTagFilter(tag.id, tag.name));
+        }
+    };
+};
+
+const Tag = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(TagRow);
+
+export default Tag;
+
+import { connect } from 'react-redux';
 import { addTagFilter, deleteTagFilter } from '../actions/actions';
 import TagRow from '../components/tagRow.jsx';;
 
@@ -284,7 +364,6 @@ const Tag = connect(
 export default Tag;
 
 import { connect } from 'react-redux';
-import { addTagFilter, deleteTagFilter } from '../actions/actions';
 import  TagList from '../components/tagList.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
@@ -403,6 +482,31 @@ const VisibleProjects = connect(
 
 export default VisibleProjects;
 
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
+import { fetchPosts, addTagFilter, setCategoryFilter } from './actions/actions';
+import portfolioApp from './reducers/reducers';
+
+const loggerMiddleware = createLogger();
+
+// const store = createStore(
+//     applyMiddleware(
+//         thunkMiddleware, // lets us dispatch() functions
+//         loggerMiddleware // neat middleware that logs actions
+//     ),
+//     portfolioApp
+// );
+
+let store =  applyMiddleware(
+    thunkMiddleware,
+    loggerMiddleware
+)(createStore)(portfolioApp);
+
+store.dispatch(fetchPosts());
+store.dispatch(addTagFilter(1, 'phaser'));
+store.dispatch(setCategoryFilter(1, 'Games'));
+
 import { combineReducers } from 'redux';
 import { API_REQUEST, API_RESPONSE, SET_CATEGORY_FILTER, ADD_TAG_FILTER, DELETE_TAG_FILTER, CLEAR_ALL_TAG_FILTERS } from '../actions/actions';
 
@@ -492,28 +596,3 @@ const portfolioApp = combineReducers({
 });
 
 export default portfolioApp;
-
-import { createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import createLogger from 'redux-logger';
-import { fetchPosts, addTagFilter, setCategoryFilter } from './actions/actions';
-import portfolioApp from './reducers/reducers';
-
-const loggerMiddleware = createLogger();
-
-// const store = createStore(
-//     applyMiddleware(
-//         thunkMiddleware, // lets us dispatch() functions
-//         loggerMiddleware // neat middleware that logs actions
-//     ),
-//     portfolioApp
-// );
-
-let store =  applyMiddleware(
-    thunkMiddleware,
-    loggerMiddleware
-)(createStore)(portfolioApp);
-
-store.dispatch(fetchPosts());
-store.dispatch(addTagFilter(1, 'phaser'));
-store.dispatch(setCategoryFilter(1, 'Games'));

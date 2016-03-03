@@ -30,6 +30,12 @@ export function deleteTagFilter(id) {
     };
 }
 
+export function clearTagFilter() {
+    return {
+        type: CLEAR_ALL_TAG_FILTERS
+    };
+}
+
 export const API_REQUEST = 'API_REQUEST';
 function apiRequest(endPoint) {
     return {

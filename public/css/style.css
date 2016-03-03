@@ -441,8 +441,13 @@ main h3 {
 }
 main p {
   font-size: 0.8em;
-  max-width: 432px;
-  line-height: 1.2em;
+  max-width: 450px;
+  line-height: 1.8em;
+}
+@media screen and (max-width: 600px) {
+  main p {
+    width: 100%;
+  }
 }
 main a {
   color: #999;
