@@ -28257,7 +28257,7 @@ var Project = function Project(_ref) {
             null,
             _react2.default.createElement(
                 'section',
-                null,
+                { className: 'info' },
                 _react2.default.createElement(
                     'h2',
                     null,

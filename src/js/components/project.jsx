@@ -20,7 +20,7 @@ const Project = ({
         }
         { !isFetching &&
             <div>
-                <section>
+                <section className="info">
                     <h2>{ project.name }</h2>
                     <LinkList
                         links = { links.items }

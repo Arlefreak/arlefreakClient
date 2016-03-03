@@ -40,15 +40,16 @@
         a
             cursor pointer
     section
-        width 48%
-        display inline-block
+        width 60%
+        display block
+        float left
         vertical-align top
         &:first-child
-            margin 0 3% 0 0
-        @media screen and (max-width: 600px)
-            width 100%
-            display block
+            margin 0 5% 0 0
         &.gallery
+            width 35%
+            @media screen and (max-width: 820px)
+                width 100%
             img
                 display block
                 max-width 100%
@@ -56,6 +57,10 @@
                 margin 2vh auto 0 auto
                 &:first-child
                     margin 40px auto 0 auto
+        @media screen and (max-width: 820px)
+            width 100%
+            display block
+            float none
     div.half
         display block
         float left
