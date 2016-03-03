@@ -12,6 +12,10 @@
             margin 10px 0 10px 0
             font-size 0.8em
             width 50%
+            max-width 300px
+            @media screen and (max-width: 600px)
+                width 100%
+                display block
             li
                 display inline-block
                 margin 0 10px 0 0
@@ -20,7 +24,7 @@
                     &:hover
                         color $color1
                     &.active
-                        color $color3
+                        color $merveilles
         &.links
             margin 0 0 10px 0
             font-size 0.8em

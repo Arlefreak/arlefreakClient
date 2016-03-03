@@ -601,6 +601,13 @@ aside.right {
   margin: 10px 0 10px 0;
   font-size: 0.8em;
   width: 50%;
+  max-width: 300px;
+}
+@media screen and (max-width: 600px) {
+  .projects ul.tags {
+    width: 100%;
+    display: block;
+  }
 }
 .projects ul.tags li {
   display: inline-block;
@@ -613,7 +620,7 @@ aside.right {
   color: #000;
 }
 .projects ul.tags li a.active {
-  color: #f04250;
+  color: #72dec2;
 }
 .projects ul.links {
   margin: 0 0 10px 0;
