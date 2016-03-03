@@ -11,9 +11,16 @@
         &.tags
             margin 10px 0 10px 0
             font-size 0.8em
+            width 50%
             li
                 display inline-block
                 margin 0 10px 0 0
+                a
+                    color $gray2
+                    &:hover
+                        color $color1
+                    &.active
+                        color $color3
         &.links
             margin 0 0 10px 0
             font-size 0.8em
@@ -45,3 +52,8 @@
                 margin 2vh auto 0 auto
                 &:first-child
                     margin 40px auto 0 auto
+    div.half
+        display block
+        float left
+        width 40%
+        min-height 10px

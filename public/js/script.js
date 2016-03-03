@@ -246,6 +246,45 @@ export default ProjectV;
 
 import { connect } from 'react-redux';
 import { addTagFilter, deleteTagFilter } from '../actions/actions';
+import TagRow from '../components/tagRow.jsx';;
+
+const mapStateToProps = (state, ownProps) => {
+    const { apiCalls, tagFilter } = state;
+    const { tag } = ownProps;
+    let active = false;
+
+    if(tagFilter){
+        var i = 0;
+        for(i; i < tagFilter.length; i++){
+            if(tagFilter[i].id === tag.id){
+                active = true;
+            }
+        }
+    }
+    return {
+        tag,
+        active
+    };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    const { tag } = ownProps;
+    return {
+        onClick: () => {
+            dispatch(addTagFilter(tag.id, tag.name));
+        }
+    };
+};
+
+const Tag = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(TagRow);
+
+export default Tag;
+
+import { connect } from 'react-redux';
+import { addTagFilter, deleteTagFilter } from '../actions/actions';
 import  TagList from '../components/tagList.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
@@ -268,7 +307,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onTagClick: (id, name) => {
-            dispatch(AddTagFilter(id, name));
+            dispatch(addTagFilter(id, name));
         }
     };
 };
@@ -283,16 +322,58 @@ export default TagFilter;
 import { connect } from 'react-redux';
 import ProjectList from '../components/projectList.jsx';
 
-const getVisibleProjects = (projects, category, tags) => {
+function containsObject(obj, list) {
+    var i;
+    for (i = 0; i < list.length; i++) {
+        if (list[i].id === obj.id) {
+            console.log(true);
+            return true;
+        }
+    }
+    return false;
+}
+
+const filterByCategory  = (projects, category) => {
     if(projects.length > 0){
         if(category.id === 0){
             return projects;
         }else{
             return projects.filter(t => t.category === category.id);
         }
-    }else{
-        return [];
     }
+};
+
+const filterByTags = (projects, tags) => {
+    var filteredProjects = [];
+    var i = 0;
+    var j = 0;
+    var k = 0;
+    var project;
+    if(projects.length > 0 && tags.length > 0){
+        for(i; i < projects.length; i++){
+            project = projects[i];
+            j = 0;
+            if(project){
+                for(j; j < project.tags.length; j++){
+                    var b = false;
+                    k = 0;
+                    for(k; k < tags.length; k++){
+                        if(project.tags[j].id === tags[k].id){
+                            filteredProjects.push(project);
+                            b = true;
+                            break;
+                        }
+                    }
+                    if(b){
+                        break;
+                    }
+                }
+            }
+        }
+    }else{
+        filteredProjects = projects;
+    }
+    return filteredProjects;
 };
 
 const mapStateToProps = (state) => {
@@ -300,17 +381,17 @@ const mapStateToProps = (state) => {
     const {
         isFetching,
         lastUpdated,
-        items: projects
+        items: items
     } = apiCalls['projects'] || {
         isFetching: true,
         items: []
     };
+
+    const projectsByCat = filterByCategory(items, categoryFilter);
+    const projectsByTag = filterByTags(projectsByCat, tagFilter);
+
     return {
-        projects: getVisibleProjects(
-            projects,
-            categoryFilter,
-            tagFilter
-        ),
+        projects: projectsByTag,
         isFetching,
         lastUpdated
     };
@@ -341,18 +422,30 @@ const categoryFilter = (state = {
 };
 
 const tagFilter = (state = [], action) => {
+    var exists = false;
+    var i = 0;
+    var index = 0;
     switch (action.type) {
         case ADD_TAG_FILTER:
+        case DELETE_TAG_FILTER:
+            for(i; i < state.length; i++){
+                if(state[i].id === action.id){
+                    exists = true;
+                    index = i;
+                    break;
+                }
+            }
+            if(exists){
+                return [
+                    ...state.slice(0, index),
+                    ...state.slice(index + 1)
+                ];
+            }
             return [
                 ...state,{
                     id: action.id,
                     name: action.name
                 }
-            ];
-        case DELETE_TAG_FILTER:
-            return [
-                ...state.slice(0, action.id),
-                ...state.slice(action.id + 1)
             ];
         case CLEAR_ALL_TAG_FILTERS:
             return [];

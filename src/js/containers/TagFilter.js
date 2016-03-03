@@ -22,7 +22,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onTagClick: (id, name) => {
-            dispatch(AddTagFilter(id, name));
+            dispatch(addTagFilter(id, name));
         }
     };
 };

@@ -27682,7 +27682,7 @@ var App = function (_Component) {
 
 exports.default = App;
 
-},{"../reducers/reducers":290,"./routes.jsx":279,"react":244,"react-redux":70,"redux":252,"redux-logger":245,"redux-thunk":246}],266:[function(require,module,exports){
+},{"../reducers/reducers":291,"./routes.jsx":279,"react":244,"react-redux":70,"redux":252,"redux-logger":245,"redux-thunk":246}],266:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28132,24 +28132,31 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Portfolio = function Portfolio(_ref) {
     var isFetching = _ref.isFetching;
-    return _react2.default.createElement(
-        'article',
-        { className: 'projects' },
-        isFetching && _react2.default.createElement(_loading2.default, null),
-        !isFetching && _react2.default.createElement(
-            'div',
-            null,
+
+    var element;
+    if (isFetching) {
+        element = _react2.default.createElement(
+            'article',
+            { className: 'projects' },
+            _react2.default.createElement(_loading2.default, null),
+            _react2.default.createElement('img', { className: 'index', src: 'img/p.svg', alt: 'Icono' })
+        );
+    } else {
+        element = _react2.default.createElement(
+            'article',
+            { className: 'projects' },
             _react2.default.createElement(
                 'h2',
                 null,
                 'Projects'
             ),
             _react2.default.createElement(_CategoryFilter2.default, null),
+            _react2.default.createElement(_TagFilter2.default, null),
             _react2.default.createElement(_VisibleProjects2.default, null),
-            _react2.default.createElement(_TagFilter2.default, null)
-        ),
-        _react2.default.createElement('img', { className: 'index', src: 'img/p.svg', alt: 'Icono' })
-    );
+            _react2.default.createElement('img', { className: 'index', src: 'img/p.svg', alt: 'Icono' })
+        );
+    }
+    return element;
 };
 
 Portfolio.propTypes = {
@@ -28158,7 +28165,7 @@ Portfolio.propTypes = {
 
 exports.default = Portfolio;
 
-},{"../containers/CategoryFilter.js":285,"../containers/TagFilter.js":288,"../containers/VisibleProjects.js":289,"./loading.jsx":273,"react":244}],275:[function(require,module,exports){
+},{"../containers/CategoryFilter.js":285,"../containers/TagFilter.js":289,"../containers/VisibleProjects.js":290,"./loading.jsx":273,"react":244}],275:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28398,7 +28405,6 @@ var Root = function (_Component) {
     _createClass(Root, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            console.log('Did Mount');
             var _props = this.props;
             var dispatch = _props.dispatch;
             var children = _props.children;
@@ -28582,25 +28588,21 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _tagRow = require('./tagRow.jsx');
+var _Tag = require('../containers/Tag.js');
 
-var _tagRow2 = _interopRequireDefault(_tagRow);
+var _Tag2 = _interopRequireDefault(_Tag);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var TagList = function TagList(_ref) {
     var tags = _ref.tags;
-    var onTagClick = _ref.onTagClick;
     return _react2.default.createElement(
         'ul',
         { className: 'tags' },
         tags.map(function (tag) {
-            return _react2.default.createElement(_tagRow2.default, {
+            return _react2.default.createElement(_Tag2.default, {
                 key: tag.id,
-                name: tag.name,
-                onClick: function onClick() {
-                    return onTagClick(tag.id);
-                }
+                tag: tag
             });
         })
     );
@@ -28610,13 +28612,12 @@ TagList.propTypes = {
     tags: _react.PropTypes.arrayOf(_react.PropTypes.shape({
         id: _react.PropTypes.number.isRequired,
         name: _react.PropTypes.string.isRequired
-    }).isRequired).isRequired,
-    onTagClick: _react.PropTypes.func.isRequired
+    }).isRequired).isRequired
 };
 
 exports.default = TagList;
 
-},{"./tagRow.jsx":282,"react":244}],282:[function(require,module,exports){
+},{"../containers/Tag.js":288,"react":244}],282:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28630,20 +28631,27 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var TagRow = function TagRow(_ref) {
-    var name = _ref.name;
+    var tag = _ref.tag;
+    var active = _ref.active;
+    var onClick = _ref.onClick;
     return _react2.default.createElement(
         'li',
         null,
         _react2.default.createElement(
             'a',
-            null,
-            name
+            {
+                className: active && 'active',
+                onClick: onClick },
+            tag.name,
+            ','
         )
     );
 };
 
 TagRow.propTypes = {
-    name: _react.PropTypes.string.isRequired
+    onClick: _react.PropTypes.func.isRequired,
+    tag: _react.PropTypes.object.isRequired,
+    active: _react.PropTypes.bool.isRequired
 };
 
 exports.default = TagRow;
@@ -28866,6 +28874,60 @@ var _reactRedux = require('react-redux');
 
 var _actions = require('../actions/actions');
 
+var _tagRow = require('../components/tagRow.jsx');
+
+var _tagRow2 = _interopRequireDefault(_tagRow);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+;
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+    var apiCalls = state.apiCalls;
+    var tagFilter = state.tagFilter;
+    var tag = ownProps.tag;
+
+    var active = false;
+
+    if (tagFilter) {
+        var i = 0;
+        for (i; i < tagFilter.length; i++) {
+            if (tagFilter[i].id === tag.id) {
+                active = true;
+            }
+        }
+    }
+    return {
+        tag: tag,
+        active: active
+    };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+    var tag = ownProps.tag;
+
+    return {
+        onClick: function onClick() {
+            dispatch((0, _actions.addTagFilter)(tag.id, tag.name));
+        }
+    };
+};
+
+var Tag = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_tagRow2.default);
+
+exports.default = Tag;
+
+},{"../actions/actions":262,"../components/tagRow.jsx":282,"react-redux":70}],289:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _reactRedux = require('react-redux');
+
+var _actions = require('../actions/actions');
+
 var _tagList = require('../components/tagList.jsx');
 
 var _tagList2 = _interopRequireDefault(_tagList);
@@ -28896,7 +28958,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     return {
         onTagClick: function onTagClick(id, name) {
-            dispatch(AddTagFilter(id, name));
+            dispatch((0, _actions.addTagFilter)(id, name));
         }
     };
 };
@@ -28905,7 +28967,7 @@ var TagFilter = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_t
 
 exports.default = TagFilter;
 
-},{"../actions/actions":262,"../components/tagList.jsx":281,"react-redux":70}],289:[function(require,module,exports){
+},{"../actions/actions":262,"../components/tagList.jsx":281,"react-redux":70}],290:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28920,7 +28982,18 @@ var _projectList2 = _interopRequireDefault(_projectList);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var getVisibleProjects = function getVisibleProjects(projects, category, tags) {
+function containsObject(obj, list) {
+    var i;
+    for (i = 0; i < list.length; i++) {
+        if (list[i].id === obj.id) {
+            console.log(true);
+            return true;
+        }
+    }
+    return false;
+}
+
+var filterByCategory = function filterByCategory(projects, category) {
     if (projects.length > 0) {
         if (category.id === 0) {
             return projects;
@@ -28929,9 +29002,40 @@ var getVisibleProjects = function getVisibleProjects(projects, category, tags) {
                 return t.category === category.id;
             });
         }
-    } else {
-        return [];
     }
+};
+
+var filterByTags = function filterByTags(projects, tags) {
+    var filteredProjects = [];
+    var i = 0;
+    var j = 0;
+    var k = 0;
+    var project;
+    if (projects.length > 0 && tags.length > 0) {
+        for (i; i < projects.length; i++) {
+            project = projects[i];
+            j = 0;
+            if (project) {
+                for (j; j < project.tags.length; j++) {
+                    var b = false;
+                    k = 0;
+                    for (k; k < tags.length; k++) {
+                        if (project.tags[j].id === tags[k].id) {
+                            filteredProjects.push(project);
+                            b = true;
+                            break;
+                        }
+                    }
+                    if (b) {
+                        break;
+                    }
+                }
+            }
+        }
+    } else {
+        filteredProjects = projects;
+    }
+    return filteredProjects;
 };
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -28946,10 +29050,13 @@ var mapStateToProps = function mapStateToProps(state) {
 
     var isFetching = _ref.isFetching;
     var lastUpdated = _ref.lastUpdated;
-    var projects = _ref.items;
+    var items = _ref.items;
+
+    var projectsByCat = filterByCategory(items, categoryFilter);
+    var projectsByTag = filterByTags(projectsByCat, tagFilter);
 
     return {
-        projects: getVisibleProjects(projects, categoryFilter, tagFilter),
+        projects: projectsByTag,
         isFetching: isFetching,
         lastUpdated: lastUpdated
     };
@@ -28959,7 +29066,7 @@ var VisibleProjects = (0, _reactRedux.connect)(mapStateToProps)(_projectList2.de
 
 exports.default = VisibleProjects;
 
-},{"../components/projectList.jsx":276,"react-redux":70}],290:[function(require,module,exports){
+},{"../components/projectList.jsx":276,"react-redux":70}],291:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -28996,14 +29103,26 @@ var tagFilter = function tagFilter() {
     var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
     var action = arguments[1];
 
+    var exists = false;
+    var i = 0;
+    var index = 0;
     switch (action.type) {
         case _actions.ADD_TAG_FILTER:
+        case _actions.DELETE_TAG_FILTER:
+            for (i; i < state.length; i++) {
+                if (state[i].id === action.id) {
+                    exists = true;
+                    index = i;
+                    break;
+                }
+            }
+            if (exists) {
+                return [].concat(_toConsumableArray(state.slice(0, index)), _toConsumableArray(state.slice(index + 1)));
+            }
             return [].concat(_toConsumableArray(state), [{
                 id: action.id,
                 name: action.name
             }]);
-        case _actions.DELETE_TAG_FILTER:
-            return [].concat(_toConsumableArray(state.slice(0, action.id)), _toConsumableArray(state.slice(action.id + 1)));
         case _actions.CLEAR_ALL_TAG_FILTERS:
             return [];
         default:

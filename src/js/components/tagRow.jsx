@@ -1,16 +1,19 @@
 import React, { PropTypes } from 'react';
 
-const TagRow = ({ name }) => (
+const TagRow = ({ tag, active, onClick }) => (
     <li>
         <a
-        >
-            {name}
+            className={ active && 'active'}
+            onClick={ onClick }>
+            { tag.name },
         </a>
     </li>
 );
 
 TagRow.propTypes = {
-    name: PropTypes.string.isRequired
+    onClick: PropTypes.func.isRequired,
+    tag: PropTypes.object.isRequired,
+    active: PropTypes.bool.isRequired
 };
 
 export default TagRow;

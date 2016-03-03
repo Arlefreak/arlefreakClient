@@ -17,18 +17,30 @@ const categoryFilter = (state = {
 };
 
 const tagFilter = (state = [], action) => {
+    var exists = false;
+    var i = 0;
+    var index = 0;
     switch (action.type) {
         case ADD_TAG_FILTER:
+        case DELETE_TAG_FILTER:
+            for(i; i < state.length; i++){
+                if(state[i].id === action.id){
+                    exists = true;
+                    index = i;
+                    break;
+                }
+            }
+            if(exists){
+                return [
+                    ...state.slice(0, index),
+                    ...state.slice(index + 1)
+                ];
+            }
             return [
                 ...state,{
                     id: action.id,
                     name: action.name
                 }
-            ];
-        case DELETE_TAG_FILTER:
-            return [
-                ...state.slice(0, action.id),
-                ...state.slice(action.id + 1)
             ];
         case CLEAR_ALL_TAG_FILTERS:
             return [];

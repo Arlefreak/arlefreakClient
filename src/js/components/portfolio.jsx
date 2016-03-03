@@ -4,22 +4,26 @@ import CategoryList from '../containers/CategoryFilter.js';
 import TagList from '../containers/TagFilter.js';
 import Loading from './loading.jsx';
 
-const Portfolio = ({ isFetching }) => (
-    <article className="projects">
-        { isFetching &&
-            <Loading/>
-            }
-            { !isFetching &&
-                <div>
-                    <h2>Projects</h2>
-                    <CategoryList></CategoryList>
-                    <ProjectList></ProjectList>
-                    <TagList></TagList>
-                </div>
-                }
+const Portfolio = ({ isFetching }) => {
+    var element;
+    if(isFetching){
+        element = 
+            <article className="projects">
+                <Loading/>
                 <img className="index" src="img/p.svg" alt="Icono"/>
-            </article>
-);
+            </article>;
+    }else{
+        element = 
+            <article className="projects">
+                <h2>Projects</h2>
+                <CategoryList></CategoryList>
+                <TagList></TagList>
+                <ProjectList></ProjectList>
+                <img className="index" src="img/p.svg" alt="Icono"/>
+            </article>;
+    }
+    return (element);
+};
 
 Portfolio.propTypes = {
     isFetching: PropTypes.bool

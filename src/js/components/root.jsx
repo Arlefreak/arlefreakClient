@@ -11,7 +11,6 @@ class Root extends Component {
     }
 
     componentDidMount() {
-        console.log('Did Mount');
         const { dispatch, children } = this.props;
         dispatch(apiFetchIfNeeded('projects'));
         dispatch(apiFetchIfNeeded('projectsCategories'));

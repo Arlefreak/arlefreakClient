@@ -600,10 +600,20 @@ aside.right {
 .projects ul.tags {
   margin: 10px 0 10px 0;
   font-size: 0.8em;
+  width: 50%;
 }
 .projects ul.tags li {
   display: inline-block;
   margin: 0 10px 0 0;
+}
+.projects ul.tags li a {
+  color: #e3e3e3;
+}
+.projects ul.tags li a:hover {
+  color: #000;
+}
+.projects ul.tags li a.active {
+  color: #f04250;
 }
 .projects ul.links {
   margin: 0 0 10px 0;
@@ -645,6 +655,12 @@ aside.right {
 }
 .projects section.gallery img:first-child {
   margin: 40px auto 0 auto;
+}
+.projects div.half {
+  display: block;
+  float: left;
+  width: 40%;
+  min-height: 10px;
 }
 .error img {
   margin: 15vh 0 0 0;

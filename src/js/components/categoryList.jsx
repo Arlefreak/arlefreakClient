@@ -8,7 +8,7 @@ const CategoryList = ({ categories, onCategoryClick }) => (
             categories.map( category =>
                      <Category
                          key={category.id}
-                         category={category}
+                         category={ category }
                          onClick={
                              () => onCategoryClick(category.id,category.name)
                          }
