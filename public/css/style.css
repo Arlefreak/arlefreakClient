@@ -788,6 +788,7 @@ aside.right {
   font-weight: normal;
   font-weight: 500;
   font-size: 1em;
+  margin: 30px 0 10px 0;
 }
 .cv h4 {
   font-size: 1em;
@@ -795,11 +796,9 @@ aside.right {
   font-weight: 500;
 }
 .cv a {
-  font-weight: lighter;
-  font-weight: 300;
-  color: #000;
   text-decoration: none;
   display: inline-block;
+  font-style: italic;
 }
 @media print {
   .cv a {
@@ -809,6 +808,23 @@ aside.right {
 }
 .cv p {
   margin: 0;
+}
+.cv a,
+.cv p,
+.cv li {
+  font-size: 0.8em;
+  font-weight: lighter;
+  font-weight: 300;
+}
+.cv a p,
+.cv p p,
+.cv li p {
+  font-size: 1em;
+}
+.cv a a,
+.cv p a,
+.cv li a {
+  font-size: 1em;
 }
 .cv .logo {
   width: 10%;
@@ -828,9 +844,6 @@ aside.right {
 .cv ul {
   width: 95%;
   margin: 0 auto 0px auto;
-  font-size: 0.8em;
-  font-weight: lighter;
-  font-weight: 300;
 }
 .cv li {
   max-width: 600px;
@@ -839,10 +852,6 @@ aside.right {
 }
 .cv p {
   color: #666;
-  font-size: 0.8em;
-  font-weight: lighter;
-  font-weight: 300;
-  font-style: italic;
   margin: 10px 0 10px 0;
   display: block;
   width: 80%;

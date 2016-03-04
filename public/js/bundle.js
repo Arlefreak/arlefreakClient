@@ -38735,25 +38735,21 @@ var ProjectList = function ProjectList(_ref) {
     var projects = _ref.projects;
     var isFetching = _ref.isFetching;
 
-    if (!isFetching) {
-        return _react2.default.createElement(_loading2.default, null);
-    } else {
-        return _react2.default.createElement(
-            'ul',
-            { className: 'vertical-list' },
-            projects.map(function (project) {
-                return _react2.default.createElement(_projectRow2.default, _extends({
-                    key: project.id
-                }, project, {
-                    id: project.id,
-                    name: project.name,
-                    onClick: function onClick() {
-                        return onProjectClick(project.id);
-                    }
-                }));
-            })
-        );
-    }
+    return _react2.default.createElement(
+        'ul',
+        { className: 'vertical-list' },
+        projects.map(function (project) {
+            return _react2.default.createElement(_projectRow2.default, _extends({
+                key: project.id
+            }, project, {
+                id: project.id,
+                name: project.name,
+                onClick: function onClick() {
+                    return onProjectClick(project.id);
+                }
+            }));
+        })
+    );
 };
 
 ProjectList.propTypes = {
