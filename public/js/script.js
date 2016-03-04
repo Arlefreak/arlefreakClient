@@ -321,8 +321,18 @@ const mapStateToProps = (state, ownProps) => {
         isFetching: true,
         items: []
     };
+    
+    const {
+        items: projects
+    } = apiCalls['projects'] || {
+        items: []
+    };
 
-    const filteredImages = getVisibleImages(items, visibleProjects);
+    let filterProjects = projects;
+    if(visibleProjects.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0){
+        filterProjects = projects;
+    }
+    const filteredImages = getVisibleImages(items, filterProjects);
 
     return {
         images: filteredImages,
@@ -540,25 +550,6 @@ import { connect } from 'react-redux';
 import ProjectList from '../components/projectList.jsx';
 import { setVisibleProjects } from '../actions/actions.js';
 
-const getVisibleProjects  = (items, projects) => {
-    if(items.length > 0){
-        var i = 0;
-        var j = 0;
-        var filteredImages = [];
-        for(i; i < items.length; i++){
-            j = 0;
-            for(j; j < projects.length; j++){
-                if(items[i].id === projects[j].id ){
-                    filteredImages.push(items[i]);
-                }
-            } 
-        }
-        return filteredImages;
-    }else{
-        return items;
-    }
-};
-
 const mapStateToProps = (state) => {
     const { apiCalls, visibleProjects, tagFilter, categoryFilter } = state;
     const {
@@ -570,7 +561,11 @@ const mapStateToProps = (state) => {
         items: []
     };
 
-    const filterProjects = getVisibleProjects(items, visibleProjects);
+   
+    let filterProjects = items;
+    if(visibleProjects.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0){
+        filterProjects = items;
+    }
 
     return {
         projects: filterProjects,

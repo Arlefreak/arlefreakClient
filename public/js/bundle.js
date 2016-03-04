@@ -29169,7 +29169,17 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     var lastUpdated = _ref.lastUpdated;
     var items = _ref.items;
 
-    var filteredImages = getVisibleImages(items, visibleProjects);
+    var _ref2 = apiCalls['projects'] || {
+        items: []
+    };
+
+    var projects = _ref2.items;
+
+    var filterProjects = projects;
+    if (visibleProjects.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0) {
+        filterProjects = projects;
+    }
+    var filteredImages = getVisibleImages(items, filterProjects);
 
     return {
         images: filteredImages,
@@ -29469,25 +29479,6 @@ var _actions = require('../actions/actions.js');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var getVisibleProjects = function getVisibleProjects(items, projects) {
-    if (items.length > 0) {
-        var i = 0;
-        var j = 0;
-        var filteredImages = [];
-        for (i; i < items.length; i++) {
-            j = 0;
-            for (j; j < projects.length; j++) {
-                if (items[i].id === projects[j].id) {
-                    filteredImages.push(items[i]);
-                }
-            }
-        }
-        return filteredImages;
-    } else {
-        return items;
-    }
-};
-
 var mapStateToProps = function mapStateToProps(state) {
     var apiCalls = state.apiCalls;
     var visibleProjects = state.visibleProjects;
@@ -29503,7 +29494,10 @@ var mapStateToProps = function mapStateToProps(state) {
     var lastUpdated = _ref.lastUpdated;
     var items = _ref.items;
 
-    var filterProjects = getVisibleProjects(items, visibleProjects);
+    var filterProjects = items;
+    if (visibleProjects.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0) {
+        filterProjects = items;
+    }
 
     return {
         projects: filterProjects,

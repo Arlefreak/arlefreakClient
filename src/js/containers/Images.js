@@ -31,8 +31,18 @@ const mapStateToProps = (state, ownProps) => {
         isFetching: true,
         items: []
     };
+    
+    const {
+        items: projects
+    } = apiCalls['projects'] || {
+        items: []
+    };
 
-    const filteredImages = getVisibleImages(items, visibleProjects);
+    let filterProjects = projects;
+    if(visibleProjects.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0){
+        filterProjects = projects;
+    }
+    const filteredImages = getVisibleImages(items, filterProjects);
 
     return {
         images: filteredImages,
