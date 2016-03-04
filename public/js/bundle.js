@@ -29262,15 +29262,19 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
         items: []
     };
 
-    console.log('Project id: ' + id);
-
-    var project = projects.items[id - 1] || {
+    var project = {
         id: 0,
-        name: '',
-        description: '',
+        name: 'not',
+        description: 'not',
         tags: []
     };
-    console.log(project);
+    var i = 0;
+    for (i; i < projects.items.length; i++) {
+        if (projects.items[i].id === parseInt(id)) {
+            project = projects.items[i];
+            break;
+        }
+    }
     var links = apiCalls['projectsLinks/?project__id=' + id] || {
         isFetching: true,
         items: []
