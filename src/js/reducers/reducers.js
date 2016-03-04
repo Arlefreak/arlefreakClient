@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { SET_VISIBLE_PROJECTS, API_REQUEST, API_RESPONSE, SET_CATEGORY_FILTER, ADD_TAG_FILTER, DELETE_TAG_FILTER, CLEAR_ALL_TAG_FILTERS } from '../actions/actions';
+import { SET_VISIBLE_PROJECTS, FILE_REQUEST, FILE_RESPONSE, API_REQUEST, API_RESPONSE, SET_CATEGORY_FILTER, ADD_TAG_FILTER, DELETE_TAG_FILTER, CLEAR_ALL_TAG_FILTERS } from '../actions/actions';
 
 const categoryFilter = (state = {
     id: 0,
@@ -71,6 +71,17 @@ function apiCalls(state = {}, action) {
     }
 };
 
+function fileCalls(state = {}, action) {
+    switch (action.type) {
+        case FILE_RESPONSE:
+            return Object.assign({}, state, {
+                [action.endPoint]: file(state[action.endPoint], action)
+            });
+        default:
+            return state;
+    }
+};
+
 const items = (state = {
     isFetching: false,
     items: []
@@ -91,9 +102,31 @@ const items = (state = {
     }
 };
 
+
+const file = (state = {
+    isFetching: false,
+    file: ''
+}, action) => {
+    switch (action.type) {
+        case FILE_REQUEST:
+            return Object.assign({}, state, {
+                isFetching: true
+            });
+        case FILE_RESPONSE:
+            return Object.assign({}, state, {
+                isFetching: false,
+                file: action.file,
+                lastUpdated: action.receivedAt
+            });
+        default:
+            return state;
+    }
+};
+
 const portfolioApp = combineReducers({
     tagFilter,
     apiCalls,
+    fileCalls,
     categoryFilter,
     visibleProjects
 });

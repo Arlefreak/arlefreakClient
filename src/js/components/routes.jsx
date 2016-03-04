@@ -5,6 +5,7 @@ import About from './about.jsx';
 import Soon from './soon.jsx';
 import Portfolio from '../containers/Portfolio.js';
 import Project from '../containers/Project.js';
+import CV from '../containers/CV.js';
 
 class Routes extends Component {
     render() {
@@ -15,6 +16,7 @@ class Routes extends Component {
                     <Route path="/projects" component={Portfolio} />
                     <Route path="/projects/:id" component={Project} />
                     <Route path="about" component={About} />
+                    <Route path="cv" component={CV} />
                     <Route path="*" component={Soon} />
                 </Route>
             </Router>

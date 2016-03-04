@@ -111,6 +111,65 @@ function apiShouldFetch(state, endPoint) {
     }
 }
 
+export const FILE_REQUEST  = 'FILE_REQUEST ';
+function fileRequest(endPoint) {
+    return {
+        type: FILE_REQUEST ,
+        endPoint
+    };
+}
+
+
+export const FILE_RESPONSE = 'FILE_RESPONSE';
+export function fileResponse(text, endPoint) {
+    return {
+        type: FILE_RESPONSE,
+        endPoint,
+        file: text,
+        receivedAt: Date.now()
+    };
+}
+
+export function fileFetch(endPoint) {
+    return function (dispatch) {
+        dispatch(fileRequest(endPoint));
+        return fetch(endPoint)
+        .then(response => response.text())
+        .then(text =>
+              dispatch(fileResponse(text, endPoint))
+             );
+    };
+}
+
+export function fileFetchIfNeeded(endPoint){
+    // Note that the function also receives getState()
+    // which lets you choose what to dispatch next.
+
+    // This is useful for avoiding a network request if
+    // a cached value is already available.
+
+    return (dispatch, getState) => {
+        if (fileShouldFetch(getState(), endPoint)) {
+            // Dispatch a thunk from thunk!
+            return dispatch(fileFetch(endPoint));
+        } else {
+            // Let the calling code know there's nothing to wait for.
+            return Promise.resolve();
+        }
+    };
+}
+
+function fileShouldFetch(state, endPoint) {
+    const fileCall = state.fileCalls[endPoint];
+    if (!fileCall) {
+        return true;
+    } else if (fileCall.isFetching) {
+        return false;
+    } else {
+        return false;
+    }
+}
+
 export const SET_VISIBLE_PROJECTS = 'SET_VISIBLE_PROJECTS';
 export function setVisibleProjects(projects) {
     const PROJECTS = projects || [];
@@ -184,6 +243,35 @@ function filterByTags (projects, tags) {
 };
 
 
+
+import { connect } from 'react-redux';
+import  CV from '../components/cv.jsx';;
+
+const mapStateToProps = (state, ownProps) => {
+    const { fileCalls } = state;
+    const {
+        isFetching,
+        lastUpdated,
+        file: file
+    } = fileCalls['https://raw.githubusercontent.com/Arlefreak/Resume/master/README.md'] || {
+        isFetching: true,
+        file: ''
+    };
+
+    console.log(fileCalls);
+    console.log(file);
+    
+    return {
+        file: file,
+        isFetching
+    };
+};
+
+const cv = connect(
+    mapStateToProps
+)(CV);
+
+export default cv;
 
 import { connect } from 'react-redux';
 import  CategoryRow from '../components/categoryRow.jsx';;
@@ -588,7 +676,7 @@ const VisibleProjects = connect(
 export default VisibleProjects;
 
 import { combineReducers } from 'redux';
-import { SET_VISIBLE_PROJECTS, API_REQUEST, API_RESPONSE, SET_CATEGORY_FILTER, ADD_TAG_FILTER, DELETE_TAG_FILTER, CLEAR_ALL_TAG_FILTERS } from '../actions/actions';
+import { SET_VISIBLE_PROJECTS, FILE_REQUEST, FILE_RESPONSE, API_REQUEST, API_RESPONSE, SET_CATEGORY_FILTER, ADD_TAG_FILTER, DELETE_TAG_FILTER, CLEAR_ALL_TAG_FILTERS } from '../actions/actions';
 
 const categoryFilter = (state = {
     id: 0,
@@ -660,6 +748,17 @@ function apiCalls(state = {}, action) {
     }
 };
 
+function fileCalls(state = {}, action) {
+    switch (action.type) {
+        case FILE_RESPONSE:
+            return Object.assign({}, state, {
+                [action.endPoint]: file(state[action.endPoint], action)
+            });
+        default:
+            return state;
+    }
+};
+
 const items = (state = {
     isFetching: false,
     items: []
@@ -680,9 +779,31 @@ const items = (state = {
     }
 };
 
+
+const file = (state = {
+    isFetching: false,
+    file: ''
+}, action) => {
+    switch (action.type) {
+        case FILE_REQUEST:
+            return Object.assign({}, state, {
+                isFetching: true
+            });
+        case FILE_RESPONSE:
+            return Object.assign({}, state, {
+                isFetching: false,
+                file: action.file,
+                lastUpdated: action.receivedAt
+            });
+        default:
+            return state;
+    }
+};
+
 const portfolioApp = combineReducers({
     tagFilter,
     apiCalls,
+    fileCalls,
     categoryFilter,
     visibleProjects
 });
