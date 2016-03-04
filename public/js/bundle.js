@@ -28145,11 +28145,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var ImageRow = function ImageRow(_ref) {
     var image = _ref.image;
+    var thumbnail = _ref.thumbnail;
     var project = _ref.project;
     var onImageClick = _ref.onImageClick;
 
     var imgStyle = {
-        backgroundImage: 'url(' + image + ')'
+        backgroundImage: 'url(' + thumbnail + ')'
     };
     return _react2.default.createElement(
         'li',
@@ -28165,6 +28166,7 @@ var ImageRow = function ImageRow(_ref) {
 
 ImageRow.propTypes = {
     image: _react.PropTypes.string.isRequired,
+    thumbnail: _react.PropTypes.string.isRequired,
     project: _react.PropTypes.number.isRequired,
     onImageClick: _react.PropTypes.func.isRequired
 };
