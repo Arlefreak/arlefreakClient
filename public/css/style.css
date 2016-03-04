@@ -450,6 +450,8 @@ main p {
 @media screen and (max-width: 600px) {
   main p {
     width: 100%;
+    font-size: 0.8em;
+    line-height: 1.6em;
   }
 }
 main a {
