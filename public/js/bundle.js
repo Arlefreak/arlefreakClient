@@ -29261,12 +29261,16 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
         isFetching: true,
         items: []
     };
-    var project = projects.items[id] || {
+
+    console.log('Project id: ' + id);
+
+    var project = projects.items[id - 1] || {
         id: 0,
         name: '',
         description: '',
         tags: []
     };
+    console.log(project);
     var links = apiCalls['projectsLinks/?project__id=' + id] || {
         isFetching: true,
         items: []
@@ -29276,7 +29280,6 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
         items: []
     };
     var isFetching = projects.isFetching && images.isFetching && links.isFetching;
-    console.log(images);
     return {
         isFetching: isFetching,
         project: project,

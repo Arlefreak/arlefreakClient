@@ -390,12 +390,16 @@ const mapStateToProps = (state, ownProps) => {
         isFetching: true,
         items: []
     };
-    const project = projects.items[id] || {
+
+    console.log('Project id: ' + id);
+
+    const project = projects.items[id-1] || {
         id: 0,
         name: '',
         description: '',
         tags: []
     };
+    console.log(project);
     const links = apiCalls['projectsLinks/?project__id=' + id] || {
         isFetching: true,
         items: []
@@ -405,7 +409,6 @@ const mapStateToProps = (state, ownProps) => {
         items: []
     };
     const isFetching = projects.isFetching && images.isFetching && links.isFetching;
-    console.log(images);
     return {
         isFetching: isFetching,
         project: project,
@@ -580,6 +583,31 @@ const VisibleProjects = connect(
 
 export default VisibleProjects;
 
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
+import { fetchPosts, addTagFilter, setCategoryFilter } from './actions/actions';
+import portfolioApp from './reducers/reducers';
+
+const loggerMiddleware = createLogger();
+
+// const store = createStore(
+//     applyMiddleware(
+//         thunkMiddleware, // lets us dispatch() functions
+//         loggerMiddleware // neat middleware that logs actions
+//     ),
+//     portfolioApp
+// );
+
+let store =  applyMiddleware(
+    thunkMiddleware,
+    loggerMiddleware
+)(createStore)(portfolioApp);
+
+store.dispatch(fetchPosts());
+store.dispatch(addTagFilter(1, 'phaser'));
+store.dispatch(setCategoryFilter(1, 'Games'));
+
 import { combineReducers } from 'redux';
 import { SET_VISIBLE_PROJECTS, API_REQUEST, API_RESPONSE, SET_CATEGORY_FILTER, ADD_TAG_FILTER, DELETE_TAG_FILTER, CLEAR_ALL_TAG_FILTERS } from '../actions/actions';
 
@@ -681,28 +709,3 @@ const portfolioApp = combineReducers({
 });
 
 export default portfolioApp;
-
-import { createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import createLogger from 'redux-logger';
-import { fetchPosts, addTagFilter, setCategoryFilter } from './actions/actions';
-import portfolioApp from './reducers/reducers';
-
-const loggerMiddleware = createLogger();
-
-// const store = createStore(
-//     applyMiddleware(
-//         thunkMiddleware, // lets us dispatch() functions
-//         loggerMiddleware // neat middleware that logs actions
-//     ),
-//     portfolioApp
-// );
-
-let store =  applyMiddleware(
-    thunkMiddleware,
-    loggerMiddleware
-)(createStore)(portfolioApp);
-
-store.dispatch(fetchPosts());
-store.dispatch(addTagFilter(1, 'phaser'));
-store.dispatch(setCategoryFilter(1, 'Games'));

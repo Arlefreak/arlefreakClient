@@ -10,12 +10,16 @@ const mapStateToProps = (state, ownProps) => {
         isFetching: true,
         items: []
     };
-    const project = projects.items[id] || {
+
+    console.log('Project id: ' + id);
+
+    const project = projects.items[id-1] || {
         id: 0,
         name: '',
         description: '',
         tags: []
     };
+    console.log(project);
     const links = apiCalls['projectsLinks/?project__id=' + id] || {
         isFetching: true,
         items: []
@@ -25,7 +29,6 @@ const mapStateToProps = (state, ownProps) => {
         items: []
     };
     const isFetching = projects.isFetching && images.isFetching && links.isFetching;
-    console.log(images);
     return {
         isFetching: isFetching,
         project: project,
