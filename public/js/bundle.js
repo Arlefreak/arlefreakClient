@@ -29175,7 +29175,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
     var projects = _ref2.items;
 
-    var filterProjects = projects;
+    var filterProjects = visibleProjects;
     if (visibleProjects.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0) {
         filterProjects = projects;
     }
@@ -29494,7 +29494,7 @@ var mapStateToProps = function mapStateToProps(state) {
     var lastUpdated = _ref.lastUpdated;
     var items = _ref.items;
 
-    var filterProjects = items;
+    var filterProjects = visibleProjects;
     if (visibleProjects.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0) {
         filterProjects = items;
     }

@@ -14,7 +14,7 @@ const mapStateToProps = (state) => {
     };
 
    
-    let filterProjects = items;
+    let filterProjects = visibleProjects;
     if(visibleProjects.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0){
         filterProjects = items;
     }
