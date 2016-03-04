@@ -1,62 +1,28 @@
 import { connect } from 'react-redux';
 import ProjectList from '../components/projectList.jsx';
+import { setVisibleProjects } from '../actions/actions.js';
 
-function containsObject(obj, list) {
-    var i;
-    for (i = 0; i < list.length; i++) {
-        if (list[i].id === obj.id) {
-            console.log(true);
-            return true;
-        }
-    }
-    return false;
-}
-
-const filterByCategory  = (projects, category) => {
-    if(projects.length > 0){
-        if(category.id === 0){
-            return projects;
-        }else{
-            return projects.filter(t => t.category === category.id);
-        }
-    }
-};
-
-const filterByTags = (projects, tags) => {
-    var filteredProjects = [];
-    var i = 0;
-    var j = 0;
-    var k = 0;
-    var project;
-    if(projects.length > 0 && tags.length > 0){
-        for(i; i < projects.length; i++){
-            project = projects[i];
+const getVisibleProjects  = (items, projects) => {
+    if(items.length > 0){
+        var i = 0;
+        var j = 0;
+        var filteredImages = [];
+        for(i; i < items.length; i++){
             j = 0;
-            if(project){
-                for(j; j < project.tags.length; j++){
-                    var b = false;
-                    k = 0;
-                    for(k; k < tags.length; k++){
-                        if(project.tags[j].id === tags[k].id){
-                            filteredProjects.push(project);
-                            b = true;
-                            break;
-                        }
-                    }
-                    if(b){
-                        break;
-                    }
+            for(j; j < projects.length; j++){
+                if(items[i].id === projects[j].id ){
+                    filteredImages.push(items[i]);
                 }
-            }
+            } 
         }
+        return filteredImages;
     }else{
-        filteredProjects = projects;
+        return items;
     }
-    return filteredProjects;
 };
 
 const mapStateToProps = (state) => {
-    const { apiCalls, categoryFilter, tagFilter } = state;
+    const { apiCalls, visibleProjects, tagFilter, categoryFilter } = state;
     const {
         isFetching,
         lastUpdated,
@@ -66,11 +32,10 @@ const mapStateToProps = (state) => {
         items: []
     };
 
-    const projectsByCat = filterByCategory(items, categoryFilter);
-    const projectsByTag = filterByTags(projectsByCat, tagFilter);
+    const filterProjects = getVisibleProjects(items, visibleProjects);
 
     return {
-        projects: projectsByTag,
+        projects: filterProjects,
         isFetching,
         lastUpdated
     };

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { clearTagFilter } from '../actions/actions';
+import { clearTagFilter, filterProjects } from '../actions/actions';
 import TagRow from '../components/clearAllTagsRow.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
@@ -21,6 +21,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onClick: () => {
             dispatch(clearTagFilter());
+            dispatch(filterProjects());
         }
     };
 };

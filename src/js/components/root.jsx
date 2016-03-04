@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Header from './header.jsx';
 import { bindActionCreators } from 'redux';
-import { apiFetchIfNeeded } from '../actions/actions';
+import { apiFetchIfNeeded, setVisibleProjects } from '../actions/actions';
 import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
@@ -15,6 +15,7 @@ class Root extends Component {
         dispatch(apiFetchIfNeeded('projects'));
         dispatch(apiFetchIfNeeded('projectsCategories'));
         dispatch(apiFetchIfNeeded('tags'));
+        dispatch(apiFetchIfNeeded('images'));
     }
 
     render() {

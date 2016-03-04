@@ -59,6 +59,7 @@ function apiRequest(endPoint) {
     };
 }
 
+
 export const API_RESPONSE = 'API_RESPONSE';
 export function apiResponse(json, endPoint) {
     return {
@@ -75,20 +76,10 @@ export function apiFetch(endPoint) {
         return fetch(apiURL + endPoint)
         .then(response => response.json())
         .then(json =>
-              dispatch(apiResponse(json, endPoint))
+              dispatch(apiResponse(json, endPoint)),
+              dispatch(filterProjects())
              );
     };
-}
-
-function apiShouldFetch(state, endPoint) {
-    const apiCall = state.apiCalls[endPoint];
-    if (!apiCall) {
-        return true;
-    } else if (apiCall.isFetching) {
-        return false;
-    } else {
-        return false;
-    }
 }
 
 export function apiFetchIfNeeded(endPoint){
@@ -108,6 +99,91 @@ export function apiFetchIfNeeded(endPoint){
         }
     };
 }
+
+function apiShouldFetch(state, endPoint) {
+    const apiCall = state.apiCalls[endPoint];
+    if (!apiCall) {
+        return true;
+    } else if (apiCall.isFetching) {
+        return false;
+    } else {
+        return false;
+    }
+}
+
+export const SET_VISIBLE_PROJECTS = 'SET_VISIBLE_PROJECTS';
+export function setVisibleProjects(projects) {
+    const PROJECTS = projects || [];
+    return {
+        type: SET_VISIBLE_PROJECTS,
+        projects: projects
+    };
+}
+
+export function filterProjects() {
+    return function (dispatch, getState){
+        const state = getState() || {};
+        const apiCalls = state['apiCalls'] || [];
+        const projects = apiCalls['projects'] || {};
+        const items = projects.items || [];
+        const categoryFilter = state['categoryFilter'];
+        const tagFilter = state['tagFilter'] || [];
+        let filterProjects = filterByCategory(items, categoryFilter);
+        filterProjects = filterByTags(filterProjects, tagFilter);
+        dispatch(setVisibleProjects(filterProjects));
+    };
+}
+
+function filterByCategory (projects, category) {
+    if(projects.length > 0){
+        if(category.id === 0){
+            return projects;
+        }else{
+            return projects.filter(t => t.category === category.id);
+        }
+    }else{
+        return projects;
+    }
+};
+
+function filterByTags (projects, tags) {
+    var filteredProjects = [];
+    var i = 0;
+    var j = 0;
+    var k = 0;
+    var project;
+    if(projects && tags){
+        if(projects.length > 0 && tags.length > 0){
+            for(i; i < projects.length; i++){
+                project = projects[i];
+                j = 0;
+                if(project){
+                    for(j; j < project.tags.length; j++){
+                        var b = false;
+                        k = 0;
+                        for(k; k < tags.length; k++){
+                            if(project.tags[j].id === tags[k].id){
+                                filteredProjects.push(project);
+                                b = true;
+                                break;
+                            }
+                        }
+                        if(b){
+                            break;
+                        }
+                    }
+                }
+            }
+        }else{
+            filteredProjects = projects;
+        }
+    }else{
+        filteredProjects = projects;
+    }
+    return filteredProjects;
+};
+
+
 
 import { connect } from 'react-redux';
 import  CategoryRow from '../components/categoryRow.jsx';;
@@ -135,7 +211,7 @@ const Category = connect(
 export default Category;
 
 import { connect } from 'react-redux';
-import { setCategoryFilter } from '../actions/actions';
+import { setCategoryFilter, filterProjects } from '../actions/actions';
 import  CategoryList from '../components/categoryList.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
@@ -165,6 +241,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onCategoryClick: (id, name) => {
             dispatch(setCategoryFilter(id, name));
+            dispatch(filterProjects());
         }
     };
 };
@@ -177,7 +254,7 @@ const CategoryFilter = connect(
 export default CategoryFilter;
 
 import { connect } from 'react-redux';
-import { clearTagFilter } from '../actions/actions';
+import { clearTagFilter, filterProjects } from '../actions/actions';
 import TagRow from '../components/clearAllTagsRow.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
@@ -199,6 +276,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onClick: () => {
             dispatch(clearTagFilter());
+            dispatch(filterProjects());
         }
     };
 };
@@ -209,6 +287,65 @@ const Tag = connect(
 )(TagRow);
 
 export default Tag;
+
+import { connect } from 'react-redux';
+import { apiFetchIfNeeded } from '../actions/actions';
+import  ImageList from '../components/imageList.jsx';;
+
+const getVisibleImages  = (items, projects) => {
+    if(items.length > 0){
+        var i = 0;
+        var j = 0;
+        var filteredImages = [];
+        for(i; i < items.length; i++){
+            j = 0;
+            for(j; j < projects.length; j++){
+                if(items[i].project === projects[j].id ){
+                    filteredImages.push(items[i]);
+                }
+            } 
+        }
+        return filteredImages;
+    }else{
+        return items;
+    }
+};
+
+const mapStateToProps = (state, ownProps) => {
+    const { apiCalls, visibleProjects, tagFilter, categoryFilter } = state;
+    const {
+        isFetching,
+        lastUpdated,
+        items: items
+    } = apiCalls['images'] || {
+        isFetching: true,
+        items: []
+    };
+
+    const filteredImages = getVisibleImages(items, visibleProjects);
+
+    return {
+        images: filteredImages,
+        isFetching,
+        lastUpdated
+    };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        onImageClick: (id, name) => {
+            // dispatch(setCategoryFilter(id, name));
+            console.log('ImageClick: ' + id);
+        }
+    };
+};
+
+const Images = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ImageList);
+
+export default Images;
 
 import { connect } from 'react-redux';
 import PortfolioV from '../components/portfolio.jsx';
@@ -325,7 +462,7 @@ const Tag = connect(
 export default Tag;
 
 import { connect } from 'react-redux';
-import { addTagFilter, deleteTagFilter } from '../actions/actions';
+import { addTagFilter, deleteTagFilter, filterProjects } from '../actions/actions';
 import TagRow from '../components/tagRow.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
@@ -352,6 +489,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onClick: () => {
             dispatch(addTagFilter(tag.id, tag.name));
+            dispatch(filterProjects());
         }
     };
 };
@@ -400,63 +538,29 @@ export default TagFilter;
 
 import { connect } from 'react-redux';
 import ProjectList from '../components/projectList.jsx';
+import { setVisibleProjects } from '../actions/actions.js';
 
-function containsObject(obj, list) {
-    var i;
-    for (i = 0; i < list.length; i++) {
-        if (list[i].id === obj.id) {
-            console.log(true);
-            return true;
-        }
-    }
-    return false;
-}
-
-const filterByCategory  = (projects, category) => {
-    if(projects.length > 0){
-        if(category.id === 0){
-            return projects;
-        }else{
-            return projects.filter(t => t.category === category.id);
-        }
-    }
-};
-
-const filterByTags = (projects, tags) => {
-    var filteredProjects = [];
-    var i = 0;
-    var j = 0;
-    var k = 0;
-    var project;
-    if(projects.length > 0 && tags.length > 0){
-        for(i; i < projects.length; i++){
-            project = projects[i];
+const getVisibleProjects  = (items, projects) => {
+    if(items.length > 0){
+        var i = 0;
+        var j = 0;
+        var filteredImages = [];
+        for(i; i < items.length; i++){
             j = 0;
-            if(project){
-                for(j; j < project.tags.length; j++){
-                    var b = false;
-                    k = 0;
-                    for(k; k < tags.length; k++){
-                        if(project.tags[j].id === tags[k].id){
-                            filteredProjects.push(project);
-                            b = true;
-                            break;
-                        }
-                    }
-                    if(b){
-                        break;
-                    }
+            for(j; j < projects.length; j++){
+                if(items[i].id === projects[j].id ){
+                    filteredImages.push(items[i]);
                 }
-            }
+            } 
         }
+        return filteredImages;
     }else{
-        filteredProjects = projects;
+        return items;
     }
-    return filteredProjects;
 };
 
 const mapStateToProps = (state) => {
-    const { apiCalls, categoryFilter, tagFilter } = state;
+    const { apiCalls, visibleProjects, tagFilter, categoryFilter } = state;
     const {
         isFetching,
         lastUpdated,
@@ -466,11 +570,10 @@ const mapStateToProps = (state) => {
         items: []
     };
 
-    const projectsByCat = filterByCategory(items, categoryFilter);
-    const projectsByTag = filterByTags(projectsByCat, tagFilter);
+    const filterProjects = getVisibleProjects(items, visibleProjects);
 
     return {
-        projects: projectsByTag,
+        projects: filterProjects,
         isFetching,
         lastUpdated
     };
@@ -483,7 +586,7 @@ const VisibleProjects = connect(
 export default VisibleProjects;
 
 import { combineReducers } from 'redux';
-import { API_REQUEST, API_RESPONSE, SET_CATEGORY_FILTER, ADD_TAG_FILTER, DELETE_TAG_FILTER, CLEAR_ALL_TAG_FILTERS } from '../actions/actions';
+import { SET_VISIBLE_PROJECTS, API_REQUEST, API_RESPONSE, SET_CATEGORY_FILTER, ADD_TAG_FILTER, DELETE_TAG_FILTER, CLEAR_ALL_TAG_FILTERS } from '../actions/actions';
 
 const categoryFilter = (state = {
     id: 0,
@@ -533,6 +636,17 @@ const tagFilter = (state = [], action) => {
     }
 };
 
+const visibleProjects = (state = [], action) => {
+    switch (action.type){
+        case SET_VISIBLE_PROJECTS:
+            return action.projects;
+            break;
+        default:
+            return state;
+            break;
+    }
+};
+
 function apiCalls(state = {}, action) {
     switch (action.type) {
         case API_RESPONSE:
@@ -567,7 +681,8 @@ const items = (state = {
 const portfolioApp = combineReducers({
     tagFilter,
     apiCalls,
-    categoryFilter
+    categoryFilter,
+    visibleProjects
 });
 
 export default portfolioApp;

@@ -3,7 +3,7 @@ import Images from './imageList.jsx';
 import Isvg from 'react-inlinesvg';
 import LinkList from './linkList.jsx';
 import TagList from './projectTagList.jsx';
-import ImageList from './imageList.jsx';
+import ImageList from './gallery.jsx';
 import Loading from './loading.jsx';
 
 const Project = ({ 

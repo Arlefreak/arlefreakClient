@@ -599,6 +599,16 @@ aside.right {
 }
 .projects ul.vertical-list {
   margin: 0;
+  width: 50%;
+  float: left;
+}
+@media screen and (max-width: 820px) {
+  .projects ul.vertical-list {
+    display: block;
+    width: 100%;
+    float: none;
+    clear: both;
+  }
 }
 .projects ul.vertical-list li {
   display: block;
@@ -686,6 +696,42 @@ aside.right {
   float: left;
   width: 40%;
   min-height: 10px;
+}
+.projects .images {
+  display: block;
+  float: right;
+  width: 50%;
+  max-width: 350px;
+}
+@media screen and (max-width: 820px) {
+  .projects .images {
+    display: block;
+    width: 100%;
+    float: none;
+    margin: 10px 0 0 0;
+  }
+}
+.projects .images a {
+  display: block;
+  float: left;
+  margin: 0 2% 2% 0;
+  width: 20%;
+  height: auto;
+  padding: 0 0 20% 0;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  background-position: center;
+  background-color: #f0f0f0;
+  border: 1px solid #f0f0f0;
+  -webkit-transition: border-color 0.5s ease;
+  -moz-transition: border-color 0.5s ease;
+  -o-transition: border-color 0.5s ease;
+  -ms-transition: border-color 0.5s ease;
+  transition: border-color 0.5s ease;
+}
+.projects .images a:hover {
+  border: 1px solid #666;
 }
 .error img {
   margin: 15vh 0 0 0;

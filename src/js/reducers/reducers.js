@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { API_REQUEST, API_RESPONSE, SET_CATEGORY_FILTER, ADD_TAG_FILTER, DELETE_TAG_FILTER, CLEAR_ALL_TAG_FILTERS } from '../actions/actions';
+import { SET_VISIBLE_PROJECTS, API_REQUEST, API_RESPONSE, SET_CATEGORY_FILTER, ADD_TAG_FILTER, DELETE_TAG_FILTER, CLEAR_ALL_TAG_FILTERS } from '../actions/actions';
 
 const categoryFilter = (state = {
     id: 0,
@@ -49,6 +49,17 @@ const tagFilter = (state = [], action) => {
     }
 };
 
+const visibleProjects = (state = [], action) => {
+    switch (action.type){
+        case SET_VISIBLE_PROJECTS:
+            return action.projects;
+            break;
+        default:
+            return state;
+            break;
+    }
+};
+
 function apiCalls(state = {}, action) {
     switch (action.type) {
         case API_RESPONSE:
@@ -83,7 +94,8 @@ const items = (state = {
 const portfolioApp = combineReducers({
     tagFilter,
     apiCalls,
-    categoryFilter
+    categoryFilter,
+    visibleProjects
 });
 
 export default portfolioApp;

@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import ProjectList from '../containers/VisibleProjects.js';
 import CategoryList from '../containers/CategoryFilter.js';
+import ImageList from '../containers/Images.js';
 import TagList from '../containers/TagFilter.js';
 import Loading from './loading.jsx';
 
@@ -18,6 +19,7 @@ const Portfolio = ({ isFetching }) => {
                 <h2>Projects</h2>
                 <CategoryList></CategoryList>
                 <TagList></TagList>
+                <ImageList></ImageList>
                 <ProjectList></ProjectList>
                 <img className="index" src="img/p.svg" alt="Icono"/>
             </article>;

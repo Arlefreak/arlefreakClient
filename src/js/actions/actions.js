@@ -44,6 +44,7 @@ function apiRequest(endPoint) {
     };
 }
 
+
 export const API_RESPONSE = 'API_RESPONSE';
 export function apiResponse(json, endPoint) {
     return {
@@ -60,20 +61,10 @@ export function apiFetch(endPoint) {
         return fetch(apiURL + endPoint)
         .then(response => response.json())
         .then(json =>
-              dispatch(apiResponse(json, endPoint))
+              dispatch(apiResponse(json, endPoint)),
+              dispatch(filterProjects())
              );
     };
-}
-
-function apiShouldFetch(state, endPoint) {
-    const apiCall = state.apiCalls[endPoint];
-    if (!apiCall) {
-        return true;
-    } else if (apiCall.isFetching) {
-        return false;
-    } else {
-        return false;
-    }
 }
 
 export function apiFetchIfNeeded(endPoint){
@@ -93,3 +84,88 @@ export function apiFetchIfNeeded(endPoint){
         }
     };
 }
+
+function apiShouldFetch(state, endPoint) {
+    const apiCall = state.apiCalls[endPoint];
+    if (!apiCall) {
+        return true;
+    } else if (apiCall.isFetching) {
+        return false;
+    } else {
+        return false;
+    }
+}
+
+export const SET_VISIBLE_PROJECTS = 'SET_VISIBLE_PROJECTS';
+export function setVisibleProjects(projects) {
+    const PROJECTS = projects || [];
+    return {
+        type: SET_VISIBLE_PROJECTS,
+        projects: projects
+    };
+}
+
+export function filterProjects() {
+    return function (dispatch, getState){
+        const state = getState() || {};
+        const apiCalls = state['apiCalls'] || [];
+        const projects = apiCalls['projects'] || {};
+        const items = projects.items || [];
+        const categoryFilter = state['categoryFilter'];
+        const tagFilter = state['tagFilter'] || [];
+        let filterProjects = filterByCategory(items, categoryFilter);
+        filterProjects = filterByTags(filterProjects, tagFilter);
+        dispatch(setVisibleProjects(filterProjects));
+    };
+}
+
+function filterByCategory (projects, category) {
+    if(projects.length > 0){
+        if(category.id === 0){
+            return projects;
+        }else{
+            return projects.filter(t => t.category === category.id);
+        }
+    }else{
+        return projects;
+    }
+};
+
+function filterByTags (projects, tags) {
+    var filteredProjects = [];
+    var i = 0;
+    var j = 0;
+    var k = 0;
+    var project;
+    if(projects && tags){
+        if(projects.length > 0 && tags.length > 0){
+            for(i; i < projects.length; i++){
+                project = projects[i];
+                j = 0;
+                if(project){
+                    for(j; j < project.tags.length; j++){
+                        var b = false;
+                        k = 0;
+                        for(k; k < tags.length; k++){
+                            if(project.tags[j].id === tags[k].id){
+                                filteredProjects.push(project);
+                                b = true;
+                                break;
+                            }
+                        }
+                        if(b){
+                            break;
+                        }
+                    }
+                }
+            }
+        }else{
+            filteredProjects = projects;
+        }
+    }else{
+        filteredProjects = projects;
+    }
+    return filteredProjects;
+};
+
+
