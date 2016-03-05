@@ -454,7 +454,7 @@ main p {
   }
 }
 main a {
-  color: #999;
+  color: #666;
   font-size: 0.8em;
   text-decoration: none;
   -webkit-transition: color 0.5s ease;
@@ -628,16 +628,22 @@ aside.right {
 }
 .projects ul.tags li {
   display: inline-block;
-  margin: 0 10px 0 0;
+  margin: 0px 4px 0px 0px;
 }
 .projects ul.tags li a {
-  color: #e3e3e3;
+  color: #999;
+  padding: 2px 2px 2px 2px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 0.6em;
 }
 .projects ul.tags li a:hover {
   color: #000;
 }
 .projects ul.tags li a.active {
-  color: #72dec2;
+  background: #72dec2;
+  color: #000;
 }
 .projects ul.links {
   margin: 0 0 10px 0;
