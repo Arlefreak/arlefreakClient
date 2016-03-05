@@ -38363,6 +38363,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var ImageRow = function ImageRow(_ref) {
     var image = _ref.image;
+    var thumbnailBW = _ref.thumbnailBW;
     var thumbnail = _ref.thumbnail;
     var project = _ref.project;
     var onImageClick = _ref.onImageClick;
@@ -38373,18 +38374,29 @@ var ImageRow = function ImageRow(_ref) {
     return _react2.default.createElement(
         'li',
         null,
-        _react2.default.createElement(_reactRouter.Link, {
-            style: imgStyle,
-            to: '/projects/' + project,
-            onClick: onImageClick
-
-        })
+        _react2.default.createElement(
+            _reactRouter.Link,
+            {
+                style: imgStyle,
+                to: '/projects/' + project,
+                onClick: onImageClick
+            },
+            _react2.default.createElement('img', {
+                src: thumbnail,
+                className: 'imgColor'
+            }),
+            _react2.default.createElement('img', {
+                src: thumbnailBW,
+                className: 'imgBW'
+            })
+        )
     );
 };
 
 ImageRow.propTypes = {
     image: _react.PropTypes.string.isRequired,
     thumbnail: _react.PropTypes.string.isRequired,
+    thumbnailBW: _react.PropTypes.string.isRequired,
     project: _react.PropTypes.number.isRequired,
     onImageClick: _react.PropTypes.func.isRequired
 };

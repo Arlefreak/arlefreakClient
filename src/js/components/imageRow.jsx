@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
-const ImageRow = ({ image, thumbnail, project, onImageClick}) => {
+const ImageRow = ({ image, thumbnailBW, thumbnail, project, onImageClick}) => {
     var imgStyle = {
         backgroundImage: 'url(' + thumbnail + ')'
     };
@@ -11,8 +11,16 @@ const ImageRow = ({ image, thumbnail, project, onImageClick}) => {
                 style={ imgStyle }
                 to={'/projects/' + project }
                 onClick={ onImageClick }
-
-            ></Link>
+            >
+                <img
+                    src= { thumbnail }
+                    className="imgColor"
+                />
+                <img
+                    src= { thumbnailBW }
+                    className="imgBW"
+                />
+            </Link>
         </li>
     );
 };
@@ -20,6 +28,7 @@ const ImageRow = ({ image, thumbnail, project, onImageClick}) => {
 ImageRow.propTypes = {
     image: PropTypes.string.isRequired,
     thumbnail: PropTypes.string.isRequired,
+    thumbnailBW: PropTypes.string.isRequired,
     project: PropTypes.number.isRequired,
     onImageClick: PropTypes.func.isRequired
 };

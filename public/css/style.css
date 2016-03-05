@@ -747,9 +747,32 @@ ul.images a {
   -o-transition: border-color 0.5s ease;
   -ms-transition: border-color 0.5s ease;
   transition: border-color 0.5s ease;
+  overflow: hidden;
+  position: relative;
 }
 ul.images a:hover {
   border: 1px solid #666;
+}
+ul.images a img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 100;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10000)";
+  filter: alpha(opacity=10000);
+  -webkit-transition: opacity 0.5s ease;
+  -moz-transition: opacity 0.5s ease;
+  -o-transition: opacity 0.5s ease;
+  -ms-transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease;
+}
+ul.images a img.imgBW:hover {
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
 }
 section.gallery {
   width: 35%;
