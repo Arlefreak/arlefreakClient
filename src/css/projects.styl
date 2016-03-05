@@ -52,17 +52,6 @@
         vertical-align top
         &:first-child
             margin 0 5% 0 0
-        &.gallery
-            width 35%
-            @media screen and (max-width: $mobile-width)
-                width 100%
-            img
-                display block
-                max-width 100%
-                height auto
-                margin 2vh auto 0 auto
-                &:first-child
-                    margin 40px auto 0 auto
         @media screen and (max-width: $mobile-width)
             width 100%
             display block
@@ -72,27 +61,3 @@
         float left
         width 40%
         min-height 10px
-    .images
-        display block
-        float right
-        width 50%
-        max-width 350px
-        @media screen and (max-width: $mobile-width)
-            display block
-            width 100%
-            float none
-            margin 10px 0 0 0
-        a
-            display block
-            float left
-            margin 0 2% 2% 0
-            width 20%
-            height auto
-            padding 0 0 20% 0
-            background-size cover
-            background-position center
-            background-color $gray1
-            border 1px solid $gray1
-            transition border-color 0.5s ease
-            &:hover
-                border 1px solid $gray4
