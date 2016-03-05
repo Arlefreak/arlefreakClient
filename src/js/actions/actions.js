@@ -61,8 +61,7 @@ export function apiFetch(endPoint) {
         return fetch(apiURL + endPoint)
         .then(response => response.json())
         .then(json =>
-              dispatch(apiResponse(json, endPoint)),
-              dispatch(filterProjects())
+              dispatch(apiResponse(json, endPoint))
              );
     };
 }
@@ -226,5 +225,3 @@ function filterByTags (projects, tags) {
     }
     return filteredProjects;
 };
-
-

@@ -37631,7 +37631,7 @@ function apiFetch(endPoint) {
             return response.json();
         }).then(function (json) {
             return dispatch(apiResponse(json, endPoint));
-        }, dispatch(filterProjects()));
+        });
     };
 }
 
@@ -39633,8 +39633,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
 
     return {
         onClick: function onClick() {
-            dispatch((0, _actions.clearTagFilter)());
+            dispatch(clearTagFilter());
             dispatch((0, _actions.addTagFilter)(tag.id, tag.name));
+            dispatch((0, _actions.filterProjects)());
         }
     };
 };
