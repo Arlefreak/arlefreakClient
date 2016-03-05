@@ -1,0 +1,34 @@
+ul.images
+    display block
+    float right
+    width 48%
+    @media screen and (max-width: $mobile-width)
+        display block
+        width 100%
+        float none
+        margin 10px 0 0 0
+    a
+        display block
+        float left
+        margin 0 1% 1% 0
+        width 23%
+        height auto
+        padding 0 0 23% 0
+        background-size cover
+        background-position center
+        background-color $gray1
+        border 1px solid $gray1
+        transition border-color 0.5s ease
+        &:hover
+            border 1px solid $gray4
+ul.gallery
+    width 35%
+    @media screen and (max-width: $mobile-width)
+        width 100%
+    img
+        display block
+        max-width 100%
+        height auto
+        margin 2vh auto 0 auto
+        &:first-child
+            margin 40px auto 0 auto
