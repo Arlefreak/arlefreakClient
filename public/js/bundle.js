@@ -39633,7 +39633,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
 
     return {
         onClick: function onClick() {
-            dispatch(clearTagFilter());
+            dispatch((0, _actions.clearTagFilter)());
             dispatch((0, _actions.addTagFilter)(tag.id, tag.name));
             dispatch((0, _actions.filterProjects)());
         }

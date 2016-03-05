@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addTagFilter, deleteTagFilter, filterProjects } from '../actions/actions';
+import { addTagFilter, clearTagFilter, filterProjects } from '../actions/actions';
 import TagRow from '../components/projectTagRow.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
