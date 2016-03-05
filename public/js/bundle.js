@@ -38368,16 +38368,12 @@ var ImageRow = function ImageRow(_ref) {
     var project = _ref.project;
     var onImageClick = _ref.onImageClick;
 
-    var imgStyle = {
-        backgroundImage: 'url(' + thumbnail + ')'
-    };
     return _react2.default.createElement(
         'li',
         null,
         _react2.default.createElement(
             _reactRouter.Link,
             {
-                style: imgStyle,
                 to: '/projects/' + project,
                 onClick: onImageClick
             },

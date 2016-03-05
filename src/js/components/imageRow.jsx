@@ -2,13 +2,9 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 const ImageRow = ({ image, thumbnailBW, thumbnail, project, onImageClick}) => {
-    var imgStyle = {
-        backgroundImage: 'url(' + thumbnail + ')'
-    };
     return (
         <li>
             <Link 
-                style={ imgStyle }
                 to={'/projects/' + project }
                 onClick={ onImageClick }
             >
