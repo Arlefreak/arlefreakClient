@@ -6,6 +6,8 @@ main
         width 50%
         display block
         max-width $max-text-width
+        @media screen and (max-width: $mobile-width)
+            width 100%
     h1
         font-size 1.8em
         font-weight 700
@@ -35,7 +37,7 @@ main
         color $gray4
         font-size 0.8em
         text-decoration none
-        transition color 0.5s ease
+        transition all 0.5s ease
         &:hover
             color $color1
 .sk-rotating-plane

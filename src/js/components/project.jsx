@@ -14,7 +14,7 @@ const Project = ({
     onTagClick,
     onImageClick
 }) => (
-<article className="projects">
+<article className="project">
     { isFetching && 
         <Loading/>
         }

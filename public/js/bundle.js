@@ -38646,7 +38646,7 @@ var Project = function Project(_ref) {
     var onImageClick = _ref.onImageClick;
     return _react2.default.createElement(
         'article',
-        { className: 'projects' },
+        { className: 'project' },
         isFetching && _react2.default.createElement(_loading2.default, null),
         !isFetching && _react2.default.createElement(
             'div',
