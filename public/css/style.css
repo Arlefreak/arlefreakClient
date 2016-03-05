@@ -638,6 +638,7 @@ aside.right {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   font-size: 0.6em;
+  letter-spacing: 0.1em;
 }
 .projects ul.tags li a:hover {
   color: #000;
@@ -652,8 +653,8 @@ aside.right {
 .projects ul.links li {
   display: inline-block;
   margin: 0 10px 0 0;
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
 }
 .projects ul.links li img {
   display: block;
@@ -721,22 +722,27 @@ ul.images a {
 ul.images a:hover {
   border: 1px solid #666;
 }
-ul.gallery {
+section.gallery {
   width: 35%;
 }
 @media screen and (max-width: 800px) {
-  ul.gallery {
+  section.gallery {
     width: 100%;
   }
 }
-ul.gallery img {
+section.gallery img {
   display: block;
   max-width: 100%;
   height: auto;
   margin: 2vh auto 0 auto;
 }
-ul.gallery img:first-child {
+section.gallery img:first-child {
   margin: 40px auto 0 auto;
+}
+svg {
+  width: 100%;
+  height: 100%;
+  margin: 0px 10px 0 0;
 }
 .cv img {
   display: none;
