@@ -10,14 +10,12 @@ const DiaryPost = ({
         <Loading/>
         }
         { !isFetching &&
-            <div>
-                <section className="info">
-                    <h2>{ post.title } - { post.dateCreated }</h2>
-                    <p>{ post.text }</p>
-                </section>
-                <img className="index" src="img/tumblr.svg" alt="Icono"/>
-            </div>
+            <section>
+                <h2>{ post.title } - { post.dateCreated }</h2>
+                <p>{ post.text }</p>
+            </section>
             }
+            <img className="index" src="img/tumblr.svg" alt="Icono"/>
         </article>
 );
 

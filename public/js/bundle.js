@@ -38224,26 +38224,22 @@ var DiaryPost = function DiaryPost(_ref) {
         { className: 'post' },
         isFetching && _react2.default.createElement(_loading2.default, null),
         !isFetching && _react2.default.createElement(
-            'div',
+            'section',
             null,
             _react2.default.createElement(
-                'section',
-                { className: 'info' },
-                _react2.default.createElement(
-                    'h2',
-                    null,
-                    post.title,
-                    ' - ',
-                    post.dateCreated
-                ),
-                _react2.default.createElement(
-                    'p',
-                    null,
-                    post.text
-                )
+                'h2',
+                null,
+                post.title,
+                ' - ',
+                post.dateCreated
             ),
-            _react2.default.createElement('img', { className: 'index', src: 'img/tumblr.svg', alt: 'Icono' })
-        )
+            _react2.default.createElement(
+                'p',
+                null,
+                post.text
+            )
+        ),
+        _react2.default.createElement('img', { className: 'index', src: 'img/tumblr.svg', alt: 'Icono' })
     );
 };
 

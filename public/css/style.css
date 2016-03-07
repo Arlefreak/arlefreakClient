@@ -580,12 +580,6 @@ aside.right {
 .post {
   color: #000;
 }
-.post img {
-  display: block;
-  width: 50%;
-  height: auto;
-  margin: auto;
-}
 .post .video-wrapper {
   position: relative;
   padding-bottom: 56, 25%;
