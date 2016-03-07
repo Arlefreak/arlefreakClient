@@ -16,6 +16,7 @@ class Root extends Component {
         dispatch(apiFetchIfNeeded('projectsCategories'));
         dispatch(apiFetchIfNeeded('tags'));
         dispatch(apiFetchIfNeeded('projectsImages'));
+        dispatch(apiFetchIfNeeded('posts'));
         dispatch(fileFetchIfNeeded('https://raw.githubusercontent.com/Arlefreak/Resume/master/README.md'));
     }
 

@@ -32,7 +32,6 @@ const mapStateToProps = (state, ownProps) => {
         isFetching: true,
         items: []
     };
-    console.log(images);
     const isFetching = projects.isFetching && images.isFetching && links.isFetching;
     return {
         isFetching: isFetching,
