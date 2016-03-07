@@ -5,6 +5,7 @@ import LinkList from './linkList.jsx';
 import TagList from './projectTagList.jsx';
 import ImageList from './gallery.jsx';
 import Loading from './loading.jsx';
+import Remarkable from 'remarkable';
 
 const Project = ({ 
     isFetching,
@@ -13,33 +14,40 @@ const Project = ({
     images,
     onTagClick,
     onImageClick
-}) => (
-<article className="project">
-    { isFetching && 
-        <Loading/>
-        }
-        { !isFetching &&
-            <div>
-                <section className="info">
-                    <h2>{ project.name }</h2>
-                    <LinkList
-                        links = { links.items }
-                    ></LinkList>
-                    <p>{ project.description }</p>
-                    <TagList
-                        tags = { project.tags }
-                        onTagClick = { onTagClick }
-                    ></TagList>
-                </section>
-                <ImageList
-                    images = { images.items }
-                    onImageClick = { onImageClick }
-                /> 
-                <img className="index" src="img/p.svg" alt="Icono"/>
-            </div>
-            }
-        </article>
-);
+}) => {
+    var md = new Remarkable();
+    var mdr = md.render(project.description);
+    if(!isFetching){
+        return(
+            <article className="project">
+                <div>
+                    <section className="info">
+                        <h2>{ project.name }</h2>
+                        <LinkList
+                            links = { links.items }
+                        ></LinkList>
+                        <div  dangerouslySetInnerHTML={{ __html: mdr }}/>
+                        <TagList
+                            tags = { project.tags }
+                            onTagClick = { onTagClick }
+                        ></TagList>
+                    </section>
+                    <ImageList
+                        images = { images.items }
+                        onImageClick = { onImageClick }
+                    /> 
+                    <img className="index" src="img/p.svg" alt="Icono"/>
+                </div>
+            </article>
+        );
+    }else{
+        return(
+            <article className="project">
+                <Loading/>
+            </article>
+        );
+    }
+};
 
 Project.propTypes = {
     isFetching: PropTypes.bool.isRequired,

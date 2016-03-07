@@ -12,9 +12,6 @@ const mapStateToProps = (state, ownProps) => {
         file: ''
     };
 
-    console.log(fileCalls);
-    console.log(file);
-    
     return {
         file: file,
         isFetching

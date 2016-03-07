@@ -5,7 +5,6 @@ import Loading from './loading.jsx';
 const CV = ({ file, isFetching }) => {
     var md = new Remarkable();
     var mdr = md.render(file);
-    console.log(mdr);
     if(!isFetching){
         return (
             <div  className='cv' dangerouslySetInnerHTML={{ __html: mdr }}/>

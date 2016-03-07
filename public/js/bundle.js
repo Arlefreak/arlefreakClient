@@ -38091,7 +38091,6 @@ var CV = function CV(_ref) {
 
     var md = new _remarkable2.default();
     var mdr = md.render(file);
-    console.log(mdr);
     if (!isFetching) {
         return _react2.default.createElement('div', { className: 'cv', dangerouslySetInnerHTML: { __html: mdr } });
     } else {
@@ -38214,33 +38213,40 @@ var _loading = require('./loading.jsx');
 
 var _loading2 = _interopRequireDefault(_loading);
 
+var _remarkable = require('remarkable');
+
+var _remarkable2 = _interopRequireDefault(_remarkable);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DiaryPost = function DiaryPost(_ref) {
     var isFetching = _ref.isFetching;
     var post = _ref.post;
-    return _react2.default.createElement(
-        'article',
-        { className: 'post' },
-        isFetching && _react2.default.createElement(_loading2.default, null),
-        !isFetching && _react2.default.createElement(
-            'section',
-            null,
+
+    var md = new _remarkable2.default();
+    console.log(post.text);
+    var mdr = md.render(post.text);
+    if (!isFetching) {
+        return _react2.default.createElement(
+            'article',
+            { className: 'post' },
             _react2.default.createElement(
-                'h2',
+                'section',
                 null,
-                post.title,
-                ' - ',
-                post.dateCreated
+                _react2.default.createElement(
+                    'h2',
+                    null,
+                    post.title,
+                    ' - ',
+                    post.dateCreated
+                ),
+                _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: mdr } })
             ),
-            _react2.default.createElement(
-                'p',
-                null,
-                post.text
-            )
-        ),
-        _react2.default.createElement('img', { className: 'index', src: 'img/tumblr.svg', alt: 'Icono' })
-    );
+            _react2.default.createElement('img', { className: 'index', src: 'img/tumblr.svg', alt: 'Icono' })
+        );
+    } else {
+        return _react2.default.createElement(_loading2.default, null);
+    }
 };
 
 DiaryPost.propTypes = {
@@ -38253,7 +38259,7 @@ DiaryPost.propTypes = {
 };
 exports.default = DiaryPost;
 
-},{"./loading.jsx":341,"react":245}],334:[function(require,module,exports){
+},{"./loading.jsx":341,"react":245,"remarkable":258}],334:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -38786,6 +38792,10 @@ var _loading = require('./loading.jsx');
 
 var _loading2 = _interopRequireDefault(_loading);
 
+var _remarkable = require('remarkable');
+
+var _remarkable2 = _interopRequireDefault(_remarkable);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Project = function Project(_ref) {
@@ -38795,41 +38805,47 @@ var Project = function Project(_ref) {
     var images = _ref.images;
     var onTagClick = _ref.onTagClick;
     var onImageClick = _ref.onImageClick;
-    return _react2.default.createElement(
-        'article',
-        { className: 'project' },
-        isFetching && _react2.default.createElement(_loading2.default, null),
-        !isFetching && _react2.default.createElement(
-            'div',
-            null,
+
+    var md = new _remarkable2.default();
+    var mdr = md.render(project.description);
+    if (!isFetching) {
+        return _react2.default.createElement(
+            'article',
+            { className: 'project' },
             _react2.default.createElement(
-                'section',
-                { className: 'info' },
+                'div',
+                null,
                 _react2.default.createElement(
-                    'h2',
-                    null,
-                    project.name
+                    'section',
+                    { className: 'info' },
+                    _react2.default.createElement(
+                        'h2',
+                        null,
+                        project.name
+                    ),
+                    _react2.default.createElement(_linkList2.default, {
+                        links: links.items
+                    }),
+                    _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: mdr } }),
+                    _react2.default.createElement(_projectTagList2.default, {
+                        tags: project.tags,
+                        onTagClick: onTagClick
+                    })
                 ),
-                _react2.default.createElement(_linkList2.default, {
-                    links: links.items
+                _react2.default.createElement(_gallery2.default, {
+                    images: images.items,
+                    onImageClick: onImageClick
                 }),
-                _react2.default.createElement(
-                    'p',
-                    null,
-                    project.description
-                ),
-                _react2.default.createElement(_projectTagList2.default, {
-                    tags: project.tags,
-                    onTagClick: onTagClick
-                })
-            ),
-            _react2.default.createElement(_gallery2.default, {
-                images: images.items,
-                onImageClick: onImageClick
-            }),
-            _react2.default.createElement('img', { className: 'index', src: 'img/p.svg', alt: 'Icono' })
-        )
-    );
+                _react2.default.createElement('img', { className: 'index', src: 'img/p.svg', alt: 'Icono' })
+            )
+        );
+    } else {
+        return _react2.default.createElement(
+            'article',
+            { className: 'project' },
+            _react2.default.createElement(_loading2.default, null)
+        );
+    }
 };
 
 Project.propTypes = {
@@ -38859,7 +38875,7 @@ Project.propTypes = {
 };
 exports.default = Project;
 
-},{"./gallery.jsx":334,"./imageList.jsx":337,"./linkList.jsx":339,"./loading.jsx":341,"./projectTagList.jsx":346,"react":245,"react-inlinesvg":68}],344:[function(require,module,exports){
+},{"./gallery.jsx":334,"./imageList.jsx":337,"./linkList.jsx":339,"./loading.jsx":341,"./projectTagList.jsx":346,"react":245,"react-inlinesvg":68,"remarkable":258}],344:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39386,9 +39402,6 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     var isFetching = _ref.isFetching;
     var lastUpdated = _ref.lastUpdated;
     var file = _ref.file;
-
-    console.log(fileCalls);
-    console.log(file);
 
     return {
         file: file,
