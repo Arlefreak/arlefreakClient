@@ -7,9 +7,7 @@ class Header extends React.Component {
             <header>
                 <div className="wrapper">
                     <div className="title">
-                        <a href="http://arlefreak.com/">
-                            <img className="logo" src="img/logo.svg" alt="arlefreak"/>
-                        </a>
+                        <img className="logo" src="img/logo.svg" alt="arlefreak"/>
                         <h1 className="hideMobile">Mario Carballo Zama</h1>
                     </div>
                     <nav>
@@ -17,8 +15,8 @@ class Header extends React.Component {
                             <li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
                             <li><Link to="/about" activeClassName="active">About</Link></li>
                             <li><Link to="/projects" activeClassName="active">Projects</Link></li>
-                            <li><Link to="/cv" activeClassName="active">CV</Link></li>
                             <li><Link to="/diary" activeClassName="active">Diary</Link></li>
+                            <li><Link to="/cv" activeClassName="active">CV</Link></li>
                         </ul>
                     </nav>
                 </div>

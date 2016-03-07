@@ -38375,11 +38375,7 @@ var Header = function (_React$Component) {
                     _react2.default.createElement(
                         'div',
                         { className: 'title' },
-                        _react2.default.createElement(
-                            'a',
-                            { href: 'http://arlefreak.com/' },
-                            _react2.default.createElement('img', { className: 'logo', src: 'img/logo.svg', alt: 'arlefreak' })
-                        ),
+                        _react2.default.createElement('img', { className: 'logo', src: 'img/logo.svg', alt: 'arlefreak' }),
                         _react2.default.createElement(
                             'h1',
                             { className: 'hideMobile' },
@@ -38424,8 +38420,8 @@ var Header = function (_React$Component) {
                                 null,
                                 _react2.default.createElement(
                                     _reactRouter.Link,
-                                    { to: '/cv', activeClassName: 'active' },
-                                    'CV'
+                                    { to: '/diary', activeClassName: 'active' },
+                                    'Diary'
                                 )
                             ),
                             _react2.default.createElement(
@@ -38433,8 +38429,8 @@ var Header = function (_React$Component) {
                                 null,
                                 _react2.default.createElement(
                                     _reactRouter.Link,
-                                    { to: '/diary', activeClassName: 'active' },
-                                    'Diary'
+                                    { to: '/cv', activeClassName: 'active' },
+                                    'CV'
                                 )
                             )
                         )
