@@ -38941,7 +38941,7 @@ var Root = function (_Component) {
             dispatch((0, _actions.apiFetchIfNeeded)('projects'));
             dispatch((0, _actions.apiFetchIfNeeded)('projectsCategories'));
             dispatch((0, _actions.apiFetchIfNeeded)('tags'));
-            dispatch((0, _actions.apiFetchIfNeeded)('images'));
+            dispatch((0, _actions.apiFetchIfNeeded)('projectsImages'));
             dispatch((0, _actions.fileFetchIfNeeded)('https://raw.githubusercontent.com/Arlefreak/Resume/master/README.md'));
         }
     }, {
@@ -39437,7 +39437,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     var tagFilter = state.tagFilter;
     var categoryFilter = state.categoryFilter;
 
-    var _ref = apiCalls['images'] || {
+    var _ref = apiCalls['projectsImages'] || {
         isFetching: true,
         items: []
     };
@@ -39556,10 +39556,11 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
         isFetching: true,
         items: []
     };
-    var images = apiCalls['images/?imgType=gal&project__id=' + id] || {
+    var images = apiCalls['projectsImages?imgType=gal&project__id=' + id] || {
         isFetching: true,
         items: []
     };
+    console.log(images);
     var isFetching = projects.isFetching && images.isFetching && links.isFetching;
     return {
         isFetching: isFetching,
@@ -39573,7 +39574,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     var id = ownProps.params.id;
 
     dispatch((0, _actions.apiFetchIfNeeded)('projectsLinks/?project__id=' + id));
-    dispatch((0, _actions.apiFetchIfNeeded)('images/?imgType=gal&project__id=' + id));
+    dispatch((0, _actions.apiFetchIfNeeded)('projectsImages?imgType=gal&project__id=' + id));
     return {
         onTagClick: function onTagClick(id) {
             console.log(id);
