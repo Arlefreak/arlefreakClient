@@ -13,7 +13,7 @@ const DiaryPost = ({
             <div>
                 <section className="info">
                     <h2>{ post.title } - { post.dateCreated }</h2>
-                    <div>{ post.text }</div>
+                    <p>{ post.text }</p>
                 </section>
                 <img className="index" src="img/tumblr.svg" alt="Icono"/>
             </div>

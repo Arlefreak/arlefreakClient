@@ -38237,7 +38237,7 @@ var DiaryPost = function DiaryPost(_ref) {
                     post.dateCreated
                 ),
                 _react2.default.createElement(
-                    'div',
+                    'p',
                     null,
                     post.text
                 )
