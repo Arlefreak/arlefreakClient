@@ -13,8 +13,8 @@ class Header extends React.Component {
                     <nav>
                         <ul>
                             <li><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
-                            <li><Link to="/about" activeClassName="active">About</Link></li>
                             <li><Link to="/projects" activeClassName="active">Projects</Link></li>
+                            <li><Link to="/about" activeClassName="active">About</Link></li>
                             <li><Link to="/diary" activeClassName="active">Diary</Link></li>
                             <li><Link to="/cv" activeClassName="active">CV</Link></li>
                         </ul>

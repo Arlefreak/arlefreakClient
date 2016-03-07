@@ -38402,8 +38402,8 @@ var Header = function (_React$Component) {
                                 null,
                                 _react2.default.createElement(
                                     _reactRouter.Link,
-                                    { to: '/about', activeClassName: 'active' },
-                                    'About'
+                                    { to: '/projects', activeClassName: 'active' },
+                                    'Projects'
                                 )
                             ),
                             _react2.default.createElement(
@@ -38411,8 +38411,8 @@ var Header = function (_React$Component) {
                                 null,
                                 _react2.default.createElement(
                                     _reactRouter.Link,
-                                    { to: '/projects', activeClassName: 'active' },
-                                    'Projects'
+                                    { to: '/about', activeClassName: 'active' },
+                                    'About'
                                 )
                             ),
                             _react2.default.createElement(
