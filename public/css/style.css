@@ -796,6 +796,11 @@ svg {
 .cv img {
   display: none;
 }
+.cv img.index {
+  display: block;
+  width: 15vw;
+  max-width: 100px;
+}
 .cv .separation {
   display: none;
 }

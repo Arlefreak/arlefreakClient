@@ -7,7 +7,10 @@ const CV = ({ file, isFetching }) => {
     var mdr = md.render(file);
     if(!isFetching){
         return (
-            <div  className='cv' dangerouslySetInnerHTML={{ __html: mdr }}/>
+            <article className="cv">
+                <img className="index" src="img/cv.svg" alt="Icono"/>
+                <div  className='cv' dangerouslySetInnerHTML={{ __html: mdr }}/>
+            </article>
         );
     }else{
         return (

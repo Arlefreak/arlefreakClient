@@ -38092,7 +38092,12 @@ var CV = function CV(_ref) {
     var md = new _remarkable2.default();
     var mdr = md.render(file);
     if (!isFetching) {
-        return _react2.default.createElement('div', { className: 'cv', dangerouslySetInnerHTML: { __html: mdr } });
+        return _react2.default.createElement(
+            'article',
+            { className: 'cv' },
+            _react2.default.createElement('img', { className: 'index', src: 'img/cv.svg', alt: 'Icono' }),
+            _react2.default.createElement('div', { className: 'cv', dangerouslySetInnerHTML: { __html: mdr } })
+        );
     } else {
         return _react2.default.createElement(_loading2.default, null);
     }
@@ -38144,7 +38149,7 @@ function DiaryList(_ref) {
                 }, post));
             })
         ),
-        _react2.default.createElement('img', { className: 'index', src: 'img/tumblr.svg', alt: 'Icono' })
+        _react2.default.createElement('img', { className: 'index', src: 'img/d.svg', alt: 'Icono' })
     );
 };
 
@@ -38251,7 +38256,7 @@ var DiaryPost = function DiaryPost(_ref) {
                 ),
                 _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: mdr } })
             ),
-            _react2.default.createElement('img', { className: 'index', src: 'img/tumblr.svg', alt: 'Icono' })
+            _react2.default.createElement('img', { className: 'index', src: 'img/d.svg', alt: 'Icono' })
         );
     } else {
         return _react2.default.createElement(_loading2.default, null);
