@@ -453,6 +453,7 @@ main p {
   font-size: 1em;
   max-width: 600px;
   line-height: 1.8em;
+  margin: 0 0 10px 0;
 }
 @media screen and (max-width: 800px) {
   main p {
