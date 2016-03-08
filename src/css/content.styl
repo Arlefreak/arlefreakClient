@@ -24,7 +24,8 @@ main
         box-sizing border-box
     h3
         font-size 1.3em
-        margin 10px 0 10px 0
+        margin 20px 0 20px 0
+        font-weight 200
     p
         font-size 1em
         max-width $max-text-width
@@ -68,3 +69,20 @@ a.center
     display block
     width 100%
     margin 20vh 0 0 0
+ul
+    width 100%
+    padding 0
+    &.vertical-list
+        margin 0
+        width 50%
+        float left
+        @media screen and (max-width: $mobile-width)
+            display block
+            width 100%
+            float none
+            clear both
+        li
+            display block
+            width 100%
+            margin 0 0 12px 0
+            font-size 1.2em

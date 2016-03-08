@@ -38183,9 +38183,12 @@ var DiaryRow = function DiaryRow(_ref) {
         _react2.default.createElement(
             _reactRouter.Link,
             { to: '/diary/' + id },
-            title,
-            ' - ',
-            dateCreated
+            _react2.default.createElement(
+                'span',
+                { className: 'date' },
+                dateCreated
+            ),
+            title
         )
     );
 };
@@ -38224,21 +38227,27 @@ var DiaryPost = function DiaryPost(_ref) {
     var post = _ref.post;
 
     var md = new _remarkable2.default();
-    console.log(post.text);
     var mdr = md.render(post.text);
     if (!isFetching) {
         return _react2.default.createElement(
             'article',
-            { className: 'post' },
+            { className: 'diary post' },
             _react2.default.createElement(
                 'section',
                 null,
                 _react2.default.createElement(
                     'h2',
                     null,
-                    post.title,
-                    ' - ',
-                    post.dateCreated
+                    post.title
+                ),
+                _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(
+                        'span',
+                        { className: 'date' },
+                        post.dateCreated
+                    )
                 ),
                 _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: mdr } })
             ),

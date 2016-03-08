@@ -446,7 +446,8 @@ main h2 {
 }
 main h3 {
   font-size: 1.3em;
-  margin: 10px 0 10px 0;
+  margin: 20px 0 20px 0;
+  font-weight: 200;
 }
 main p {
   font-size: 1em;
@@ -509,6 +510,29 @@ a.center {
   display: block;
   width: 100%;
   margin: 20vh 0 0 0;
+}
+ul {
+  width: 100%;
+  padding: 0;
+}
+ul.vertical-list {
+  margin: 0;
+  width: 50%;
+  float: left;
+}
+@media screen and (max-width: 800px) {
+  ul.vertical-list {
+    display: block;
+    width: 100%;
+    float: none;
+    clear: both;
+  }
+}
+ul.vertical-list li {
+  display: block;
+  width: 100%;
+  margin: 0 0 12px 0;
+  font-size: 1.2em;
 }
 nav {
   display: block;
@@ -577,49 +601,28 @@ aside.right {
   -ms-transform: rotate(90deg) translate(-100%, 0);
   transform: rotate(90deg) translate(-100%, 0);
 }
-.post {
-  color: #000;
+.diary .date {
+  font-weight: 100;
+  font-size: 0.8em;
+  display: inline-block;
+  margin: 0 10px 0 0;
 }
-.post .video-wrapper {
+.diary div {
+  margin: 0 0 10px 0;
+}
+.diary .post .video-wrapper {
   position: relative;
   padding-bottom: 56, 25%;
   overflow: hidden;
   width: 100% !important;
   height: 0 !important;
 }
-.post .video-wrapper .iframe {
+.diary .post .video-wrapper .iframe {
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-}
-.projects ul,
-.project ul {
-  width: 100%;
-  padding: 0;
-}
-.projects ul.vertical-list,
-.project ul.vertical-list {
-  margin: 0;
-  width: 50%;
-  float: left;
-}
-@media screen and (max-width: 800px) {
-  .projects ul.vertical-list,
-  .project ul.vertical-list {
-    display: block;
-    width: 100%;
-    float: none;
-    clear: both;
-  }
-}
-.projects ul.vertical-list li,
-.project ul.vertical-list li {
-  display: block;
-  width: 100%;
-  margin: 0 0 12px 0;
-  font-size: 1.2em;
 }
 .projects ul.tags,
 .project ul.tags {

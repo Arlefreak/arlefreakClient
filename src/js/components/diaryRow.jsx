@@ -3,7 +3,9 @@ import { Link } from 'react-router';
 
 const DiaryRow = ({ id, title, dateCreated }) => (
     <li>
-        <Link to={'/diary/' + id }>{ title } - { dateCreated }</Link>
+        <Link to={'/diary/' + id }>
+            <span className="date">{ dateCreated }</span>{ title }
+        </Link>
     </li>
 );
 

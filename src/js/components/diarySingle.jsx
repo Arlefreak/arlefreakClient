@@ -7,13 +7,15 @@ const DiaryPost = ({
     post,
 }) => {
     var md = new Remarkable();
-    console.log(post.text);
     var mdr = md.render(post.text);
     if(!isFetching){
         return(
-            <article className="post">
+            <article className="diary post">
                 <section>
-                    <h2>{ post.title } - { post.dateCreated }</h2>
+                    <h2>{ post.title }</h2>
+                    <div>
+                        <span className="date">{ post.dateCreated }</span>
+                    </div>
                     <div dangerouslySetInnerHTML={{ __html: mdr }}/>
                 </section>
                 <img className="index" src="img/tumblr.svg" alt="Icono"/>
