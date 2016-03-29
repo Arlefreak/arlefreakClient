@@ -568,6 +568,9 @@ ul.vertical-list li {
 .markdown strong {
   color: #72dec2;
 }
+.markdown p a {
+  font-size: 1em;
+}
 nav {
   display: block;
   width: 100%;
