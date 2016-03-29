@@ -39079,8 +39079,6 @@ var _header2 = _interopRequireDefault(_header);
 
 var _redux = require('redux');
 
-var _actions = require('../actions/actions');
-
 var _reactRedux = require('react-redux');
 
 var _reactAddonsCssTransitionGroup = require('react-addons-css-transition-group');
@@ -39110,13 +39108,6 @@ var Root = function (_Component) {
             var _props = this.props;
             var dispatch = _props.dispatch;
             var children = _props.children;
-
-            dispatch((0, _actions.apiFetchIfNeeded)('projects'));
-            dispatch((0, _actions.apiFetchIfNeeded)('projectsCategories'));
-            dispatch((0, _actions.apiFetchIfNeeded)('tags'));
-            dispatch((0, _actions.apiFetchIfNeeded)('projectsImages'));
-            dispatch((0, _actions.apiFetchIfNeeded)('posts'));
-            dispatch((0, _actions.fileFetchIfNeeded)('https://raw.githubusercontent.com/Arlefreak/Resume/master/README.md'));
         }
     }, {
         key: 'render',
@@ -39155,7 +39146,7 @@ Root.propTypes = {
 
 exports.default = (0, _reactRedux.connect)()(Root);
 
-},{"../actions/actions":323,"./header.jsx":336,"react":245,"react-addons-css-transition-group":66,"react-redux":71,"redux":253}],349:[function(require,module,exports){
+},{"./header.jsx":336,"react":245,"react-addons-css-transition-group":66,"react-redux":71,"redux":253}],349:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39397,6 +39388,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _reactRedux = require('react-redux');
 
+var _actions = require('../actions/actions');
+
 var _cv = require('../components/cv.jsx');
 
 var _cv2 = _interopRequireDefault(_cv);
@@ -39423,11 +39416,16 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     };
 };
 
-var cv = (0, _reactRedux.connect)(mapStateToProps)(_cv2.default);
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    dispatch((0, _actions.fileFetchIfNeeded)('https://raw.githubusercontent.com/Arlefreak/Resume/master/README.md'));
+    return {};
+};
+
+var cv = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_cv2.default);
 
 exports.default = cv;
 
-},{"../components/cv.jsx":330,"react-redux":71}],355:[function(require,module,exports){
+},{"../actions/actions":323,"../components/cv.jsx":330,"react-redux":71}],355:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39512,6 +39510,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+    dispatch((0, _actions.apiFetchIfNeeded)('projectsCategories'));
     return {
         onCategoryClick: function onCategoryClick(id, name) {
             dispatch((0, _actions.setCategoryFilter)(id, name));
@@ -39583,6 +39582,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _reactRedux = require('react-redux');
 
+var _actions = require('../actions/actions');
+
 var _diaryList = require('../components/diaryList.jsx');
 
 var _diaryList2 = _interopRequireDefault(_diaryList);
@@ -39608,11 +39609,16 @@ var mapStateToProps = function mapStateToProps(state) {
     };
 };
 
-var Diary = (0, _reactRedux.connect)(mapStateToProps)(_diaryList2.default);
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    dispatch((0, _actions.apiFetchIfNeeded)('posts'));
+    return {};
+};
+
+var Diary = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_diaryList2.default);
 
 exports.default = Diary;
 
-},{"../components/diaryList.jsx":331,"react-redux":71}],359:[function(require,module,exports){
+},{"../actions/actions":323,"../components/diaryList.jsx":331,"react-redux":71}],359:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39761,6 +39767,8 @@ var _portfolio = require('../components/portfolio.jsx');
 
 var _portfolio2 = _interopRequireDefault(_portfolio);
 
+var _actions = require('../actions/actions');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -39777,11 +39785,17 @@ var mapStateToProps = function mapStateToProps(state) {
     };
 };
 
-var Portfolio = (0, _reactRedux.connect)(mapStateToProps)(_portfolio2.default);
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    dispatch((0, _actions.apiFetchIfNeeded)('projects'));
+    dispatch((0, _actions.apiFetchIfNeeded)('projectsImages'));
+    return {};
+};
+
+var Portfolio = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_portfolio2.default);
 
 exports.default = Portfolio;
 
-},{"../components/portfolio.jsx":342,"react-redux":71}],362:[function(require,module,exports){
+},{"../actions/actions":323,"../components/portfolio.jsx":342,"react-redux":71}],362:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39982,6 +39996,8 @@ var _tagList = require('../components/tagList.jsx');
 
 var _tagList2 = _interopRequireDefault(_tagList);
 
+var _actions = require('../actions/actions');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 ;
@@ -40006,6 +40022,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+    dispatch((0, _actions.apiFetchIfNeeded)('tags'));
     return {
         onTagClick: function onTagClick(id, name) {
             dispatch(addTagFilter(id, name));
@@ -40017,7 +40034,7 @@ var TagFilter = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_t
 
 exports.default = TagFilter;
 
-},{"../components/tagList.jsx":351,"react-redux":71}],366:[function(require,module,exports){
+},{"../actions/actions":323,"../components/tagList.jsx":351,"react-redux":71}],366:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

@@ -242,6 +242,7 @@ function filterByTags (projects, tags) {
 };
 
 import { connect } from 'react-redux';
+import { fileFetchIfNeeded } from '../actions/actions';
 import  CV from '../components/cv.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
@@ -261,8 +262,14 @@ const mapStateToProps = (state, ownProps) => {
     };
 };
 
+const mapDispatchToProps = (dispatch) => {
+    dispatch(fileFetchIfNeeded('https://raw.githubusercontent.com/Arlefreak/Resume/master/README.md'));
+    return {};
+};
+
 const cv = connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(CV);
 
 export default cv;
@@ -293,7 +300,7 @@ const Category = connect(
 export default Category;
 
 import { connect } from 'react-redux';
-import { setCategoryFilter, filterProjects } from '../actions/actions';
+import { setCategoryFilter, filterProjects, apiFetchIfNeeded } from '../actions/actions';
 import  CategoryList from '../components/categoryList.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
@@ -320,6 +327,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
+    dispatch(apiFetchIfNeeded('projectsCategories'));
     return {
         onCategoryClick: (id, name) => {
             dispatch(setCategoryFilter(id, name));
@@ -371,6 +379,7 @@ const Tag = connect(
 export default Tag;
 
 import { connect } from 'react-redux';
+import { apiFetchIfNeeded } from '../actions/actions';
 import DiaryList from '../components/diaryList.jsx';
 
 const mapStateToProps = (state) => {
@@ -391,8 +400,14 @@ const mapStateToProps = (state) => {
     };
 };
 
+const mapDispatchToProps = (dispatch) => {
+    dispatch(apiFetchIfNeeded('posts'));
+    return {};
+};
+
 const Diary = connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(DiaryList);
 
 export default Diary;
@@ -505,6 +520,7 @@ export default Images;
 
 import { connect } from 'react-redux';
 import PortfolioV from '../components/portfolio.jsx';
+import { apiFetchIfNeeded } from '../actions/actions';
 
 const mapStateToProps = (state) => {
     const { apiCalls } = state;
@@ -518,8 +534,15 @@ const mapStateToProps = (state) => {
     };
 };
 
+const mapDispatchToProps = (dispatch) => {
+    dispatch(apiFetchIfNeeded('projects'));
+    dispatch(apiFetchIfNeeded('projectsImages'));
+    return {};
+};
+
 const Portfolio = connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(PortfolioV);
 
 export default Portfolio;
@@ -667,6 +690,7 @@ export default Tag;
 
 import { connect } from 'react-redux';
 import  TagList from '../components/tagList.jsx';;
+import { apiFetchIfNeeded } from '../actions/actions';
 
 const mapStateToProps = (state, ownProps) => {
     const { apiCalls } = state;
@@ -686,6 +710,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
+    dispatch(apiFetchIfNeeded('tags'));
     return {
         onTagClick: (id, name) => {
             dispatch(addTagFilter(id, name));

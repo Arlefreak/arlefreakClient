@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import  TagList from '../components/tagList.jsx';;
+import { apiFetchIfNeeded } from '../actions/actions';
 
 const mapStateToProps = (state, ownProps) => {
     const { apiCalls } = state;
@@ -19,6 +20,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
+    dispatch(apiFetchIfNeeded('tags'));
     return {
         onTagClick: (id, name) => {
             dispatch(addTagFilter(id, name));

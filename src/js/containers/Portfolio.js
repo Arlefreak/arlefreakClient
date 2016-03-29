@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import PortfolioV from '../components/portfolio.jsx';
+import { apiFetchIfNeeded } from '../actions/actions';
 
 const mapStateToProps = (state) => {
     const { apiCalls } = state;
@@ -13,8 +14,15 @@ const mapStateToProps = (state) => {
     };
 };
 
+const mapDispatchToProps = (dispatch) => {
+    dispatch(apiFetchIfNeeded('projects'));
+    dispatch(apiFetchIfNeeded('projectsImages'));
+    return {};
+};
+
 const Portfolio = connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(PortfolioV);
 
 export default Portfolio;

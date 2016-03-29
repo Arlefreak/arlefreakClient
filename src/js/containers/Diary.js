@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { apiFetchIfNeeded } from '../actions/actions';
 import DiaryList from '../components/diaryList.jsx';
 
 const mapStateToProps = (state) => {
@@ -19,8 +20,14 @@ const mapStateToProps = (state) => {
     };
 };
 
+const mapDispatchToProps = (dispatch) => {
+    dispatch(apiFetchIfNeeded('posts'));
+    return {};
+};
+
 const Diary = connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(DiaryList);
 
 export default Diary;
