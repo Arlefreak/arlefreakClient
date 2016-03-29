@@ -38254,7 +38254,7 @@ var DiaryPost = function DiaryPost(_ref) {
                         post.dateCreated
                     )
                 ),
-                _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: mdr } })
+                _react2.default.createElement('div', { className: 'markdown', dangerouslySetInnerHTML: { __html: mdr } })
             ),
             _react2.default.createElement('img', { className: 'index', src: 'img/d.svg', alt: 'Icono' })
         );
@@ -38840,7 +38840,7 @@ var Project = function Project(_ref) {
                     _react2.default.createElement(_linkList2.default, {
                         links: links.items
                     }),
-                    _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: mdr } }),
+                    _react2.default.createElement('div', { className: 'markdown', dangerouslySetInnerHTML: { __html: mdr } }),
                     _react2.default.createElement(_projectTagList2.default, {
                         tags: project.tags,
                         onTagClick: onTagClick

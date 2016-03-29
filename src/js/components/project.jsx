@@ -26,7 +26,7 @@ const Project = ({
                         <LinkList
                             links = { links.items }
                         ></LinkList>
-                        <div  dangerouslySetInnerHTML={{ __html: mdr }}/>
+                        <div  className="markdown" dangerouslySetInnerHTML={{ __html: mdr }}/>
                         <TagList
                             tags = { project.tags }
                             onTagClick = { onTagClick }

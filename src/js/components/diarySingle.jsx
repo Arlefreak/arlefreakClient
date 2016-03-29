@@ -16,7 +16,7 @@ const DiaryPost = ({
                     <div>
                         <span className="date">{ post.dateCreated }</span>
                     </div>
-                    <div dangerouslySetInnerHTML={{ __html: mdr }}/>
+                    <div className="markdown" dangerouslySetInnerHTML={{ __html: mdr }}/>
                 </section>
                 <img className="index" src="img/d.svg" alt="Icono"/>
             </article>

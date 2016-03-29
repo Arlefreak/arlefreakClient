@@ -535,6 +535,39 @@ ul.vertical-list li {
   margin: 0 0 12px 0;
   font-size: 1.2em;
 }
+.markdown ul {
+  margin: 20px 0 20px 0;
+}
+.markdown ul li {
+  font-size: 1em;
+  max-width: 600px;
+  line-height: 1.8em;
+  margin: 10px 0 10px 0;
+  padding: 0 0 0 10px;
+  border-left: 1px solid #999;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+@media screen and (max-width: 800px) {
+  .markdown ul li {
+    width: 100%;
+    font-size: 0.8em;
+    line-height: 1.6em;
+  }
+}
+.markdown ul li a {
+  font-size: 1em;
+}
+.markdown h3 {
+  width: 100%;
+}
+.markdown em {
+  font-style: italic;
+}
+.markdown strong {
+  color: #72dec2;
+}
 nav {
   display: block;
   width: 100%;
@@ -712,6 +745,22 @@ aside.right {
 }
 .project h2 {
   width: 100%;
+}
+.markdown ul {
+  margin: 20px 0 20px 0;
+  list-style-type: circle;
+}
+.markdown ul li {
+  font-size: 0.8em;
+  margin: 10px 0 10px 0;
+  padding: 0 0 0 10px;
+  border-left: 1px solid #999;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.markdown ul li a {
+  font-size: 1em;
 }
 ul.images {
   display: block;
