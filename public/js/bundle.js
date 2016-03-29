@@ -39713,7 +39713,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     var tagFilter = state.tagFilter;
     var categoryFilter = state.categoryFilter;
 
-    var _ref = apiCalls['projectsImages'] || {
+    var _ref = apiCalls['projectsImages/?imgType=mni'] || {
         isFetching: true,
         items: []
     };
@@ -39787,7 +39787,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     dispatch((0, _actions.apiFetchIfNeeded)('projects'));
-    dispatch((0, _actions.apiFetchIfNeeded)('projectsImages'));
+    dispatch((0, _actions.apiFetchIfNeeded)('projectsImages/?imgType=mni'));
     return {};
 };
 
@@ -39825,8 +39825,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
     var project = {
         id: 0,
-        name: 'not',
-        description: 'not',
+        name: '',
+        description: '',
         tags: []
     };
     var i = 0;
@@ -39856,6 +39856,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     var id = ownProps.params.id;
 
+    dispatch((0, _actions.apiFetchIfNeeded)('projects'));
     dispatch((0, _actions.apiFetchIfNeeded)('projectsLinks/?project__id=' + id));
     dispatch((0, _actions.apiFetchIfNeeded)('projectsImages?imgType=gal&project__id=' + id));
     return {

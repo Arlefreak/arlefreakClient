@@ -13,8 +13,8 @@ const mapStateToProps = (state, ownProps) => {
 
     let project = {
         id: 0,
-        name: 'not',
-        description: 'not',
+        name: '',
+        description: '',
         tags: []
     };
     var i = 0;
@@ -43,6 +43,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     const { id } = ownProps.params;
+    dispatch(apiFetchIfNeeded('projects'));
     dispatch(apiFetchIfNeeded('projectsLinks/?project__id=' + id));
     dispatch(apiFetchIfNeeded('projectsImages?imgType=gal&project__id=' + id));
     return {

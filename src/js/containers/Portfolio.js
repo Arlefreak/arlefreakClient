@@ -16,7 +16,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     dispatch(apiFetchIfNeeded('projects'));
-    dispatch(apiFetchIfNeeded('projectsImages'));
+    dispatch(apiFetchIfNeeded('projectsImages/?imgType=mni'));
     return {};
 };
 
