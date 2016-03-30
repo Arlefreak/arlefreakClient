@@ -39405,27 +39405,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mapStateToProps = function mapStateToProps(state, ownProps) {
     var fileCalls = state.fileCalls;
 
-    var _ref = fileCalls['https://raw.githubusercontent.com/Arlefreak/Resume/master/About.md'] || {
-        isFetchingAbout: true,
-        about: ''
+    var about = fileCalls['https://raw.githubusercontent.com/Arlefreak/Resume/master/About.md'] || {
+        isFetching: true,
+        file: ''
+    };
+    var site = fileCalls['https://raw.githubusercontent.com/Arlefreak/arlefreakClient/master/README.md'] || {
+        isFetching: true,
+        file: ''
     };
 
-    var isFetchingAbout = _ref.isFetchingAbout;
-    var about = _ref.file;
-
-    var _ref2 = fileCalls['https://raw.githubusercontent.com/Arlefreak/arlefreakClient/master/README.md'] || {
-        isFetchingSite: true,
-        site: ''
-    };
-
-    var isFetchingSite = _ref2.isFetchingSite;
-    var site = _ref2.file;
-
-    var isFetching = isFetchingAbout && isFetchingSite;
+    var isFetching = about.isFetching && site.isFetching;
 
     return {
-        about: about,
-        site: site,
+        about: about.file,
+        site: site.file,
         isFetching: isFetching
     };
 };
