@@ -248,22 +248,33 @@ import  About from '../components/about.jsx';;
 const mapStateToProps = (state, ownProps) => {
     const { fileCalls } = state;
     const {
-        isFetching,
-        lastUpdated,
-        file: file
+        isFetchingAbout,
+        file: about
     } = fileCalls['https://raw.githubusercontent.com/Arlefreak/Resume/master/About.md'] || {
-        isFetching: true,
-        file: ''
+        isFetchingAbout: true,
+        about: ''
     };
 
+    const {
+        isFetchingSite,
+        file: site
+    } = fileCalls['https://raw.githubusercontent.com/Arlefreak/arlefreakClient/master/README.md'] || {
+        isFetchingSite: true,
+        site: ''
+    };
+
+    const isFetching = isFetchingAbout && isFetchingSite;
+
     return {
-        about: file,
+        about: about,
+        site: site,
         isFetching
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     dispatch(fileFetchIfNeeded('https://raw.githubusercontent.com/Arlefreak/Resume/master/About.md'));
+    dispatch(fileFetchIfNeeded('https://raw.githubusercontent.com/Arlefreak/arlefreakClient/master/README.md'));
     return {};
 };
 

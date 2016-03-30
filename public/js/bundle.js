@@ -37839,10 +37839,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var About = function About(_ref) {
     var about = _ref.about;
+    var site = _ref.site;
     var isFetching = _ref.isFetching;
 
     var md = new _remarkable2.default();
-    var mdr = md.render(about);
+    var mdrAbout = md.render(about);
+    var mdrSite = md.render(site);
+
     if (!isFetching) {
         return _react2.default.createElement(
             'article',
@@ -37852,7 +37855,8 @@ var About = function About(_ref) {
                 null,
                 'About'
             ),
-            _react2.default.createElement('div', { className: 'markdown', dangerouslySetInnerHTML: { __html: mdr } }),
+            _react2.default.createElement('div', { className: 'markdown', dangerouslySetInnerHTML: { __html: mdrAbout } }),
+            _react2.default.createElement('div', { className: 'markdown', dangerouslySetInnerHTML: { __html: mdrSite } }),
             _react2.default.createElement('img', { className: 'index', src: 'img/a.svg', alt: 'Icono' })
         );
     } else {
@@ -37866,6 +37870,7 @@ var About = function About(_ref) {
 
 About.propTypes = {
     about: _react.PropTypes.string.isRequired,
+    site: _react.PropTypes.string.isRequired,
     isFetching: _react.PropTypes.bool.isRequired
 };
 
@@ -39401,22 +39406,33 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     var fileCalls = state.fileCalls;
 
     var _ref = fileCalls['https://raw.githubusercontent.com/Arlefreak/Resume/master/About.md'] || {
-        isFetching: true,
-        file: ''
+        isFetchingAbout: true,
+        about: ''
     };
 
-    var isFetching = _ref.isFetching;
-    var lastUpdated = _ref.lastUpdated;
-    var file = _ref.file;
+    var isFetchingAbout = _ref.isFetchingAbout;
+    var about = _ref.file;
+
+    var _ref2 = fileCalls['https://raw.githubusercontent.com/Arlefreak/arlefreakClient/master/README.md'] || {
+        isFetchingSite: true,
+        site: ''
+    };
+
+    var isFetchingSite = _ref2.isFetchingSite;
+    var site = _ref2.file;
+
+    var isFetching = isFetchingAbout && isFetchingSite;
 
     return {
-        about: file,
+        about: about,
+        site: site,
         isFetching: isFetching
     };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     dispatch((0, _actions.fileFetchIfNeeded)('https://raw.githubusercontent.com/Arlefreak/Resume/master/About.md'));
+    dispatch((0, _actions.fileFetchIfNeeded)('https://raw.githubusercontent.com/Arlefreak/arlefreakClient/master/README.md'));
     return {};
 };
 
