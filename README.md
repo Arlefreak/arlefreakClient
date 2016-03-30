@@ -1,4 +1,4 @@
-### api.arlefreak.com
+### Api.arlefreak.com
 
 - url: [api.arlefreak.com](http://api.arlefreak.com/)
 - tools: [Django](https://www.djangoproject.com/), [Rest Framework](http://www.django-rest-framework.org/)
