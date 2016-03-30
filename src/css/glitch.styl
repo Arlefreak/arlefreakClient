@@ -1,0 +1,42 @@
+@keyframes glitch
+    0%
+        text-shadow 1px 0px 2px $merveilles
+    6%
+        text-shadow -2px 2px 3px $color3
+    17%
+        text-shadow 3px -2px 0 $merveilles
+    16%
+        text-shadow 0px 2px 0 $white
+    22%
+        text-shadow 3px -2px 0 $color3
+    28%
+        text-shadow -2px 3px 0 $merveilles
+    37%
+        text-shadow 3px 0px 0 $color3
+    39%
+        text-shadow -1px -2px 0 $white
+    43%
+        text-shadow 0px 0px 0 $merveilles
+    47%
+        text-shadow 4px -4px 0 $merveilles
+    52%
+        text-shadow 0px 0px 0px $black
+    100%
+        text-shadow 0px 0px 0px $black
+.glitch
+    width 100%
+    margin auto
+    background $black
+    font-size 2.0em
+    color $white
+    text-align center
+    padding 30vh 0 30vh 0
+    box-sizing border-box
+    span
+        text-shadow none
+        transition text-shadow 0.2s ease
+        cursor none
+        @media screen and (max-width: $mobile-width)
+            animation glitch 1s infinite linear alternate-reverse
+        &:hover
+            animation glitch 1s infinite linear alternate-reverse
