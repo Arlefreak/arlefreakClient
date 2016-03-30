@@ -3,10 +3,12 @@ import React from 'react';
 class Soon extends React.Component {
     render() {
         return (
-            <article>
-                <h1 className="center">Work in progress</h1>
+            <div>
+                <article className="glitch">
+                    <span>WORK IN PROGRESS</span>
+                </article>
                 <img className="index" src="img/h.svg" alt="Icono"/>
-            </article>
+            </div>
         );
     }
 }

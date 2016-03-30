@@ -39275,12 +39275,16 @@ var Soon = function (_React$Component) {
         key: "render",
         value: function render() {
             return _react2.default.createElement(
-                "article",
+                "div",
                 null,
                 _react2.default.createElement(
-                    "h1",
-                    { className: "center" },
-                    "Work in progress"
+                    "article",
+                    { className: "glitch" },
+                    _react2.default.createElement(
+                        "span",
+                        null,
+                        "WORK IN PROGRESS"
+                    )
                 ),
                 _react2.default.createElement("img", { className: "index", src: "img/h.svg", alt: "Icono" })
             );
