@@ -25,6 +25,7 @@
   "homepage": "https://github.com/Arlefreak/bp.afk#readme",
   "dependencies": {
     "body-parser": "^1.15.0",
+    "dotenv": "^2.0.0",
     "errorhandler": "^1.4.3",
     "es6-promise": "^3.1.2",
     "express": "^4.13.4",
