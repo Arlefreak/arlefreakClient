@@ -37817,62 +37817,61 @@ var routes = _react2.default.createElement(_app2.default);
 _reactDom2.default.render(routes, document.getElementById('application'));
 
 },{"./components/app.jsx":326,"react":245,"react-dom":67}],325:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _remarkable = require('remarkable');
+
+var _remarkable2 = _interopRequireDefault(_remarkable);
+
+var _loading = require('./loading.jsx');
+
+var _loading2 = _interopRequireDefault(_loading);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var About = function About(_ref) {
+    var about = _ref.about;
+    var isFetching = _ref.isFetching;
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Loading = function (_React$Component) {
-    _inherits(Loading, _React$Component);
-
-    function Loading() {
-        _classCallCheck(this, Loading);
-
-        return _possibleConstructorReturn(this, Object.getPrototypeOf(Loading).apply(this, arguments));
-    }
-
-    _createClass(Loading, [{
-        key: "render",
-        value: function render() {
-            return _react2.default.createElement(
-                "article",
+    var md = new _remarkable2.default();
+    var mdr = md.render(about);
+    if (!isFetching) {
+        return _react2.default.createElement(
+            'article',
+            null,
+            _react2.default.createElement(
+                'h2',
                 null,
-                _react2.default.createElement(
-                    "h2",
-                    null,
-                    "About"
-                ),
-                _react2.default.createElement(
-                    "p",
-                    null,
-                    "I'm Mario Carballo Zama a game and full web stack developer with great learning skills and a keen eye for UI UX, I am passionate about games with good visual style and simple and fun mechanics, I'm always looking for new technologies to learn and new projects to implement them."
-                ),
-                _react2.default.createElement("img", { className: "index", src: "img/a.svg", alt: "Icono" })
-            );
-        }
-    }]);
+                'About'
+            ),
+            _react2.default.createElement('div', { className: 'markdown', dangerouslySetInnerHTML: { __html: mdr } }),
+            _react2.default.createElement('img', { className: 'index', src: 'img/a.svg', alt: 'Icono' })
+        );
+    } else {
+        return _react2.default.createElement(
+            'article',
+            null,
+            _react2.default.createElement(_loading2.default, null)
+        );
+    }
+};
 
-    return Loading;
-}(_react2.default.Component);
+About.propTypes = {
+    about: _react.PropTypes.string.isRequired,
+    isFetching: _react.PropTypes.bool.isRequired
+};
 
-exports.default = Loading;
+exports.default = About;
 
-},{"react":245}],326:[function(require,module,exports){
+},{"./loading.jsx":341,"react":245,"remarkable":258}],326:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -37941,7 +37940,7 @@ var App = function (_Component) {
 
 exports.default = App;
 
-},{"../reducers/reducers":367,"./routes.jsx":349,"react":245,"react-redux":71,"redux":253,"redux-logger":246,"redux-thunk":247}],327:[function(require,module,exports){
+},{"../reducers/reducers":368,"./routes.jsx":349,"react":245,"react-redux":71,"redux":253,"redux-logger":246,"redux-thunk":247}],327:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -37990,7 +37989,7 @@ CategoryList.propTypes = {
 
 exports.default = CategoryList;
 
-},{"../containers/Category.js":355,"react":245}],328:[function(require,module,exports){
+},{"../containers/Category.js":356,"react":245}],328:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -38771,7 +38770,7 @@ Portfolio.propTypes = {
 
 exports.default = Portfolio;
 
-},{"../containers/CategoryFilter.js":356,"../containers/Images.js":360,"../containers/TagFilter.js":365,"../containers/VisibleProjects.js":366,"./loading.jsx":341,"react":245}],343:[function(require,module,exports){
+},{"../containers/CategoryFilter.js":357,"../containers/Images.js":361,"../containers/TagFilter.js":366,"../containers/VisibleProjects.js":367,"./loading.jsx":341,"react":245}],343:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39019,7 +39018,7 @@ TagList.propTypes = {
 
 exports.default = TagList;
 
-},{"../containers/ProjectTag.js":363,"react":245}],347:[function(require,module,exports){
+},{"../containers/ProjectTag.js":364,"react":245}],347:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39165,9 +39164,9 @@ var _root = require('./root.jsx');
 
 var _root2 = _interopRequireDefault(_root);
 
-var _about = require('./about.jsx');
+var _About = require('../containers/About.js');
 
-var _about2 = _interopRequireDefault(_about);
+var _About2 = _interopRequireDefault(_About);
 
 var _soon = require('./soon.jsx');
 
@@ -39222,7 +39221,7 @@ var Routes = function (_Component) {
                     _react2.default.createElement(_reactRouter.IndexRoute, { component: _soon2.default }),
                     _react2.default.createElement(_reactRouter.Route, { path: 'projects', component: _Portfolio2.default }),
                     _react2.default.createElement(_reactRouter.Route, { path: 'projects/:id', component: _Project2.default }),
-                    _react2.default.createElement(_reactRouter.Route, { path: 'about', component: _about2.default }),
+                    _react2.default.createElement(_reactRouter.Route, { path: 'about', component: _About2.default }),
                     _react2.default.createElement(_reactRouter.Route, { path: 'cv', component: _CV2.default }),
                     _react2.default.createElement(_reactRouter.Route, { path: 'diary', component: _Diary2.default }),
                     _react2.default.createElement(_reactRouter.Route, { path: 'diary/:id', component: _DiaryPost2.default }),
@@ -39237,7 +39236,7 @@ var Routes = function (_Component) {
 
 exports.default = Routes;
 
-},{"../containers/CV.js":354,"../containers/Diary.js":358,"../containers/DiaryPost.js":359,"../containers/Portfolio.js":361,"../containers/Project.js":362,"./about.jsx":325,"./root.jsx":348,"./soon.jsx":350,"react":245,"react-router":105}],350:[function(require,module,exports){
+},{"../containers/About.js":354,"../containers/CV.js":355,"../containers/Diary.js":359,"../containers/DiaryPost.js":360,"../containers/Portfolio.js":362,"../containers/Project.js":363,"./root.jsx":348,"./soon.jsx":350,"react":245,"react-router":105}],350:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39333,7 +39332,7 @@ TagList.propTypes = {
 
 exports.default = TagList;
 
-},{"../containers/ClearAllTags.js":357,"../containers/Tag.js":364,"react":245}],352:[function(require,module,exports){
+},{"../containers/ClearAllTags.js":358,"../containers/Tag.js":365,"react":245}],352:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39390,6 +39389,52 @@ var _reactRedux = require('react-redux');
 
 var _actions = require('../actions/actions');
 
+var _about = require('../components/about.jsx');
+
+var _about2 = _interopRequireDefault(_about);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+;
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+    var fileCalls = state.fileCalls;
+
+    var _ref = fileCalls['https://raw.githubusercontent.com/Arlefreak/Resume/master/About.md'] || {
+        isFetching: true,
+        file: ''
+    };
+
+    var isFetching = _ref.isFetching;
+    var lastUpdated = _ref.lastUpdated;
+    var file = _ref.file;
+
+    return {
+        about: file,
+        isFetching: isFetching
+    };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    dispatch((0, _actions.fileFetchIfNeeded)('https://raw.githubusercontent.com/Arlefreak/Resume/master/About.md'));
+    return {};
+};
+
+var AboutV = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_about2.default);
+
+exports.default = AboutV;
+
+},{"../actions/actions":323,"../components/about.jsx":325,"react-redux":71}],355:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _reactRedux = require('react-redux');
+
+var _actions = require('../actions/actions');
+
 var _cv = require('../components/cv.jsx');
 
 var _cv2 = _interopRequireDefault(_cv);
@@ -39425,7 +39470,7 @@ var cv = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_cv2.defa
 
 exports.default = cv;
 
-},{"../actions/actions":323,"../components/cv.jsx":330,"react-redux":71}],355:[function(require,module,exports){
+},{"../actions/actions":323,"../components/cv.jsx":330,"react-redux":71}],356:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39464,7 +39509,7 @@ var Category = (0, _reactRedux.connect)(mapStateToProps)(_categoryRow2.default);
 
 exports.default = Category;
 
-},{"../components/categoryRow.jsx":328,"react-redux":71}],356:[function(require,module,exports){
+},{"../components/categoryRow.jsx":328,"react-redux":71}],357:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39523,7 +39568,7 @@ var CategoryFilter = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProp
 
 exports.default = CategoryFilter;
 
-},{"../actions/actions":323,"../components/categoryList.jsx":327,"react-redux":71}],357:[function(require,module,exports){
+},{"../actions/actions":323,"../components/categoryList.jsx":327,"react-redux":71}],358:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39573,7 +39618,7 @@ var Tag = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_clearAl
 
 exports.default = Tag;
 
-},{"../actions/actions":323,"../components/clearAllTagsRow.jsx":329,"react-redux":71}],358:[function(require,module,exports){
+},{"../actions/actions":323,"../components/clearAllTagsRow.jsx":329,"react-redux":71}],359:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39618,7 +39663,7 @@ var Diary = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_diary
 
 exports.default = Diary;
 
-},{"../actions/actions":323,"../components/diaryList.jsx":331,"react-redux":71}],359:[function(require,module,exports){
+},{"../actions/actions":323,"../components/diaryList.jsx":331,"react-redux":71}],360:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39669,7 +39714,7 @@ var DiaryV = (0, _reactRedux.connect)(mapStateToProps)(_diarySingle2.default);
 
 exports.default = DiaryV;
 
-},{"../actions/actions":323,"../components/diarySingle.jsx":333,"react-redux":71}],360:[function(require,module,exports){
+},{"../actions/actions":323,"../components/diarySingle.jsx":333,"react-redux":71}],361:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39754,7 +39799,7 @@ var Images = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_imag
 
 exports.default = Images;
 
-},{"../actions/actions":323,"../components/imageList.jsx":337,"react-redux":71}],361:[function(require,module,exports){
+},{"../actions/actions":323,"../components/imageList.jsx":337,"react-redux":71}],362:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39795,7 +39840,7 @@ var Portfolio = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_p
 
 exports.default = Portfolio;
 
-},{"../actions/actions":323,"../components/portfolio.jsx":342,"react-redux":71}],362:[function(require,module,exports){
+},{"../actions/actions":323,"../components/portfolio.jsx":342,"react-redux":71}],363:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39873,7 +39918,7 @@ var ProjectV = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_pr
 
 exports.default = ProjectV;
 
-},{"../actions/actions":323,"../components/project.jsx":343,"react-redux":71}],363:[function(require,module,exports){
+},{"../actions/actions":323,"../components/project.jsx":343,"react-redux":71}],364:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39929,7 +39974,7 @@ var Tag = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_project
 
 exports.default = Tag;
 
-},{"../actions/actions":323,"../components/projectTagRow.jsx":347,"react-redux":71}],364:[function(require,module,exports){
+},{"../actions/actions":323,"../components/projectTagRow.jsx":347,"react-redux":71}],365:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39984,7 +40029,7 @@ var Tag = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_tagRow2
 
 exports.default = Tag;
 
-},{"../actions/actions":323,"../components/tagRow.jsx":352,"react-redux":71}],365:[function(require,module,exports){
+},{"../actions/actions":323,"../components/tagRow.jsx":352,"react-redux":71}],366:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -40035,7 +40080,7 @@ var TagFilter = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_t
 
 exports.default = TagFilter;
 
-},{"../actions/actions":323,"../components/tagList.jsx":351,"react-redux":71}],366:[function(require,module,exports){
+},{"../actions/actions":323,"../components/tagList.jsx":351,"react-redux":71}],367:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -40083,7 +40128,7 @@ var VisibleProjects = (0, _reactRedux.connect)(mapStateToProps)(_projectList2.de
 
 exports.default = VisibleProjects;
 
-},{"../actions/actions.js":323,"../components/projectList.jsx":344,"react-redux":71}],367:[function(require,module,exports){
+},{"../actions/actions.js":323,"../components/projectList.jsx":344,"react-redux":71}],368:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

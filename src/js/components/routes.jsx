@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import Root from './root.jsx';
-import About from './about.jsx';
+import About from '../containers/About.js';
 import Soon from './soon.jsx';
 import Portfolio from '../containers/Portfolio.js';
 import Project from '../containers/Project.js';

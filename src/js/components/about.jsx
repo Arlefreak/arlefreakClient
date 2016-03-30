@@ -1,19 +1,30 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import Remarkable from 'remarkable';
+import Loading from './loading.jsx';
 
-class Loading extends React.Component {
-    render() {
+const About = ({ about, isFetching }) => {
+    var md = new Remarkable();
+    var mdr = md.render(about);
+    if(!isFetching){
         return (
             <article>
                 <h2>About</h2>
-                <p>
-                    I'm Mario Carballo Zama a game and full web stack developer with great learning skills and a keen eye for UI UX,
-                    I am passionate about games with good visual style and simple and fun mechanics,
-                    I'm always looking for new technologies to learn and new projects to implement them.
-                </p>
+                <div  className="markdown" dangerouslySetInnerHTML={{ __html: mdr }}/>
                 <img className="index" src="img/a.svg" alt="Icono"/>
             </article>
         );
+    }else{
+        return(
+            <article>
+                <Loading/>
+            </article>
+        );
     }
-}
+};
 
-export default Loading;
+About.propTypes = {
+    about: PropTypes.string.isRequired,
+    isFetching: PropTypes.bool.isRequired
+};
+
+export default About;
