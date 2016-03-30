@@ -9,7 +9,7 @@ const CV = ({ file, isFetching }) => {
         return (
             <article className="cv">
                 <img className="index" src="img/cv.svg" alt="Icono"/>
-                <div  className='cv' dangerouslySetInnerHTML={{ __html: mdr }}/>
+                <div  className='markdown' dangerouslySetInnerHTML={{ __html: mdr }}/>
             </article>
         );
     }else{

@@ -434,7 +434,7 @@ main h1.center {
   margin: 25vh auto 0 auto;
 }
 main h2 {
-  font-size: 1.6em;
+  font-size: 1.5em;
   font-weight: 700;
   margin: 0 0 10px 0;
   border-bottom: 1px solid;
@@ -547,11 +547,13 @@ ul.vertical-list li {
   max-width: 600px;
   line-height: 1.8em;
   margin: 10px 0 10px 0;
-  padding: 0 0 0 10px;
-  border-left: 1px solid #999;
+/* padding 0 0 0 10px */
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+.markdown ul li:before {
+  content: '- ';
 }
 @media screen and (max-width: 800px) {
   .markdown ul li {
@@ -562,6 +564,22 @@ ul.vertical-list li {
 }
 .markdown ul li a {
   font-size: 1em;
+}
+.markdown ul li p {
+  display: inline;
+  font-size: 1em;
+}
+.markdown h1 {
+  width: 100%;
+  text-align: left;
+}
+@media screen and (max-width: 800px) {
+  .markdown h1 {
+    font-size: 1.2em;
+  }
+}
+.markdown h2 {
+  margin: 20px 0 20px 0;
 }
 .markdown h3 {
   width: 100%;
@@ -840,145 +858,6 @@ svg {
   display: block;
   width: 15vw;
   max-width: 100px;
-}
-.cv .separation {
-  display: none;
-}
-@media print {
-  .cv .separation {
-    height: 1px;
-    display: block;
-    margin: 20px;
-  }
-}
-.cv .pageBreak {
-  page-break-before: always;
-}
-@media print {
-  .cv .pageBreak {
-    margin: 50px;
-    display: block;
-    clear: both;
-  }
-}
-.cv h1,
-.cv h2,
-.cv h3,
-.cv h4 {
-  font-weight: bolder;
-  font-weight: 700;
-  margin: 10px 0 10px 0;
-  text-align: left;
-}
-.cv h1 {
-  font-weight: bolder;
-  font-weight: 700;
-}
-.cv h2 {
-  font-weight: bolder;
-  font-weight: 700;
-  width: 85%;
-  padding: 10px 0 0 0;
-}
-@media print {
-  .cv h2 {
-    padding: 8px 0 0 0;
-  }
-}
-.cv h3 {
-  font-weight: normal;
-  font-weight: 500;
-  margin: 30px 0 10px 0;
-}
-.cv h4 {
-  font-weight: normal;
-  font-weight: 500;
-}
-.cv a {
-  text-decoration: none;
-  display: inline-block;
-  font-style: italic;
-}
-@media print {
-  .cv a {
-    padding: 0;
-    border: none;
-  }
-}
-.cv p {
-  margin: 0;
-}
-.cv a,
-.cv p,
-.cv li {
-  font-size: 0.8em;
-  font-weight: lighter;
-  font-weight: 300;
-}
-.cv a p,
-.cv p p,
-.cv li p {
-  font-size: 1em;
-}
-.cv a a,
-.cv p a,
-.cv li a {
-  font-size: 1em;
-}
-.cv .logo {
-  width: 10%;
-  height: auto;
-  top: 10px;
-  right: 10px;
-  position: absolute;
-  display: block;
-}
-@media screen and (max-width: 600px) {
-  .cv .logo {
-    position: relative;
-    margin: auto;
-    width: 80%;
-  }
-}
-.cv ul {
-  width: 95%;
-  margin: 0 auto 0px auto;
-}
-.cv li {
-  max-width: 600px;
-  list-style: square;
-  margin: 10px 0 0 0;
-}
-.cv p {
-  color: #666;
-  margin: 10px 0 10px 0;
-  display: block;
-  width: 80%;
-  max-width: 600px;
-}
-.cv .twoColumn {
-  text-align: center;
-}
-.cv .twoColumn.left {
-  text-align: left;
-}
-.cv .twoColumn div,
-.cv .twoColumn>ul {
-  width: 39.5%;
-  text-align: left;
-  display: inline-block;
-  vertical-align: top;
-}
-@media screen and (max-width: 600px) {
-  .cv .twoColumn div,
-  .cv .twoColumn>ul {
-    width: 80%;
-  }
-}
-.cv div.margin {
-  margin: 20px 0px 0px 20px;
-  clear: both;
-  width: 10px;
 }
 .error img {
   margin: 15vh 0 0 0;

@@ -15,7 +15,7 @@ main
         &.center
             margin 25vh auto 0 auto
     h2
-        font-size 1.6em
+        font-size 1.5em
         font-weight 700
         margin 0 0 10px 0
         border-bottom 1px solid
@@ -98,15 +98,26 @@ ul
             max-width $max-text-width
             line-height 1.8em
             margin 10px 0 10px 0
-            padding 0 0 0 10px
-            border-left 1px solid $gray3
+            /* padding 0 0 0 10px */
             box-sizing border-box
+            &:before
+                content: '- '
             @media screen and (max-width: $mobile-width)
                 width 100%
                 font-size 0.8em
                 line-height 1.6em
             a
                 font-size 1.0em
+            p
+                display inline
+                font-size 1.0em
+    h1
+        width 100%
+        text-align left
+        @media screen and (max-width: $mobile-width)
+            font-size 1.2em
+    h2
+        margin 20px 0 20px 0
     h3
         width 100%
     em

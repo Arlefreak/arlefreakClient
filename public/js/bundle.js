@@ -38100,7 +38100,7 @@ var CV = function CV(_ref) {
             'article',
             { className: 'cv' },
             _react2.default.createElement('img', { className: 'index', src: 'img/cv.svg', alt: 'Icono' }),
-            _react2.default.createElement('div', { className: 'cv', dangerouslySetInnerHTML: { __html: mdr } })
+            _react2.default.createElement('div', { className: 'markdown', dangerouslySetInnerHTML: { __html: mdr } })
         );
     } else {
         return _react2.default.createElement(_loading2.default, null);
