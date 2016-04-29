@@ -38647,12 +38647,11 @@ function filterProjects() {
     return function (dispatch, getState) {
         var state = getState() || {};
         var apiCalls = state['apiCalls'] || [];
-        var projects = apiCalls['projects'] || {};
+        var projects = apiCalls['portfolio/projects'] || {};
         var items = projects.items || [];
         var categoryFilter = state['categoryFilter'];
         var tagFilter = state['tagFilter'] || [];
         var filterProjects = filterByCategory(items, categoryFilter);
-        console.log(tagFilter);
         filterProjects = filterByTags(filterProjects, tagFilter);
         dispatch(setVisibleProjects(filterProjects));
     };
@@ -38690,7 +38689,7 @@ function filterByTags(projects, tags) {
                         k = 0;
                         for (k; k < tags.length; k++) {
                             //TODO: Change string comparisong to id
-                            if (project.tags[j] === tags[k].name) {
+                            if (project.tags[j].id === tags[k].id) {
                                 filteredProjects.push(project);
                                 b = true;
                                 break;
@@ -39924,7 +39923,7 @@ var TagList = function TagList(_ref) {
     return _react2.default.createElement(
         'ul',
         { className: 'tags' },
-        tags.map(function (tag) {
+        tags.map(function (tag, id) {
             return _react2.default.createElement(_ProjectTag2.default, {
                 key: tag.id,
                 tag: tag
@@ -40465,7 +40464,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     var apiCalls = state.apiCalls;
     var categoryFilter = state.categoryFilter;
 
-    var _ref = apiCalls['projectsCategories'] || {
+    var _ref = apiCalls['portfolio/projectsCategories'] || {
         isFetching: true,
         items: []
     };
@@ -40488,7 +40487,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
-    dispatch((0, _actions.apiFetchIfNeeded)('projectsCategories'));
+    dispatch((0, _actions.apiFetchIfNeeded)('portfolio/projectsCategories'));
     return {
         onCategoryClick: function onCategoryClick(id, name) {
             dispatch((0, _actions.setCategoryFilter)(id, name));
@@ -40571,7 +40570,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mapStateToProps = function mapStateToProps(state) {
     var apiCalls = state.apiCalls;
 
-    var _ref = apiCalls['posts'] || {
+    var _ref = apiCalls['diary/posts'] || {
         isFetching: true,
         items: []
     };
@@ -40589,7 +40588,7 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-    dispatch((0, _actions.apiFetchIfNeeded)('posts'));
+    dispatch((0, _actions.apiFetchIfNeeded)('diary/posts'));
     return {};
 };
 
@@ -40621,7 +40620,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     var id = ownProps.params.id;
     var apiCalls = state.apiCalls;
 
-    var posts = apiCalls['posts'] || {
+    var posts = apiCalls['diary/posts'] || {
         isFetching: true,
         items: []
     };
@@ -40648,7 +40647,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     var id = ownProps.params.id;
 
-    dispatch((0, _actions.apiFetchIfNeeded)('posts'));
+    dispatch((0, _actions.apiFetchIfNeeded)('diary/posts'));
     return {};
 };
 
@@ -40700,7 +40699,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     var tagFilter = state.tagFilter;
     var categoryFilter = state.categoryFilter;
 
-    var _ref = apiCalls['projectsImages/?imgType=mni'] || {
+    var _ref = apiCalls['portfolio/projectsImages/?imgType=mni'] || {
         isFetching: true,
         items: []
     };
@@ -40709,7 +40708,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     var lastUpdated = _ref.lastUpdated;
     var items = _ref.items;
 
-    var _ref2 = apiCalls['projects'] || {
+    var _ref2 = apiCalls['portfolio/projects'] || {
         items: []
     };
 
@@ -40762,7 +40761,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mapStateToProps = function mapStateToProps(state) {
     var apiCalls = state.apiCalls;
 
-    var _ref = apiCalls['projects'] || {
+    var _ref = apiCalls['portfolio/projects'] || {
         isFetching: true
     };
 
@@ -40774,8 +40773,8 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-    dispatch((0, _actions.apiFetchIfNeeded)('projects'));
-    dispatch((0, _actions.apiFetchIfNeeded)('projectsImages/?imgType=mni'));
+    dispatch((0, _actions.apiFetchIfNeeded)('portfolio/projects'));
+    dispatch((0, _actions.apiFetchIfNeeded)('portfolio/projectsImages/?imgType=mni'));
     return {};
 };
 
@@ -40807,7 +40806,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     var id = ownProps.params.id;
     var apiCalls = state.apiCalls;
 
-    var projects = apiCalls['projects'] || {
+    var projects = apiCalls['portfolio/projects'] || {
         isFetching: true,
         items: []
     };
@@ -40825,11 +40824,11 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
             break;
         }
     }
-    var links = apiCalls['projectsLinks/?project__id=' + id] || {
+    var links = apiCalls['portfolio/projectsLinks/?project__id=' + id] || {
         isFetching: true,
         items: []
     };
-    var images = apiCalls['projectsImages?imgType=gal&project__id=' + id] || {
+    var images = apiCalls['portfolio/projectsImages?imgType=gal&project__id=' + id] || {
         isFetching: true,
         items: []
     };
@@ -40845,9 +40844,9 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     var id = ownProps.params.id;
 
-    dispatch((0, _actions.apiFetchIfNeeded)('projects'));
-    dispatch((0, _actions.apiFetchIfNeeded)('projectsLinks/?project__id=' + id));
-    dispatch((0, _actions.apiFetchIfNeeded)('projectsImages?imgType=gal&project__id=' + id));
+    dispatch((0, _actions.apiFetchIfNeeded)('portfolio/projects'));
+    dispatch((0, _actions.apiFetchIfNeeded)('portfolio/projectsLinks/?project__id=' + id));
+    dispatch((0, _actions.apiFetchIfNeeded)('portfolio/projectsImages?imgType=gal&project__id=' + id));
     return {
         onTagClick: function onTagClick(id) {
             console.log(id);
@@ -40996,7 +40995,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mapStateToProps = function mapStateToProps(state, ownProps) {
     var apiCalls = state.apiCalls;
 
-    var _ref = apiCalls['tags'] || {
+    var _ref = apiCalls['portfolio/tags'] || {
         isFetching: true,
         items: []
     };
@@ -41013,7 +41012,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
-    dispatch((0, _actions.apiFetchIfNeeded)('tags'));
+    dispatch((0, _actions.apiFetchIfNeeded)('portfolio/tags'));
     return {
         onTagClick: function onTagClick(id, name) {
             dispatch(addTagFilter(id, name));
@@ -41048,7 +41047,7 @@ var mapStateToProps = function mapStateToProps(state) {
     var tagFilter = state.tagFilter;
     var categoryFilter = state.categoryFilter;
 
-    var _ref = apiCalls['projects'] || {
+    var _ref = apiCalls['portfolio/projects'] || {
         isFetching: true,
         items: []
     };

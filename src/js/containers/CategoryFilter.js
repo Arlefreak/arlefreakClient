@@ -8,7 +8,7 @@ const mapStateToProps = (state, ownProps) => {
         isFetching,
         lastUpdated,
         items: categories
-    } = apiCalls['projectsCategories'] || {
+    } = apiCalls['portfolio/projectsCategories'] || {
         isFetching: true,
         items: []
     };
@@ -26,7 +26,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    dispatch(apiFetchIfNeeded('projectsCategories'));
+    dispatch(apiFetchIfNeeded('portfolio/projectsCategories'));
     return {
         onCategoryClick: (id, name) => {
             dispatch(setCategoryFilter(id, name));

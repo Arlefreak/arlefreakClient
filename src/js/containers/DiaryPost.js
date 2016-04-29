@@ -5,7 +5,7 @@ import { apiFetchIfNeeded } from '../actions/actions';
 const mapStateToProps = (state, ownProps) => {
     const { id } = ownProps.params;
     const { apiCalls } = state;
-    const posts = apiCalls['posts'] || {
+    const posts = apiCalls['diary/posts'] || {
         isFetching: true,
         items: []
     };
@@ -31,7 +31,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     const { id } = ownProps.params;
-    dispatch(apiFetchIfNeeded('posts'));
+    dispatch(apiFetchIfNeeded('diary/posts'));
     return {};
 };
 

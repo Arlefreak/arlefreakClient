@@ -6,7 +6,7 @@ import { apiFetchIfNeeded } from '../actions/actions';
 const mapStateToProps = (state, ownProps) => {
     const { id } = ownProps.params;
     const { apiCalls } = state;
-    const projects = apiCalls['projects'] || {
+    const projects = apiCalls['portfolio/projects'] || {
         isFetching: true,
         items: []
     };
@@ -24,11 +24,11 @@ const mapStateToProps = (state, ownProps) => {
             break;
         }
     }
-    const links = apiCalls['projectsLinks/?project__id=' + id] || {
+    const links = apiCalls['portfolio/projectsLinks/?project__id=' + id] || {
         isFetching: true,
         items: []
     };
-    const images = apiCalls['projectsImages?imgType=gal&project__id=' + id] || {
+    const images = apiCalls['portfolio/projectsImages?imgType=gal&project__id=' + id] || {
         isFetching: true,
         items: []
     };
@@ -43,9 +43,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     const { id } = ownProps.params;
-    dispatch(apiFetchIfNeeded('projects'));
-    dispatch(apiFetchIfNeeded('projectsLinks/?project__id=' + id));
-    dispatch(apiFetchIfNeeded('projectsImages?imgType=gal&project__id=' + id));
+    dispatch(apiFetchIfNeeded('portfolio/projects'));
+    dispatch(apiFetchIfNeeded('portfolio/projectsLinks/?project__id=' + id));
+    dispatch(apiFetchIfNeeded('portfolio/projectsImages?imgType=gal&project__id=' + id));
     return {
         onTagClick: (id) => { console.log(id); },
         onImageClick : () => { console.log('ImageClick'); }

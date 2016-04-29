@@ -6,7 +6,7 @@ const mapStateToProps = (state) => {
     const { apiCalls } = state;
     const {
         isFetching
-    } = apiCalls['projects'] || {
+    } = apiCalls['portfolio/projects'] || {
         isFetching: true
     };
     return {
@@ -15,8 +15,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    dispatch(apiFetchIfNeeded('projects'));
-    dispatch(apiFetchIfNeeded('projectsImages/?imgType=mni'));
+    dispatch(apiFetchIfNeeded('portfolio/projects'));
+    dispatch(apiFetchIfNeeded('portfolio/projectsImages/?imgType=mni'));
     return {};
 };
 

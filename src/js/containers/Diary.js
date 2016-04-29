@@ -8,7 +8,7 @@ const mapStateToProps = (state) => {
         isFetching,
         lastUpdated,
         items: items
-    } = apiCalls['posts'] || {
+    } = apiCalls['diary/posts'] || {
         isFetching: true,
         items: []
     };
@@ -21,7 +21,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    dispatch(apiFetchIfNeeded('posts'));
+    dispatch(apiFetchIfNeeded('diary/posts'));
     return {};
 };
 

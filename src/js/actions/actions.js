@@ -167,12 +167,11 @@ export function filterProjects() {
     return function (dispatch, getState){
         const state = getState() || {};
         const apiCalls = state['apiCalls'] || [];
-        const projects = apiCalls['projects'] || {};
+        const projects = apiCalls['portfolio/projects'] || {};
         const items = projects.items || [];
         const categoryFilter = state['categoryFilter'];
         const tagFilter = state['tagFilter'] || [];
         let filterProjects = filterByCategory(items, categoryFilter);
-        console.log(tagFilter);
         filterProjects = filterByTags(filterProjects, tagFilter);
         dispatch(setVisibleProjects(filterProjects));
     };
@@ -208,7 +207,7 @@ function filterByTags (projects, tags) {
                         k = 0;
                         for(k; k < tags.length; k++){
                             //TODO: Change string comparisong to id
-                            if(project.tags[j] === tags[k].name){
+                            if(project.tags[j].id === tags[k].id){
                                 filteredProjects.push(project);
                                 b = true;
                                 break;

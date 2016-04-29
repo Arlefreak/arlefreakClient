@@ -182,12 +182,11 @@ export function filterProjects() {
     return function (dispatch, getState){
         const state = getState() || {};
         const apiCalls = state['apiCalls'] || [];
-        const projects = apiCalls['projects'] || {};
+        const projects = apiCalls['portfolio/projects'] || {};
         const items = projects.items || [];
         const categoryFilter = state['categoryFilter'];
         const tagFilter = state['tagFilter'] || [];
         let filterProjects = filterByCategory(items, categoryFilter);
-        console.log(tagFilter);
         filterProjects = filterByTags(filterProjects, tagFilter);
         dispatch(setVisibleProjects(filterProjects));
     };
@@ -223,7 +222,7 @@ function filterByTags (projects, tags) {
                         k = 0;
                         for(k; k < tags.length; k++){
                             //TODO: Change string comparisong to id
-                            if(project.tags[j] === tags[k].name){
+                            if(project.tags[j].id === tags[k].id){
                                 filteredProjects.push(project);
                                 b = true;
                                 break;
@@ -349,7 +348,7 @@ const mapStateToProps = (state, ownProps) => {
         isFetching,
         lastUpdated,
         items: categories
-    } = apiCalls['projectsCategories'] || {
+    } = apiCalls['portfolio/projectsCategories'] || {
         isFetching: true,
         items: []
     };
@@ -367,7 +366,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    dispatch(apiFetchIfNeeded('projectsCategories'));
+    dispatch(apiFetchIfNeeded('portfolio/projectsCategories'));
     return {
         onCategoryClick: (id, name) => {
             dispatch(setCategoryFilter(id, name));
@@ -428,7 +427,7 @@ const mapStateToProps = (state) => {
         isFetching,
         lastUpdated,
         items: items
-    } = apiCalls['posts'] || {
+    } = apiCalls['diary/posts'] || {
         isFetching: true,
         items: []
     };
@@ -441,7 +440,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    dispatch(apiFetchIfNeeded('posts'));
+    dispatch(apiFetchIfNeeded('diary/posts'));
     return {};
 };
 
@@ -459,7 +458,7 @@ import { apiFetchIfNeeded } from '../actions/actions';
 const mapStateToProps = (state, ownProps) => {
     const { id } = ownProps.params;
     const { apiCalls } = state;
-    const posts = apiCalls['posts'] || {
+    const posts = apiCalls['diary/posts'] || {
         isFetching: true,
         items: []
     };
@@ -485,7 +484,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     const { id } = ownProps.params;
-    dispatch(apiFetchIfNeeded('posts'));
+    dispatch(apiFetchIfNeeded('diary/posts'));
     return {};
 };
 
@@ -525,14 +524,14 @@ const mapStateToProps = (state, ownProps) => {
         isFetching,
         lastUpdated,
         items: items
-    } = apiCalls['projectsImages/?imgType=mni'] || {
+    } = apiCalls['portfolio/projectsImages/?imgType=mni'] || {
         isFetching: true,
         items: []
     };
     
     const {
         items: projects
-    } = apiCalls['projects'] || {
+    } = apiCalls['portfolio/projects'] || {
         items: []
     };
 
@@ -573,7 +572,7 @@ const mapStateToProps = (state) => {
     const { apiCalls } = state;
     const {
         isFetching
-    } = apiCalls['projects'] || {
+    } = apiCalls['portfolio/projects'] || {
         isFetching: true
     };
     return {
@@ -582,8 +581,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    dispatch(apiFetchIfNeeded('projects'));
-    dispatch(apiFetchIfNeeded('projectsImages/?imgType=mni'));
+    dispatch(apiFetchIfNeeded('portfolio/projects'));
+    dispatch(apiFetchIfNeeded('portfolio/projectsImages/?imgType=mni'));
     return {};
 };
 
@@ -602,7 +601,7 @@ import { apiFetchIfNeeded } from '../actions/actions';
 const mapStateToProps = (state, ownProps) => {
     const { id } = ownProps.params;
     const { apiCalls } = state;
-    const projects = apiCalls['projects'] || {
+    const projects = apiCalls['portfolio/projects'] || {
         isFetching: true,
         items: []
     };
@@ -620,11 +619,11 @@ const mapStateToProps = (state, ownProps) => {
             break;
         }
     }
-    const links = apiCalls['projectsLinks/?project__id=' + id] || {
+    const links = apiCalls['portfolio/projectsLinks/?project__id=' + id] || {
         isFetching: true,
         items: []
     };
-    const images = apiCalls['projectsImages?imgType=gal&project__id=' + id] || {
+    const images = apiCalls['portfolio/projectsImages?imgType=gal&project__id=' + id] || {
         isFetching: true,
         items: []
     };
@@ -639,9 +638,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     const { id } = ownProps.params;
-    dispatch(apiFetchIfNeeded('projects'));
-    dispatch(apiFetchIfNeeded('projectsLinks/?project__id=' + id));
-    dispatch(apiFetchIfNeeded('projectsImages?imgType=gal&project__id=' + id));
+    dispatch(apiFetchIfNeeded('portfolio/projects'));
+    dispatch(apiFetchIfNeeded('portfolio/projectsLinks/?project__id=' + id));
+    dispatch(apiFetchIfNeeded('portfolio/projectsImages?imgType=gal&project__id=' + id));
     return {
         onTagClick: (id) => { console.log(id); },
         onImageClick : () => { console.log('ImageClick'); }
@@ -746,7 +745,7 @@ const mapStateToProps = (state, ownProps) => {
         isFetching,
         lastUpdated,
         items: tags
-    } = apiCalls['tags'] || {
+    } = apiCalls['portfolio/tags'] || {
         isFetching: true,
         items: []
     };
@@ -758,7 +757,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    dispatch(apiFetchIfNeeded('tags'));
+    dispatch(apiFetchIfNeeded('portfolio/tags'));
     return {
         onTagClick: (id, name) => {
             dispatch(addTagFilter(id, name));
@@ -783,7 +782,7 @@ const mapStateToProps = (state) => {
         isFetching,
         lastUpdated,
         items: items
-    } = apiCalls['projects'] || {
+    } = apiCalls['portfolio/projects'] || {
         isFetching: true,
         items: []
     };

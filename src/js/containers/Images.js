@@ -27,14 +27,14 @@ const mapStateToProps = (state, ownProps) => {
         isFetching,
         lastUpdated,
         items: items
-    } = apiCalls['projectsImages/?imgType=mni'] || {
+    } = apiCalls['portfolio/projectsImages/?imgType=mni'] || {
         isFetching: true,
         items: []
     };
     
     const {
         items: projects
-    } = apiCalls['projects'] || {
+    } = apiCalls['portfolio/projects'] || {
         items: []
     };
 

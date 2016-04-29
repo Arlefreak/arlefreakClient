@@ -4,7 +4,7 @@ import Tag from '../containers/ProjectTag.js';
 const TagList = ({ tags }) => (
     <ul className="tags" >
         {
-            tags.map(tag =>
+            tags.map((tag, id)=>
                      <Tag
                          key={ tag.id }
                          tag={ tag }

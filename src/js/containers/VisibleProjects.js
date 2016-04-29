@@ -8,7 +8,7 @@ const mapStateToProps = (state) => {
         isFetching,
         lastUpdated,
         items: items
-    } = apiCalls['projects'] || {
+    } = apiCalls['portfolio/projects'] || {
         isFetching: true,
         items: []
     };
