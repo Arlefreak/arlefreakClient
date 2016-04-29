@@ -600,29 +600,29 @@ header h1 {
 main {
   margin: 15vh 0 15vh 0;
 }
-main h1,
-main h2,
-main h3 {
+h1,
+h2,
+h3 {
   width: 50%;
   display: block;
   max-width: 600px;
 }
 @media screen and (max-width: 800px) {
-  main h1,
-  main h2,
-  main h3 {
+  h1,
+  h2,
+  h3 {
     width: 100%;
   }
 }
-main h1 {
+h1 {
   font-size: 1.8em;
   font-weight: 700;
   text-align: center;
 }
-main h1.center {
+h1.center {
   margin: 25vh auto 0 auto;
 }
-main h2 {
+h2 {
   font-size: 1.5em;
   font-weight: 700;
   margin: 0 0 10px 0;
@@ -633,29 +633,29 @@ main h2 {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-main h3 {
+h3 {
   font-size: 1.3em;
   margin: 20px 0 20px 0;
   font-weight: 200;
 }
-main h4 {
+h4 {
   font-size: 1.1em;
   margin: 20px 0 20px 0;
 }
-main p {
+p {
   font-size: 1em;
   max-width: 600px;
   line-height: 1.8em;
   margin: 0 0 10px 0;
 }
 @media screen and (max-width: 800px) {
-  main p {
+  p {
     width: 100%;
     font-size: 0.8em;
     line-height: 1.6em;
   }
 }
-main a {
+a {
   color: #666;
   font-size: 0.8em;
   text-decoration: none;
@@ -665,7 +665,7 @@ main a {
   -ms-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
-main a:hover {
+a:hover {
   color: #000;
 }
 .sk-rotating-plane,
