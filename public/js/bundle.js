@@ -38652,6 +38652,7 @@ function filterProjects() {
         var categoryFilter = state['categoryFilter'];
         var tagFilter = state['tagFilter'] || [];
         var filterProjects = filterByCategory(items, categoryFilter);
+        console.log(tagFilter);
         filterProjects = filterByTags(filterProjects, tagFilter);
         dispatch(setVisibleProjects(filterProjects));
     };
@@ -38683,11 +38684,13 @@ function filterByTags(projects, tags) {
                 project = projects[i];
                 j = 0;
                 if (project) {
+                    console.log(project);
                     for (j; j < project.tags.length; j++) {
                         var b = false;
                         k = 0;
                         for (k; k < tags.length; k++) {
-                            if (project.tags[j].id === tags[k].id) {
+                            //TODO: Change string comparisong to id
+                            if (project.tags[j] === tags[k].name) {
                                 filteredProjects.push(project);
                                 b = true;
                                 break;
