@@ -23,7 +23,7 @@ var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
 var gifsicle = require('imagemin-gifsicle');
 var jpegtran = require('imagemin-jpegtran');
-var svgo = require('imagemin-svgo');
+// var svgo = require('imagemin-svgo');
 
 var DEBUG = process.env.NODE_ENV === 'production' ? false : true;
 
@@ -113,13 +113,13 @@ gulp.task('css', function() {
 
 gulp.task('img', function() {
     gulp.src('src/img/**/*')
-        .pipe(imagemin({
-            progressive: true,
-            svgoPlugins: [{
-                removeViewBox: false
-            }],
-            use: [pngquant(), gifsicle(), jpegtran(), svgo()]
-        }))
+        // .pipe(imagemin({
+        //     progressive: true,
+            // svgoPlugins: [{
+            //     removeViewBox: false
+            // }],
+            // use: [pngquant(), gifsicle(), jpegtran()]
+        // }))
         .pipe(gulp.dest('public/img'))
         .pipe(connect.reload());
 });
