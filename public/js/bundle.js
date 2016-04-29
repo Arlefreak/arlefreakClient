@@ -39310,7 +39310,11 @@ var Header = function (_React$Component) {
                     _react2.default.createElement(
                         'div',
                         { className: 'title' },
-                        _react2.default.createElement('img', { className: 'logo', src: 'img/logo.svg', alt: 'arlefreak' }),
+                        _react2.default.createElement(
+                            _reactRouter.IndexLink,
+                            { to: '/' },
+                            _react2.default.createElement('img', { className: 'logo', src: 'img/logo.svg', alt: 'arlefreak' })
+                        ),
                         _react2.default.createElement(
                             'h1',
                             { className: 'hideMobile' },
@@ -40641,7 +40645,14 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     };
 };
 
-var DiaryV = (0, _reactRedux.connect)(mapStateToProps)(_diarySingle2.default);
+var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+    var id = ownProps.params.id;
+
+    dispatch((0, _actions.apiFetchIfNeeded)('posts'));
+    return {};
+};
+
+var DiaryV = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_diarySingle2.default);
 
 exports.default = DiaryV;
 

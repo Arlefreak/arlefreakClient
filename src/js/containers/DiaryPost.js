@@ -29,8 +29,15 @@ const mapStateToProps = (state, ownProps) => {
     };
 };
 
+const mapDispatchToProps = (dispatch, ownProps) => {
+    const { id } = ownProps.params;
+    dispatch(apiFetchIfNeeded('posts'));
+    return {};
+};
+
 const DiaryV = connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(Diary);
 
 export default DiaryV;
