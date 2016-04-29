@@ -7,7 +7,7 @@ class Header extends React.Component {
             <header>
                 <div className="wrapper">
                     <div className="title">
-                        <img className="logo" src="img/logo.svg" alt="arlefreak"/>
+                        <IndexLink to="/"><img className="logo" src="img/logo.svg" alt="arlefreak"/></IndexLink>
                         <h1 className="hideMobile">Mario Carballo Zama</h1>
                     </div>
                     <nav>
