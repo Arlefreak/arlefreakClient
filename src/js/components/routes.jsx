@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import Root from './root.jsx';
 import About from '../containers/About.js';
+import Entry from '../containers/Entry.js';
 import Soon from './soon.jsx';
 import Portfolio from '../containers/Portfolio.js';
 import Project from '../containers/Project.js';
@@ -18,6 +19,7 @@ class Routes extends Component {
                     <Route path="projects" component={Portfolio} />
                     <Route path="projects/:id" component={Project} />
                     <Route path="about" component={About} />
+                    <Route path="about/:id" component={Entry} />
                     <Route path="cv" component={CV} />
                     <Route path="diary" component={Diary} />
                     <Route path="diary/:id" component={DiaryPost} />

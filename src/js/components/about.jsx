@@ -1,18 +1,16 @@
 import React, { PropTypes } from 'react';
 import Remarkable from 'remarkable';
+import List from './about_list.jsx';
 import Loading from './loading.jsx';
 
-const About = ({ about, site, isFetching }) => {
+const About = ({ items, isFetching }) => {
     var md = new Remarkable();
-    var mdrAbout = md.render(about);
-    var mdrSite = md.render(site);
 
     if(!isFetching){
         return (
             <article>
                 <h2>About</h2>
-                <div  className="markdown" dangerouslySetInnerHTML={{ __html: mdrAbout }}/>
-                <div  className="markdown" dangerouslySetInnerHTML={{ __html: mdrSite }}/>
+                <List items={items} />
                 <img className="index" src="img/a.svg" alt="Icono"/>
             </article>
         );
@@ -20,14 +18,17 @@ const About = ({ about, site, isFetching }) => {
         return(
             <article>
                 <Loading/>
+                <img className="index" src="img/a.svg" alt="Icono"/>
             </article>
         );
     }
 };
 
 About.propTypes = {
-    about: PropTypes.string.isRequired,
-    site: PropTypes.string.isRequired,
+    items : PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired
+    }).isRequired).isRequired,
     isFetching: PropTypes.bool.isRequired
 };
 
