@@ -1,30 +1,27 @@
 import { connect } from 'react-redux';
-import { fileFetchIfNeeded } from '../actions/actions';
+import { apiFetchIfNeeded } from '../actions/actions';
 import  About from '../components/about.jsx';;
 
-const mapStateToProps = (state, ownProps) => {
-    const { fileCalls } = state;
-    const about = fileCalls['https://raw.githubusercontent.com/Arlefreak/Resume/master/About.md'] || {
+const mapStateToProps = (state) => {
+    const { apiCalls } = state;
+    const {
+        isFetching,
+        lastUpdated,
+        items: items
+    } = apiCalls['about/entry'] || {
         isFetching: true,
-        file: ''
+        items: []
     };
-    const site = fileCalls['https://raw.githubusercontent.com/Arlefreak/arlefreakClient/master/README.md'] || {
-        isFetching: true,
-        file: ''
-    };
-
-    const isFetching = about.isFetching && site.isFetching;
-
     return {
-        about: about.file,
-        site: site.file,
-        isFetching
+        items,
+        isFetching,
+        lastUpdated
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    dispatch(fileFetchIfNeeded('https://raw.githubusercontent.com/Arlefreak/Resume/master/About.md'));
-    dispatch(fileFetchIfNeeded('https://raw.githubusercontent.com/Arlefreak/arlefreakClient/master/README.md'));
+    dispatch(apiFetchIfNeeded('about/entry'));
+    dispatch(apiFetchIfNeeded('about/entryImages'));
     return {};
 };
 
