@@ -730,6 +730,25 @@ ul.vertical-list li {
   white-space: nowrap;
   overflow: hidden;
 }
+ul.vertical-list li a {
+  position: relative;
+}
+ul.vertical-list li a::before {
+  width: 0%;
+  height: 100%;
+  background: rgba(109,223,194,0.5);
+  content: "";
+  position: absolute;
+  bottom: 0;
+  -webkit-transition: width 0.2s ease;
+  -moz-transition: width 0.2s ease;
+  -o-transition: width 0.2s ease;
+  -ms-transition: width 0.2s ease;
+  transition: width 0.2s ease;
+}
+ul.vertical-list li a:hover::before {
+  width: 110%;
+}
 .markdown ul {
   margin: 20px 0 20px 0;
 }
