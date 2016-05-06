@@ -42,7 +42,7 @@ a
     color $gray4
     font-size 0.8em
     text-decoration none
-    transition all 0.5s ease
+    transition all 0.2s ease
     &:hover
         color $color1
 .sk-rotating-plane
@@ -88,23 +88,27 @@ ul
         li
             display block
             width 100%
-            margin 0 0 12px 0
             font-size 1.2em
             white-space nowrap
             overflow hidden
             a
+                display block
+                width 100%
+                padding 5px 0 5px 0
                 position relative
+                z-index 2
                 &::before
                     width 0%
                     height 100%
-                    background $merveillesT
+                    z-index -1
+                    background $merveilles
                     content ""
                     position absolute
                     bottom 0
-                    transition width 0.2s ease
+                    transition all 0.2s ease
                 &:hover
                     &::before
-                        width 110%
+                        width 100%
 .markdown
     ul
         margin 20px 0 20px 0
