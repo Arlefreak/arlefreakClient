@@ -573,8 +573,8 @@ body .wrapper {
 }
 header {
   width: 100%;
-  height: 15vh;
-  padding: 2vh 0 2vh 0;
+  height: 90px;
+  padding: 10px 0 10px 0;
   display: block;
   position: fixed;
   background: #fff;
@@ -599,7 +599,7 @@ header h1 {
   vertical-align: top;
 }
 main {
-  margin: 16vh 0 16vh 0;
+  margin: 90px 0 90px 0;
 }
 h1,
 h2,
@@ -633,7 +633,7 @@ h2 {
   box-sizing: border-box;
 }
 h3 {
-  font-size: 1.8em;
+  font-size: 1.4em;
   margin: 20px 0 20px 0;
   font-weight: 700;
 }
@@ -803,14 +803,24 @@ ul.vertical-list li a:hover::before {
 }
 @media screen and (max-width: 800px) {
   .markdown h1 {
-    font-size: 1.2em;
+    font-size: 1.4em;
   }
 }
 .markdown h2 {
   margin: 20px 0 20px 0;
 }
+@media screen and (max-width: 800px) {
+  .markdown h2 {
+    font-size: 1.2em;
+  }
+}
 .markdown h3 {
   width: 100%;
+}
+@media screen and (max-width: 800px) {
+  .markdown h3 {
+    font-size: 1.1em;
+  }
 }
 .markdown p a {
   font-size: 1em;
@@ -818,7 +828,7 @@ ul.vertical-list li a:hover::before {
 nav {
   display: block;
   width: 100%;
-  margin: 2vh 0 2vh 0;
+  margin: 15px 0 15px 0;
 }
 nav ul {
   display: inline-block;
@@ -968,22 +978,9 @@ aside.right {
 }
 .projects section,
 .project section {
-  width: 60%;
+  width: 100%;
   display: block;
-  float: left;
   vertical-align: top;
-}
-.projects section:first-child,
-.project section:first-child {
-  margin: 0 5% 0 0;
-}
-@media screen and (max-width: 800px) {
-  .projects section,
-  .project section {
-    width: 100%;
-    display: block;
-    float: none;
-  }
 }
 .projects div.half,
 .project div.half {
@@ -1054,18 +1051,18 @@ ul.images a img.imgBW:hover {
   filter: alpha(opacity=0);
 }
 section.gallery {
-  width: 35%;
-}
-@media screen and (max-width: 800px) {
-  section.gallery {
-    width: 100%;
-  }
+  width: 100%;
 }
 section.gallery img {
   display: block;
   max-width: 100%;
   height: auto;
   margin: 2vh auto 0 auto;
+  border: 1px solid #333;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
 }
 section.gallery img:first-child {
   margin: 40px auto 0 auto;
@@ -1091,9 +1088,8 @@ svg {
 }
 footer {
   width: 100%;
-  width: 100%;
-/* height 15vh */
-/* padding 2vh 0 2vh 0 */
+  height: 80px;
+  padding: 10px 0 10px 0;
   background: #fff;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -1120,7 +1116,6 @@ footer p {
   color: #999;
   display: inline-block;
   line-height: 1.5em;
-  padding: 2% 0 2% 0;
 }
 footer ul {
   width: 20%;
@@ -1128,15 +1123,9 @@ footer ul {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  padding: 2% 0 2% 0;
   position: absolute;
-  top: 50%;
+  bottom: 28%;
   right: 0%;
-  -webkit-transform: translate(0, -50%);
-  -moz-transform: translate(0, -50%);
-  -o-transform: translate(0, -50%);
-  -ms-transform: translate(0, -50%);
-  transform: translate(0, -50%);
 }
 footer ul li {
   display: inline-block;

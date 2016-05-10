@@ -36,14 +36,15 @@ ul.images
                 opacity 0
 
 section.gallery
-    width 35%
-    @media screen and (max-width: $mobile-width)
-        width 100%
+    width 100%
     img
         display block
         max-width 100%
         height auto
         margin 2vh auto 0 auto
+        border 1px solid $gray5
+        box-sizing border-box
+        padding 10px
         &:first-child
             margin 40px auto 0 auto
 svg
