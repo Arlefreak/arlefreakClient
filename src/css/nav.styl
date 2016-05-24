@@ -1,7 +1,7 @@
 nav
     display block
     width 100%
-    margin 2vh 0 2vh 0
+    margin 15px 0 15px 0
     ul
         display inline-block
         li
@@ -16,8 +16,10 @@ nav
         border-bottom 1px solid $color2
         transition border-color 0.5s ease
         @media screen and (max-width: 820px)
-            font-size 0.6em
+            font-size 1.0em
         &:hover
+            color $color1
             border-bottom 1px solid $color1
         &.active
-            border-bottom 1px solid $color3
+            color $color1
+            border-bottom 1px solid $red
