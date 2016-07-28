@@ -8,7 +8,7 @@ const CV = ({ file, isFetching }) => {
     if(!isFetching){
         return (
             <article className="cv">
-                <img className="index" src="img/cv.svg" alt="Icono"/>
+                <img className="index" src="/img/cv.svg" alt="Icono"/>
                 <div  className='markdown' dangerouslySetInnerHTML={{ __html: mdr }}/>
             </article>
         );

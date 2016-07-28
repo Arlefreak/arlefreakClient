@@ -15,7 +15,7 @@ function DiaryList ({ posts }) {
                               )
                 }
             </ul>
-            <img className="index" src="img/d.svg" alt="Icono"/>
+            <img className="index" src="/img/d.svg" alt="Icono"/>
         </article>
     );
 };

@@ -36,7 +36,7 @@ const Project = ({
                         images = { images.items }
                         onImageClick = { onImageClick }
                     /> 
-                    <img className="index" src="img/p.svg" alt="Icono"/>
+                    <img className="index" src="/img/p.svg" alt="Icono"/>
                 </div>
             </article>
         );

@@ -11,14 +11,14 @@ const About = ({ items, isFetching }) => {
             <article>
                 <h2>About</h2>
                 <List items={items} />
-                <img className="index" src="img/a.svg" alt="Icono"/>
+                <img className="index" src="/img/a.svg" alt="Icono"/>
             </article>
         );
     }else{
         return(
             <article>
                 <Loading/>
-                <img className="index" src="img/a.svg" alt="Icono"/>
+                <img className="index" src="/img/a.svg" alt="Icono"/>
             </article>
         );
     }

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import Root from './root.jsx';
 import About from '../containers/About.js';
 import Entry from '../containers/Entry.js';
@@ -20,7 +20,7 @@ function logPageView() {
 class Routes extends Component {
     render() {
         return (
-            <Router history={ hashHistory } onUpdate={logPageView}>
+            <Router history={ browserHistory } onUpdate={logPageView}>
                 <Route path="/" component={Root}>
                     <IndexRoute component={Soon} /> 
                     <Route path="projects" component={Portfolio} />

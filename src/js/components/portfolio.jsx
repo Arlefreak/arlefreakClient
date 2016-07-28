@@ -11,7 +11,7 @@ const Portfolio = ({ isFetching }) => {
         element = 
             <article className="projects">
                 <Loading/>
-                <img className="index" src="img/p.svg" alt="Icono"/>
+                <img className="index" src="/img/p.svg" alt="Icono"/>
             </article>;
     }else{
         element = 
@@ -21,7 +21,7 @@ const Portfolio = ({ isFetching }) => {
                 <TagList></TagList>
                 <ImageList></ImageList>
                 <ProjectList></ProjectList>
-                <img className="index" src="img/p.svg" alt="Icono"/>
+                <img className="index" src="/img/p.svg" alt="Icono"/>
             </article>;
     }
     return (element);

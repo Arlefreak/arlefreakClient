@@ -7,7 +7,7 @@ class Soon extends React.Component {
                 <article className="glitch">
                     <span>WORK IN PROGRESS</span>
                 </article>
-                <img className="index" src="img/h.svg" alt="Icono"/>
+                <img className="index" src="/img/h.svg" alt="Icono"/>
             </div>
         );
     }

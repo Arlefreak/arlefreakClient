@@ -15,7 +15,7 @@ const Entry = ({
                     <h2>{ entry.name }</h2>
                     <div className="markdown" dangerouslySetInnerHTML={{ __html: mdr }}/>
                 </section>
-                <img className="index" src="img/a.svg" alt="Icono"/>
+                <img className="index" src="/img/a.svg" alt="Icono"/>
             </article>
         );
     }else{

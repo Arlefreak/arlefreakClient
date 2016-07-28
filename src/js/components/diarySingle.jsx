@@ -18,7 +18,7 @@ const DiaryPost = ({
                     </div>
                     <div className="markdown" dangerouslySetInnerHTML={{ __html: mdr }}/>
                 </section>
-                <img className="index" src="img/d.svg" alt="Icono"/>
+                <img className="index" src="/img/d.svg" alt="Icono"/>
             </article>
         );
     }else{
