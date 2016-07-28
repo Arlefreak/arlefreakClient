@@ -1,9 +1,16 @@
 import fetch from 'isomorphic-fetch';
 import constants from '../constants.js';
 const apiURL = constants.APIURL;
+import ReactGA from 'react-ga';
+ReactGA.initialize('UA-43222844-2');
 
 export const SET_CATEGORY_FILTER = 'SET_CATEGORY_FILTER';
 export function setCategoryFilter(id, name) {
+    ReactGA.event({
+        category: 'Filter',
+        action: 'setCategoryFilter',
+        value: name
+    });
     return {
         type: SET_CATEGORY_FILTER,
         id,
@@ -16,6 +23,11 @@ export const DELETE_TAG_FILTER = 'DELETE_TAG_FILTER';
 export const CLEAR_ALL_TAG_FILTERS = 'CLEAR_ALL_TAG_FILTERS';
 
 export function addTagFilter(id, name) {
+    ReactGA.event({
+        category: 'Filter',
+        action: 'addTagFilter',
+        value: name
+    });
     return { 
         type: ADD_TAG_FILTER,
         id,
@@ -24,6 +36,11 @@ export function addTagFilter(id, name) {
 }
 
 export function deleteTagFilter(id) {
+    ReactGA.event({
+        category: 'Filter',
+        action: 'deleteTagFilter',
+        value: id
+    });
     return {
         type: DELETE_TAG_FILTER,
         id
@@ -31,6 +48,10 @@ export function deleteTagFilter(id) {
 }
 
 export function clearTagFilter() {
+    ReactGA.event({
+        category: 'Filter',
+        action: 'clearTagFilter'
+    });
     return {
         type: CLEAR_ALL_TAG_FILTERS
     };
@@ -59,10 +80,10 @@ export function apiFetch(endPoint) {
     return function (dispatch) {
         dispatch(apiRequest(endPoint));
         return fetch(apiURL + endPoint)
-        .then(response => response.json())
-        .then(json =>
-              dispatch(apiResponse(json, endPoint))
-             );
+            .then(response => response.json())
+            .then(json =>
+                dispatch(apiResponse(json, endPoint))
+            );
     };
 }
 
@@ -118,10 +139,10 @@ export function fileFetch(endPoint) {
     return function (dispatch) {
         dispatch(fileRequest(endPoint));
         return fetch(endPoint)
-        .then(response => response.text())
-        .then(text =>
-              dispatch(fileResponse(text, endPoint))
-             );
+            .then(response => response.text())
+            .then(text =>
+                dispatch(fileResponse(text, endPoint))
+            );
     };
 }
 

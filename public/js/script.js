@@ -16,9 +16,16 @@ console.log(i);
 import fetch from 'isomorphic-fetch';
 import constants from '../constants.js';
 const apiURL = constants.APIURL;
+import ReactGA from 'react-ga';
+ReactGA.initialize('UA-43222844-2');
 
 export const SET_CATEGORY_FILTER = 'SET_CATEGORY_FILTER';
 export function setCategoryFilter(id, name) {
+    ReactGA.event({
+        category: 'Filter',
+        action: 'setCategoryFilter',
+        value: name
+    });
     return {
         type: SET_CATEGORY_FILTER,
         id,
@@ -31,6 +38,11 @@ export const DELETE_TAG_FILTER = 'DELETE_TAG_FILTER';
 export const CLEAR_ALL_TAG_FILTERS = 'CLEAR_ALL_TAG_FILTERS';
 
 export function addTagFilter(id, name) {
+    ReactGA.event({
+        category: 'Filter',
+        action: 'addTagFilter',
+        value: name
+    });
     return { 
         type: ADD_TAG_FILTER,
         id,
@@ -39,6 +51,11 @@ export function addTagFilter(id, name) {
 }
 
 export function deleteTagFilter(id) {
+    ReactGA.event({
+        category: 'Filter',
+        action: 'deleteTagFilter',
+        value: id
+    });
     return {
         type: DELETE_TAG_FILTER,
         id
@@ -46,6 +63,10 @@ export function deleteTagFilter(id) {
 }
 
 export function clearTagFilter() {
+    ReactGA.event({
+        category: 'Filter',
+        action: 'clearTagFilter'
+    });
     return {
         type: CLEAR_ALL_TAG_FILTERS
     };
@@ -74,10 +95,10 @@ export function apiFetch(endPoint) {
     return function (dispatch) {
         dispatch(apiRequest(endPoint));
         return fetch(apiURL + endPoint)
-        .then(response => response.json())
-        .then(json =>
-              dispatch(apiResponse(json, endPoint))
-             );
+            .then(response => response.json())
+            .then(json =>
+                dispatch(apiResponse(json, endPoint))
+            );
     };
 }
 
@@ -133,10 +154,10 @@ export function fileFetch(endPoint) {
     return function (dispatch) {
         dispatch(fileRequest(endPoint));
         return fetch(endPoint)
-        .then(response => response.text())
-        .then(text =>
-              dispatch(fileResponse(text, endPoint))
-             );
+            .then(response => response.text())
+            .then(text =>
+                dispatch(fileResponse(text, endPoint))
+            );
     };
 }
 
@@ -847,31 +868,6 @@ const VisibleProjects = connect(
 
 export default VisibleProjects;
 
-import { createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import createLogger from 'redux-logger';
-import { fetchPosts, addTagFilter, setCategoryFilter } from './actions/actions';
-import portfolioApp from './reducers/reducers';
-
-const loggerMiddleware = createLogger();
-
-// const store = createStore(
-//     applyMiddleware(
-//         thunkMiddleware, // lets us dispatch() functions
-//         loggerMiddleware // neat middleware that logs actions
-//     ),
-//     portfolioApp
-// );
-
-let store =  applyMiddleware(
-    thunkMiddleware,
-    loggerMiddleware
-)(createStore)(portfolioApp);
-
-store.dispatch(fetchPosts());
-store.dispatch(addTagFilter(1, 'phaser'));
-store.dispatch(setCategoryFilter(1, 'Games'));
-
 import { combineReducers } from 'redux';
 import { SET_VISIBLE_PROJECTS, FILE_REQUEST, FILE_RESPONSE, API_REQUEST, API_RESPONSE, SET_CATEGORY_FILTER, ADD_TAG_FILTER, DELETE_TAG_FILTER, CLEAR_ALL_TAG_FILTERS } from '../actions/actions';
 
@@ -1006,3 +1002,28 @@ const portfolioApp = combineReducers({
 });
 
 export default portfolioApp;
+
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
+import { fetchPosts, addTagFilter, setCategoryFilter } from './actions/actions';
+import portfolioApp from './reducers/reducers';
+
+const loggerMiddleware = createLogger();
+
+// const store = createStore(
+//     applyMiddleware(
+//         thunkMiddleware, // lets us dispatch() functions
+//         loggerMiddleware // neat middleware that logs actions
+//     ),
+//     portfolioApp
+// );
+
+let store =  applyMiddleware(
+    thunkMiddleware,
+    loggerMiddleware
+)(createStore)(portfolioApp);
+
+store.dispatch(fetchPosts());
+store.dispatch(addTagFilter(1, 'phaser'));
+store.dispatch(setCategoryFilter(1, 'Games'));

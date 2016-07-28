@@ -39624,12 +39624,23 @@ var _constants = require('../constants.js');
 
 var _constants2 = _interopRequireDefault(_constants);
 
+var _reactGa = require('react-ga');
+
+var _reactGa2 = _interopRequireDefault(_reactGa);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var apiURL = _constants2.default.APIURL;
 
+_reactGa2.default.initialize('UA-43222844-2');
+
 var SET_CATEGORY_FILTER = exports.SET_CATEGORY_FILTER = 'SET_CATEGORY_FILTER';
 function setCategoryFilter(id, name) {
+    _reactGa2.default.event({
+        category: 'Filter',
+        action: 'setCategoryFilter',
+        value: name
+    });
     return {
         type: SET_CATEGORY_FILTER,
         id: id,
@@ -39642,6 +39653,11 @@ var DELETE_TAG_FILTER = exports.DELETE_TAG_FILTER = 'DELETE_TAG_FILTER';
 var CLEAR_ALL_TAG_FILTERS = exports.CLEAR_ALL_TAG_FILTERS = 'CLEAR_ALL_TAG_FILTERS';
 
 function addTagFilter(id, name) {
+    _reactGa2.default.event({
+        category: 'Filter',
+        action: 'addTagFilter',
+        value: name
+    });
     return {
         type: ADD_TAG_FILTER,
         id: id,
@@ -39650,6 +39666,11 @@ function addTagFilter(id, name) {
 }
 
 function deleteTagFilter(id) {
+    _reactGa2.default.event({
+        category: 'Filter',
+        action: 'deleteTagFilter',
+        value: id
+    });
     return {
         type: DELETE_TAG_FILTER,
         id: id
@@ -39657,6 +39678,10 @@ function deleteTagFilter(id) {
 }
 
 function clearTagFilter() {
+    _reactGa2.default.event({
+        category: 'Filter',
+        action: 'clearTagFilter'
+    });
     return {
         type: CLEAR_ALL_TAG_FILTERS
     };
@@ -39854,7 +39879,7 @@ function filterByTags(projects, tags) {
     return filteredProjects;
 };
 
-},{"../constants.js":379,"isomorphic-fetch":61}],347:[function(require,module,exports){
+},{"../constants.js":379,"isomorphic-fetch":61,"react-ga":69}],347:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
