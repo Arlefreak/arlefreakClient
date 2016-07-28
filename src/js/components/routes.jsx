@@ -9,11 +9,18 @@ import Project from '../containers/Project.js';
 import CV from '../containers/CV.js';
 import Diary from '../containers/Diary.js';
 import DiaryPost from '../containers/DiaryPost.js';
+import ReactGA from 'react-ga';
+
+ReactGA.initialize('UA-43222844-2');
+function logPageView() {
+    ReactGA.set({ page: window.location.pathname });
+    ReactGA.pageview(window.location.pathname);
+}
 
 class Routes extends Component {
     render() {
         return (
-            <Router history={ hashHistory }>
+            <Router history={ hashHistory } onUpdate={logPageView}>
                 <Route path="/" component={Root}>
                     <IndexRoute component={Soon} /> 
                     <Route path="projects" component={Portfolio} />
