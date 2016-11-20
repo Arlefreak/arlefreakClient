@@ -21,15 +21,18 @@ Arlefreak.com is a web client for the Arlefreak's Api, it's on the constant rewo
 	- Min Size onScroll
 
 ## Refactor
+
 ### Components
 
 #### List
 - Optional Filters
 - Date On list
 - Gallery
+
 #### Single
 - Delete Image Section
 - Improve Markdown
+
 ### CSS
 - Reutilizable classes
 - Delete unused rules
