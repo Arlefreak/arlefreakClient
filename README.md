@@ -13,26 +13,27 @@ Api to track projects and the life of Mario Carballo Zama.
 Arlefreak.com is a web client for the Arlefreak's Api, it's on the constant rework.
 
 # TODO:
-	## Change Layout
-		- New Header
-			- Add Image
-			- Min Size onScroll
-		- New Footer
-			- Min Size onScroll
+## Change Layout
+- New Header
+	- Add Image
+	- Min Size onScroll
+- New Footer
+	- Min Size onScroll
 
-	## Refactor
-		### Components
-			#### List
-				- Optional Filters
-				- Date On list
-				- Gallery
-			#### Single
-				- Delete Image Section
-				- Improve Markdown
-		### CSS
-			- Reutilizable classes
-			- Delete unused rules
+## Refactor
+### Components
 
-	## Nested API endpoints
-		- Let markdown call other API endpoitns
+#### List
+- Optional Filters
+- Date On list
+- Gallery
+#### Single
+- Delete Image Section
+- Improve Markdown
+### CSS
+- Reutilizable classes
+- Delete unused rules
+
+## Nested API endpoints
+- Let markdown call other API endpoitns
 		 
