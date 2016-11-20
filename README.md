@@ -13,6 +13,13 @@ Api to track projects and the life of Mario Carballo Zama.
 Arlefreak.com is a web client for the Arlefreak's Api, it's on the constant rework.
 
 # TODO:
+
+## Update Build process
+- New Gulp version
+- New Server.js
+- Templates
+- Split Tasks
+
 ## Change Layout
 - New Header
 	- Add Image
