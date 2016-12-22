@@ -1,4 +1,4 @@
-const APIURL = 'http://api.arlefreak.com/';
+const APIURL = 'https://api.arlefreak.com/';
 module.exports = {
     APIURL:APIURL
 };

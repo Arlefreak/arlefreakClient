@@ -43303,7 +43303,7 @@ exports.default = TagRow;
 },{"react":275}],390:[function(require,module,exports){
 'use strict';
 
-var APIURL = 'http://api.arlefreak.com/';
+var APIURL = 'https://api.arlefreak.com/';
 module.exports = {
     APIURL: APIURL
 };
