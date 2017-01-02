@@ -43244,7 +43244,7 @@ var TagList = function TagList(_ref) {
         _react2.default.createElement(_ClearAllTags2.default, null),
         tags.map(function (tag, i) {
             return _react2.default.createElement(_Tag2.default, {
-                key: tag.id,
+                key: tag.tag_id,
                 tag: tag
             });
         })
@@ -43253,7 +43253,7 @@ var TagList = function TagList(_ref) {
 
 TagList.propTypes = {
     tags: _react.PropTypes.arrayOf(_react.PropTypes.shape({
-        id: _react.PropTypes.number.isRequired,
+        tag_id: _react.PropTypes.number.isRequired,
         tag: _react.PropTypes.string.isRequired
     }).isRequired).isRequired
 };
@@ -43994,7 +43994,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     if (tagFilter) {
         var i = 0;
         for (i; i < tagFilter.length; i++) {
-            if (tagFilter[i].id === tag.id) {
+            if (tagFilter[i].id === tag.tag_id) {
                 active = true;
             }
         }
@@ -44010,7 +44010,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
 
     return {
         onClick: function onClick() {
-            dispatch((0, _actions.addTagFilter)(tag.id, tag.tag));
+            dispatch((0, _actions.addTagFilter)(tag.tag_id, tag.tag));
             dispatch((0, _actions.filterProjects)());
         }
     };

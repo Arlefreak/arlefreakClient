@@ -767,7 +767,7 @@ const mapStateToProps = (state, ownProps) => {
     if(tagFilter){
         var i = 0;
         for(i; i < tagFilter.length; i++){
-            if(tagFilter[i].id === tag.id){
+            if(tagFilter[i].id === tag.tag_id){
                 active = true;
             }
         }
@@ -782,7 +782,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     const { tag } = ownProps;
     return {
         onClick: () => {
-            dispatch(addTagFilter(tag.id, tag.tag));
+            dispatch(addTagFilter(tag.tag_id, tag.tag));
             dispatch(filterProjects());
         }
     };
