@@ -7,7 +7,7 @@ const TagRow = ({ tag, active, onClick }) => (
             to="/projects"
             className={ active && 'active'}
             onClick={ onClick }>
-            { tag.name }
+            { tag.tag }
         </Link>
     </li>
 );

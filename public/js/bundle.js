@@ -41325,16 +41325,16 @@ var ADD_TAG_FILTER = exports.ADD_TAG_FILTER = 'ADD_TAG_FILTER';
 var DELETE_TAG_FILTER = exports.DELETE_TAG_FILTER = 'DELETE_TAG_FILTER';
 var CLEAR_ALL_TAG_FILTERS = exports.CLEAR_ALL_TAG_FILTERS = 'CLEAR_ALL_TAG_FILTERS';
 
-function addTagFilter(id, name) {
+function addTagFilter(id, tag) {
     _reactGa2.default.event({
         category: 'Filter',
         action: 'addTagFilter',
-        value: name
+        value: tag
     });
     return {
         type: ADD_TAG_FILTER,
         id: id,
-        name: name
+        tag: tag
     };
 }
 
@@ -41494,8 +41494,7 @@ function filterProjects() {
         var categoryFilter = state['categoryFilter'];
         var tagFilter = state['tagFilter'] || [];
         var filterProjects = filterByCategory(items, categoryFilter);
-        filterProjects = filterByTags(filterProjects, tagFilter);
-        dispatch(setVisibleProjects(filterProjects));
+        filterProjects = filterByTags(filterProjects, tagFilter);dispatch(setVisibleProjects(filterProjects));
     };
 }
 
@@ -41525,12 +41524,11 @@ function filterByTags(projects, tags) {
                 project = projects[i];
                 j = 0;
                 if (project) {
-                    console.log(project);
+                    {/* console.log(project); */}
                     for (j; j < project.tags.length; j++) {
                         var b = false;
                         k = 0;
                         for (k; k < tags.length; k++) {
-                            //TODO: Change string comparisong to id
                             if (project.tags[j].id === tags[k].id) {
                                 filteredProjects.push(project);
                                 b = true;
@@ -42957,7 +42955,7 @@ var TagRow = function TagRow(_ref) {
                 to: '/projects',
                 className: active && 'active',
                 onClick: onClick },
-            tag.name
+            tag.tag
         )
     );
 };
@@ -43256,7 +43254,7 @@ var TagList = function TagList(_ref) {
 TagList.propTypes = {
     tags: _react.PropTypes.arrayOf(_react.PropTypes.shape({
         id: _react.PropTypes.number.isRequired,
-        name: _react.PropTypes.string.isRequired
+        tag: _react.PropTypes.string.isRequired
     }).isRequired).isRequired
 };
 
@@ -43287,7 +43285,7 @@ var TagRow = function TagRow(_ref) {
             {
                 className: active && 'active',
                 onClick: onClick },
-            tag.name
+            tag.tag
         )
     );
 };
@@ -44012,7 +44010,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
 
     return {
         onClick: function onClick() {
-            dispatch((0, _actions.addTagFilter)(tag.id, tag.name));
+            dispatch((0, _actions.addTagFilter)(tag.id, tag.tag));
             dispatch((0, _actions.filterProjects)());
         }
     };
@@ -44045,7 +44043,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mapStateToProps = function mapStateToProps(state, ownProps) {
     var apiCalls = state.apiCalls;
 
-    var _ref = apiCalls['portfolio/tags'] || {
+    var _ref = apiCalls['portfolio/projectTags'] || {
         isFetching: true,
         items: []
     },
@@ -44061,10 +44059,10 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
-    dispatch((0, _actions.apiFetchIfNeeded)('portfolio/tags'));
+    dispatch((0, _actions.apiFetchIfNeeded)('portfolio/projectTags'));
     return {
-        onTagClick: function onTagClick(id, name) {
-            dispatch(addTagFilter(id, name));
+        onTagClick: function onTagClick(id, tag) {
+            dispatch(addTagFilter(id, tag));
         }
     };
 };
@@ -44175,7 +44173,7 @@ var tagFilter = function tagFilter() {
             }
             return [].concat(_toConsumableArray(state), [{
                 id: action.id,
-                name: action.name
+                tag: action.tag
             }]);
         case _actions.CLEAR_ALL_TAG_FILTERS:
             return [];

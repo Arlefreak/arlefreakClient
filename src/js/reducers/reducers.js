@@ -39,7 +39,7 @@ const tagFilter = (state = [], action) => {
             return [
                 ...state,{
                     id: action.id,
-                    name: action.name
+                    tag: action.tag
                 }
             ];
         case CLEAR_ALL_TAG_FILTERS:

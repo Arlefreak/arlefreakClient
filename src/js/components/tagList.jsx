@@ -18,7 +18,7 @@ const TagList = ({ tags }) => (
 TagList.propTypes = {
     tags: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired
+        tag: PropTypes.string.isRequired
     }).isRequired).isRequired
 };
 

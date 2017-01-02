@@ -22,16 +22,16 @@ export const ADD_TAG_FILTER = 'ADD_TAG_FILTER';
 export const DELETE_TAG_FILTER = 'DELETE_TAG_FILTER';
 export const CLEAR_ALL_TAG_FILTERS = 'CLEAR_ALL_TAG_FILTERS';
 
-export function addTagFilter(id, name) {
+export function addTagFilter(id, tag) {
     ReactGA.event({
         category: 'Filter',
         action: 'addTagFilter',
-        value: name
+        value: tag
     });
     return { 
         type: ADD_TAG_FILTER,
         id,
-        name
+        tag
     };
 }
 
@@ -193,8 +193,7 @@ export function filterProjects() {
         const categoryFilter = state['categoryFilter'];
         const tagFilter = state['tagFilter'] || [];
         let filterProjects = filterByCategory(items, categoryFilter);
-        filterProjects = filterByTags(filterProjects, tagFilter);
-        dispatch(setVisibleProjects(filterProjects));
+        filterProjects = filterByTags(filterProjects, tagFilter); dispatch(setVisibleProjects(filterProjects));
     };
 }
 
@@ -222,12 +221,11 @@ function filterByTags (projects, tags) {
                 project = projects[i];
                 j = 0;
                 if(project){
-                    console.log(project);
+                    {/* console.log(project); */}
                     for(j; j < project.tags.length; j++){
                         var b = false;
                         k = 0;
                         for(k; k < tags.length; k++){
-                            //TODO: Change string comparisong to id
                             if(project.tags[j].id === tags[k].id){
                                 filteredProjects.push(project);
                                 b = true;

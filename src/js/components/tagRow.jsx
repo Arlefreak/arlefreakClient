@@ -5,7 +5,7 @@ const TagRow = ({ tag, active, onClick }) => (
         <a
             className={ active && 'active'}
             onClick={ onClick }>
-            { tag.name }
+            { tag.tag }
         </a>
     </li>
 );

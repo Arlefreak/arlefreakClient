@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     const { tag } = ownProps;
     return {
         onClick: () => {
-            dispatch(addTagFilter(tag.id, tag.name));
+            dispatch(addTagFilter(tag.id, tag.tag));
             dispatch(filterProjects());
         }
     };
