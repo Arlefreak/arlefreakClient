@@ -1,14 +1,21 @@
 import React, { Component, PropTypes } from 'react';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
-import Root from './root.jsx';
-import About from '../containers/About.js';
-import Entry from '../containers/Entry.js';
 import Soon from './soon.jsx';
-import Portfolio from '../containers/Portfolio.js';
-import Project from '../containers/Project.js';
-import CV from '../containers/CV.js';
-import Diary from '../containers/Diary.js';
-import DiaryPost from '../containers/DiaryPost.js';
+import Root from './root.jsx';
+
+import AboutList from '../containers/about__list.js';
+import AboutSingle from '../containers/about__single.js';
+
+import DiaryList from '../containers/diary__list.js';
+import DiarySingle from '../containers/diary__single.js';
+
+import CvSingle from '../containers/cv__single.js';
+
+import LigojList from '../containers/ligoj__list.js';
+
+import ProjectList from '../containers/Portfolio.js';
+import ProjectSingle from '../containers/Project.js';
+
 import ReactGA from 'react-ga';
 
 ReactGA.initialize('UA-43222844-2');
@@ -23,13 +30,14 @@ class Routes extends Component {
             <Router history={ browserHistory } onUpdate={logPageView}>
                 <Route path="/" component={Root}>
                     <IndexRoute component={Soon} /> 
-                    <Route path="projects" component={Portfolio} />
-                    <Route path="projects/:id" component={Project} />
-                    <Route path="about" component={About} />
-                    <Route path="about/:id" component={Entry} />
-                    <Route path="cv" component={CV} />
-                    <Route path="diary" component={Diary} />
-                    <Route path="diary/:id" component={DiaryPost} />
+                    <Route path="projects" component={ProjectList} />
+                    <Route path="projects/:id" component={ProjectSingle} />
+                    <Route path="about" component={AboutList} />
+                    <Route path="about/:id" component={AboutSingle} />
+                    <Route path="cv" component={CvSingle} />
+                    <Route path="diary" component={DiaryList} />
+                    <Route path="diary/:id" component={DiarySingle} />
+                    <Route path="ligoj" component={LigojList} />
                     <Route path="*" component={Soon} />
                 </Route>
             </Router>

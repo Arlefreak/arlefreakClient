@@ -263,73 +263,6 @@ function filterByTags (projects, tags) {
 };
 
 import { connect } from 'react-redux';
-import { apiFetchIfNeeded } from '../actions/actions';
-import  About from '../components/about.jsx';;
-
-const mapStateToProps = (state) => {
-    const { apiCalls } = state;
-    const {
-        isFetching,
-        lastUpdated,
-        items: items
-    } = apiCalls['about/entry'] || {
-        isFetching: true,
-        items: []
-    };
-    return {
-        items,
-        isFetching,
-        lastUpdated
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    dispatch(apiFetchIfNeeded('about/entry'));
-    dispatch(apiFetchIfNeeded('about/entryImages'));
-    return {};
-};
-
-const AboutV = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(About);
-
-export default AboutV;
-
-import { connect } from 'react-redux';
-import { fileFetchIfNeeded } from '../actions/actions';
-import  CV from '../components/cv.jsx';;
-
-const mapStateToProps = (state, ownProps) => {
-    const { fileCalls } = state;
-    const {
-        isFetching,
-        lastUpdated,
-        file: file
-    } = fileCalls['https://raw.githubusercontent.com/Arlefreak/Resume/master/README.md'] || {
-        isFetching: true,
-        file: ''
-    };
-
-    return {
-        file: file,
-        isFetching
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    dispatch(fileFetchIfNeeded('https://raw.githubusercontent.com/Arlefreak/Resume/master/README.md'));
-    return {};
-};
-
-const cv = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(CV);
-
-export default cv;
-
-import { connect } from 'react-redux';
 import  CategoryRow from '../components/categoryRow.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
@@ -432,128 +365,6 @@ const Tag = connect(
 )(TagRow);
 
 export default Tag;
-
-import { connect } from 'react-redux';
-import { apiFetchIfNeeded } from '../actions/actions';
-import DiaryList from '../components/diaryList.jsx';
-
-const mapStateToProps = (state) => {
-    const { apiCalls } = state;
-    const {
-        isFetching,
-        lastUpdated,
-        items: items
-    } = apiCalls['diary/posts'] || {
-        isFetching: true,
-        items: []
-    };
-
-    return {
-        posts: items,
-        isFetching,
-        lastUpdated
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    dispatch(apiFetchIfNeeded('diary/posts'));
-    return {};
-};
-
-const Diary = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(DiaryList);
-
-export default Diary;
-
-import { connect } from 'react-redux';
-import  Diary from '../components/diarySingle.jsx';;
-import { apiFetchIfNeeded } from '../actions/actions';
-
-const mapStateToProps = (state, ownProps) => {
-    const { id } = ownProps.params;
-    const { apiCalls } = state;
-    const posts = apiCalls['diary/posts'] || {
-        isFetching: true,
-        items: []
-    };
-
-    let post = {
-        id: 0,
-        title: 'not',
-        text: 'not'
-    };
-    var i = 0;
-    for(i; i < posts.items.length; i++){
-        if (posts.items[i].id === parseInt(id)){
-            post = posts.items[i];
-            break;
-        }
-    }
-    const isFetching = posts.isFetching;
-    return {
-        isFetching: isFetching,
-        post: post
-    };
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    const { id } = ownProps.params;
-    dispatch(apiFetchIfNeeded('diary/posts'));
-    return {};
-};
-
-const DiaryV = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Diary);
-
-export default DiaryV;
-
-import { connect } from 'react-redux';
-import  Entry from '../components/about_single.jsx';;
-import { apiFetchIfNeeded } from '../actions/actions';
-
-const mapStateToProps = (state, ownProps) => {
-    const { id } = ownProps.params;
-    const { apiCalls } = state;
-    const entries = apiCalls['about/entry'] || {
-        isFetching: true,
-        items: []
-    };
-
-    let entry = {
-        id: 0,
-        name: 'not',
-        text: 'not'
-    };
-    var i = 0;
-    for(i; i < entries.items.length; i++){
-        if (entries.items[i].id === parseInt(id)){
-            entry = entries.items[i];
-            break;
-        }
-    }
-    const isFetching = entries.isFetching;
-    return {
-        isFetching: isFetching,
-        entry: entry
-    };
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    const { id } = ownProps.params;
-    dispatch(apiFetchIfNeeded('about/entry'));
-    return {};
-};
-
-const EntryV = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Entry);
-
-export default EntryV;
 
 import { connect } from 'react-redux';
 import { apiFetchIfNeeded } from '../actions/actions';
@@ -865,6 +676,252 @@ const VisibleProjects = connect(
 )(ProjectList);
 
 export default VisibleProjects;
+
+import { connect } from 'react-redux';
+import { apiFetchIfNeeded } from '../actions/actions';
+import ListCointainer from '../components/list__container.jsx';
+
+const mapStateToProps = (state) => {
+    const { apiCalls } = state;
+    const {
+        isFetching,
+        lastUpdated,
+        items: items
+    } = apiCalls['about/entry'] || {
+        isFetching: true,
+        items: []
+    };
+
+    return {
+        id: 'a',
+        isFetching,
+        items: items,
+        route: 'about'
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    dispatch(apiFetchIfNeeded('about/entry'));
+    return {};
+};
+
+const aboutPage = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ListCointainer);
+
+export default aboutPage;
+
+import { connect } from 'react-redux';
+import { apiFetchIfNeeded } from '../actions/actions';
+import SingleContainer from '../components/single__container.jsx';;
+
+const mapStateToProps = (state, ownProps) => {
+    const { id } = ownProps.params;
+    const { apiCalls } = state;
+    const list = apiCalls['about/entry'] || {
+        isFetching: true,
+        items: []
+    };
+
+    let item = {
+        id: 0,
+        name: 'Loading',
+        text: 'Loading'
+    };
+
+    var i = 0;
+    for(i; i < list.items.length; i++){
+        if (list.items[i].id === parseInt(id)){
+            item = list.items[i];
+            break;
+        }
+    }
+    const isFetching = list.isFetching;
+
+    return {
+        id: 'a',
+        title: item.name,
+        isFetching,
+        item: item,
+    };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    const { id } = ownProps.params;
+    dispatch(apiFetchIfNeeded('about/entry'));
+    return {};
+};
+
+const AboutSingle = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SingleContainer);
+
+export default AboutSingle;
+
+import { connect } from 'react-redux';
+import { fileFetchIfNeeded } from '../actions/actions';
+import SingleContainer from '../components/single__container.jsx';;
+
+const mapStateToProps = (state, ownProps) => {
+    const { fileCalls } = state;
+    const {
+        isFetching,
+        lastUpdated,
+        file: file
+    } = fileCalls['https://raw.githubusercontent.com/Arlefreak/Resume/master/README.md'] || {
+        isFetching: true,
+        file: ''
+    };
+
+    let item = {
+        id: 0,
+        text: ''
+    };
+
+    if (file != item.text ){
+        item.text = file;
+    }
+
+    return {
+        id: 'cv',
+        isFetching,
+        item: item,
+    };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    const { id } = ownProps.params;
+    dispatch(fileFetchIfNeeded('https://raw.githubusercontent.com/Arlefreak/Resume/master/README.md'));
+    return {};
+};
+
+const CvSingle = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SingleContainer);
+
+export default CvSingle;
+
+import { connect } from 'react-redux';
+import { apiFetchIfNeeded } from '../actions/actions';
+import ListCointainer from '../components/list__container.jsx';
+
+const mapStateToProps = (state) => {
+    const { apiCalls } = state;
+    const {
+        isFetching,
+        lastUpdated,
+        items: items
+    } = apiCalls['diary/posts'] || {
+        isFetching: true,
+        items: []
+    };
+
+    return {
+        id: 'd',
+        isFetching,
+        items: items,
+        route: 'diary'
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    dispatch(apiFetchIfNeeded('diary/posts'));
+    return {};
+};
+
+const diaryPage = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ListCointainer);
+
+export default diaryPage;
+
+import { connect } from 'react-redux';
+import { apiFetchIfNeeded } from '../actions/actions';
+import SingleContainer from '../components/single__container.jsx';;
+
+const mapStateToProps = (state, ownProps) => {
+    const { id } = ownProps.params;
+    const { apiCalls } = state;
+    const list = apiCalls['diary/posts'] || {
+        isFetching: true,
+        items: []
+    };
+
+    let item = {
+        id: 0,
+        title: 'Loading',
+        text: 'Loading'
+    };
+
+    var i = 0;
+    for(i; i < list.items.length; i++){
+        if (list.items[i].id === parseInt(id)){
+            item = list.items[i];
+            break;
+        }
+    }
+    const isFetching = list.isFetching;
+
+    return {
+        id: 'd',
+        title: item.title,
+        isFetching,
+        item: item,
+    };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    const { id } = ownProps.params;
+    dispatch(apiFetchIfNeeded('diary/posts'));
+    return {};
+};
+
+const DiarySingle = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SingleContainer);
+
+export default DiarySingle;
+
+import { connect } from 'react-redux';
+import { apiFetchIfNeeded } from '../actions/actions';
+import ListCointainer from '../components/list__container.jsx';
+
+const mapStateToProps = (state) => {
+    const { apiCalls } = state;
+    const {
+        isFetching,
+        lastUpdated,
+        items: items
+    } = apiCalls['ligoj/link'] || {
+        isFetching: true,
+        items: []
+    };
+
+    return {
+        id: 'h',
+        isFetching,
+        items: items,
+        route: 'H'
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    dispatch(apiFetchIfNeeded('ligoj/link'));
+    return {};
+};
+
+const diaryPage = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ListCointainer);
+
+export default diaryPage;
+
 
 import { combineReducers } from 'redux';
 import { SET_VISIBLE_PROJECTS, FILE_REQUEST, FILE_RESPONSE, API_REQUEST, API_RESPONSE, SET_CATEGORY_FILTER, ADD_TAG_FILTER, DELETE_TAG_FILTER, CLEAR_ALL_TAG_FILTERS } from '../actions/actions';

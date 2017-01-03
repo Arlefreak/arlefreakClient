@@ -1,31 +1,35 @@
 import { connect } from 'react-redux';
-import  Diary from '../components/diarySingle.jsx';;
 import { apiFetchIfNeeded } from '../actions/actions';
+import SingleContainer from '../components/single__container.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
     const { id } = ownProps.params;
     const { apiCalls } = state;
-    const posts = apiCalls['diary/posts'] || {
+    const list = apiCalls['diary/posts'] || {
         isFetching: true,
         items: []
     };
 
-    let post = {
+    let item = {
         id: 0,
-        title: 'not',
-        text: 'not'
+        title: 'Loading',
+        text: 'Loading'
     };
+
     var i = 0;
-    for(i; i < posts.items.length; i++){
-        if (posts.items[i].id === parseInt(id)){
-            post = posts.items[i];
+    for(i; i < list.items.length; i++){
+        if (list.items[i].id === parseInt(id)){
+            item = list.items[i];
             break;
         }
     }
-    const isFetching = posts.isFetching;
+    const isFetching = list.isFetching;
+
     return {
-        isFetching: isFetching,
-        post: post
+        id: 'd',
+        title: item.title,
+        isFetching,
+        item: item,
     };
 };
 
@@ -35,9 +39,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {};
 };
 
-const DiaryV = connect(
+const DiarySingle = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Diary);
+)(SingleContainer);
 
-export default DiaryV;
+export default DiarySingle;

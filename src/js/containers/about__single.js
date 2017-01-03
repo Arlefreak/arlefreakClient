@@ -1,31 +1,35 @@
 import { connect } from 'react-redux';
-import  Entry from '../components/about_single.jsx';;
 import { apiFetchIfNeeded } from '../actions/actions';
+import SingleContainer from '../components/single__container.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
     const { id } = ownProps.params;
     const { apiCalls } = state;
-    const entries = apiCalls['about/entry'] || {
+    const list = apiCalls['about/entry'] || {
         isFetching: true,
         items: []
     };
 
-    let entry = {
+    let item = {
         id: 0,
-        name: 'not',
-        text: 'not'
+        name: 'Loading',
+        text: 'Loading'
     };
+
     var i = 0;
-    for(i; i < entries.items.length; i++){
-        if (entries.items[i].id === parseInt(id)){
-            entry = entries.items[i];
+    for(i; i < list.items.length; i++){
+        if (list.items[i].id === parseInt(id)){
+            item = list.items[i];
             break;
         }
     }
-    const isFetching = entries.isFetching;
+    const isFetching = list.isFetching;
+
     return {
-        isFetching: isFetching,
-        entry: entry
+        id: 'a',
+        title: item.name,
+        isFetching,
+        item: item,
     };
 };
 
@@ -35,9 +39,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {};
 };
 
-const EntryV = connect(
+const AboutSingle = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Entry);
+)(SingleContainer);
 
-export default EntryV;
+export default AboutSingle;
