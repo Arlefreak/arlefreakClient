@@ -1,16 +1,24 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
-const ItemRow = ({ id, route, name, title, dateUpdated }) => {
+const ItemRow = ({ id, route, name, title, dateUpdated, dateCreated, link }) => {
     var content = name;
+    var toRoute = link;
     if(!content){
         content = title;
     }
     return(
         <li>
-            <Link to={'/' + route + '/' + id }>
-                <span className="date">{ dateUpdated } </span>{ content }
-            </Link>
+            { link &&
+                <a href={ link } target="_blank">
+                    <span className="date">{ dateCreated } </span>{ content }
+                </a>
+            }
+            { !link &&
+                <Link to={ '/' + route + '/' + id }>
+                    <span className="date">{ dateCreated } </span>{ content }
+                </Link>
+            }
         </li>
     );
 };
@@ -20,7 +28,9 @@ ItemRow.propTypes = {
     route: PropTypes.string.isRequired,
     name: PropTypes.string,
     title: PropTypes.string,
-    dateUpdated: PropTypes.string
+    dateUpdated: PropTypes.string,
+    dateCreated: PropTypes.string,
+    link: PropTypes.string
 };
 
 export default ItemRow;

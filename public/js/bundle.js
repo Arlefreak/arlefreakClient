@@ -42958,22 +42958,36 @@ var ItemRow = function ItemRow(_ref) {
         route = _ref.route,
         name = _ref.name,
         title = _ref.title,
-        dateUpdated = _ref.dateUpdated;
+        dateUpdated = _ref.dateUpdated,
+        dateCreated = _ref.dateCreated,
+        link = _ref.link;
 
     var content = name;
+    var toRoute = link;
     if (!content) {
         content = title;
     }
     return _react2.default.createElement(
         'li',
         null,
-        _react2.default.createElement(
+        link && _react2.default.createElement(
+            'a',
+            { href: link, target: '_blank' },
+            _react2.default.createElement(
+                'span',
+                { className: 'date' },
+                dateCreated,
+                ' '
+            ),
+            content
+        ),
+        !link && _react2.default.createElement(
             _reactRouter.Link,
             { to: '/' + route + '/' + id },
             _react2.default.createElement(
                 'span',
                 { className: 'date' },
-                dateUpdated,
+                dateCreated,
                 ' '
             ),
             content
@@ -42986,7 +43000,9 @@ ItemRow.propTypes = {
     route: _react.PropTypes.string.isRequired,
     name: _react.PropTypes.string,
     title: _react.PropTypes.string,
-    dateUpdated: _react.PropTypes.string
+    dateUpdated: _react.PropTypes.string,
+    dateCreated: _react.PropTypes.string,
+    link: _react.PropTypes.string
 };
 
 exports.default = ItemRow;

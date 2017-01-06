@@ -772,6 +772,10 @@ ul.vertical-list li a:hover {
 ul.vertical-list li a:hover::before {
   width: 100%;
 }
+ul.full-width {
+  width: 100%;
+  float: none;
+}
 .markdown ul {
   margin: 20px 0 20px 0;
 }
