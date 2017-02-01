@@ -80,6 +80,13 @@ a.center
     display block
     width 100%
     margin 20vh 0 0 0
+.date-container
+    margin 0 0 10px 0
+.date
+    font-weight 100
+    font-size 0.8em
+    display inline-block
+    margin 0 10px 0 0
 ul
     width 100%
     padding 0
@@ -117,6 +124,9 @@ ul
                     color $black
                     &::before
                         width 100%
+    &.full-width
+        width 100%
+        float none
 .markdown
     ul
         margin 20px 0 20px 0
@@ -154,3 +164,11 @@ ul
     p
         a
             font-size 1.0em
+        &:first-child
+            img
+                display none
+    img
+        width 99%
+        height auto
+        display block
+        margin auto

@@ -712,6 +712,15 @@ a.center {
   width: 100%;
   margin: 20vh 0 0 0;
 }
+.date-container {
+  margin: 0 0 10px 0;
+}
+.date {
+  font-weight: 100;
+  font-size: 0.8em;
+  display: inline-block;
+  margin: 0 10px 0 0;
+}
 ul {
   width: 100%;
   padding: 0;
@@ -762,6 +771,10 @@ ul.vertical-list li a:hover {
 }
 ul.vertical-list li a:hover::before {
   width: 100%;
+}
+ul.full-width {
+  width: 100%;
+  float: none;
 }
 .markdown ul {
   margin: 20px 0 20px 0;
@@ -820,6 +833,15 @@ ul.vertical-list li a:hover::before {
 }
 .markdown p a {
   font-size: 1em;
+}
+.markdown p:first-child img {
+  display: none;
+}
+.markdown img {
+  width: 99%;
+  height: auto;
+  display: block;
+  margin: auto;
 }
 nav {
   display: block;
@@ -889,12 +911,6 @@ aside.right {
   -o-transform: rotate(90deg) translate(-100%, 0);
   -ms-transform: rotate(90deg) translate(-100%, 0);
   transform: rotate(90deg) translate(-100%, 0);
-}
-.diary .date {
-  font-weight: 100;
-  font-size: 0.8em;
-  display: inline-block;
-  margin: 0 10px 0 0;
 }
 .diary div {
   margin: 0 0 10px 0;

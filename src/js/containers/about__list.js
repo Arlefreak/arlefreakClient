@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { apiFetchIfNeeded } from '../actions/actions';
-import  About from '../components/about.jsx';;
+import ListCointainer from '../components/list__container.jsx';
 
 const mapStateToProps = (state) => {
     const { apiCalls } = state;
@@ -12,22 +12,23 @@ const mapStateToProps = (state) => {
         isFetching: true,
         items: []
     };
+
     return {
-        items,
+        id: 'a',
         isFetching,
-        lastUpdated
+        items: items,
+        route: 'about'
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     dispatch(apiFetchIfNeeded('about/entry'));
-    dispatch(apiFetchIfNeeded('about/entryImages'));
     return {};
 };
 
-const AboutV = connect(
+const aboutPage = connect(
     mapStateToProps,
     mapDispatchToProps
-)(About);
+)(ListCointainer);
 
-export default AboutV;
+export default aboutPage;

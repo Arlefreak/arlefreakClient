@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { fileFetchIfNeeded } from '../actions/actions';
-import  CV from '../components/cv.jsx';;
+import SingleContainer from '../components/single__container.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
     const { fileCalls } = state;
@@ -13,20 +13,31 @@ const mapStateToProps = (state, ownProps) => {
         file: ''
     };
 
+    let item = {
+        id: 0,
+        text: ''
+    };
+
+    if (file != item.text ){
+        item.text = file;
+    }
+
     return {
-        file: file,
-        isFetching
+        id: 'cv',
+        isFetching,
+        item: item,
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
+    const { id } = ownProps.params;
     dispatch(fileFetchIfNeeded('https://raw.githubusercontent.com/Arlefreak/Resume/master/README.md'));
     return {};
 };
 
-const cv = connect(
+const CvSingle = connect(
     mapStateToProps,
     mapDispatchToProps
-)(CV);
+)(SingleContainer);
 
-export default cv;
+export default CvSingle;

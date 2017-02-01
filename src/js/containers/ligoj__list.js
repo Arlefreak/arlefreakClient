@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { apiFetchIfNeeded } from '../actions/actions';
-import DiaryList from '../components/diaryList.jsx';
+import ListCointainer from '../components/list__container.jsx';
 
 const mapStateToProps = (state) => {
     const { apiCalls } = state;
@@ -8,26 +8,27 @@ const mapStateToProps = (state) => {
         isFetching,
         lastUpdated,
         items: items
-    } = apiCalls['diary/posts'] || {
+    } = apiCalls['ligoj/link'] || {
         isFetching: true,
         items: []
     };
 
     return {
-        posts: items,
+        id: 'h',
         isFetching,
-        lastUpdated
+        items: items,
+        route: 'H'
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    dispatch(apiFetchIfNeeded('diary/posts'));
+    dispatch(apiFetchIfNeeded('ligoj/link'));
     return {};
 };
 
-const Diary = connect(
+const diaryPage = connect(
     mapStateToProps,
     mapDispatchToProps
-)(DiaryList);
+)(ListCointainer);
 
-export default Diary;
+export default diaryPage;

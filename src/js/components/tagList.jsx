@@ -8,7 +8,7 @@ const TagList = ({ tags }) => (
         {
             tags.map((tag, i)=>
                      <Tag
-                         key={ tag.id }
+                         key={ tag.tag_id }
                          tag={ tag }
                      />
                      )}
@@ -17,8 +17,8 @@ const TagList = ({ tags }) => (
 
 TagList.propTypes = {
     tags: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired
+        tag_id: PropTypes.number.isRequired,
+        tag: PropTypes.string.isRequired
     }).isRequired).isRequired
 };
 
