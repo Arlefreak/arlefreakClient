@@ -13,7 +13,7 @@ import CvSingle from '../containers/cv__single.js';
 
 import LigojList from '../containers/ligoj__list.js';
 
-import ProjectList from '../containers/Portfolio.js';
+import ProjectList from '../containers/project__list.js';
 import ProjectSingle from '../containers/Project.js';
 
 import ReactGA from 'react-ga';

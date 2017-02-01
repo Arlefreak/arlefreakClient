@@ -1,0 +1,22 @@
+ul
+    &.tags
+        margin 10px 0 10px 0
+        max-width $max-text-width
+        width 50%
+        @media screen and (max-width: $mobile-width)
+            width 100%
+            display block
+        li
+            display inline-block
+            margin 0px 4px 0px 0px
+            a
+                color $gray3
+                padding 2px 2px 2px 2px
+                box-sizing border-box
+                font-size 0.6em
+                letter-spacing 0.1em
+                &:hover
+                    color $color1
+                &.active
+                    background $merveilles
+                    color $black

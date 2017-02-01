@@ -262,31 +262,6 @@ function filterByTags (projects, tags) {
     return filteredProjects;
 };
 
-import { createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import createLogger from 'redux-logger';
-import { fetchPosts, addTagFilter, setCategoryFilter } from './actions/actions';
-import portfolioApp from './reducers/reducers';
-
-const loggerMiddleware = createLogger();
-
-// const store = createStore(
-//     applyMiddleware(
-//         thunkMiddleware, // lets us dispatch() functions
-//         loggerMiddleware // neat middleware that logs actions
-//     ),
-//     portfolioApp
-// );
-
-let store =  applyMiddleware(
-    thunkMiddleware,
-    loggerMiddleware
-)(createStore)(portfolioApp);
-
-store.dispatch(fetchPosts());
-store.dispatch(addTagFilter(1, 'phaser'));
-store.dispatch(setCategoryFilter(1, 'Games'));
-
 import { connect } from 'react-redux';
 import  CategoryRow from '../components/categoryRow.jsx';;
 
@@ -459,35 +434,6 @@ const Images = connect(
 )(ImageList);
 
 export default Images;
-
-import { connect } from 'react-redux';
-import PortfolioV from '../components/portfolio.jsx';
-import { apiFetchIfNeeded } from '../actions/actions';
-
-const mapStateToProps = (state) => {
-    const { apiCalls } = state;
-    const {
-        isFetching
-    } = apiCalls['portfolio/projects'] || {
-        isFetching: true
-    };
-    return {
-        isFetching
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    dispatch(apiFetchIfNeeded('portfolio/projects'));
-    dispatch(apiFetchIfNeeded('portfolio/projectsImages/?imgType=mni'));
-    return {};
-};
-
-const Portfolio = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(PortfolioV);
-
-export default Portfolio;
 
 import { connect } from 'react-redux';
 import { setCategoryFilter } from '../actions/actions';
@@ -667,40 +613,6 @@ const TagFilter = connect(
 )(TagList);
 
 export default TagFilter;
-
-import { connect } from 'react-redux';
-import ProjectList from '../components/projectList.jsx';
-import { setVisibleProjects } from '../actions/actions.js';
-
-const mapStateToProps = (state) => {
-    const { apiCalls, visibleProjects, tagFilter, categoryFilter } = state;
-    const {
-        isFetching,
-        lastUpdated,
-        items: items
-    } = apiCalls['portfolio/projects'] || {
-        isFetching: true,
-        items: []
-    };
-
-   
-    let filterProjects = visibleProjects;
-    if(visibleProjects.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0){
-        filterProjects = items;
-    }
-
-    return {
-        projects: filterProjects,
-        isFetching,
-        lastUpdated
-    };
-};
-
-const VisibleProjects = connect(
-    mapStateToProps
-)(ProjectList);
-
-export default VisibleProjects;
 
 import { connect } from 'react-redux';
 import { apiFetchIfNeeded } from '../actions/actions';
@@ -948,6 +860,71 @@ const diaryPage = connect(
 export default diaryPage;
 
 
+import { connect } from 'react-redux';
+import ListCointainer from '../components/list__container.jsx';
+import { apiFetchIfNeeded } from '../actions/actions';
+
+const mapStateToProps = (state) => {
+    const { apiCalls, visibleProjects, tagFilter, categoryFilter } = state;
+    const {
+        isFetching,
+        lastUpdated,
+        items: items
+    } = apiCalls['portfolio/projects'] || {
+        isFetching: true,
+        items: []
+    };
+
+    // TODO:  Grab categories & tags from state
+    // const {
+    //     isFetching,
+    //     lastUpdated,
+    //     items: items
+    // } = apiCalls['portfolio/projectTags'] || {
+    //     isFetching: true,
+    //     items: []
+    // };
+
+    // const {
+    //     isFetching,
+    //     lastUpdated,
+    //     items: items
+    // } = apiCalls['portfolio/projectCategories'] || {
+    //     isFetching: true,
+    //     items: []
+    // };
+
+    let filterProjects = visibleProjects;
+    if(visibleProjects.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0){
+        filterProjects = items;
+    }
+
+    return {
+        id: 'p',
+        isFetching,
+        items: filterProjects,
+        categories: filterProjects,
+        tags: filterProjects,
+        images: filterProjects,
+        route: 'projects'
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    dispatch(apiFetchIfNeeded('portfolio/projects'));
+    dispatch(apiFetchIfNeeded('portfolio/projectTags'));
+    dispatch(apiFetchIfNeeded('portfolio/projectsCategories'));
+    dispatch(apiFetchIfNeeded('portfolio/projectsImages/?imgType=mni'));
+    return {};
+};
+
+const projectsPage = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ListCointainer);
+
+export default projectsPage;
+
 import { combineReducers } from 'redux';
 import { SET_VISIBLE_PROJECTS, FILE_REQUEST, FILE_RESPONSE, API_REQUEST, API_RESPONSE, SET_CATEGORY_FILTER, ADD_TAG_FILTER, DELETE_TAG_FILTER, CLEAR_ALL_TAG_FILTERS } from '../actions/actions';
 
@@ -1082,3 +1059,28 @@ const portfolioApp = combineReducers({
 });
 
 export default portfolioApp;
+
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
+import { fetchPosts, addTagFilter, setCategoryFilter } from './actions/actions';
+import portfolioApp from './reducers/reducers';
+
+const loggerMiddleware = createLogger();
+
+// const store = createStore(
+//     applyMiddleware(
+//         thunkMiddleware, // lets us dispatch() functions
+//         loggerMiddleware // neat middleware that logs actions
+//     ),
+//     portfolioApp
+// );
+
+let store =  applyMiddleware(
+    thunkMiddleware,
+    loggerMiddleware
+)(createStore)(portfolioApp);
+
+store.dispatch(fetchPosts());
+store.dispatch(addTagFilter(1, 'phaser'));
+store.dispatch(setCategoryFilter(1, 'Games'));
