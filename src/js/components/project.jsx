@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import Images from './imageList.jsx';
 import Isvg from 'react-inlinesvg';
 import LinkList from './linkList.jsx';
-import TagList from './projectTagList.jsx';
 import ImageList from './gallery.jsx';
 import Loading from './loading.jsx';
 import Remarkable from 'remarkable';
@@ -27,10 +26,6 @@ const Project = ({
                             links = { links.items }
                         ></LinkList>
                         <div  className="markdown" dangerouslySetInnerHTML={{ __html: mdr }}/>
-                        <TagList
-                            tags = { project.tags }
-                            onTagClick = { onTagClick }
-                        ></TagList>
                     </section>
                     <ImageList
                         images = { images.items }

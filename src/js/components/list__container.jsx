@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import Page from './page.jsx';
 import List from './list.jsx';
-import CategoryList from '../containers/CategoryFilter.js';
-import TagList from '../containers/TagFilter.js';
+import CategoryList from '../containers/project__filter__categories.js';
+import TagList from '../containers/project__filter__tags.js';
 import ImageList from '../containers/Images.js';
 
 const Container = ({ id, title, isFetching, items, categories, tags, images, route }) => {
@@ -12,8 +12,8 @@ const Container = ({ id, title, isFetching, items, categories, tags, images, rou
         title = { title }
         isFetching = { isFetching }
     >
-        { categories != null && <CategoryList></CategoryList> }
-        { tags != null && <TagList></TagList> }
+        { categories != null && <CategoryList className="categories" /> }
+        { tags != null && <TagList className="tags" /> }
         { images != null && <ImageList></ImageList> }
         <List items={ items } route={ route } />
     </Page>
