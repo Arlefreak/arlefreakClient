@@ -4,13 +4,13 @@ import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import Routes from './routes.jsx';
-import portfolioApp from '../reducers/reducers';
+import reducers from '../reducers/reducers';
 
 const loggerMiddleware = createLogger();
 let store =  applyMiddleware(
     thunkMiddleware,
     loggerMiddleware
-)(createStore)(portfolioApp);
+)(createStore)(reducers);
 
 export default class App extends Component {
     render() {

@@ -20,14 +20,7 @@ class Root extends Component {
             <div>
                 <Header></Header>
                 <main>
-                    <ReactCSSTransitionGroup 
-                        component="div"
-                        className="wrapper"
-                        transitionName="example"
-                        transitionEnterTimeout={500}
-                        transitionLeaveTimeout={300}>
-                        { children }
-                    </ReactCSSTransitionGroup>
+                    { children }
                 </main>
             </div>
         );

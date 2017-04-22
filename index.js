@@ -9,7 +9,7 @@ var methodOverride = require('method-override');
 var port = parseInt(process.env.PORT, 10) || 8000;
 
 app.use(express.static(__dirname + '/public'));
-app.get('/*', function (request, response){
+app.get('/*', (request, response) => {
     response.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
 

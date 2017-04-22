@@ -1,8 +1,16 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Match, Route, IndexRoute } from 'react-router';
+import {
+    BrowserRouter as Router,
+    Route,
+    Link,
+    Redirect,
+    Switch
+} from 'react-router-dom';
+
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import Header from './header.jsx';
 import Soon from './soon.jsx';
-import Root from './root.jsx';
 
 import AboutList from '../containers/about__list.js';
 import AboutSingle from '../containers/about__single.js';
@@ -25,29 +33,34 @@ function logPageView() {
     ReactGA.pageview(window.location.pathname);
 }
 
-{/* <IndexRoute component={Soon} /> */} 
+const Routes = () => (
+    <Router>
+        <div>
+            <Header></Header>
+            <main>
+                <div className="wrapper">
+                    <Switch>
 
-class Routes extends Component {
-    render() {
-        return (
-            <Router onUpdate={logPageView}>
-                <div>
-                    <Match pattern={this.props.pathname} component={Root} />
-                    <Match exactly pattern={this.props.pathname} render={() => <Soon />}/>
-                    <Match path="projects" component={Soon} />
-                    <Match path="projects/:id" component={Soon} />
-                    <Match path="about" component={Soon} />
-                    <Match path="about/:id" component={Soon} />
-                    <Match path="cv" component={Soon} />
-                    <Match path="diary" component={Soon} />
-                    <Match path="diary/:id" component={Soon} />
-                    <Match path="ligoj" component={Soon} />
-                    <Match path="*" component={Soon} />
+                        <Route path="/projects" component={ProjectList} />
+                        <Route path="/projects/:id" component={ProjectSingle} />
+
+                        <Route path="/about" component={AboutList} />
+                        <Route path="/about/:id" component={AboutSingle} />
+
+                        <Route path="/cv" component={CvSingle} />
+
+                        <Route path="/diary" component={DiaryList} />
+                        <Route path="/diary/:id" component={DiarySingle} />
+
+                        <Route path="/ligoj" component={LigojList} />
+
+                        <Route component={Soon} />
+                    </Switch>
                 </div>
-            </Router>
-        );
-    }
-}
+            </main>
+        </div>
+    </Router>
+);
 
 Routes.propTypes = {
     pathname: PropTypes.string,
