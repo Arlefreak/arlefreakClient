@@ -369,6 +369,48 @@ const Tag = connect(
 export default Tag;
 
 import { connect } from 'react-redux';
+import HomePage from '../components/home.jsx';
+import { apiFetchIfNeeded } from '../actions/actions';
+
+const mapStateToProps = (state) => {
+    const { apiCalls, visibleProjects } = state;
+    const {
+        isFetching,
+        lastUpdated,
+        items: items
+    } = apiCalls['portfolio/projects'] || {
+        isFetching: true,
+        items: []
+    };
+
+    const images = apiCalls['portfolio/projectsImages/?imgType=mni'] || {
+        isFetching: true,
+        items: []
+    };
+
+    return {
+        id: 'h',
+        isFetching,
+        items: items,
+        images: images,
+        route: ''
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    dispatch(apiFetchIfNeeded('portfolio/projects'));
+    dispatch(apiFetchIfNeeded('portfolio/projectsImages/?imgType=mni'));
+    return {};
+};
+
+const Home = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(HomePage);
+
+export default Home;
+
+import { connect } from 'react-redux';
 import { apiFetchIfNeeded } from '../actions/actions';
 import  ImageList from '../components/imageList.jsx';;
 
@@ -397,21 +439,18 @@ const mapStateToProps = (state, ownProps) => {
         isFetching,
         lastUpdated,
         items: items
-    } = apiCalls['portfolio/projectsImages/?imgType=mni'] || {
+    } = ownProps.images || {
         isFetching: true,
         items: []
     };
-    
-    const {
-        items: projects
-    } = apiCalls['portfolio/projects'] || {
-        items: []
-    };
+
+    const _list = ownProps.items || [];
 
     let filterProjects = visibleProjects;
     if(visibleProjects.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0){
-        filterProjects = projects;
+        filterProjects = _list;
     }
+
     const filteredImages = getVisibleImages(items, filterProjects);
 
     return {
@@ -424,8 +463,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onImageClick: (id, name) => {
-            // dispatch(setCategoryFilter(id, name));
-            console.log('ImageClick: ' + id);
         }
     };
 };
@@ -1029,6 +1066,11 @@ const mapStateToProps = (state) => {
         items: []
     };
 
+    const images = apiCalls['portfolio/projectsImages/?imgType=mni'] || {
+        isFetching: true,
+        items: []
+    };
+
     let filterProjects = visibleProjects;
 
     if(visibleProjects.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0){
@@ -1041,7 +1083,7 @@ const mapStateToProps = (state) => {
         items: filterProjects,
         categories: categories,
         tags: tags,
-        images: filterProjects,
+        images: images,
         route: 'projects'
     };
 };

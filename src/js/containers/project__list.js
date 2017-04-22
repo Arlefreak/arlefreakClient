@@ -23,6 +23,11 @@ const mapStateToProps = (state) => {
         items: []
     };
 
+    const images = apiCalls['portfolio/projectsImages/?imgType=mni'] || {
+        isFetching: true,
+        items: []
+    };
+
     let filterProjects = visibleProjects;
 
     if(visibleProjects.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0){
@@ -35,7 +40,7 @@ const mapStateToProps = (state) => {
         items: filterProjects,
         categories: categories,
         tags: tags,
-        images: filterProjects,
+        images: images,
         route: 'projects'
     };
 };

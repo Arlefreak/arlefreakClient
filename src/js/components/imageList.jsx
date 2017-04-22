@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Image from './imageRow.jsx';
 
-function ImageList ({ images, onImageClick }) {
+function ImageList ({ images, onImageClick, className }) {
     return (
-        <ul className="images">
+        <ul className={ className + ' images' }>
             {
                 images.map( image =>
                            <Image
@@ -25,7 +25,8 @@ ImageList.propTypes = {
         image: PropTypes.string.isRequired,
         project: PropTypes.number.isRequired
     }).isRequired).isRequired,
-    onImageClick: PropTypes.func.isRequired
+    onImageClick: PropTypes.func.isRequired,
+    className: PropTypes.string,
 };
 
 export default ImageList;

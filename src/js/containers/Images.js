@@ -27,21 +27,18 @@ const mapStateToProps = (state, ownProps) => {
         isFetching,
         lastUpdated,
         items: items
-    } = apiCalls['portfolio/projectsImages/?imgType=mni'] || {
+    } = ownProps.images || {
         isFetching: true,
         items: []
     };
-    
-    const {
-        items: projects
-    } = apiCalls['portfolio/projects'] || {
-        items: []
-    };
+
+    const _list = ownProps.items || [];
 
     let filterProjects = visibleProjects;
     if(visibleProjects.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0){
-        filterProjects = projects;
+        filterProjects = _list;
     }
+
     const filteredImages = getVisibleImages(items, filterProjects);
 
     return {
@@ -54,8 +51,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onImageClick: (id, name) => {
-            // dispatch(setCategoryFilter(id, name));
-            console.log('ImageClick: ' + id);
         }
     };
 };

@@ -12,6 +12,8 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Header from './header.jsx';
 import Soon from './soon.jsx';
 
+import Home from '../containers/home.js';
+
 import AboutList from '../containers/about__list.js';
 import AboutSingle from '../containers/about__single.js';
 
@@ -55,7 +57,7 @@ const Routes = () => (
 
                         <Route path="/ligoj" component={LigojList} />
 
-                        <Route component={Soon} />
+                        <Route component={Home} />
                     </Switch>
                 </div>
             </main>

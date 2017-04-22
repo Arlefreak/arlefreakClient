@@ -17,7 +17,7 @@ const Container = ({ id, title, isFetching, items, categories, tags, images, rou
     >
         { categories != null && <CategoryList categories={ categories } className="categories" /> }
         { tags != null && <TagList tags={ tags } className="tags" /> }
-        { images != null && <ImageList></ImageList> }
+        { images != null && <ImageList images={ images } items={ items }></ImageList> }
         <List items={ items } route={ route }  className={ listClasses } />
     </Page>
     );
@@ -34,7 +34,7 @@ Container.propTypes = {
     }).isRequired).isRequired,
     categories: PropTypes.shape(),
     tags: PropTypes.PropTypes.shape(),
-    images: PropTypes.arrayOf(PropTypes.shape()),
+    images: PropTypes.PropTypes.shape(),
     route: PropTypes.string.isRequired
 };
 
