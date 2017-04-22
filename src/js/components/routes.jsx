@@ -28,11 +28,11 @@ import ProjectSingle from '../containers/Project.js';
 import ReactGA from 'react-ga';
 
 // TODO: React router 4 fix https://github.com/react-ga/react-ga/issues/122
-// ReactGA.initialize('UA-43222844-2');
-// function logPageView() {
-//     ReactGA.set({ page: window.location.pathname });
-//     ReactGA.pageview(window.location.pathname);
-// }
+ReactGA.initialize('UA-43222844-2');
+function logPageView() {
+    ReactGA.set({ page: window.location.pathname });
+    ReactGA.pageview(window.location.pathname);
+}
 
 const Routes = () => (
     <Router>

@@ -9,7 +9,8 @@ export function setCategoryFilter(id, name) {
     ReactGA.event({
         category: 'Filter',
         action: 'setCategoryFilter',
-        value: name
+        value: id,
+        label: name,
     });
     return {
         type: SET_CATEGORY_FILTER,
@@ -26,7 +27,8 @@ export function addTagFilter(tag_id, tag) {
     ReactGA.event({
         category: 'Filter',
         action: 'addTagFilter',
-        value: tag
+        value: tag_id,
+        label: tag,
     });
     return { 
         type: ADD_TAG_FILTER,
@@ -39,7 +41,8 @@ export function deleteTagFilter(tag_id) {
     ReactGA.event({
         category: 'Filter',
         action: 'deleteTagFilter',
-        value: tag_id
+        value: tag_id,
+        label: tag,
     });
     return {
         type: DELETE_TAG_FILTER,

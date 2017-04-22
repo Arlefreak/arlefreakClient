@@ -42188,7 +42188,8 @@ function setCategoryFilter(id, name) {
     _reactGa2.default.event({
         category: 'Filter',
         action: 'setCategoryFilter',
-        value: name
+        value: id,
+        label: name
     });
     return {
         type: SET_CATEGORY_FILTER,
@@ -42205,7 +42206,8 @@ function addTagFilter(tag_id, tag) {
     _reactGa2.default.event({
         category: 'Filter',
         action: 'addTagFilter',
-        value: tag
+        value: tag_id,
+        label: tag
     });
     return {
         type: ADD_TAG_FILTER,
@@ -42218,7 +42220,8 @@ function deleteTagFilter(tag_id) {
     _reactGa2.default.event({
         category: 'Filter',
         action: 'deleteTagFilter',
-        value: tag_id
+        value: tag_id,
+        label: tag
     });
     return {
         type: DELETE_TAG_FILTER,
@@ -43512,11 +43515,11 @@ var _reactGa2 = _interopRequireDefault(_reactGa);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // TODO: React router 4 fix https://github.com/react-ga/react-ga/issues/122
-// ReactGA.initialize('UA-43222844-2');
-// function logPageView() {
-//     ReactGA.set({ page: window.location.pathname });
-//     ReactGA.pageview(window.location.pathname);
-// }
+_reactGa2.default.initialize('UA-43222844-2');
+function logPageView() {
+    _reactGa2.default.set({ page: window.location.pathname });
+    _reactGa2.default.pageview(window.location.pathname);
+}
 
 var Routes = function Routes() {
     return _react2.default.createElement(
