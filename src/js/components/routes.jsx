@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react';
-import { Router, Route, browserHistory, IndexRoute } from 'react-router';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Match, Route, IndexRoute } from 'react-router';
 import Soon from './soon.jsx';
 import Root from './root.jsx';
 
@@ -24,25 +25,32 @@ function logPageView() {
     ReactGA.pageview(window.location.pathname);
 }
 
+{/* <IndexRoute component={Soon} /> */} 
+
 class Routes extends Component {
     render() {
         return (
-            <Router history={ browserHistory } onUpdate={logPageView}>
-                <Route path="/" component={Root}>
-                    <IndexRoute component={Soon} /> 
-                    <Route path="projects" component={ProjectList} />
-                    <Route path="projects/:id" component={ProjectSingle} />
-                    <Route path="about" component={AboutList} />
-                    <Route path="about/:id" component={AboutSingle} />
-                    <Route path="cv" component={CvSingle} />
-                    <Route path="diary" component={DiaryList} />
-                    <Route path="diary/:id" component={DiarySingle} />
-                    <Route path="ligoj" component={LigojList} />
-                    <Route path="*" component={Soon} />
-                </Route>
+            <Router onUpdate={logPageView}>
+                <div>
+                    <Match pattern={this.props.pathname} component={Root} />
+                    <Match exactly pattern={this.props.pathname} render={() => <Soon />}/>
+                    <Match path="projects" component={Soon} />
+                    <Match path="projects/:id" component={Soon} />
+                    <Match path="about" component={Soon} />
+                    <Match path="about/:id" component={Soon} />
+                    <Match path="cv" component={Soon} />
+                    <Match path="diary" component={Soon} />
+                    <Match path="diary/:id" component={Soon} />
+                    <Match path="ligoj" component={Soon} />
+                    <Match path="*" component={Soon} />
+                </div>
             </Router>
         );
     }
 }
+
+Routes.propTypes = {
+    pathname: PropTypes.string,
+};
 
 export default Routes;

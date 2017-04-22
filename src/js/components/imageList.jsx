@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import Image from './imageRow.jsx';
 
 function ImageList ({ images, onImageClick }) {
@@ -15,7 +16,7 @@ function ImageList ({ images, onImageClick }) {
             }
         </ul>
     );
-};
+}
 
 ImageList.propTypes = {
     images: PropTypes.arrayOf(PropTypes.shape({

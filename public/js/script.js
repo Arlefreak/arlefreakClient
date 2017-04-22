@@ -1180,7 +1180,7 @@ export default portfolioApp;
 
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import createLogger from 'redux-logger';
+import { createLogger } from 'redux-logger';
 import { fetchPosts, addTagFilter, setCategoryFilter } from './actions/actions';
 import portfolioApp from './reducers/reducers';
 

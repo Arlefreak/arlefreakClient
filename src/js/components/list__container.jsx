@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import Page from './page.jsx';
 import List from './list.jsx';
 import CategoryList from '../containers/project__filter__categories.js';

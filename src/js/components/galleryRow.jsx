@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const ImageRow = ({ name , image , onImageClick}) => (
         <img src= { image } alt={ name } onClick= { onImageClick }/>

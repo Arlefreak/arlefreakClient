@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import Images from './imageList.jsx';
 import Isvg from 'react-inlinesvg';
 import LinkList from './linkList.jsx';
