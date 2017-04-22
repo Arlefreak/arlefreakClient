@@ -2,21 +2,23 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Page from './page.jsx';
 import List from './list.jsx';
+
 import CategoryList from '../containers/project__filter__categories.js';
 import TagList from '../containers/project__filter__tags.js';
 import ImageList from '../containers/Images.js';
 
 const Container = ({ id, title, isFetching, items, categories, tags, images, route }) => {
+    var listClasses = !images ? 'full-width' : '';
     return (
     <Page 
         id = { id }
         title = { title }
         isFetching = { isFetching }
     >
-        { categories != null && <CategoryList className="categories" /> }
-        { tags != null && <TagList className="tags" /> }
+        { categories != null && <CategoryList categories={ categories } className="categories" /> }
+        { tags != null && <TagList tags={ tags } className="tags" /> }
         { images != null && <ImageList></ImageList> }
-        <List items={ items } route={ route } />
+        <List items={ items } route={ route }  className={ listClasses } />
     </Page>
     );
 };
@@ -30,8 +32,8 @@ Container.propTypes = {
         name: PropTypes.string,
         title: PropTypes.string
     }).isRequired).isRequired,
-    categories: PropTypes.arrayOf(PropTypes.shape()),
-    tags: PropTypes.arrayOf(PropTypes.shape()),
+    categories: PropTypes.shape(),
+    tags: PropTypes.PropTypes.shape(),
     images: PropTypes.arrayOf(PropTypes.shape()),
     route: PropTypes.string.isRequired
 };

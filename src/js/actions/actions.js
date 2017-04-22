@@ -22,7 +22,7 @@ export const ADD_TAG_FILTER = 'ADD_TAG_FILTER';
 export const DELETE_TAG_FILTER = 'DELETE_TAG_FILTER';
 export const CLEAR_ALL_TAG_FILTERS = 'CLEAR_ALL_TAG_FILTERS';
 
-export function addTagFilter(id, tag) {
+export function addTagFilter(tag_id, tag) {
     ReactGA.event({
         category: 'Filter',
         action: 'addTagFilter',
@@ -30,20 +30,20 @@ export function addTagFilter(id, tag) {
     });
     return { 
         type: ADD_TAG_FILTER,
-        id,
+        tag_id,
         tag
     };
 }
 
-export function deleteTagFilter(id) {
+export function deleteTagFilter(tag_id) {
     ReactGA.event({
         category: 'Filter',
         action: 'deleteTagFilter',
-        value: id
+        value: tag_id
     });
     return {
         type: DELETE_TAG_FILTER,
-        id
+        tag_id
     };
 }
 
@@ -226,7 +226,7 @@ function filterByTags (projects, tags) {
                         var b = false;
                         k = 0;
                         for(k; k < tags.length; k++){
-                            if(project.tags[j].id === tags[k].id){
+                            if(project.tags[j].tag_id === tags[k].tag_id){
                                 filteredProjects.push(project);
                                 b = true;
                                 break;

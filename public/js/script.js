@@ -37,7 +37,7 @@ export const ADD_TAG_FILTER = 'ADD_TAG_FILTER';
 export const DELETE_TAG_FILTER = 'DELETE_TAG_FILTER';
 export const CLEAR_ALL_TAG_FILTERS = 'CLEAR_ALL_TAG_FILTERS';
 
-export function addTagFilter(id, tag) {
+export function addTagFilter(tag_id, tag) {
     ReactGA.event({
         category: 'Filter',
         action: 'addTagFilter',
@@ -45,20 +45,20 @@ export function addTagFilter(id, tag) {
     });
     return { 
         type: ADD_TAG_FILTER,
-        id,
+        tag_id,
         tag
     };
 }
 
-export function deleteTagFilter(id) {
+export function deleteTagFilter(tag_id) {
     ReactGA.event({
         category: 'Filter',
         action: 'deleteTagFilter',
-        value: id
+        value: tag_id
     });
     return {
         type: DELETE_TAG_FILTER,
-        id
+        tag_id
     };
 }
 
@@ -241,7 +241,7 @@ function filterByTags (projects, tags) {
                         var b = false;
                         k = 0;
                         for(k; k < tags.length; k++){
-                            if(project.tags[j].id === tags[k].id){
+                            if(project.tags[j].tag_id === tags[k].tag_id){
                                 filteredProjects.push(project);
                                 b = true;
                                 break;
@@ -729,7 +729,6 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    const { id } = ownProps.params;
     dispatch(fileFetchIfNeeded('https://raw.githubusercontent.com/Arlefreak/Resume/master/README.md'));
     return {};
 };
@@ -839,16 +838,23 @@ const mapStateToProps = (state) => {
         items: []
     };
 
+    const tags = apiCalls['ligoj/linkTags'] || {
+        isFetching: true,
+        items: []
+    };
+
     return {
         id: 'h',
         isFetching,
         items: items,
+        tags: tags,
         route: 'H'
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     dispatch(apiFetchIfNeeded('ligoj/link'));
+    dispatch(apiFetchIfNeeded('ligoj/linkTags'));
     return {};
 };
 
@@ -870,30 +876,33 @@ const mapStateToProps = (state, ownProps) => {
         isFetching,
         lastUpdated,
         items: items
-    } = apiCalls['portfolio/projectsCategories'] || {
+    } = ownProps.categories || {
         isFetching: true,
         items: []
     };
 
-    if(items.length > 0 && items[0].id !== 0 ){
-        items.unshift({
-            id: 0,
-            name:'Alll',
-        });
+    let active = [];
+    active.length = 0;
+    let allActive = categoryFilter.id === 0;
 
-        if(categoryFilter){
-            items.map(( item ) => {
+    if(items.length > 0 && items[0].id !== 0 ){
+        if(categoryFilter) {
+            items.map((item) => {
                 if(categoryFilter.id === item.id){
-                    item.active = true;
+                    active.push(true);
+                }else{
+                    active.push(false);
                 }
-            }
-            );
+            });
         }
     }
+
     return {
         items: items,
         isFetching,
-        lastUpdated
+        lastUpdated,
+        active,
+        allActive,
     };
 };
 
@@ -920,53 +929,54 @@ import FilterList from '../components/filter__list.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
     const { apiCalls, tagFilter } = state;
+
     const {
         isFetching,
         lastUpdated,
         items: items
-    } = apiCalls['portfolio/projectTags'] || {
+    } = ownProps.tags || {
         isFetching: true,
         items: []
     };
 
-    let itemsCopy = Object.assign([], items);
 
-    if(itemsCopy.length > 0 && itemsCopy[0].id !== 0 ){
-        itemsCopy.unshift({
-            id: 0,
-            name:'Alll',
-        });
-        itemsCopy.map(( item ) => {
-            item.id = item.tag_id;
-            item.name = item.tag;
-            item.active = false;
-            console.log(item);
-        }
-        );
+    let active = [];
+    active.length = 0;
 
-        if(tagFilter){
-            itemsCopy.map(( item ) => {
-                tagFilter.map(( filter ) => {
-                    if(filter.id === item.id){
-                        item.active = true;
-                    }
-                });
+    let allActive = tagFilter.length > 0 ? true : false;
+
+    if(items.length > 0 && items[0].tag_id !== 0 ){
+        for(var i = 0; i < items.length; i++){
+            for(var j = 0; j < tagFilter.length; j++){
+                if(items[i].tag_id === tagFilter[j].tag_id)
+                {
+                    active.push(true);
+                    console.log('true');
+                }
+                else{
+                    active.push(false);
+                    console.log('false');
+                }
             }
-            );
         }
     }
+
+    console.log(active);
+
     return {
         items: items,
         isFetching,
-        lastUpdated
+        lastUpdated,
+        active,
+        allActive,
     };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     dispatch(apiFetchIfNeeded('portfolio/projectTags'));
     return {
-        onClick: (id, name) => {
-            dispatch(addTagFilter(id, name));
+        onClick: (tag_id, name) => {
+            dispatch(addTagFilter(tag_id, name));
         }
     };
 };
@@ -993,26 +1003,18 @@ const mapStateToProps = (state) => {
         items: []
     };
 
-    // TODO:  Grab categories & tags from state
-    // const {
-    //     isFetching,
-    //     lastUpdated,
-    //     items: items
-    // } = apiCalls['portfolio/projectTags'] || {
-    //     isFetching: true,
-    //     items: []
-    // };
+    const tags = apiCalls['portfolio/projectTags'] || {
+        isFetching: true,
+        items: []
+    };
 
-    // const {
-    //     isFetching,
-    //     lastUpdated,
-    //     items: items
-    // } = apiCalls['portfolio/projectCategories'] || {
-    //     isFetching: true,
-    //     items: []
-    // };
+    const categories = apiCalls['portfolio/projectsCategories'] || {
+        isFetching: true,
+        items: []
+    };
 
     let filterProjects = visibleProjects;
+
     if(visibleProjects.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0){
         filterProjects = items;
     }
@@ -1021,8 +1023,8 @@ const mapStateToProps = (state) => {
         id: 'p',
         isFetching,
         items: filterProjects,
-        categories: filterProjects,
-        tags: filterProjects,
+        categories: categories,
+        tags: tags,
         images: filterProjects,
         route: 'projects'
     };
@@ -1043,31 +1045,6 @@ const projectsPage = connect(
 
 export default projectsPage;
 
-import { createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import { createLogger } from 'redux-logger';
-import { fetchPosts, addTagFilter, setCategoryFilter } from './actions/actions';
-import portfolioApp from './reducers/reducers';
-
-const loggerMiddleware = createLogger();
-
-// const store = createStore(
-//     applyMiddleware(
-//         thunkMiddleware, // lets us dispatch() functions
-//         loggerMiddleware // neat middleware that logs actions
-//     ),
-//     portfolioApp
-// );
-
-let store =  applyMiddleware(
-    thunkMiddleware,
-    loggerMiddleware
-)(createStore)(portfolioApp);
-
-store.dispatch(fetchPosts());
-store.dispatch(addTagFilter(1, 'phaser'));
-store.dispatch(setCategoryFilter(1, 'Games'));
-
 import { combineReducers } from 'redux';
 import { SET_VISIBLE_PROJECTS, FILE_REQUEST, FILE_RESPONSE, API_REQUEST, API_RESPONSE, SET_CATEGORY_FILTER, ADD_TAG_FILTER, DELETE_TAG_FILTER, CLEAR_ALL_TAG_FILTERS } from '../actions/actions';
 
@@ -1087,14 +1064,16 @@ const categoryFilter = (state = {
 };
 
 const tagFilter = (state = [], action) => {
+
     var exists = false;
     var i = 0;
     var index = 0;
+
     switch (action.type) {
         case ADD_TAG_FILTER:
         case DELETE_TAG_FILTER:
             for(i; i < state.length; i++){
-                if(state[i].id === action.id){
+                if(state[i].tag_id === action.tag_id){
                     exists = true;
                     index = i;
                     break;
@@ -1108,7 +1087,7 @@ const tagFilter = (state = [], action) => {
             }
             return [
                 ...state,{
-                    id: action.id,
+                    tag_id: action.tag_id,
                     tag: action.tag
                 }
             ];
@@ -1202,3 +1181,28 @@ const portfolioApp = combineReducers({
 });
 
 export default portfolioApp;
+
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger';
+import { fetchPosts, addTagFilter, setCategoryFilter } from './actions/actions';
+import portfolioApp from './reducers/reducers';
+
+const loggerMiddleware = createLogger();
+
+// const store = createStore(
+//     applyMiddleware(
+//         thunkMiddleware, // lets us dispatch() functions
+//         loggerMiddleware // neat middleware that logs actions
+//     ),
+//     portfolioApp
+// );
+
+let store =  applyMiddleware(
+    thunkMiddleware,
+    loggerMiddleware
+)(createStore)(portfolioApp);
+
+store.dispatch(fetchPosts());
+store.dispatch(addTagFilter(1, 'phaser'));
+store.dispatch(setCategoryFilter(1, 'Games'));

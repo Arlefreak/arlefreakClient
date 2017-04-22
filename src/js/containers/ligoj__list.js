@@ -13,16 +13,23 @@ const mapStateToProps = (state) => {
         items: []
     };
 
+    const tags = apiCalls['ligoj/linkTags'] || {
+        isFetching: true,
+        items: []
+    };
+
     return {
         id: 'h',
         isFetching,
         items: items,
+        tags: tags,
         route: 'H'
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     dispatch(apiFetchIfNeeded('ligoj/link'));
+    dispatch(apiFetchIfNeeded('ligoj/linkTags'));
     return {};
 };
 

@@ -3,12 +3,15 @@ ul
         margin 10px 0 10px 0
         max-width $max-text-width
         width 50%
+        clear both
+        overflow hidden
         @media screen and (max-width: $mobile-width)
             width 100%
             display block
         li
             display inline-block
             margin 0px 4px 0px 0px
+            cursor pointer
             a
                 color $gray3
                 padding 2px 2px 2px 2px
@@ -20,3 +23,17 @@ ul
                 &.active
                     background $merveilles
                     color $black
+
+    &.categories
+        display block
+        width 100%
+        margin 15px 0 15px 0
+        clear both
+        overflow hidden
+        li
+            display block
+            float left
+            margin 0 10px 0 0
+            cursor pointer
+            .active
+                color $red

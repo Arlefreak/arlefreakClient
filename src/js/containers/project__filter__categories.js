@@ -8,30 +8,33 @@ const mapStateToProps = (state, ownProps) => {
         isFetching,
         lastUpdated,
         items: items
-    } = apiCalls['portfolio/projectsCategories'] || {
+    } = ownProps.categories || {
         isFetching: true,
         items: []
     };
 
-    if(items.length > 0 && items[0].id !== 0 ){
-        items.unshift({
-            id: 0,
-            name:'Alll',
-        });
+    let active = [];
+    active.length = 0;
+    let allActive = categoryFilter.id === 0;
 
-        if(categoryFilter){
-            items.map(( item ) => {
+    if(items.length > 0 && items[0].id !== 0 ){
+        if(categoryFilter) {
+            items.map((item) => {
                 if(categoryFilter.id === item.id){
-                    item.active = true;
+                    active.push(true);
+                }else{
+                    active.push(false);
                 }
-            }
-            );
+            });
         }
     }
+
     return {
         items: items,
         isFetching,
-        lastUpdated
+        lastUpdated,
+        active,
+        allActive,
     };
 };
 

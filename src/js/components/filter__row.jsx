@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const FilterRow = ({ onClick, name, active}) => (
+const FilterRow = ({ onClick, name, className}) => (
     <li>
         <a 
-            className={ active && 'active'}
+            className={ className }
             onClick={ onClick }>
             { name }
         </a>
@@ -14,7 +14,7 @@ const FilterRow = ({ onClick, name, active}) => (
 FilterRow.propTypes = {
     onClick: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
-    active: PropTypes.bool.isRequired
+    className: PropTypes.string,
 };
 
 export default FilterRow;

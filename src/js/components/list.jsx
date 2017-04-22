@@ -3,9 +3,10 @@ import React from 'react';
 import Page from './page.jsx';
 import Row from './row.jsx';
 
-const List = ({ items, route }) => {
+const List = ({ items, route, className }) => {
+    let classes = className + ' vertical-list';
     return (
-        <ul className="vertical-list">
+        <ul className={ classes }>
             {
                 items.map( item =>
                      <Row
@@ -26,6 +27,7 @@ List.propTypes = {
         title: PropTypes.string,
         dateUpdated: PropTypes.string
     }).isRequired).isRequired,
+    className: PropTypes.string,
     route: PropTypes.string.isRequired
 };
 

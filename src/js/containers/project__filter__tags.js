@@ -4,53 +4,54 @@ import FilterList from '../components/filter__list.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
     const { apiCalls, tagFilter } = state;
+
     const {
         isFetching,
         lastUpdated,
         items: items
-    } = apiCalls['portfolio/projectTags'] || {
+    } = ownProps.tags || {
         isFetching: true,
         items: []
     };
 
-    let itemsCopy = Object.assign([], items);
 
-    if(itemsCopy.length > 0 && itemsCopy[0].id !== 0 ){
-        itemsCopy.unshift({
-            id: 0,
-            name:'Alll',
-        });
-        itemsCopy.map(( item ) => {
-            item.id = item.tag_id;
-            item.name = item.tag;
-            item.active = false;
-            console.log(item);
-        }
-        );
+    let active = [];
+    active.length = 0;
 
-        if(tagFilter){
-            itemsCopy.map(( item ) => {
-                tagFilter.map(( filter ) => {
-                    if(filter.id === item.id){
-                        item.active = true;
-                    }
-                });
+    let allActive = tagFilter.length > 0 ? true : false;
+
+    if(items.length > 0 && items[0].tag_id !== 0 ){
+        for(var i = 0; i < items.length; i++){
+            for(var j = 0; j < tagFilter.length; j++){
+                if(items[i].tag_id === tagFilter[j].tag_id)
+                {
+                    active.push(true);
+                    console.log('true');
+                }
+                else{
+                    active.push(false);
+                    console.log('false');
+                }
             }
-            );
         }
     }
+
+    console.log(active);
+
     return {
         items: items,
         isFetching,
-        lastUpdated
+        lastUpdated,
+        active,
+        allActive,
     };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     dispatch(apiFetchIfNeeded('portfolio/projectTags'));
     return {
-        onClick: (id, name) => {
-            dispatch(addTagFilter(id, name));
+        onClick: (tag_id, name) => {
+            dispatch(addTagFilter(tag_id, name));
         }
     };
 };

@@ -13,26 +13,18 @@ const mapStateToProps = (state) => {
         items: []
     };
 
-    // TODO:  Grab categories & tags from state
-    // const {
-    //     isFetching,
-    //     lastUpdated,
-    //     items: items
-    // } = apiCalls['portfolio/projectTags'] || {
-    //     isFetching: true,
-    //     items: []
-    // };
+    const tags = apiCalls['portfolio/projectTags'] || {
+        isFetching: true,
+        items: []
+    };
 
-    // const {
-    //     isFetching,
-    //     lastUpdated,
-    //     items: items
-    // } = apiCalls['portfolio/projectCategories'] || {
-    //     isFetching: true,
-    //     items: []
-    // };
+    const categories = apiCalls['portfolio/projectsCategories'] || {
+        isFetching: true,
+        items: []
+    };
 
     let filterProjects = visibleProjects;
+
     if(visibleProjects.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0){
         filterProjects = items;
     }
@@ -41,8 +33,8 @@ const mapStateToProps = (state) => {
         id: 'p',
         isFetching,
         items: filterProjects,
-        categories: filterProjects,
-        tags: filterProjects,
+        categories: categories,
+        tags: tags,
         images: filterProjects,
         route: 'projects'
     };

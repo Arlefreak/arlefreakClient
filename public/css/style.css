@@ -337,7 +337,7 @@ body {
 html .wrapper,
 body .wrapper {
   width: 80%;
-  max-width: 1024px;
+/* max-width 1024px */
   height: auto;
   display: block;
   margin: auto;
@@ -971,6 +971,8 @@ ul.tags {
   margin: 10px 0 10px 0;
   max-width: 600px;
   width: 50%;
+  clear: both;
+  overflow: hidden;
 }
 @media screen and (max-width: 800px) {
   ul.tags {
@@ -981,6 +983,7 @@ ul.tags {
 ul.tags li {
   display: inline-block;
   margin: 0px 4px 0px 0px;
+  cursor: pointer;
 }
 ul.tags li a {
   color: #999;
@@ -997,6 +1000,22 @@ ul.tags li a:hover {
 ul.tags li a.active {
   background: #72dec2;
   color: #000;
+}
+ul.categories {
+  display: block;
+  width: 100%;
+  margin: 15px 0 15px 0;
+  clear: both;
+  overflow: hidden;
+}
+ul.categories li {
+  display: block;
+  float: left;
+  margin: 0 10px 0 0;
+  cursor: pointer;
+}
+ul.categories li .active {
+  color: #f04250;
 }
 ul.images {
   display: block;
