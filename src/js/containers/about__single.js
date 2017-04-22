@@ -3,7 +3,7 @@ import { apiFetchIfNeeded } from '../actions/actions';
 import SingleContainer from '../components/single__container.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
-    const { id } = ownProps.params;
+    const { id } = ownProps.match.params;
     const { apiCalls } = state;
     const list = apiCalls['about/entry'] || {
         isFetching: true,
@@ -34,7 +34,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    const { id } = ownProps.params;
+    const { id } = ownProps.match.params;
     dispatch(apiFetchIfNeeded('about/entry'));
     return {};
 };

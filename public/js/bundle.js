@@ -42400,12 +42400,11 @@ function filterByTags(projects, tags) {
                 project = projects[i];
                 j = 0;
                 if (project) {
-                    {/* console.log(project); */}
                     for (j; j < project.tags.length; j++) {
                         var b = false;
                         k = 0;
                         for (k; k < tags.length; k++) {
-                            if (project.tags[j].tag_id === tags[k].tag_id) {
+                            if (project.tags[j].id === tags[k].tag_id) {
                                 filteredProjects.push(project);
                                 b = true;
                                 break;
@@ -42545,16 +42544,19 @@ var FilterList = function FilterList(_ref) {
         _onClick = _ref.onClick,
         className = _ref.className,
         active = _ref.active,
-        allActive = _ref.allActive;
+        allActive = _ref.allActive,
+        clearAll = _ref.clearAll;
+
+    var allClass = allActive ? 'active' : '';
     return _react2.default.createElement(
         'ul',
         { className: className },
         _react2.default.createElement(_filter__row2.default, {
             key: 0,
-            active: allActive,
+            className: allClass,
             name: 'All',
             onClick: function onClick() {
-                return _onClick(0, 'All');
+                return clearAll();
             }
         }),
         items.map(function (item, index) {
@@ -42585,7 +42587,8 @@ FilterList.propTypes = {
     onClick: _propTypes2.default.func.isRequired,
     className: _propTypes2.default.string,
     active: _propTypes2.default.arrayOf(_propTypes2.default.bool).isRequired,
-    allActive: _propTypes2.default.bool.isRequired
+    allActive: _propTypes2.default.bool.isRequired,
+    clearAll: _propTypes2.default.func.isRequired
 };
 
 exports.default = FilterList;
@@ -43508,11 +43511,12 @@ var _reactGa2 = _interopRequireDefault(_reactGa);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactGa2.default.initialize('UA-43222844-2');
-function logPageView() {
-    _reactGa2.default.set({ page: window.location.pathname });
-    _reactGa2.default.pageview(window.location.pathname);
-}
+// TODO: React router 4 fix https://github.com/react-ga/react-ga/issues/122
+// ReactGA.initialize('UA-43222844-2');
+// function logPageView() {
+//     ReactGA.set({ page: window.location.pathname });
+//     ReactGA.pageview(window.location.pathname);
+// }
 
 var Routes = function Routes() {
     return _react2.default.createElement(
@@ -43531,12 +43535,12 @@ var Routes = function Routes() {
                     _react2.default.createElement(
                         _reactRouterDom.Switch,
                         null,
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/projects', component: _project__list2.default }),
+                        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/projects', component: _project__list2.default }),
                         _react2.default.createElement(_reactRouterDom.Route, { path: '/projects/:id', component: _Project2.default }),
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/about', component: _about__list2.default }),
+                        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/about', component: _about__list2.default }),
                         _react2.default.createElement(_reactRouterDom.Route, { path: '/about/:id', component: _about__single2.default }),
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/cv', component: _cv__single2.default }),
-                        _react2.default.createElement(_reactRouterDom.Route, { path: '/diary', component: _diary__list2.default }),
+                        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/cv', component: _cv__single2.default }),
+                        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/diary', component: _diary__list2.default }),
                         _react2.default.createElement(_reactRouterDom.Route, { path: '/diary/:id', component: _diary__single2.default }),
                         _react2.default.createElement(_reactRouterDom.Route, { path: '/ligoj', component: _ligoj__list2.default }),
                         _react2.default.createElement(_reactRouterDom.Route, { component: _soon2.default })
@@ -43586,6 +43590,7 @@ var ItemRow = function ItemRow(_ref) {
     if (!content) {
         content = title;
     }
+
     return _react2.default.createElement(
         'li',
         null,
@@ -43882,7 +43887,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-    var id = ownProps.params.id;
+    var id = ownProps.match.params.id;
+
+    console.table(ownProps.match);
     var apiCalls = state.apiCalls;
 
     var projects = apiCalls['portfolio/projects'] || {
@@ -43921,7 +43928,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
-    var id = ownProps.params.id;
+    var _ref = ownProps.match.params || 0,
+        id = _ref.id;
 
     dispatch((0, _actions.apiFetchIfNeeded)('portfolio/projects'));
     dispatch((0, _actions.apiFetchIfNeeded)('portfolio/projectsLinks/?project__id=' + id));
@@ -44005,7 +44013,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 ;
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-    var id = ownProps.params.id;
+    var id = ownProps.match.params.id;
     var apiCalls = state.apiCalls;
 
     var list = apiCalls['about/entry'] || {
@@ -44037,7 +44045,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
-    var id = ownProps.params.id;
+    var id = ownProps.match.params.id;
 
     dispatch((0, _actions.apiFetchIfNeeded)('about/entry'));
     return {};
@@ -44167,7 +44175,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 ;
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-    var id = ownProps.params.id;
+    var id = ownProps.match.params.id;
     var apiCalls = state.apiCalls;
 
     var list = apiCalls['diary/posts'] || {
@@ -44199,7 +44207,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
-    var id = ownProps.params.id;
+    var id = ownProps.match.params.id;
 
     dispatch((0, _actions.apiFetchIfNeeded)('diary/posts'));
     return {};
@@ -44294,6 +44302,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
     var active = [];
     active.length = 0;
+
     var allActive = categoryFilter.id === 0;
 
     if (items.length > 0 && items[0].id !== 0) {
@@ -44322,6 +44331,10 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     return {
         onClick: function onClick(id, name) {
             dispatch((0, _actions.setCategoryFilter)(id, name));
+            dispatch((0, _actions.filterProjects)());
+        },
+        clearAll: function clearAll() {
+            dispatch((0, _actions.setCategoryFilter)(0, 'All'));
             dispatch((0, _actions.filterProjects)());
         }
     };
@@ -44363,25 +44376,29 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
         items = _ref.items;
 
     var active = [];
+    var activeObjs = [];
+
+    activeObjs.length = 0;
     active.length = 0;
 
-    var allActive = tagFilter.length > 0 ? true : false;
+    var allActive = tagFilter.length <= 0 ? true : false;
 
-    if (items.length > 0 && items[0].tag_id !== 0) {
+    if (items.length > 0) {
         for (var i = 0; i < items.length; i++) {
+            var tag = {
+                tag_id: items[i].tag_id,
+                active: false
+            };
             for (var j = 0; j < tagFilter.length; j++) {
                 if (items[i].tag_id === tagFilter[j].tag_id) {
-                    active.push(true);
-                    console.log('true');
-                } else {
-                    active.push(false);
-                    console.log('false');
+                    tag.active = true;
+                    continue;
                 }
             }
+            active.push(tag.active);
+            activeObjs.push(tag);
         }
     }
-
-    console.log(active);
 
     return {
         items: items,
@@ -44397,6 +44414,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     return {
         onClick: function onClick(tag_id, name) {
             dispatch((0, _actions.addTagFilter)(tag_id, name));
+            dispatch((0, _actions.filterProjects)());
+        },
+
+        clearAll: function clearAll() {
+            dispatch((0, _actions.clearTagFilter)());
+            dispatch((0, _actions.filterProjects)());
         }
     };
 };

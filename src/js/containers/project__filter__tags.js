@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addTagFilter, filterProjects, apiFetchIfNeeded } from '../actions/actions';
+import { addTagFilter, filterProjects, apiFetchIfNeeded, clearTagFilter } from '../actions/actions';
 import FilterList from '../components/filter__list.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
@@ -14,29 +14,31 @@ const mapStateToProps = (state, ownProps) => {
         items: []
     };
 
-
     let active = [];
+    let activeObjs = [];
+
+    activeObjs.length = 0;
     active.length = 0;
 
-    let allActive = tagFilter.length > 0 ? true : false;
+    let allActive = tagFilter.length <= 0 ? true : false;
 
-    if(items.length > 0 && items[0].tag_id !== 0 ){
+    if(items.length > 0){
         for(var i = 0; i < items.length; i++){
+            let tag = {
+                tag_id: items[i].tag_id,
+                active: false,
+            };
             for(var j = 0; j < tagFilter.length; j++){
                 if(items[i].tag_id === tagFilter[j].tag_id)
                 {
-                    active.push(true);
-                    console.log('true');
-                }
-                else{
-                    active.push(false);
-                    console.log('false');
+                    tag.active = true;
+                    continue;
                 }
             }
+            active.push(tag.active);
+            activeObjs.push(tag);
         }
     }
-
-    console.log(active);
 
     return {
         items: items,
@@ -52,6 +54,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onClick: (tag_id, name) => {
             dispatch(addTagFilter(tag_id, name));
+            dispatch(filterProjects());
+        },
+
+        clearAll: () =>{
+            dispatch(clearTagFilter());
+            dispatch(filterProjects());
         }
     };
 };

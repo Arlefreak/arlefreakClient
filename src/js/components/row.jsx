@@ -8,6 +8,7 @@ const ItemRow = ({ id, route, name, title, dateUpdated, dateCreated, link }) => 
     if(!content){
         content = title;
     }
+
     return(
         <li>
             { link &&

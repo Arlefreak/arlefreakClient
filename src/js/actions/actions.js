@@ -221,12 +221,11 @@ function filterByTags (projects, tags) {
                 project = projects[i];
                 j = 0;
                 if(project){
-                    {/* console.log(project); */}
                     for(j; j < project.tags.length; j++){
                         var b = false;
                         k = 0;
                         for(k; k < tags.length; k++){
-                            if(project.tags[j].tag_id === tags[k].tag_id){
+                            if(project.tags[j].id === tags[k].tag_id){
                                 filteredProjects.push(project);
                                 b = true;
                                 break;

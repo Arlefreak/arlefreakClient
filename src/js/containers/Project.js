@@ -4,7 +4,8 @@ import  Project from '../components/project.jsx';;
 import { apiFetchIfNeeded } from '../actions/actions';
 
 const mapStateToProps = (state, ownProps) => {
-    const { id } = ownProps.params;
+    const { id } = ownProps.match.params;
+    console.table(ownProps.match);
     const { apiCalls } = state;
     const projects = apiCalls['portfolio/projects'] || {
         isFetching: true,
@@ -42,7 +43,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    const { id } = ownProps.params;
+    const { id } = ownProps.match.params || 0;
     dispatch(apiFetchIfNeeded('portfolio/projects'));
     dispatch(apiFetchIfNeeded('portfolio/projectsLinks/?project__id=' + id));
     dispatch(apiFetchIfNeeded('portfolio/projectsImages?imgType=gal&project__id=' + id));

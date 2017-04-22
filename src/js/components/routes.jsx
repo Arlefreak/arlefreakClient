@@ -27,11 +27,12 @@ import ProjectSingle from '../containers/Project.js';
 
 import ReactGA from 'react-ga';
 
-ReactGA.initialize('UA-43222844-2');
-function logPageView() {
-    ReactGA.set({ page: window.location.pathname });
-    ReactGA.pageview(window.location.pathname);
-}
+// TODO: React router 4 fix https://github.com/react-ga/react-ga/issues/122
+// ReactGA.initialize('UA-43222844-2');
+// function logPageView() {
+//     ReactGA.set({ page: window.location.pathname });
+//     ReactGA.pageview(window.location.pathname);
+// }
 
 const Routes = () => (
     <Router>
@@ -41,15 +42,15 @@ const Routes = () => (
                 <div className="wrapper">
                     <Switch>
 
-                        <Route path="/projects" component={ProjectList} />
+                        <Route exact path="/projects" component={ProjectList} />
                         <Route path="/projects/:id" component={ProjectSingle} />
 
-                        <Route path="/about" component={AboutList} />
+                        <Route exact path="/about" component={AboutList} />
                         <Route path="/about/:id" component={AboutSingle} />
 
-                        <Route path="/cv" component={CvSingle} />
+                        <Route exact path="/cv" component={CvSingle} />
 
-                        <Route path="/diary" component={DiaryList} />
+                        <Route exact path="/diary" component={DiaryList} />
                         <Route path="/diary/:id" component={DiarySingle} />
 
                         <Route path="/ligoj" component={LigojList} />

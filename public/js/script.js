@@ -236,12 +236,11 @@ function filterByTags (projects, tags) {
                 project = projects[i];
                 j = 0;
                 if(project){
-                    {/* console.log(project); */}
                     for(j; j < project.tags.length; j++){
                         var b = false;
                         k = 0;
                         for(k; k < tags.length; k++){
-                            if(project.tags[j].tag_id === tags[k].tag_id){
+                            if(project.tags[j].id === tags[k].tag_id){
                                 filteredProjects.push(project);
                                 b = true;
                                 break;
@@ -441,7 +440,8 @@ import  Project from '../components/project.jsx';;
 import { apiFetchIfNeeded } from '../actions/actions';
 
 const mapStateToProps = (state, ownProps) => {
-    const { id } = ownProps.params;
+    const { id } = ownProps.match.params;
+    console.table(ownProps.match);
     const { apiCalls } = state;
     const projects = apiCalls['portfolio/projects'] || {
         isFetching: true,
@@ -479,7 +479,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    const { id } = ownProps.params;
+    const { id } = ownProps.match.params || 0;
     dispatch(apiFetchIfNeeded('portfolio/projects'));
     dispatch(apiFetchIfNeeded('portfolio/projectsLinks/?project__id=' + id));
     dispatch(apiFetchIfNeeded('portfolio/projectsImages?imgType=gal&project__id=' + id));
@@ -654,7 +654,7 @@ import { apiFetchIfNeeded } from '../actions/actions';
 import SingleContainer from '../components/single__container.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
-    const { id } = ownProps.params;
+    const { id } = ownProps.match.params;
     const { apiCalls } = state;
     const list = apiCalls['about/entry'] || {
         isFetching: true,
@@ -685,7 +685,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    const { id } = ownProps.params;
+    const { id } = ownProps.match.params;
     dispatch(apiFetchIfNeeded('about/entry'));
     return {};
 };
@@ -780,7 +780,7 @@ import { apiFetchIfNeeded } from '../actions/actions';
 import SingleContainer from '../components/single__container.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
-    const { id } = ownProps.params;
+    const { id } = ownProps.match.params;
     const { apiCalls } = state;
     const list = apiCalls['diary/posts'] || {
         isFetching: true,
@@ -811,7 +811,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    const { id } = ownProps.params;
+    const { id } = ownProps.match.params;
     dispatch(apiFetchIfNeeded('diary/posts'));
     return {};
 };
@@ -883,6 +883,7 @@ const mapStateToProps = (state, ownProps) => {
 
     let active = [];
     active.length = 0;
+
     let allActive = categoryFilter.id === 0;
 
     if(items.length > 0 && items[0].id !== 0 ){
@@ -912,6 +913,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         onClick: (id, name) => {
             dispatch(setCategoryFilter(id, name));
             dispatch(filterProjects());
+        },
+        clearAll: () =>{
+            dispatch(setCategoryFilter(0, 'All'));
+            dispatch(filterProjects());
         }
     };
 };
@@ -924,7 +929,7 @@ const ProjectFilterCategory = connect(
 export default ProjectFilterCategory;
 
 import { connect } from 'react-redux';
-import { addTagFilter, filterProjects, apiFetchIfNeeded } from '../actions/actions';
+import { addTagFilter, filterProjects, apiFetchIfNeeded, clearTagFilter } from '../actions/actions';
 import FilterList from '../components/filter__list.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
@@ -939,29 +944,31 @@ const mapStateToProps = (state, ownProps) => {
         items: []
     };
 
-
     let active = [];
+    let activeObjs = [];
+
+    activeObjs.length = 0;
     active.length = 0;
 
-    let allActive = tagFilter.length > 0 ? true : false;
+    let allActive = tagFilter.length <= 0 ? true : false;
 
-    if(items.length > 0 && items[0].tag_id !== 0 ){
+    if(items.length > 0){
         for(var i = 0; i < items.length; i++){
+            let tag = {
+                tag_id: items[i].tag_id,
+                active: false,
+            };
             for(var j = 0; j < tagFilter.length; j++){
                 if(items[i].tag_id === tagFilter[j].tag_id)
                 {
-                    active.push(true);
-                    console.log('true');
-                }
-                else{
-                    active.push(false);
-                    console.log('false');
+                    tag.active = true;
+                    continue;
                 }
             }
+            active.push(tag.active);
+            activeObjs.push(tag);
         }
     }
-
-    console.log(active);
 
     return {
         items: items,
@@ -977,6 +984,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onClick: (tag_id, name) => {
             dispatch(addTagFilter(tag_id, name));
+            dispatch(filterProjects());
+        },
+
+        clearAll: () =>{
+            dispatch(clearTagFilter());
+            dispatch(filterProjects());
         }
     };
 };

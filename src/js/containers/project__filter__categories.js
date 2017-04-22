@@ -15,6 +15,7 @@ const mapStateToProps = (state, ownProps) => {
 
     let active = [];
     active.length = 0;
+
     let allActive = categoryFilter.id === 0;
 
     if(items.length > 0 && items[0].id !== 0 ){
@@ -43,6 +44,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onClick: (id, name) => {
             dispatch(setCategoryFilter(id, name));
+            dispatch(filterProjects());
+        },
+        clearAll: () =>{
+            dispatch(setCategoryFilter(0, 'All'));
             dispatch(filterProjects());
         }
     };
