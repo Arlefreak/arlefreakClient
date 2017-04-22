@@ -43672,7 +43672,7 @@ var ItemRow = function ItemRow(_ref) {
             { href: link, target: '_blank' },
             _react2.default.createElement(
                 'span',
-                { className: 'date' },
+                { className: 'date hideMobile' },
                 dateCreated,
                 ' '
             ),
@@ -43683,7 +43683,7 @@ var ItemRow = function ItemRow(_ref) {
             { to: '/' + route + '/' + id },
             _react2.default.createElement(
                 'span',
-                { className: 'date' },
+                { className: 'date hideMobile' },
                 dateCreated,
                 ' '
             ),

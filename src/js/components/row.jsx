@@ -13,12 +13,12 @@ const ItemRow = ({ id, route, name, title, dateUpdated, dateCreated, link }) => 
         <li>
             { link &&
                 <a href={ link } target="_blank">
-                    <span className="date">{ dateCreated } </span>{ content }
+                    <span className="date hideMobile">{ dateCreated } </span>{ content }
                 </a>
             }
             { !link &&
                 <Link to={ '/' + route + '/' + id }>
-                    <span className="date">{ dateCreated } </span>{ content }
+                    <span className="date hideMobile">{ dateCreated } </span>{ content }
                 </Link>
             }
         </li>
