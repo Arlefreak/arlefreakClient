@@ -1072,6 +1072,16 @@ ul.images.full-width {
   float: none;
   margin: 10px 0 0 0;
 }
+ul.images.full-width li {
+  width: calc(100% / 6 - 2%);
+  padding: 0 0 calc(100% / 6 - 2%) 0;
+}
+@media screen and (max-width: 800px) {
+  ul.images.full-width li {
+    width: calc(100% / 4 - 2%);
+    padding: 0 0 calc(100% / 4 - 2%) 0;
+  }
+}
 ul.images li {
   display: -webkit-box;
   display: -moz-box;
@@ -1079,9 +1089,9 @@ ul.images li {
   display: -ms-flexbox;
   display: box;
   display: flex;
-  width: calc(100% / 4 - 2%);
   height: auto;
-  padding: 0 0 23% 0;
+  width: calc(100% / 4 - 2%);
+  padding: 0 0 calc(100% / 4 - 2%) 0;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
@@ -1125,6 +1135,13 @@ ul.images a img.imgBW:hover {
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);
+}
+@media screen and (max-width: 800px) {
+  ul.images a img.imgBW {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+  }
 }
 section.gallery {
   width: 100%;

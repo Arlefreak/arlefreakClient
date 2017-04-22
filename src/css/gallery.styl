@@ -14,11 +14,17 @@ ul.images
         width 100%
         float none
         margin 10px 0 0 0
+        li
+            width calc(100% / 6 - 2%)
+            padding 0 0 calc(100% / 6 - 2%) 0
+            @media screen and (max-width: $mobile-width)
+                width calc(100% / 4 - 2%)
+                padding 0 0 calc(100% / 4 - 2%) 0
     li
         display flex
-        width calc(100% / 4 - 2%)
         height auto
-        padding 0 0 23% 0
+        width calc(100% / 4 - 2%)
+        padding 0 0 calc(100% / 4 - 2%) 0
         background-size cover
         background-position center
         background-color $white
@@ -44,6 +50,9 @@ ul.images
             transition opacity .5s ease
             &.imgBW:hover
                 opacity 0
+            &.imgBW
+                @media screen and (max-width: $mobile-width)
+                    opacity 0
 
 section.gallery
     width 100%
