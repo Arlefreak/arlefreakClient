@@ -50,9 +50,10 @@ ul.images
             transition opacity .5s ease
             &.imgBW:hover
                 opacity 0
-            &.imgBW
-                @media screen and (max-width: $mobile-width)
-                    opacity 0
+    li
+        img.imgBW
+            @media screen and (max-width: $mobile-width)
+                opacity 0.8
 
 section.gallery
     width 100%

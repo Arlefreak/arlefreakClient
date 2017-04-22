@@ -1137,10 +1137,10 @@ ul.images a img.imgBW:hover {
   filter: alpha(opacity=0);
 }
 @media screen and (max-width: 800px) {
-  ul.images a img.imgBW {
-    opacity: 0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    filter: alpha(opacity=0);
+  ul.images li img.imgBW {
+    opacity: 0.8;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+    filter: alpha(opacity=80);
   }
 }
 section.gallery {
