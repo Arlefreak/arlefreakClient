@@ -18,9 +18,11 @@ const mapStateToProps = (state) => {
         items: []
     };
 
+    let finalFetch = isFetching && images.isFetching;
+
     return {
         id: 'h',
-        isFetching,
+        isFetching: finalFetch,
         items: items,
         images: images,
         route: ''

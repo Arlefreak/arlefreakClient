@@ -8,7 +8,7 @@ import {
     Switch
 } from 'react-router-dom';
 
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import Header from './header.jsx';
 import Soon from './soon.jsx';
 
@@ -40,27 +40,35 @@ const Routes = () => (
     <Router>
         <div>
             <Header></Header>
-            <main>
-                <div className="wrapper">
-                    <Switch>
+            <CSSTransitionGroup
+                transitionName="example"
+                transitionAppear={true}
+                transitionAppearTimeout={500}
+                transitionEnter={false}
+                transitionLeave={false}
+            >
+                <main>
+                    <div className="wrapper">
+                        <Switch>
 
-                        <Route exact path="/projects" component={ProjectList} />
-                        <Route path="/projects/:id" component={ProjectSingle} />
+                            <Route exact path="/projects" component={ProjectList} />
+                            <Route path="/projects/:id" component={ProjectSingle} />
 
-                        <Route exact path="/about" component={AboutList} />
-                        <Route path="/about/:id" component={AboutSingle} />
+                            <Route exact path="/about" component={AboutList} />
+                            <Route path="/about/:id" component={AboutSingle} />
 
-                        <Route exact path="/cv" component={CvSingle} />
+                            <Route exact path="/cv" component={CvSingle} />
 
-                        <Route exact path="/diary" component={DiaryList} />
-                        <Route path="/diary/:id" component={DiarySingle} />
+                            <Route exact path="/diary" component={DiaryList} />
+                            <Route path="/diary/:id" component={DiarySingle} />
 
-                        <Route path="/ligoj" component={LigojList} />
+                            <Route path="/ligoj" component={LigojList} />
 
-                        <Route component={Home} />
-                    </Switch>
-                </div>
-            </main>
+                            <Route component={Home} />
+                        </Switch>
+                    </div>
+                </main>
+            </CSSTransitionGroup>
         </div>
     </Router>
 );

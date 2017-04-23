@@ -34,9 +34,14 @@ const mapStateToProps = (state) => {
         filterProjects = items;
     }
 
+    let finalFetch = isFetching &&
+        tags.isFetching &&
+        categories.isFetching &&
+        images.isFetching;
+
     return {
         id: 'p',
-        isFetching,
+        isFetching: finalFetch,
         items: filterProjects,
         categories: categories,
         tags: tags,

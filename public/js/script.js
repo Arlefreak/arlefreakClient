@@ -388,9 +388,11 @@ const mapStateToProps = (state) => {
         items: []
     };
 
+    let finalFetch = isFetching && images.isFetching;
+
     return {
         id: 'h',
-        isFetching,
+        isFetching: finalFetch,
         items: items,
         images: images,
         route: ''
@@ -884,8 +886,8 @@ const mapStateToProps = (state) => {
     };
 
     return {
-        id: 'h',
-        isFetching,
+        id: 'ligoj',
+        isFetching: isFetching && tags.isFetching,
         items: items,
         tags: tags,
         route: 'H'
@@ -1077,9 +1079,14 @@ const mapStateToProps = (state) => {
         filterProjects = items;
     }
 
+    let finalFetch = isFetching &&
+        tags.isFetching &&
+        categories.isFetching &&
+        images.isFetching;
+
     return {
         id: 'p',
-        isFetching,
+        isFetching: finalFetch,
         items: filterProjects,
         categories: categories,
         tags: tags,
