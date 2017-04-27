@@ -42,11 +42,13 @@ const Routes = () => (
         <StickyContainer>
             <Header></Header>
             <CSSTransitionGroup
-                transitionName="example"
+                transitionName="fade"
                 transitionAppear={true}
+                transitionEnter={true}
+                transitionLeave={true}
                 transitionAppearTimeout={500}
-                transitionEnter={false}
-                transitionLeave={false}
+                transitionEnterTimeout={500}
+                transitionLeaveTimeout={500}
             >
                 <main>
                     <div className="wrapper">

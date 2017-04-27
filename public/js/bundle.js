@@ -41778,6 +41778,10 @@ var _filter__row = require('./filter__row.jsx');
 
 var _filter__row2 = _interopRequireDefault(_filter__row);
 
+var _CSSTransitionGroup = require('react-transition-group/CSSTransitionGroup');
+
+var _CSSTransitionGroup2 = _interopRequireDefault(_CSSTransitionGroup);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var FilterList = function FilterList(_ref) {
@@ -41790,31 +41794,43 @@ var FilterList = function FilterList(_ref) {
 
     var allClass = allActive ? 'active' : '';
     return _react2.default.createElement(
-        'ul',
-        { className: className },
-        _react2.default.createElement(_filter__row2.default, {
-            key: 0,
-            className: allClass,
-            name: 'All',
-            onClick: function onClick() {
-                return clearAll();
-            }
-        }),
-        items.map(function (item, index) {
-            var id = item.id || item.tag_id;
-            var name = item.name || item.tag;
-            var className = active[index] ? 'active' : '';
-
-            return _react2.default.createElement(_filter__row2.default, _extends({
-                key: id,
-                className: className,
-                name: name
-            }, item, {
+        _CSSTransitionGroup2.default,
+        {
+            transitionName: 'fade',
+            transitionAppear: true,
+            transitionEnter: true,
+            transitionLeave: true,
+            transitionAppearTimeout: 500,
+            transitionEnterTimeout: 500,
+            transitionLeaveTimeout: 500
+        },
+        _react2.default.createElement(
+            'ul',
+            { className: className },
+            _react2.default.createElement(_filter__row2.default, {
+                key: 0,
+                className: allClass,
+                name: 'All',
                 onClick: function onClick() {
-                    return _onClick(id, name);
+                    return clearAll();
                 }
-            }));
-        })
+            }),
+            items.map(function (item, index) {
+                var id = item.id || item.tag_id;
+                var name = item.name || item.tag;
+                var className = active[index] ? 'active' : '';
+
+                return _react2.default.createElement(_filter__row2.default, _extends({
+                    key: id,
+                    className: className,
+                    name: name
+                }, item, {
+                    onClick: function onClick() {
+                        return _onClick(id, name);
+                    }
+                }));
+            })
+        )
     );
 };
 
@@ -41834,7 +41850,7 @@ FilterList.propTypes = {
 
 exports.default = FilterList;
 
-},{"./filter__row.jsx":382,"prop-types":50,"react":295}],382:[function(require,module,exports){
+},{"./filter__row.jsx":382,"prop-types":50,"react":295,"react-transition-group/CSSTransitionGroup":261}],382:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42427,6 +42443,10 @@ var _row = require('./row.jsx');
 
 var _row2 = _interopRequireDefault(_row);
 
+var _CSSTransitionGroup = require('react-transition-group/CSSTransitionGroup');
+
+var _CSSTransitionGroup2 = _interopRequireDefault(_CSSTransitionGroup);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var List = function List(_ref) {
@@ -42436,14 +42456,26 @@ var List = function List(_ref) {
 
     var classes = className + ' vertical-list';
     return _react2.default.createElement(
-        'ul',
-        { className: classes },
-        items.map(function (item) {
-            return _react2.default.createElement(_row2.default, _extends({
-                key: item.id,
-                route: route
-            }, item));
-        })
+        _CSSTransitionGroup2.default,
+        {
+            transitionName: 'fade',
+            transitionAppear: true,
+            transitionEnter: true,
+            transitionLeave: true,
+            transitionAppearTimeout: 500,
+            transitionEnterTimeout: 500,
+            transitionLeaveTimeout: 500
+        },
+        _react2.default.createElement(
+            'ul',
+            { className: classes },
+            items.map(function (item) {
+                return _react2.default.createElement(_row2.default, _extends({
+                    key: item.id,
+                    route: route
+                }, item));
+            })
+        )
     );
 };
 
@@ -42460,7 +42492,7 @@ List.propTypes = {
 
 exports.default = List;
 
-},{"./page.jsx":395,"./row.jsx":398,"prop-types":50,"react":295}],393:[function(require,module,exports){
+},{"./page.jsx":395,"./row.jsx":398,"prop-types":50,"react":295,"react-transition-group/CSSTransitionGroup":261}],393:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42608,6 +42640,10 @@ var _id = require('./id.jsx');
 
 var _id2 = _interopRequireDefault(_id);
 
+var _CSSTransitionGroup = require('react-transition-group/CSSTransitionGroup');
+
+var _CSSTransitionGroup2 = _interopRequireDefault(_CSSTransitionGroup);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Page = function Page(_ref) {
@@ -42616,9 +42652,17 @@ var Page = function Page(_ref) {
         isFetching = _ref.isFetching,
         children = _ref.children;
 
-    if (!isFetching) {
-        return _react2.default.createElement(
-            'article',
+    var child = void 0;
+    if (isFetching) {
+        child = _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(_loading2.default, null),
+            _react2.default.createElement(_id2.default, { index: id })
+        );
+    } else {
+        child = _react2.default.createElement(
+            'div',
             null,
             title != null && _react2.default.createElement(
                 'h2',
@@ -42628,14 +42672,25 @@ var Page = function Page(_ref) {
             children,
             _react2.default.createElement(_id2.default, { index: id })
         );
-    } else {
-        return _react2.default.createElement(
-            'article',
-            null,
-            _react2.default.createElement(_loading2.default, null),
-            _react2.default.createElement(_id2.default, { index: id })
-        );
     }
+
+    return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+            _CSSTransitionGroup2.default,
+            {
+                transitionName: 'fade',
+                transitionAppear: true,
+                transitionEnter: true,
+                transitionLeave: true,
+                transitionAppearTimeout: 500,
+                transitionEnterTimeout: 500,
+                transitionLeaveTimeout: 500
+            },
+            child
+        )
+    );
 };
 
 Page.propTypes = {
@@ -42647,7 +42702,7 @@ Page.propTypes = {
 
 exports.default = Page;
 
-},{"./id.jsx":387,"./loading.jsx":394,"prop-types":50,"react":295}],396:[function(require,module,exports){
+},{"./id.jsx":387,"./loading.jsx":394,"prop-types":50,"react":295,"react-transition-group/CSSTransitionGroup":261}],396:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42852,11 +42907,13 @@ var Routes = function Routes() {
             _react2.default.createElement(
                 _CSSTransitionGroup2.default,
                 {
-                    transitionName: 'example',
+                    transitionName: 'fade',
                     transitionAppear: true,
+                    transitionEnter: true,
+                    transitionLeave: true,
                     transitionAppearTimeout: 500,
-                    transitionEnter: false,
-                    transitionLeave: false
+                    transitionEnterTimeout: 500,
+                    transitionLeaveTimeout: 500
                 },
                 _react2.default.createElement(
                     'main',

@@ -1498,9 +1498,9 @@ ul.categories li .active {
   color: #f04250;
 }
 .fade-enter {
-  opacity: 0;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  filter: alpha(opacity=0);
+  opacity: 0.1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+  filter: alpha(opacity=10);
   z-index: 1;
 }
 .fade-enter.fade-enter-active {
@@ -1513,27 +1513,12 @@ ul.categories li .active {
   -ms-transition: opacity 250ms ease-in;
   transition: opacity 250ms ease-in;
 }
-.example-enter {
-  opacity: 0.01;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=1)";
-  filter: alpha(opacity=1);
-}
-.example-enter.example-enter-active {
-  opacity: 1;
-  -ms-filter: none;
-  filter: none;
-  -webkit-transition: opacity 500ms ease-in;
-  -moz-transition: opacity 500ms ease-in;
-  -o-transition: opacity 500ms ease-in;
-  -ms-transition: opacity 500ms ease-in;
-  transition: opacity 500ms ease-in;
-}
-.example-leave {
+.fade-leave {
   opacity: 1;
   -ms-filter: none;
   filter: none;
 }
-.example-leave.example-leave-active {
+.fade-leave.fade-leave-active {
   opacity: 0.01;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=1)";
   filter: alpha(opacity=1);
@@ -1543,12 +1528,12 @@ ul.categories li .active {
   -ms-transition: opacity 300ms ease-in;
   transition: opacity 300ms ease-in;
 }
-.example-appear {
+.fade-appear {
   opacity: 0.01;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=1)";
   filter: alpha(opacity=1);
 }
-.example-appear.example-appear-active {
+.fade-appear.fade-appear-active {
   opacity: 1;
   -ms-filter: none;
   filter: none;

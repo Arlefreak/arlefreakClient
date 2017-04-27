@@ -1,39 +1,50 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Row from './filter__row.jsx';
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 const FilterList = ({ items, onClick, className, active, allActive, clearAll }) => {
     let allClass = allActive ? 'active' : '';
     return(
-        <ul className = { className }>
-            {
-                <Row 
-                    key={0}
-                    className={ allClass }
-                    name='All'
-                    onClick={
-                        () => clearAll()
-                    }
-                />
-            }
-            {
-                items.map((item, index) => {
-                    let id = item.id || item.tag_id;
-                    let name =  item.name || item.tag;
-                    let className = active[index] ? 'active' : '';
-
-                    return <Row
-                        key={ id }
-                        className={ className }
-                        name={ name }
-                        {...item}
+        <CSSTransitionGroup
+            transitionName="fade"
+            transitionAppear={true}
+            transitionEnter={true}
+            transitionLeave={true}
+            transitionAppearTimeout={500}
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={500}
+        >
+            <ul className = { className }>
+                {
+                    <Row 
+                        key={0}
+                        className={ allClass }
+                        name='All'
                         onClick={
-                            () => onClick(id, name)
+                            () => clearAll()
                         }
-                    />;
-                })
-            }
-        </ul>
+                    />
+                }
+                {
+                    items.map((item, index) => {
+                        let id = item.id || item.tag_id;
+                        let name =  item.name || item.tag;
+                        let className = active[index] ? 'active' : '';
+
+                        return <Row
+                            key={ id }
+                            className={ className }
+                            name={ name }
+                            {...item}
+                            onClick={
+                                () => onClick(id, name)
+                            }
+                        />;
+                    })
+                }
+            </ul>
+        </CSSTransitionGroup>
     );};
 
 FilterList.propTypes = {
