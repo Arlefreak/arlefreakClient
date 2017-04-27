@@ -28,6 +28,7 @@ import ProjectList from '../containers/project__list.js';
 import ProjectSingle from '../containers/Project.js';
 
 import ReactGA from 'react-ga';
+import { StickyContainer, Sticky } from 'react-sticky';
 
 // TODO: React router 4 fix https://github.com/react-ga/react-ga/issues/122
 ReactGA.initialize('UA-43222844-2');
@@ -38,7 +39,7 @@ function logPageView() {
 
 const Routes = () => (
     <Router>
-        <div>
+        <StickyContainer>
             <Header></Header>
             <CSSTransitionGroup
                 transitionName="example"
@@ -69,7 +70,7 @@ const Routes = () => (
                     </div>
                 </main>
             </CSSTransitionGroup>
-        </div>
+        </StickyContainer>
     </Router>
 );
 

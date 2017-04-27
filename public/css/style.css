@@ -380,7 +380,7 @@ aside.right {
   transform: rotate(90deg) translate(-100%, 0);
 }
 main {
-  margin: 90px 0 90px 0;
+  margin: 0 0 90px 0;
 }
 h1,
 h2,
@@ -501,6 +501,9 @@ a.center {
   font-size: 0.8em;
   display: inline-block;
   margin: 0 10px 0 0;
+}
+.sticky {
+  z-index: 1000;
 }
 ul {
   width: 100%;
@@ -1065,7 +1068,7 @@ header {
   height: 90px;
   padding: 10px 0 10px 0;
   display: block;
-  position: fixed;
+/* position fixed */
   background: #fff;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -1371,7 +1374,8 @@ svg:hover #stick {
 nav {
   display: block;
   width: 100%;
-  margin: 15px 0 15px 0;
+  padding: 15px 0 15px 0;
+  background: #fff;
 }
 nav ul {
   display: inline-block;

@@ -81,6 +81,7 @@
     "prop-types": "^15.5.8",
     "react-dom": "^15.5.4",
     "react-inlinesvg": "^0.5.5",
+    "react-sticky": "^5.0.8",
     "reactify": "^1.1.1",
     "redux": "^3.6.0",
     "redux-devtools": "^3.3.2",
