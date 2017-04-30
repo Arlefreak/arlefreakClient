@@ -1495,13 +1495,35 @@ ul.tags li a {
   box-sizing: border-box;
   font-size: 0.6em;
   letter-spacing: 0.1em;
+  position: relative;
+  z-index: 2;
+}
+ul.tags li a::before {
+  width: 0%;
+  height: 100%;
+  z-index: -1;
+  background: #f0f0f0;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  transition: all 0.2s ease;
 }
 ul.tags li a:hover {
   color: #000;
 }
+ul.tags li a:hover::before {
+  width: 100%;
+}
 ul.tags li a.active {
-  background: #72dec2;
   color: #000;
+}
+ul.tags li a.active::before {
+  width: 100%;
+  background: #72dec2;
 }
 ul.categories {
   display: block;

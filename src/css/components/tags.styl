@@ -18,11 +18,26 @@ ul
                 box-sizing border-box
                 font-size 0.6em
                 letter-spacing 0.1em
+                position relative
+                z-index 2
+                &::before
+                    width 0%
+                    height 100%
+                    z-index -1
+                    background $gray1
+                    content ""
+                    position absolute
+                    bottom 0
+                    transition all 0.2s ease
                 &:hover
                     color $color1
+                    &::before
+                        width 100%
                 &.active
-                    background $merveilles
                     color $black
+                    &::before
+                        width 100%
+                        background $merveilles
 
     &.categories
         display block
