@@ -172,3 +172,24 @@ ul
         height auto
         display block
         margin auto
+    a
+        color $color1
+        box-sizing border-box
+        position relative
+        background $gray1
+        z-index 2
+        &::before
+            width 0%
+            height 100%
+            z-index -1
+            background $gray1
+            content ""
+            position absolute
+            bottom 0
+            transition all 0.2s ease
+        &:hover
+        &.active
+            color $color1
+            &::before
+                width 100%
+                background $merveilles
