@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const ImageRow = ({ image, thumbnailBW, thumbnail, project, onImageClick}) => {
     return (
-        <li>
+        <li className="grid-cell">
             <Link 
                 to={'/projects/' + project }
                 onClick={ onImageClick }

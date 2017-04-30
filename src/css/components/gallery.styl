@@ -1,38 +1,30 @@
+$grid-with = calcWidth(6)
+$grid-with-mobile = calcWidth(4)
+
 ul.images
     float right
-    width 48%
     overflow hidden
-    display flex
-    flex-flow row wrap
-    align-items center
-    justify-content space-between
-    @media screen and (max-width: $mobile-width)
-        width 100%
-        float none
-        margin 10px 0 0 0
+    display block
+    &.half-width
+        width 48%
+        @media screen and (max-width: $mobile-width)
+            float none
+            width 100%
     &.full-width
-        width 100%
         float none
-        margin 10px 0 0 0
-        li
-            width calc(100% / 6 - 2%)
-            padding 0 0 calc(100% / 6 - 2%) 0
-            @media screen and (max-width: $mobile-width)
-                width calc(100% / 4 - 2%)
-                padding 0 0 calc(100% / 4 - 2%) 0
+        width 100%
     li
-        display flex
+        display block
         height auto
-        width calc(100% / 4 - 2%)
-        padding 0 0 calc(100% / 4 - 2%) 0
         background-size cover
         background-position center
         background-color $white
+        float left
         border 1px solid $gray1
         transition border-color 0.5s ease
         overflow hidden
         position relative
-        margin 0 0 10px 0
+        box-sizing border-box
         &:hover
             border 1px solid $gray4
     a
@@ -50,10 +42,10 @@ ul.images
             transition opacity .5s ease
             &.imgBW:hover
                 opacity 0
-    li
-        img.imgBW
-            @media screen and (max-width: $mobile-width)
-                opacity 0.8
+    /* li */
+    /*     img.imgBW */
+    /*         @media screen and (max-width: $mobile-width) */
+    /*             opacity 0.8 */
 
 section.gallery
     width 100%

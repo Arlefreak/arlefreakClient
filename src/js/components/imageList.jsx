@@ -4,7 +4,7 @@ import Image from './imageRow.jsx';
 
 function ImageList ({ images, onImageClick, className }) {
     return (
-        <ul className={ className + ' images' }>
+        <ul className={ className + ' grid images' }>
             {
                 images.map( image =>
                            <Image
