@@ -5,7 +5,7 @@ import App from './components/app.jsx';
 var app = React.createElement(App);
 ReactDOM.render(app, document.getElementById('application'));
 
-const APIURL = 'https://api.arlefreak.com/';
+const APIURL = 'https://api.ellugar.co/';
 module.exports = {
     APIURL:APIURL
 };

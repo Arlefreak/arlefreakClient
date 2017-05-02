@@ -43216,7 +43216,7 @@ exports.default = Soon;
 },{"../containers/Images.js":395,"prop-types":74,"react":287}],394:[function(require,module,exports){
 'use strict';
 
-var APIURL = 'https://api.arlefreak.com/';
+var APIURL = 'https://api.ellugar.co/';
 module.exports = {
     APIURL: APIURL
 };
