@@ -1131,18 +1131,28 @@ header {
   left: 0;
   z-index: 10;
 }
+header .title {
+  overflow: hidden;
+}
+header .title a,
+header .title h1 {
+  display: block;
+  float: left;
+}
 header .logo {
-  display: inline-block;
-  max-width: 100%;
-  height: auto;
+  display: block;
+  height: 100%;
+  width: auto;
+  max-height: 25px;
 }
 header h1 {
-  display: inline-block;
+  font-size: 1em;
   font-weight: 200;
   margin: 0 20px 0;
   color: #e3e3e3;
   text-align: right;
   vertical-align: top;
+  padding: 5px 0 5px 0;
 }
 #stick {
   fill: #333;
