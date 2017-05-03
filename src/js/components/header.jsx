@@ -17,7 +17,7 @@ class Header extends React.Component {
                                 <li><NavLink exact to="/" activeClassName="active">▲</NavLink></li>
                                 <li><NavLink to="/projects" activeClassName="active">Projects</NavLink></li>
                                 <li><NavLink to="/about" activeClassName="active">About</NavLink></li>
-                                <li><NavLink to="/diary" activeClassName="active">Diary</NavLink></li>
+                                <li><NavLink to="/logs" activeClassName="active">Logs</NavLink></li>
                                 <li><NavLink to="/cv" activeClassName="active">CV</NavLink></li>
                                 <li><NavLink to="/ligoj" activeClassName="active">Φ</NavLink></li>
                             </ul>

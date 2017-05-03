@@ -62,8 +62,8 @@ const Routes = () => (
 
                             <Route exact path="/cv" component={CvSingle} />
 
-                            <Route exact path="/diary" component={DiaryList} />
-                            <Route path="/diary/:id" component={DiarySingle} />
+                            <Route exact path="/logs" component={DiaryList} />
+                            <Route path="/logs/:id" component={DiarySingle} />
 
                             <Route path="/ligoj" component={LigojList} />
 

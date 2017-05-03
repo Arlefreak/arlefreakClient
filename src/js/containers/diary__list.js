@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
         id: 'd',
         isFetching,
         items: items,
-        route: 'diary'
+        route: 'logs'
     };
 };
 
