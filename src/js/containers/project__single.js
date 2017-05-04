@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
-import { setCategoryFilter } from '../actions/actions';
+import { setCategoryFilter, apiFetchIfNeeded} from '../actions';
 import  Project from '../components/project.jsx';;
-import { apiFetchIfNeeded } from '../actions/actions';
 
 const mapStateToProps = (state, ownProps) => {
     const { id } = ownProps.match.params;

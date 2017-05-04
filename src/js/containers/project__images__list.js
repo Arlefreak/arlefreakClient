@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { apiFetchIfNeeded } from '../actions/actions';
-import  ImageList from '../components/imageList.jsx';;
+import { apiFetchIfNeeded } from '../actions';
+import  ImageList from '../components/image__list.jsx';;
 
 const getVisibleImages  = (items, projects) => {
     if(items.length > 0){

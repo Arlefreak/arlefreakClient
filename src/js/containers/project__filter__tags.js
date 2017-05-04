@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addTagFilter, filterProjects, apiFetchIfNeeded, clearTagFilter } from '../actions/actions';
+import { addTagFilter, filterProjects, apiFetchIfNeeded, clearTagFilter } from '../actions';
 import FilterList from '../components/filter__list.jsx';;
 
 const mapStateToProps = (state, ownProps) => {

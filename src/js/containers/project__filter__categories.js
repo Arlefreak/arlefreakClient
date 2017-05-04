@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setCategoryFilter, filterProjects, apiFetchIfNeeded } from '../actions/actions';
+import { setCategoryFilter, filterProjects, apiFetchIfNeeded } from '../actions';
 import FilterList from '../components/filter__list.jsx';;
 
 const mapStateToProps = (state, ownProps) => {

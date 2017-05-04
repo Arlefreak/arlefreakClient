@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Page from './page.jsx';
 import Soon from './soon.jsx';
-import ImageList from '../containers/Images.js';
+import ImageList from '../containers/project__images__list.js';
 
 const Container = ({ id, title, isFetching, items, images, route }) => {
     return (

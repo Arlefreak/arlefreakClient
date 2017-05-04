@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fileFetchIfNeeded } from '../actions/actions';
+import { fileFetchIfNeeded } from '../actions';
 import SingleContainer from '../components/single__container.jsx';;
 
 const mapStateToProps = (state, ownProps) => {

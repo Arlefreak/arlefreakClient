@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { apiFetchIfNeeded } from '../actions/actions';
+import { apiFetchIfNeeded } from '../actions';
 import ListCointainer from '../components/list__container.jsx';
 
 const mapStateToProps = (state) => {

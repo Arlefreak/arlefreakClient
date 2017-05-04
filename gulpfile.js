@@ -150,7 +150,7 @@ gulp.task('react', function() {
 
 gulp.task('init', ['css', 'bower', 'react', 'img', 'html', 'files']);
 
-gulp.task('watch', ['css', 'react', 'img', 'html', 'connect'], function() {
+gulp.task('watch', ['css', 'react', 'img', 'html'], function() {
     gulp.watch('src/css/**/*.styl', ['css']);
     gulp.watch('src/js/**/*.js', ['react']);
     gulp.watch('src/js/**/*.jsx', ['react']);
