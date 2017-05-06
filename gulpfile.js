@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
+var fs = require('fs');
 var runSequence = require('run-sequence');
 var bower = require('main-bower-files');
 var gulpif = require('gulp-if');
@@ -23,9 +24,13 @@ var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
 var gifsicle = require('imagemin-gifsicle');
 var jpegtran = require('imagemin-jpegtran');
+var realFavicon = require ('gulp-real-favicon');
+var FAVICON_DATA_FILE = 'faviconData.json';
+
 // var svgo = require('imagemin-svgo');
 
 var DEBUG = process.env.NODE_ENV === 'production' ? false : true;
+const DEST_PATH = 'public/';
 
 // grab libraries files from bower_components, minify and push in /public
 gulp.task('bower', function() {
@@ -37,7 +42,7 @@ gulp.task('bower', function() {
         restore: true
     });
     var fontFilter = gulpFilter(['*.eot', '*.woff', '*.svg', '*.ttf']);
-    var destPath = 'public/lib';
+    var destPath = DEST_PATH + 'lib';
 
     return gulp.src(bower({
         debugging: true,
@@ -45,7 +50,7 @@ gulp.task('bower', function() {
     }))
 
     // grab vendor js files from bower_components, minify and push in /public
-    .pipe(jsFilter)
+        .pipe(jsFilter)
         .pipe(gulp.dest(destPath + '/js/'))
         .pipe(gulpif(!DEBUG, uglify()))
         .pipe(concat('vendor.js'))
@@ -56,9 +61,9 @@ gulp.task('bower', function() {
         .pipe(jsFilter.restore)
 
     // grab vendor css files from bower_components, minify and push in /public
-    .pipe(cssFilter)
+        .pipe(cssFilter)
         .pipe(gulp.dest(destPath + '/css'))
-        // .pipe(minifycss())
+    // .pipe(minifycss())
         .pipe(rename({
             suffix: '.min'
         }))
@@ -66,7 +71,7 @@ gulp.task('bower', function() {
         .pipe(cssFilter.restore)
 
     // grab vendor font files from bower_components and push in /public
-    .pipe(fontFilter)
+        .pipe(fontFilter)
         .pipe(flatten())
         .pipe(gulp.dest(destPath + '/fonts'));
 });
@@ -85,7 +90,7 @@ gulp.task('browserify', function() {
         })
         .bundle()
         .pipe(source('bundle.js'))
-        .pipe(gulp.dest('./public/js'));
+        .pipe(gulp.dest(DEST_PATH + 'js'));
 });
 
 
@@ -97,7 +102,7 @@ gulp.task('js', function() {
         .pipe(lint.format())
         .pipe(gulpif(!DEBUG, uglify()))
         .pipe(concat('script.js'))
-        .pipe(gulp.dest('./public/js/'));
+        .pipe(gulp.dest(DEST_PATH + 'js/'));
 });
 
 gulp.task('css', function() {
@@ -107,32 +112,32 @@ gulp.task('css', function() {
             compress: !DEBUG,
             import: ['nib']
         }))
-        .pipe(gulp.dest('public/css/'))
+        .pipe(gulp.dest(DEST_PATH + 'css/'))
         .pipe(connect.reload());
 });
 
 gulp.task('img', function() {
     gulp.src('src/img/**/*')
-        // .pipe(imagemin({
-        //     progressive: true,
-            // svgoPlugins: [{
-            //     removeViewBox: false
-            // }],
-            // use: [pngquant(), gifsicle(), jpegtran()]
-        // }))
-        .pipe(gulp.dest('public/img'))
+    // .pipe(imagemin({
+    //     progressive: true,
+    // svgoPlugins: [{
+    //     removeViewBox: false
+    // }],
+    // use: [pngquant(), gifsicle(), jpegtran()]
+    // }))
+        .pipe(gulp.dest(DEST_PATH + 'img'))
         .pipe(connect.reload());
 });
 
 gulp.task('html', function() {
     gulp.src('./src/*.html')
-        .pipe(gulp.dest('./public/'))
+        .pipe(gulp.dest(DEST_PATH))
         .pipe(connect.reload());
 });
 
 gulp.task('files', function() {
     gulp.src(['./src/**.*', '!./src/**.*.html', '!./src/**.*js', '!./src/img/'])
-        .pipe(gulp.dest('./public/'));
+        .pipe(gulp.dest(DEST_PATH));
 });
 
 gulp.task('connect', function() {
@@ -140,13 +145,109 @@ gulp.task('connect', function() {
         root: 'public',
         livereload: true,
         debug: true,
-        fallback: 'public/index.html'
+        fallback: DEST_PATH + 'index.html'
     });
 });
 
 gulp.task('react', function() {
     runSequence('js', 'browserify');
 });
+
+// Generate the icons. This task takes a few seconds to complete.
+// You should run it at least once to create the icons. Then,
+// you should run it whenever RealFaviconGenerator updates its
+// package (see the check-for-favicon-update task below).
+gulp.task('generate-favicon', function(done) {
+    realFavicon.generateFavicon({
+        masterPicture: 'src/img/favicon.png',
+        dest: DEST_PATH + 'img/favicons/',
+        iconsPath: '/img/favicon/',
+        design: {
+            ios: {
+                pictureAspect: 'backgroundAndMargin',
+                backgroundColor: '#ffffff',
+                margin: '14%',
+                assets: {
+                    ios6AndPriorIcons: false,
+                    ios7AndLaterIcons: false,
+                    precomposedIcons: false,
+                    declareOnlyDefaultIcon: true
+                },
+                appName: 'ellugar.co'
+            },
+            desktopBrowser: {},
+            windows: {
+                pictureAspect: 'noChange',
+                backgroundColor: '#000000',
+                onConflict: 'override',
+                assets: {
+                    windows80Ie10Tile: true,
+                    windows10Ie11EdgeTiles: {
+                        small: true,
+                        medium: true,
+                        big: true,
+                        rectangle: false
+                    }
+                },
+                appName: 'ellugar.co'
+            },
+            androidChrome: {
+                pictureAspect: 'noChange',
+                themeColor: '#000000',
+                manifest: {
+                    name: 'ellugar.co',
+                    display: 'standalone',
+                    orientation: 'notSet',
+                    onConflict: 'override',
+                    declared: true
+                },
+                assets: {
+                    legacyIcon: false,
+                    lowResolutionIcons: false
+                }
+            },
+            safariPinnedTab: {
+                pictureAspect: 'blackAndWhite',
+                threshold: 10,
+                themeColor: '#000000'
+            }
+        },
+        settings: {
+            scalingAlgorithm: 'Mitchell',
+            errorOnImageTooSmall: false
+        },
+        versioning: {
+            paramName: 'v',
+            paramValue: 'rM3xw7xzqY'
+        },
+        markupFile: FAVICON_DATA_FILE
+    }, function() {
+        done();
+    });
+});
+
+// Inject the favicon markups in your HTML pages. You should run
+// this task whenever you modify a page. You can keep this task
+// as is or refactor your existing HTML pipeline.
+gulp.task('inject-favicon-markups', function() {
+    return gulp.src(['views/head.html'])
+        .pipe(realFavicon.injectFaviconMarkups(JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).favicon.html_code))
+        .pipe(gulp.dest('views/'));
+});
+
+// Check for updates on RealFaviconGenerator (think: Apple has just
+// released a new Touch icon along with the latest version of iOS).
+// Run this task from time to time. Ideally, make it part of your
+// continuous integration system.
+gulp.task('check-for-favicon-update', function(done) {
+    var currentVersion = JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).version;
+    realFavicon.checkForUpdates(currentVersion, function(err) {
+        if (err) {
+            throw err;
+        }
+    });
+});
+
 
 gulp.task('init', ['css', 'bower', 'react', 'img', 'html', 'files']);
 
