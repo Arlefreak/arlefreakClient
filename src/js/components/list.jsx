@@ -7,15 +7,7 @@ import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 const List = ({ items, route, className }) => {
     let classes = className + ' vertical-list';
     return (
-        <CSSTransitionGroup
-            transitionName="fade"
-            transitionAppear={true}
-            transitionEnter={true}
-            transitionLeave={true}
-            transitionAppearTimeout={500}
-            transitionEnterTimeout={500}
-            transitionLeaveTimeout={500}
-            component = 'ul'
+        <ul
             className = { classes }
         >
             {
@@ -27,7 +19,7 @@ const List = ({ items, route, className }) => {
                     />
                 )
             }
-        </CSSTransitionGroup>
+        </ul>
     );
 };
 

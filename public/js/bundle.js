@@ -42624,16 +42624,8 @@ var List = function List(_ref) {
 
     var classes = className + ' vertical-list';
     return _react2.default.createElement(
-        _CSSTransitionGroup2.default,
+        'ul',
         {
-            transitionName: 'fade',
-            transitionAppear: true,
-            transitionEnter: true,
-            transitionLeave: true,
-            transitionAppearTimeout: 500,
-            transitionEnterTimeout: 500,
-            transitionLeaveTimeout: 500,
-            component: 'ul',
             className: classes
         },
         items.map(function (item) {
