@@ -1,7 +1,7 @@
 'use strict';
 const express = require('express');
 const path = require('path');
-require('dotenv').config({path: path.resolve(__dirname, '.env')});
+require('dotenv').config({path: path.resolve(__dirname, '.env'), silent: true});
 const app = express();
 const bodyParser = require('body-parser');
 const errorHandler = require('errorhandler');
@@ -16,10 +16,6 @@ app.set('view engine', 'html');
 
 app.use(express.static(__dirname + '/public'));
 app.get('/*', require('./routes').index);
-
-// app.get('/*', (request, response) => {
-//     response.sendFile(path.resolve(__dirname, 'public', 'index.html'));
-// });
 
 app.use(methodOverride());
 

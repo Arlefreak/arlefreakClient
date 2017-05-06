@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import HomePage from '../components/home.jsx';
-import { apiFetchIfNeeded } from '../actions/actions';
+import { apiFetchIfNeeded } from '../actions';
 
 const mapStateToProps = (state) => {
     const { apiCalls, visibleProjects } = state;

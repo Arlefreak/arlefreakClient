@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import Image from './imageRow.jsx';
+import Image from './image__row.jsx';
 
 function ImageList ({ images, onImageClick, className }) {
     return (

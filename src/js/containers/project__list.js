@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ListCointainer from '../components/list__container.jsx';
-import { apiFetchIfNeeded } from '../actions/actions';
+import { apiFetchIfNeeded } from '../actions';
 
 const mapStateToProps = (state) => {
     const { apiCalls, visibleProjects, tagFilter, categoryFilter } = state;

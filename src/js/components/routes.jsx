@@ -12,7 +12,7 @@ import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import Header from './header.jsx';
 import Soon from './soon.jsx';
 
-import Home from '../containers/home.js';
+import Home from '../containers/home__page.js';
 
 import AboutList from '../containers/about__list.js';
 import AboutSingle from '../containers/about__single.js';
@@ -25,7 +25,7 @@ import CvSingle from '../containers/cv__single.js';
 import LigojList from '../containers/ligoj__list.js';
 
 import ProjectList from '../containers/project__list.js';
-import ProjectSingle from '../containers/Project.js';
+import ProjectSingle from '../containers/project__single.js';
 
 import ReactGA from 'react-ga';
 import { StickyContainer, Sticky } from 'react-sticky';

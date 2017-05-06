@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import Images from './imageList.jsx';
+import Images from './image__list.jsx';
 import Isvg from 'react-inlinesvg';
-import LinkList from './linkList.jsx';
-import ImageList from './gallery.jsx';
+import LinkList from './link__list.jsx';
+import ImageList from './gallery__list.jsx';
 import Loading from './loading.jsx';
 import Remarkable from 'remarkable';
 

@@ -5,7 +5,7 @@ import List from './list.jsx';
 
 import CategoryList from '../containers/project__filter__categories.js';
 import TagList from '../containers/project__filter__tags.js';
-import ImageList from '../containers/Images.js';
+import ImageList from '../containers/project__images__list.js';
 
 const Container = ({ id, title, isFetching, items, categories, tags, images, route }) => {
     var listClasses = !images ? 'full-width' : '';

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import Image from './galleryRow.jsx';
+import Image from './gallery__row.jsx';
 
 const ImageList = ({ images, onImageClick }) => (
     <section className="gallery">

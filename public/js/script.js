@@ -10,70 +10,9 @@ module.exports = {
     APIURL:APIURL
 };
 
-var i = 1;
-console.log(i);
-
 import fetch from 'isomorphic-fetch';
 import constants from '../constants.js';
 const apiURL = constants.APIURL;
-import ReactGA from 'react-ga';
-ReactGA.initialize('UA-43222844-2');
-
-export const SET_CATEGORY_FILTER = 'SET_CATEGORY_FILTER';
-export function setCategoryFilter(id, name) {
-    ReactGA.event({
-        category: 'Filter',
-        action: 'setCategoryFilter',
-        value: id,
-        label: name,
-    });
-    return {
-        type: SET_CATEGORY_FILTER,
-        id,
-        name
-    };
-}
-
-export const ADD_TAG_FILTER = 'ADD_TAG_FILTER';
-export const DELETE_TAG_FILTER = 'DELETE_TAG_FILTER';
-export const CLEAR_ALL_TAG_FILTERS = 'CLEAR_ALL_TAG_FILTERS';
-
-export function addTagFilter(tag_id, tag) {
-    ReactGA.event({
-        category: 'Filter',
-        action: 'addTagFilter',
-        value: tag_id,
-        label: tag,
-    });
-    return { 
-        type: ADD_TAG_FILTER,
-        tag_id,
-        tag
-    };
-}
-
-export function deleteTagFilter(tag_id) {
-    ReactGA.event({
-        category: 'Filter',
-        action: 'deleteTagFilter',
-        value: tag_id,
-        label: tag,
-    });
-    return {
-        type: DELETE_TAG_FILTER,
-        tag_id
-    };
-}
-
-export function clearTagFilter() {
-    ReactGA.event({
-        category: 'Filter',
-        action: 'clearTagFilter'
-    });
-    return {
-        type: CLEAR_ALL_TAG_FILTERS
-    };
-}
 
 export const API_REQUEST = 'API_REQUEST';
 function apiRequest(endPoint) {
@@ -82,7 +21,6 @@ function apiRequest(endPoint) {
         endPoint
     };
 }
-
 
 export const API_RESPONSE = 'API_RESPONSE';
 export function apiResponse(json, endPoint) {
@@ -133,6 +71,41 @@ function apiShouldFetch(state, endPoint) {
         return false;
     }
 }
+
+
+import fetch from 'isomorphic-fetch';
+import constants from '../constants.js';
+const apiURL = constants.APIURL;
+import ReactGA from 'react-ga';
+ReactGA.initialize('UA-43222844-2');
+
+export const SET_CATEGORY_FILTER = 'SET_CATEGORY_FILTER';
+export function setCategoryFilter(id, name) {
+    ReactGA.event({
+        category: 'Filter',
+        action: 'setCategoryFilter',
+        value: id,
+        label: name,
+    });
+    return {
+        type: SET_CATEGORY_FILTER,
+        id,
+        name
+    };
+}
+
+function filterByCategory (projects, category) {
+    if(projects.length > 0){
+        if(category.id === 0){
+            return projects;
+        }else{
+            return projects.filter(t => t.category === category.id);
+        }
+    }else{
+        return projects;
+    }
+};
+
 
 export const FILE_REQUEST  = 'FILE_REQUEST ';
 function fileRequest(endPoint) {
@@ -193,39 +166,88 @@ function fileShouldFetch(state, endPoint) {
     }
 }
 
-export const SET_VISIBLE_PROJECTS = 'SET_VISIBLE_PROJECTS';
-export function setVisibleProjects(projects) {
-    const PROJECTS = projects || [];
+
+export * from './api_actions';
+export * from './category_filter_actions';
+export * from './file_actions';
+export * from './api_actions';
+export * from './tag_filter_actions';
+
+import filterByCategory from './category_filter_actions.js';
+import filterByTags from './tag_filter_actions.js';
+
+export const SET_VISIBLE_ITEMS = 'SET_VISIBLE_ITEMS';
+export function setVisibleItems(items) {
+    const ITEMS = items || [];
     return {
-        type: SET_VISIBLE_PROJECTS,
-        projects: projects
+        type: SET_VISIBLE_ITEMS,
+        items: ITEMS
     };
 }
 
-export function filterProjects() {
+export function filterItems() {
     return function (dispatch, getState){
         const state = getState() || {};
         const apiCalls = state['apiCalls'] || [];
-        const projects = apiCalls['portfolio/projects'] || {};
-        const items = projects.items || [];
+        const current_object = apiCalls['portfolio/projects'] || {};
+        const items = current_object.items || [];
         const categoryFilter = state['categoryFilter'];
         const tagFilter = state['tagFilter'] || [];
-        let filterProjects = filterByCategory(items, categoryFilter);
-        filterProjects = filterByTags(filterProjects, tagFilter); dispatch(setVisibleProjects(filterProjects));
+
+        let filteredItems = filterByCategory(items, categoryFilter);
+        filteredItems = filterByTags(filteredItems, tagFilter);
+
+        dispatch(setVisibleItems(filteredItems));
     };
 }
 
-function filterByCategory (projects, category) {
-    if(projects.length > 0){
-        if(category.id === 0){
-            return projects;
-        }else{
-            return projects.filter(t => t.category === category.id);
-        }
-    }else{
-        return projects;
-    }
-};
+
+import fetch from 'isomorphic-fetch';
+import constants from '../constants.js';
+const apiURL = constants.APIURL;
+import ReactGA from 'react-ga';
+ReactGA.initialize('UA-43222844-2');
+
+export const ADD_TAG_FILTER = 'ADD_TAG_FILTER';
+export const DELETE_TAG_FILTER = 'DELETE_TAG_FILTER';
+export const CLEAR_ALL_TAG_FILTERS = 'CLEAR_ALL_TAG_FILTERS';
+
+export function addTagFilter(tag_id, tag) {
+    ReactGA.event({
+        category: 'Filter',
+        action: 'addTagFilter',
+        value: tag_id,
+        label: tag,
+    });
+    return { 
+        type: ADD_TAG_FILTER,
+        tag_id,
+        tag
+    };
+}
+
+export function deleteTagFilter(tag_id) {
+    ReactGA.event({
+        category: 'Filter',
+        action: 'deleteTagFilter',
+        value: tag_id,
+        label: tag,
+    });
+    return {
+        type: DELETE_TAG_FILTER,
+        tag_id
+    };
+}
+
+export function clearTagFilter() {
+    ReactGA.event({
+        category: 'Filter',
+        action: 'clearTagFilter'
+    });
+    return {
+        type: CLEAR_ALL_TAG_FILTERS
+    };
+}
 
 function filterByTags (projects, tags) {
     var filteredProjects = [];
@@ -265,399 +287,7 @@ function filterByTags (projects, tags) {
 };
 
 import { connect } from 'react-redux';
-import  CategoryRow from '../components/categoryRow.jsx';;
-
-const mapStateToProps = (state, ownProps) => {
-    const { apiCalls, categoryFilter } = state;
-    const { category } = ownProps;
-    let active = false;
-
-    if(categoryFilter){
-        if(categoryFilter.id === category.id){
-            active = true;
-        }
-    }
-    return {
-        category,
-        active
-    };
-};
-
-const Category = connect(
-    mapStateToProps
-)(CategoryRow);
-
-export default Category;
-
-import { connect } from 'react-redux';
-import { setCategoryFilter, filterProjects, apiFetchIfNeeded } from '../actions/actions';
-import  CategoryList from '../components/categoryList.jsx';;
-
-const mapStateToProps = (state, ownProps) => {
-    const { apiCalls, categoryFilter } = state;
-    const {
-        isFetching,
-        lastUpdated,
-        items: categories
-    } = apiCalls['portfolio/projectsCategories'] || {
-        isFetching: true,
-        items: []
-    };
-    if(categories.length > 0 && categories[0].id !== 0 ){
-        categories.unshift({
-            id: 0,
-            name:'All',
-        });
-    }
-    return {
-        categories: categories,
-        isFetching,
-        lastUpdated
-    };
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    dispatch(apiFetchIfNeeded('portfolio/projectsCategories'));
-    return {
-        onCategoryClick: (id, name) => {
-            dispatch(setCategoryFilter(id, name));
-            dispatch(filterProjects());
-        }
-    };
-};
-
-const CategoryFilter = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(CategoryList);
-
-export default CategoryFilter;
-
-import { connect } from 'react-redux';
-import { clearTagFilter, filterProjects } from '../actions/actions';
-import TagRow from '../components/clearAllTagsRow.jsx';;
-
-const mapStateToProps = (state, ownProps) => {
-    const { apiCalls, tagFilter } = state;
-    let active = false;
-
-    if(!tagFilter){
-        active = true;
-    }else if(tagFilter.length === 0){
-        active = true;
-    }
-    return {
-        active
-    };
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    const { tag } = ownProps;
-    return {
-        onClick: () => {
-            dispatch(clearTagFilter());
-            dispatch(filterProjects());
-        }
-    };
-};
-
-const Tag = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(TagRow);
-
-export default Tag;
-
-import { connect } from 'react-redux';
-import HomePage from '../components/home.jsx';
-import { apiFetchIfNeeded } from '../actions/actions';
-
-const mapStateToProps = (state) => {
-    const { apiCalls, visibleProjects } = state;
-    const {
-        isFetching,
-        lastUpdated,
-        items: items
-    } = apiCalls['portfolio/projects'] || {
-        isFetching: true,
-        items: []
-    };
-
-    const images = apiCalls['portfolio/projectsImages/?imgType=mni'] || {
-        isFetching: true,
-        items: []
-    };
-
-    let finalFetch = isFetching && images.isFetching;
-
-    return {
-        id: 'h',
-        isFetching: finalFetch,
-        items: items,
-        images: images,
-        route: ''
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    dispatch(apiFetchIfNeeded('portfolio/projects'));
-    dispatch(apiFetchIfNeeded('portfolio/projectsImages/?imgType=mni'));
-    return {};
-};
-
-const Home = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(HomePage);
-
-export default Home;
-
-import { connect } from 'react-redux';
-import { apiFetchIfNeeded } from '../actions/actions';
-import  ImageList from '../components/imageList.jsx';;
-
-const getVisibleImages  = (items, projects) => {
-    if(items.length > 0){
-        var i = 0;
-        var j = 0;
-        var filteredImages = [];
-        for(i; i < items.length; i++){
-            j = 0;
-            for(j; j < projects.length; j++){
-                if(items[i].project === projects[j].id ){
-                    filteredImages.push(items[i]);
-                }
-            } 
-        }
-        return filteredImages;
-    }else{
-        return items;
-    }
-};
-
-const mapStateToProps = (state, ownProps) => {
-    const { apiCalls, visibleProjects, tagFilter, categoryFilter } = state;
-    const {
-        isFetching,
-        lastUpdated,
-        items: items
-    } = ownProps.images || {
-        isFetching: true,
-        items: []
-    };
-
-    const _list = ownProps.items || [];
-
-    let filterProjects = visibleProjects;
-    if(visibleProjects.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0){
-        filterProjects = _list;
-    }
-
-    const filteredImages = getVisibleImages(items, filterProjects);
-
-    return {
-        images: filteredImages,
-        isFetching,
-        lastUpdated
-    };
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        onImageClick: (id, name) => {
-        }
-    };
-};
-
-const Images = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ImageList);
-
-export default Images;
-
-import { connect } from 'react-redux';
-import { setCategoryFilter } from '../actions/actions';
-import  Project from '../components/project.jsx';;
-import { apiFetchIfNeeded } from '../actions/actions';
-
-const mapStateToProps = (state, ownProps) => {
-    const { id } = ownProps.match.params;
-    console.table(ownProps.match);
-    const { apiCalls } = state;
-    const projects = apiCalls['portfolio/projects'] || {
-        isFetching: true,
-        items: []
-    };
-
-    let project = {
-        id: 0,
-        name: '',
-        description: '',
-        tags: []
-    };
-    var i = 0;
-    for(i; i < projects.items.length; i++){
-        if (projects.items[i].id === parseInt(id)){
-            project = projects.items[i];
-            break;
-        }
-    }
-    const links = apiCalls['portfolio/projectsLinks/?project__id=' + id] || {
-        isFetching: true,
-        items: []
-    };
-    const images = apiCalls['portfolio/projectsImages?imgType=gal&project__id=' + id] || {
-        isFetching: true,
-        items: []
-    };
-    const isFetching = projects.isFetching && images.isFetching && links.isFetching;
-    return {
-        isFetching: isFetching,
-        project: project,
-        links: links,
-        images: images
-    };
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    const { id } = ownProps.match.params || 0;
-    dispatch(apiFetchIfNeeded('portfolio/projects'));
-    dispatch(apiFetchIfNeeded('portfolio/projectsLinks/?project__id=' + id));
-    dispatch(apiFetchIfNeeded('portfolio/projectsImages?imgType=gal&project__id=' + id));
-    return {
-        onTagClick: (id) => { console.log(id); },
-        onImageClick : () => { console.log('ImageClick'); }
-    };
-};
-
-const ProjectV = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Project);
-
-export default ProjectV;
-
-import { connect } from 'react-redux';
-import { addTagFilter, clearTagFilter, filterProjects } from '../actions/actions';
-import TagRow from '../components/projectTagRow.jsx';;
-
-const mapStateToProps = (state, ownProps) => {
-    const { apiCalls, tagFilter } = state;
-    const { tag } = ownProps;
-    let active = false;
-
-    if(tagFilter){
-        var i = 0;
-        for(i; i < tagFilter.length; i++){
-            if(tagFilter[i].id === tag.id){
-                active = true;
-            }
-        }
-    }
-    return {
-        tag,
-        active
-    };
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    const { tag } = ownProps;
-    return {
-        onClick: () => {
-            dispatch(clearTagFilter());
-            dispatch(addTagFilter(tag.id, tag.name));
-            dispatch(filterProjects());
-        }
-    };
-};
-
-const Tag = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(TagRow);
-
-export default Tag;
-
-import { connect } from 'react-redux';
-import { addTagFilter, deleteTagFilter, filterProjects } from '../actions/actions';
-import TagRow from '../components/tagRow.jsx';;
-
-const mapStateToProps = (state, ownProps) => {
-    const { apiCalls, tagFilter } = state;
-    const { tag } = ownProps;
-    let active = false;
-
-    if(tagFilter){
-        var i = 0;
-        for(i; i < tagFilter.length; i++){
-            if(tagFilter[i].id === tag.tag_id){
-                active = true;
-            }
-        }
-    }
-    return {
-        tag,
-        active
-    };
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    const { tag } = ownProps;
-    return {
-        onClick: () => {
-            dispatch(addTagFilter(tag.tag_id, tag.tag));
-            dispatch(filterProjects());
-        }
-    };
-};
-
-const Tag = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(TagRow);
-
-export default Tag;
-
-import { connect } from 'react-redux';
-import  TagList from '../components/tagList.jsx';;
-import { apiFetchIfNeeded } from '../actions/actions';
-
-const mapStateToProps = (state, ownProps) => {
-    const { apiCalls } = state;
-    const {
-        isFetching,
-        lastUpdated,
-        items: tags
-    } = apiCalls['portfolio/projectTags'] || {
-        isFetching: true,
-        items: []
-    };
-    return {
-        tags: tags,
-        isFetching,
-        lastUpdated
-    };
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    dispatch(apiFetchIfNeeded('portfolio/projectTags'));
-    return {
-        onTagClick: (id, tag) => {
-            dispatch(addTagFilter(id, tag));
-        }
-    };
-};
-
-const TagFilter = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(TagList);
-
-export default TagFilter;
-
-import { connect } from 'react-redux';
-import { apiFetchIfNeeded } from '../actions/actions';
+import { apiFetchIfNeeded } from '../actions';
 import ListCointainer from '../components/list__container.jsx';
 
 const mapStateToProps = (state) => {
@@ -692,7 +322,7 @@ const aboutPage = connect(
 export default aboutPage;
 
 import { connect } from 'react-redux';
-import { apiFetchIfNeeded } from '../actions/actions';
+import { apiFetchIfNeeded } from '../actions';
 import SingleContainer from '../components/single__container.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
@@ -740,7 +370,7 @@ const AboutSingle = connect(
 export default AboutSingle;
 
 import { connect } from 'react-redux';
-import { fileFetchIfNeeded } from '../actions/actions';
+import { fileFetchIfNeeded } from '../actions';
 import SingleContainer from '../components/single__container.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
@@ -783,7 +413,7 @@ const CvSingle = connect(
 export default CvSingle;
 
 import { connect } from 'react-redux';
-import { apiFetchIfNeeded } from '../actions/actions';
+import { apiFetchIfNeeded } from '../actions';
 import ListCointainer from '../components/list__container.jsx';
 
 const mapStateToProps = (state) => {
@@ -818,7 +448,7 @@ const diaryPage = connect(
 export default diaryPage;
 
 import { connect } from 'react-redux';
-import { apiFetchIfNeeded } from '../actions/actions';
+import { apiFetchIfNeeded } from '../actions';
 import SingleContainer from '../components/single__container.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
@@ -866,7 +496,51 @@ const DiarySingle = connect(
 export default DiarySingle;
 
 import { connect } from 'react-redux';
-import { apiFetchIfNeeded } from '../actions/actions';
+import HomePage from '../components/home.jsx';
+import { apiFetchIfNeeded } from '../actions';
+
+const mapStateToProps = (state) => {
+    const { apiCalls, visibleProjects } = state;
+    const {
+        isFetching,
+        lastUpdated,
+        items: items
+    } = apiCalls['portfolio/projects'] || {
+        isFetching: true,
+        items: []
+    };
+
+    const images = apiCalls['portfolio/projectsImages/?imgType=mni'] || {
+        isFetching: true,
+        items: []
+    };
+
+    let finalFetch = isFetching && images.isFetching;
+
+    return {
+        id: 'h',
+        isFetching: finalFetch,
+        items: items,
+        images: images,
+        route: ''
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    dispatch(apiFetchIfNeeded('portfolio/projects'));
+    dispatch(apiFetchIfNeeded('portfolio/projectsImages/?imgType=mni'));
+    return {};
+};
+
+const Home = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(HomePage);
+
+export default Home;
+
+import { connect } from 'react-redux';
+import { apiFetchIfNeeded } from '../actions';
 import ListCointainer from '../components/list__container.jsx';
 
 const mapStateToProps = (state) => {
@@ -909,7 +583,7 @@ export default diaryPage;
 
 
 import { connect } from 'react-redux';
-import { setCategoryFilter, filterProjects, apiFetchIfNeeded } from '../actions/actions';
+import { setCategoryFilter, filterProjects, apiFetchIfNeeded } from '../actions';
 import FilterList from '../components/filter__list.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
@@ -971,7 +645,7 @@ const ProjectFilterCategory = connect(
 export default ProjectFilterCategory;
 
 import { connect } from 'react-redux';
-import { addTagFilter, filterProjects, apiFetchIfNeeded, clearTagFilter } from '../actions/actions';
+import { addTagFilter, filterProjects, apiFetchIfNeeded, clearTagFilter } from '../actions';
 import FilterList from '../components/filter__list.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
@@ -1044,8 +718,72 @@ const ProjectFilterTag = connect(
 export default ProjectFilterTag;
 
 import { connect } from 'react-redux';
+import { apiFetchIfNeeded } from '../actions';
+import  ImageList from '../components/image__list.jsx';;
+
+const getVisibleImages  = (items, projects) => {
+    if(items.length > 0){
+        var i = 0;
+        var j = 0;
+        var filteredImages = [];
+        for(i; i < items.length; i++){
+            j = 0;
+            for(j; j < projects.length; j++){
+                if(items[i].project === projects[j].id ){
+                    filteredImages.push(items[i]);
+                }
+            } 
+        }
+        return filteredImages;
+    }else{
+        return items;
+    }
+};
+
+const mapStateToProps = (state, ownProps) => {
+    const { apiCalls, visibleProjects, tagFilter, categoryFilter } = state;
+    const {
+        isFetching,
+        lastUpdated,
+        items: items
+    } = ownProps.images || {
+        isFetching: true,
+        items: []
+    };
+
+    const _list = ownProps.items || [];
+
+    let filterProjects = visibleProjects;
+    if(visibleProjects.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0){
+        filterProjects = _list;
+    }
+
+    const filteredImages = getVisibleImages(items, filterProjects);
+
+    return {
+        images: filteredImages,
+        isFetching,
+        lastUpdated
+    };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        onImageClick: (id, name) => {
+        }
+    };
+};
+
+const Images = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ImageList);
+
+export default Images;
+
+import { connect } from 'react-redux';
 import ListCointainer from '../components/list__container.jsx';
-import { apiFetchIfNeeded } from '../actions/actions';
+import { apiFetchIfNeeded } from '../actions';
 
 const mapStateToProps = (state) => {
     const { apiCalls, visibleProjects, tagFilter, categoryFilter } = state;
@@ -1110,8 +848,101 @@ const projectsPage = connect(
 
 export default projectsPage;
 
-import { combineReducers } from 'redux';
-import { SET_VISIBLE_PROJECTS, FILE_REQUEST, FILE_RESPONSE, API_REQUEST, API_RESPONSE, SET_CATEGORY_FILTER, ADD_TAG_FILTER, DELETE_TAG_FILTER, CLEAR_ALL_TAG_FILTERS } from '../actions/actions';
+import { connect } from 'react-redux';
+import { setCategoryFilter, apiFetchIfNeeded} from '../actions';
+import  Project from '../components/project.jsx';;
+
+const mapStateToProps = (state, ownProps) => {
+    const { id } = ownProps.match.params;
+    console.table(ownProps.match);
+    const { apiCalls } = state;
+    const projects = apiCalls['portfolio/projects'] || {
+        isFetching: true,
+        items: []
+    };
+
+    let project = {
+        id: 0,
+        name: '',
+        description: '',
+        tags: []
+    };
+    var i = 0;
+    for(i; i < projects.items.length; i++){
+        if (projects.items[i].id === parseInt(id)){
+            project = projects.items[i];
+            break;
+        }
+    }
+    const links = apiCalls['portfolio/projectsLinks/?project__id=' + id] || {
+        isFetching: true,
+        items: []
+    };
+    const images = apiCalls['portfolio/projectsImages?imgType=gal&project__id=' + id] || {
+        isFetching: true,
+        items: []
+    };
+    const isFetching = projects.isFetching && images.isFetching && links.isFetching;
+    return {
+        isFetching: isFetching,
+        project: project,
+        links: links,
+        images: images
+    };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    const { id } = ownProps.match.params || 0;
+    dispatch(apiFetchIfNeeded('portfolio/projects'));
+    dispatch(apiFetchIfNeeded('portfolio/projectsLinks/?project__id=' + id));
+    dispatch(apiFetchIfNeeded('portfolio/projectsImages?imgType=gal&project__id=' + id));
+    return {
+        onTagClick: (id) => { console.log(id); },
+        onImageClick : () => { console.log('ImageClick'); }
+    };
+};
+
+const ProjectV = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Project);
+
+export default ProjectV;
+
+import { API_REQUEST, API_RESPONSE} from '../actions';
+
+function apiCalls(state = {}, action) {
+    switch (action.type) {
+        case API_RESPONSE:
+            return Object.assign({}, state, {
+                [action.endPoint]: items(state[action.endPoint], action)
+            });
+        default:
+            return state;
+    }
+};
+
+const items = (state = {
+    isFetching: false,
+    items: []
+}, action) => {
+    switch (action.type) {
+        case API_REQUEST:
+            return Object.assign({}, state, {
+                isFetching: true
+            });
+        case API_RESPONSE:
+            return Object.assign({}, state, {
+                isFetching: false,
+                items: action.projects,
+                lastUpdated: action.receivedAt
+            });
+        default:
+            return state;
+    }
+};
+
+import { SET_CATEGORY_FILTER } from '../actions';
 
 const categoryFilter = (state = {
     id: 0,
@@ -1127,6 +958,47 @@ const categoryFilter = (state = {
             return state;
     }
 };
+
+import { FILE_REQUEST, FILE_RESPONSE } from '../actions';
+
+function fileCalls(state = {}, action) {
+    switch (action.type) {
+        case FILE_RESPONSE:
+            return Object.assign({}, state, {
+                [action.endPoint]: file(state[action.endPoint], action)
+            });
+        default:
+            return state;
+    }
+};
+
+const file = (state = {
+    isFetching: false,
+    file: ''
+}, action) => {
+    switch (action.type) {
+        case FILE_REQUEST:
+            return Object.assign({}, state, {
+                isFetching: true
+            });
+        case FILE_RESPONSE:
+            return Object.assign({}, state, {
+                isFetching: false,
+                file: action.file,
+                lastUpdated: action.receivedAt
+            });
+        default:
+            return state;
+    }
+};
+
+export * from './api_reducers.js';
+export * from './file_reducers.js';
+export * from './visible_items_reducers.js';
+export * from './category_filter_reducers.js';
+export * from './tag_filter_reducers.js';
+
+import { ADD_TAG_FILTER, DELETE_TAG_FILTER, CLEAR_ALL_TAG_FILTERS } from '../actions';
 
 const tagFilter = (state = [], action) => {
 
@@ -1163,9 +1035,11 @@ const tagFilter = (state = [], action) => {
     }
 };
 
-const visibleProjects = (state = [], action) => {
+import { SET_VISIBLE_ITEMS } from '../actions';
+
+const visibleItems = (state = [], action) => {
     switch (action.type){
-        case SET_VISIBLE_PROJECTS:
+        case SET_VISIBLE_ITEMS:
             return action.projects;
             break;
         default:
@@ -1173,101 +1047,3 @@ const visibleProjects = (state = [], action) => {
             break;
     }
 };
-
-function apiCalls(state = {}, action) {
-    switch (action.type) {
-        case API_RESPONSE:
-            return Object.assign({}, state, {
-                [action.endPoint]: items(state[action.endPoint], action)
-            });
-        default:
-            return state;
-    }
-};
-
-function fileCalls(state = {}, action) {
-    switch (action.type) {
-        case FILE_RESPONSE:
-            return Object.assign({}, state, {
-                [action.endPoint]: file(state[action.endPoint], action)
-            });
-        default:
-            return state;
-    }
-};
-
-const items = (state = {
-    isFetching: false,
-    items: []
-}, action) => {
-    switch (action.type) {
-        case API_REQUEST:
-            return Object.assign({}, state, {
-                isFetching: true
-            });
-        case API_RESPONSE:
-            return Object.assign({}, state, {
-                isFetching: false,
-                items: action.projects,
-                lastUpdated: action.receivedAt
-            });
-        default:
-            return state;
-    }
-};
-
-
-const file = (state = {
-    isFetching: false,
-    file: ''
-}, action) => {
-    switch (action.type) {
-        case FILE_REQUEST:
-            return Object.assign({}, state, {
-                isFetching: true
-            });
-        case FILE_RESPONSE:
-            return Object.assign({}, state, {
-                isFetching: false,
-                file: action.file,
-                lastUpdated: action.receivedAt
-            });
-        default:
-            return state;
-    }
-};
-
-const portfolioApp = combineReducers({
-    tagFilter,
-    apiCalls,
-    fileCalls,
-    categoryFilter,
-    visibleProjects
-});
-
-export default portfolioApp;
-
-import { createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import { createLogger } from 'redux-logger';
-import { fetchPosts, addTagFilter, setCategoryFilter } from './actions/actions';
-import portfolioApp from './reducers/reducers';
-
-const loggerMiddleware = createLogger();
-
-// const store = createStore(
-//     applyMiddleware(
-//         thunkMiddleware, // lets us dispatch() functions
-//         loggerMiddleware // neat middleware that logs actions
-//     ),
-//     portfolioApp
-// );
-
-let store =  applyMiddleware(
-    thunkMiddleware,
-    loggerMiddleware
-)(createStore)(portfolioApp);
-
-store.dispatch(fetchPosts());
-store.dispatch(addTagFilter(1, 'phaser'));
-store.dispatch(setCategoryFilter(1, 'Games'));

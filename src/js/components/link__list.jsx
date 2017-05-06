@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import Link from './linkRow.jsx';
+import Link from './link__row.jsx';
 
 const LinkList = ({ links }) => (
     <ul className="links">
