@@ -41513,7 +41513,7 @@ function apiShouldFetch(state, endPoint) {
     }
 }
 
-},{"../constants.js":398,"isomorphic-fetch":56}],371:[function(require,module,exports){
+},{"../constants.js":397,"isomorphic-fetch":56}],371:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41570,7 +41570,7 @@ function filterByCategory(projects, category) {
     }
 };
 
-},{"../constants.js":398,"isomorphic-fetch":56,"react-ga":203}],372:[function(require,module,exports){
+},{"../constants.js":397,"isomorphic-fetch":56,"react-ga":203}],372:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41649,7 +41649,7 @@ function fileShouldFetch(state, endPoint) {
     }
 }
 
-},{"../constants.js":398,"isomorphic-fetch":56}],373:[function(require,module,exports){
+},{"../constants.js":397,"isomorphic-fetch":56}],373:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41796,7 +41796,7 @@ function filterByTags(projects, tags) {
     return filteredProjects;
 };
 
-},{"../constants.js":398,"isomorphic-fetch":56,"react-ga":203}],375:[function(require,module,exports){
+},{"../constants.js":397,"isomorphic-fetch":56,"react-ga":203}],375:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -41822,6 +41822,7 @@ _reactDom2.default.render(app, document.getElementById('application'));
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.store = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -41865,8 +41866,11 @@ var app = (0, _redux.combineReducers)({
     fileCalls: _reducers.fileCalls
 });
 
-var loggerMiddleware = (0, _reduxLogger.createLogger)();
-var store = (0, _redux.applyMiddleware)(_reduxThunk2.default, loggerMiddleware)(_redux.createStore)(app);
+var logger = (0, _reduxLogger.createLogger)({
+    collapsed: true
+});
+
+var store = exports.store = (0, _redux.createStore)(app, (0, _redux.applyMiddleware)(_reduxThunk2.default, logger));
 
 var App = function (_Component) {
     _inherits(App, _Component);
@@ -41893,7 +41897,7 @@ var App = function (_Component) {
 
 exports.default = App;
 
-},{"../reducers":414,"./routes.jsx":393,"prop-types":74,"react":287,"react-redux":222,"redux":299,"redux-logger":292,"redux-thunk":293}],377:[function(require,module,exports){
+},{"../reducers":414,"./routes.jsx":392,"prop-types":74,"react":287,"react-redux":222,"redux":299,"redux-logger":292,"redux-thunk":293}],377:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42052,17 +42056,14 @@ var _gallery__row2 = _interopRequireDefault(_gallery__row);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ImageList = function ImageList(_ref) {
-    var images = _ref.images,
-        onImageClick = _ref.onImageClick;
+    var images = _ref.images;
     return _react2.default.createElement(
         'section',
         { className: 'gallery' },
         images.map(function (image) {
             return _react2.default.createElement(_gallery__row2.default, _extends({
                 key: image.id
-            }, image, {
-                onImageClick: onImageClick
-            }));
+            }, image));
         })
     );
 };
@@ -42072,8 +42073,7 @@ ImageList.propTypes = {
         id: _propTypes2.default.number.isRequired,
         name: _propTypes2.default.string.isRequired,
         image: _propTypes2.default.string.isRequired
-    }).isRequired).isRequired,
-    onImageClick: _propTypes2.default.func.isRequired
+    }).isRequired).isRequired
 };
 
 exports.default = ImageList;
@@ -42097,15 +42097,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var ImageRow = function ImageRow(_ref) {
     var name = _ref.name,
-        image = _ref.image,
-        onImageClick = _ref.onImageClick;
-    return _react2.default.createElement('img', { src: image, alt: name, onClick: onImageClick });
+        image = _ref.image;
+    return _react2.default.createElement('img', { src: image, alt: name });
 };
 
 ImageRow.propTypes = {
     name: _propTypes2.default.string.isRequired,
-    image: _propTypes2.default.string.isRequired,
-    onImageClick: _propTypes2.default.func.isRequired
+    image: _propTypes2.default.string.isRequired
 };
 
 exports.default = ImageRow;
@@ -42307,7 +42305,7 @@ Container.propTypes = {
 
 exports.default = Container;
 
-},{"../containers/project__images__list.js":408,"./page.jsx":391,"./soon.jsx":397,"prop-types":74,"react":287}],383:[function(require,module,exports){
+},{"../containers/project__images__list.js":407,"./page.jsx":391,"./soon.jsx":396,"prop-types":74,"react":287}],383:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42628,7 +42626,7 @@ List.propTypes = {
 
 exports.default = List;
 
-},{"./page.jsx":391,"./row.jsx":394,"prop-types":74,"react":287,"react-transition-group/CSSTransitionGroup":257}],389:[function(require,module,exports){
+},{"./page.jsx":391,"./row.jsx":393,"prop-types":74,"react":287,"react-transition-group/CSSTransitionGroup":257}],389:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42707,7 +42705,7 @@ Container.propTypes = {
 
 exports.default = Container;
 
-},{"../containers/project__filter__categories.js":406,"../containers/project__filter__tags.js":407,"../containers/project__images__list.js":408,"./list.jsx":388,"./page.jsx":391,"prop-types":74,"react":287}],390:[function(require,module,exports){
+},{"../containers/project__filter__categories.js":405,"../containers/project__filter__tags.js":406,"../containers/project__images__list.js":407,"./list.jsx":388,"./page.jsx":391,"prop-types":74,"react":287}],390:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42845,119 +42843,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _image__list = require('./image__list.jsx');
-
-var _image__list2 = _interopRequireDefault(_image__list);
-
-var _reactInlinesvg = require('react-inlinesvg');
-
-var _reactInlinesvg2 = _interopRequireDefault(_reactInlinesvg);
-
-var _link__list = require('./link__list.jsx');
-
-var _link__list2 = _interopRequireDefault(_link__list);
-
-var _gallery__list = require('./gallery__list.jsx');
-
-var _gallery__list2 = _interopRequireDefault(_gallery__list);
-
-var _loading = require('./loading.jsx');
-
-var _loading2 = _interopRequireDefault(_loading);
-
-var _remarkable = require('remarkable');
-
-var _remarkable2 = _interopRequireDefault(_remarkable);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Project = function Project(_ref) {
-    var isFetching = _ref.isFetching,
-        project = _ref.project,
-        links = _ref.links,
-        images = _ref.images,
-        onTagClick = _ref.onTagClick,
-        onImageClick = _ref.onImageClick;
-
-    var md = new _remarkable2.default();
-    var mdr = md.render(project.description);
-    if (!isFetching) {
-        return _react2.default.createElement(
-            'article',
-            { className: 'project' },
-            _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                    'section',
-                    { className: 'info' },
-                    _react2.default.createElement(
-                        'h2',
-                        null,
-                        project.name
-                    ),
-                    _react2.default.createElement(_link__list2.default, {
-                        links: links.items
-                    }),
-                    _react2.default.createElement('div', { className: 'markdown', dangerouslySetInnerHTML: { __html: mdr } })
-                ),
-                _react2.default.createElement(_gallery__list2.default, {
-                    images: images.items,
-                    onImageClick: onImageClick
-                }),
-                _react2.default.createElement('img', { className: 'index', src: '/img/p.svg', alt: 'Icono' })
-            )
-        );
-    } else {
-        return _react2.default.createElement(
-            'article',
-            { className: 'project' },
-            _react2.default.createElement(_loading2.default, null)
-        );
-    }
-};
-
-Project.propTypes = {
-    isFetching: _propTypes2.default.bool.isRequired,
-    project: _propTypes2.default.shape({
-        id: _propTypes2.default.number.isRequired,
-        name: _propTypes2.default.string.isRequired,
-        description: _propTypes2.default.string.isRequired,
-        tags: _propTypes2.default.array.isRequired
-    }).isRequired,
-    links: _propTypes2.default.shape({
-        isFetching: _propTypes2.default.bool.isRequired,
-        items: _propTypes2.default.arrayOf(_propTypes2.default.shape({
-            id: _propTypes2.default.number.isRequired,
-            name: _propTypes2.default.string.isRequired
-        }).isRequired).isRequired
-    }),
-    images: _propTypes2.default.shape({
-        isFetching: _propTypes2.default.bool.isRequired,
-        items: _propTypes2.default.arrayOf(_propTypes2.default.shape({
-            id: _propTypes2.default.number.isRequired,
-            name: _propTypes2.default.string.isRequired
-        }).isRequired).isRequired
-    }),
-    onTagClick: _propTypes2.default.func.isRequired,
-    onImageClick: _propTypes2.default.func.isRequired
-};
-exports.default = Project;
-
-},{"./gallery__list.jsx":379,"./image__list.jsx":384,"./link__list.jsx":386,"./loading.jsx":390,"prop-types":74,"react":287,"react-inlinesvg":211,"remarkable":301}],393:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _propTypes = require('prop-types');
 
@@ -43023,52 +42909,100 @@ var _reactGa2 = _interopRequireDefault(_reactGa);
 
 var _reactSticky = require('react-sticky');
 
+var _tag_filter_actions = require('../actions/tag_filter_actions');
+
+var _category_filter_actions = require('../actions/category_filter_actions');
+
+var _app = require('./app.jsx');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 // TODO: React router 4 fix https://github.com/react-ga/react-ga/issues/122
 _reactGa2.default.initialize('UA-43222844-2');
-function logPageView() {
+
+var logPageView = function logPageView() {
+    _app.store.dispatch((0, _tag_filter_actions.clearTagFilter)());
+    _app.store.dispatch((0, _category_filter_actions.setCategoryFilter)(0, 'All'));
     _reactGa2.default.set({ page: window.location.pathname });
     _reactGa2.default.pageview(window.location.pathname);
-}
+};
+
+var TrackPageView = function (_React$Component) {
+    _inherits(TrackPageView, _React$Component);
+
+    function TrackPageView() {
+        _classCallCheck(this, TrackPageView);
+
+        return _possibleConstructorReturn(this, (TrackPageView.__proto__ || Object.getPrototypeOf(TrackPageView)).apply(this, arguments));
+    }
+
+    _createClass(TrackPageView, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            logPageView();
+        }
+    }, {
+        key: 'componentWillUpdate',
+        value: function componentWillUpdate() {
+            logPageView();
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(_reactRouterDom.Route, { children: this.props.children });
+        }
+    }]);
+
+    return TrackPageView;
+}(_react2.default.Component);
 
 var Routes = function Routes() {
     return _react2.default.createElement(
         _reactRouterDom.BrowserRouter,
         null,
         _react2.default.createElement(
-            _reactSticky.StickyContainer,
+            TrackPageView,
             null,
-            _react2.default.createElement(_header2.default, null),
             _react2.default.createElement(
-                _CSSTransitionGroup2.default,
-                {
-                    transitionName: 'fade',
-                    transitionAppear: true,
-                    transitionEnter: true,
-                    transitionLeave: true,
-                    transitionAppearTimeout: 500,
-                    transitionEnterTimeout: 500,
-                    transitionLeaveTimeout: 500
-                },
+                _reactSticky.StickyContainer,
+                null,
+                _react2.default.createElement(_header2.default, null),
                 _react2.default.createElement(
-                    'main',
-                    null,
+                    _CSSTransitionGroup2.default,
+                    {
+                        transitionName: 'fade',
+                        transitionAppear: true,
+                        transitionEnter: true,
+                        transitionLeave: true,
+                        transitionAppearTimeout: 500,
+                        transitionEnterTimeout: 500,
+                        transitionLeaveTimeout: 500
+                    },
                     _react2.default.createElement(
-                        'div',
-                        { className: 'wrapper' },
+                        'main',
+                        null,
                         _react2.default.createElement(
-                            _reactRouterDom.Switch,
-                            null,
-                            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/projects', component: _project__list2.default }),
-                            _react2.default.createElement(_reactRouterDom.Route, { path: '/projects/:id', component: _project__single2.default }),
-                            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/about', component: _about__list2.default }),
-                            _react2.default.createElement(_reactRouterDom.Route, { path: '/about/:id', component: _about__single2.default }),
-                            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/cv', component: _cv__single2.default }),
-                            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/logs', component: _diary__list2.default }),
-                            _react2.default.createElement(_reactRouterDom.Route, { path: '/logs/:id', component: _diary__single2.default }),
-                            _react2.default.createElement(_reactRouterDom.Route, { path: '/ligoj', component: _ligoj__list2.default }),
-                            _react2.default.createElement(_reactRouterDom.Route, { component: _home__page2.default })
+                            'div',
+                            { className: 'wrapper' },
+                            _react2.default.createElement(
+                                _reactRouterDom.Switch,
+                                null,
+                                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/projects', component: _project__list2.default }),
+                                _react2.default.createElement(_reactRouterDom.Route, { path: '/projects/:id', component: _project__single2.default }),
+                                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/about', component: _about__list2.default }),
+                                _react2.default.createElement(_reactRouterDom.Route, { path: '/about/:id', component: _about__single2.default }),
+                                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/cv', component: _cv__single2.default }),
+                                _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/logs', component: _diary__list2.default }),
+                                _react2.default.createElement(_reactRouterDom.Route, { path: '/logs/:id', component: _diary__single2.default }),
+                                _react2.default.createElement(_reactRouterDom.Route, { path: '/ligoj', component: _ligoj__list2.default }),
+                                _react2.default.createElement(_reactRouterDom.Route, { component: _home__page2.default })
+                            )
                         )
                     )
                 )
@@ -43083,7 +43017,7 @@ Routes.propTypes = {
 
 exports.default = Routes;
 
-},{"../containers/about__list.js":399,"../containers/about__single.js":400,"../containers/cv__single.js":401,"../containers/diary__list.js":402,"../containers/diary__single.js":403,"../containers/home__page.js":404,"../containers/ligoj__list.js":405,"../containers/project__list.js":409,"../containers/project__single.js":410,"./header.jsx":381,"./soon.jsx":397,"prop-types":74,"react":287,"react-ga":203,"react-router-dom":239,"react-sticky":255,"react-transition-group/CSSTransitionGroup":257}],394:[function(require,module,exports){
+},{"../actions/category_filter_actions":371,"../actions/tag_filter_actions":374,"../containers/about__list.js":398,"../containers/about__single.js":399,"../containers/cv__single.js":400,"../containers/diary__list.js":401,"../containers/diary__single.js":402,"../containers/home__page.js":403,"../containers/ligoj__list.js":404,"../containers/project__list.js":408,"../containers/project__single.js":409,"./app.jsx":376,"./header.jsx":381,"./soon.jsx":396,"prop-types":74,"react":287,"react-ga":203,"react-router-dom":239,"react-sticky":255,"react-transition-group/CSSTransitionGroup":257}],393:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43157,7 +43091,7 @@ ItemRow.propTypes = {
 
 exports.default = ItemRow;
 
-},{"prop-types":74,"react":287,"react-router-dom":239}],395:[function(require,module,exports){
+},{"prop-types":74,"react":287,"react-router-dom":239}],394:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43186,11 +43120,12 @@ var Single = function Single(_ref) {
     var item = _ref.item;
 
     var md = new _remarkable2.default();
-    var mdr = md.render(item.text);
+    var text = item.text || item.description;
+    var mdr = md.render(text);
     return _react2.default.createElement(
         'section',
         null,
-        item.dateCreated && _react2.default.createElement(
+        item.dateCreated != null && _react2.default.createElement(
             'div',
             { className: 'date-container' },
             _react2.default.createElement(
@@ -43213,12 +43148,13 @@ var Single = function Single(_ref) {
 Single.propTypes = {
     item: _propTypes2.default.shape({
         id: _propTypes2.default.number.isRequired,
-        text: _propTypes2.default.string.isRequired
+        text: _propTypes2.default.string,
+        description: _propTypes2.default.string
     }).isRequired
 };
 exports.default = Single;
 
-},{"./loading.jsx":390,"prop-types":74,"react":287,"remarkable":301}],396:[function(require,module,exports){
+},{"./loading.jsx":390,"prop-types":74,"react":287,"remarkable":301}],395:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43241,13 +43177,28 @@ var _single = require('./single.jsx');
 
 var _single2 = _interopRequireDefault(_single);
 
+var _single_tags_list = require('../containers/single_tags_list.js');
+
+var _single_tags_list2 = _interopRequireDefault(_single_tags_list);
+
+var _link__list = require('./link__list.jsx');
+
+var _link__list2 = _interopRequireDefault(_link__list);
+
+var _gallery__list = require('./gallery__list.jsx');
+
+var _gallery__list2 = _interopRequireDefault(_gallery__list);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Container = function Container(_ref) {
     var id = _ref.id,
         title = _ref.title,
         isFetching = _ref.isFetching,
-        item = _ref.item;
+        item = _ref.item,
+        images = _ref.images,
+        links = _ref.links,
+        tags = _ref.tags;
 
     return _react2.default.createElement(
         _page2.default,
@@ -43256,7 +43207,22 @@ var Container = function Container(_ref) {
             title: title,
             isFetching: isFetching
         },
-        _react2.default.createElement(_single2.default, { item: item })
+        links != null && _react2.default.createElement(_link__list2.default, {
+            links: links
+        }),
+        _react2.default.createElement(_single2.default, {
+            item: item,
+            links: links,
+            images: images,
+            tags: tags
+        }),
+        images != null && _react2.default.createElement(_gallery__list2.default, {
+            images: images
+        }),
+        tags != null && _react2.default.createElement(_single_tags_list2.default, {
+            tags: tags,
+            className: 'tags'
+        })
     );
 };
 
@@ -43264,12 +43230,15 @@ Container.propTypes = {
     id: _propTypes2.default.string.isRequired,
     title: _propTypes2.default.string,
     isFetching: _propTypes2.default.bool.isRequired,
-    item: _propTypes2.default.object.isRequired
+    item: _propTypes2.default.object.isRequired,
+    links: _propTypes2.default.arrayOf(_propTypes2.default.shape),
+    images: _propTypes2.default.arrayOf(_propTypes2.default.shape),
+    tags: _propTypes2.default.arrayOf(_propTypes2.default.shape)
 };
 
 exports.default = Container;
 
-},{"./page.jsx":391,"./single.jsx":395,"prop-types":74,"react":287}],397:[function(require,module,exports){
+},{"../containers/single_tags_list.js":410,"./gallery__list.jsx":379,"./link__list.jsx":386,"./page.jsx":391,"./single.jsx":394,"prop-types":74,"react":287}],396:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43305,7 +43274,7 @@ var Soon = function Soon() {
 
 exports.default = Soon;
 
-},{"prop-types":74,"react":287}],398:[function(require,module,exports){
+},{"prop-types":74,"react":287}],397:[function(require,module,exports){
 'use strict';
 
 var APIURL = 'https://api.ellugar.co/';
@@ -43313,7 +43282,7 @@ module.exports = {
     APIURL: APIURL
 };
 
-},{}],399:[function(require,module,exports){
+},{}],398:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43358,7 +43327,7 @@ var aboutPage = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_l
 
 exports.default = aboutPage;
 
-},{"../actions/api_actions":370,"../components/list__container.jsx":389,"react-redux":222}],400:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/list__container.jsx":389,"react-redux":222}],399:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43420,7 +43389,7 @@ var AboutSingle = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 exports.default = AboutSingle;
 
-},{"../actions/api_actions":370,"../components/single__container.jsx":396,"react-redux":222}],401:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/single__container.jsx":395,"react-redux":222}],400:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43475,7 +43444,7 @@ var CvSingle = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_si
 
 exports.default = CvSingle;
 
-},{"../actions/file_actions":372,"../components/single__container.jsx":396,"react-redux":222}],402:[function(require,module,exports){
+},{"../actions/file_actions":372,"../components/single__container.jsx":395,"react-redux":222}],401:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43520,7 +43489,7 @@ var diaryPage = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_l
 
 exports.default = diaryPage;
 
-},{"../actions/api_actions":370,"../components/list__container.jsx":389,"react-redux":222}],403:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/list__container.jsx":389,"react-redux":222}],402:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43582,7 +43551,7 @@ var DiarySingle = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 exports.default = DiarySingle;
 
-},{"../actions/api_actions":370,"../components/single__container.jsx":396,"react-redux":222}],404:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/single__container.jsx":395,"react-redux":222}],403:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43637,7 +43606,7 @@ var Home = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_home2.
 
 exports.default = Home;
 
-},{"../actions/api_actions":370,"../components/home.jsx":382,"react-redux":222}],405:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/home.jsx":382,"react-redux":222}],404:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43689,7 +43658,7 @@ var diaryPage = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_l
 
 exports.default = diaryPage;
 
-},{"../actions/api_actions":370,"../components/list__container.jsx":389,"react-redux":222}],406:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/list__container.jsx":389,"react-redux":222}],405:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43768,7 +43737,7 @@ var ProjectFilterCategory = (0, _reactRedux.connect)(mapStateToProps, mapDispatc
 
 exports.default = ProjectFilterCategory;
 
-},{"../actions/api_actions":370,"../actions/category_filter_actions":371,"../actions/items_actions":373,"../components/filter__list.jsx":377,"react-redux":222}],407:[function(require,module,exports){
+},{"../actions/api_actions":370,"../actions/category_filter_actions":371,"../actions/items_actions":373,"../components/filter__list.jsx":377,"react-redux":222}],406:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43854,7 +43823,7 @@ var ProjectFilterTag = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToPr
 
 exports.default = ProjectFilterTag;
 
-},{"../actions/api_actions":370,"../actions/items_actions":373,"../actions/tag_filter_actions":374,"../components/filter__list.jsx":377,"react-redux":222}],408:[function(require,module,exports){
+},{"../actions/api_actions":370,"../actions/items_actions":373,"../actions/tag_filter_actions":374,"../components/filter__list.jsx":377,"react-redux":222}],407:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43932,7 +43901,7 @@ var Images = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_imag
 
 exports.default = Images;
 
-},{"../actions/api_actions":370,"../components/image__list.jsx":384,"react-redux":222}],409:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/image__list.jsx":384,"react-redux":222}],408:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44009,7 +43978,7 @@ var projectsPage = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)
 
 exports.default = projectsPage;
 
-},{"../actions/api_actions":370,"../components/list__container.jsx":389,"react-redux":222}],410:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/list__container.jsx":389,"react-redux":222}],409:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44022,50 +43991,59 @@ var _category_filter_actions = require('../actions/category_filter_actions');
 
 var _api_actions = require('../actions/api_actions');
 
-var _project = require('../components/project.jsx');
+var _single__container = require('../components/single__container.jsx');
 
-var _project2 = _interopRequireDefault(_project);
+var _single__container2 = _interopRequireDefault(_single__container);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
     var id = ownProps.match.params.id;
-
-    console.table(ownProps.match);
     var apiCalls = state.apiCalls;
 
-    var projects = apiCalls['portfolio/projects'] || {
+    var list = apiCalls['portfolio/projects'] || {
         isFetching: true,
         items: []
     };
 
-    var project = {
+    var item = {
         id: 0,
         name: '',
         description: '',
         tags: []
     };
+
     var i = 0;
-    for (i; i < projects.items.length; i++) {
-        if (projects.items[i].id === parseInt(id)) {
-            project = projects.items[i];
+    for (i; i < list.items.length; i++) {
+        if (list.items[i].id === parseInt(id)) {
+            item = list.items[i];
             break;
         }
     }
+
     var links = apiCalls['portfolio/projectsLinks/?project__id=' + id] || {
         isFetching: true,
         items: []
     };
-    var images = apiCalls['portfolio/projectsImages?imgType=gal&project__id=' + id] || {
+
+    var images = apiCalls['portfolio/projectsImages/?imgType=gal&project__id=' + id] || {
         isFetching: true,
         items: []
     };
-    var isFetching = projects.isFetching && images.isFetching && links.isFetching;
+
+    var tags = item.tags || [];
+    console.log(tags);
+
+    var isFetching = list.isFetching && images.isFetching && links.isFetching && tags.apiCalls;
+
     return {
-        isFetching: isFetching,
-        project: project,
-        links: links,
-        images: images
+        id: 'p',
+        title: item.name,
+        isFetching: false,
+        item: item,
+        links: links.items,
+        images: images.items,
+        tags: tags
     };
 };
 
@@ -44076,6 +44054,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     dispatch((0, _api_actions.apiFetchIfNeeded)('portfolio/projects'));
     dispatch((0, _api_actions.apiFetchIfNeeded)('portfolio/projectsLinks/?project__id=' + id));
     dispatch((0, _api_actions.apiFetchIfNeeded)('portfolio/projectsImages?imgType=gal&project__id=' + id));
+    dispatch((0, _api_actions.apiFetchIfNeeded)('portfolio/projectTags'));
     return {
         onTagClick: function onTagClick(id) {
             console.log(id);
@@ -44086,11 +44065,90 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     };
 };
 
-var ProjectV = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_project2.default);
+var Project = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_single__container2.default);
 
-exports.default = ProjectV;
+exports.default = Project;
 
-},{"../actions/api_actions":370,"../actions/category_filter_actions":371,"../components/project.jsx":392,"react-redux":222}],411:[function(require,module,exports){
+},{"../actions/api_actions":370,"../actions/category_filter_actions":371,"../components/single__container.jsx":395,"react-redux":222}],410:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _reactRedux = require('react-redux');
+
+var _tag_filter_actions = require('../actions/tag_filter_actions');
+
+var _api_actions = require('../actions/api_actions');
+
+var _items_actions = require('../actions/items_actions');
+
+var _filter__list = require('../components/filter__list.jsx');
+
+var _filter__list2 = _interopRequireDefault(_filter__list);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+    var apiCalls = state.apiCalls,
+        tagFilter = state.tagFilter;
+
+
+    var items = ownProps.tags || [];
+
+    var active = [];
+    var activeObjs = [];
+
+    activeObjs.length = 0;
+    active.length = 0;
+
+    var allActive = tagFilter.length <= 0 ? true : false;
+
+    if (items.length > 0) {
+        for (var i = 0; i < items.length; i++) {
+            var tag = {
+                tag_id: items[i].tag_id,
+                active: false
+            };
+            for (var j = 0; j < tagFilter.length; j++) {
+                if (items[i].tag_id === tagFilter[j].tag_id) {
+                    tag.active = true;
+                    continue;
+                }
+            }
+            active.push(tag.active);
+            activeObjs.push(tag);
+        }
+    }
+
+    return {
+        items: items,
+        active: active,
+        allActive: allActive
+    };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+    dispatch((0, _api_actions.apiFetchIfNeeded)('portfolio/projectTags'));
+    return {
+        onClick: function onClick(tag_id, name) {
+            dispatch((0, _tag_filter_actions.addTagFilter)(tag_id, name));
+            dispatch((0, _items_actions.filterItems)());
+        },
+
+        clearAll: function clearAll() {
+            dispatch((0, _tag_filter_actions.clearTagFilter)());
+            dispatch((0, _items_actions.filterItems)());
+        }
+    };
+};
+
+var ProjectFilterTag = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_filter__list2.default);
+
+exports.default = ProjectFilterTag;
+
+},{"../actions/api_actions":370,"../actions/items_actions":373,"../actions/tag_filter_actions":374,"../components/filter__list.jsx":377,"react-redux":222}],411:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

@@ -7,15 +7,17 @@ const Single = ({
     item,
 }) => {
     var md = new Remarkable();
-    var mdr = md.render(item.text);
+    var text = item.text || item.description;
+    var mdr = md.render(text);
     return(
         <section>
-            { item.dateCreated && 
-                <div className="date-container">
-                    <span className="date">{ item.dateCreated } |</span> 
-                    <span className="date"> { item.dateUpdated }</span>
-                </div>
+            { item.dateCreated != null && 
+                    <div className="date-container">
+                        <span className="date">{ item.dateCreated } |</span> 
+                        <span className="date"> { item.dateUpdated }</span>
+                    </div>
             }
+
             <div className="markdown" dangerouslySetInnerHTML={{ __html: mdr }}/>
         </section>
     );
@@ -24,7 +26,8 @@ const Single = ({
 Single.propTypes = {
     item: PropTypes.shape({
         id: PropTypes.number.isRequired,
-        text: PropTypes.string.isRequired
-    }).isRequired
+        text: PropTypes.string,
+        description: PropTypes.string,
+    }).isRequired,
 };
 export default Single;

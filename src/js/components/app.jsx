@@ -23,11 +23,18 @@ const app = combineReducers({
     fileCalls,
 });
 
-const loggerMiddleware = createLogger();
-let store =  applyMiddleware(
-    thunkMiddleware,
-    loggerMiddleware
-)(createStore)(app);
+const logger = createLogger({
+    collapsed: true,
+});
+
+export const store =  createStore(
+    app,
+    applyMiddleware(
+        thunkMiddleware,
+        logger, 
+    ),
+);
+
 
 export default class App extends Component {
     render() {

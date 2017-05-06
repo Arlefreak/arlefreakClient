@@ -2,14 +2,13 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Image from './gallery__row.jsx';
 
-const ImageList = ({ images, onImageClick }) => (
+const ImageList = ({ images }) => (
     <section className="gallery">
         {
             images.map( image =>
                          <Image
                              key={image.id}
                              {...image}
-                             onImageClick={ onImageClick }
                          />
                          )
         }
@@ -22,7 +21,6 @@ ImageList.propTypes = {
         name: PropTypes.string.isRequired,
         image: PropTypes.string.isRequired
     }).isRequired).isRequired,
-    onImageClick: PropTypes.func.isRequired
 };
 
 export default ImageList;

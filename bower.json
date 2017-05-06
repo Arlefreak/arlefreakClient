@@ -22,10 +22,6 @@
     "test",
     "tests"
   ],
-  "devDependencies": {
-    "jquery": "~2.1.4",
-    "html5shiv": "~3.7.3"
-  },
   "dependencies": {
     "svg-injector": "~1.1.3",
     "SpinKit": "spinkit#^1.2.5"

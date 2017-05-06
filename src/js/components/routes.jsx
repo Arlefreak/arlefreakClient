@@ -30,49 +30,64 @@ import ProjectSingle from '../containers/project__single.js';
 import ReactGA from 'react-ga';
 import { StickyContainer } from 'react-sticky';
 
+import { clearTagFilter } from '../actions/tag_filter_actions';
+import { setCategoryFilter } from '../actions/category_filter_actions';
+import { store } from './app.jsx';
+
 // TODO: React router 4 fix https://github.com/react-ga/react-ga/issues/122
 ReactGA.initialize('UA-43222844-2');
-function logPageView() {
+
+const logPageView = () => {
+    store.dispatch(clearTagFilter());
+    store.dispatch(setCategoryFilter(0, 'All'));
     ReactGA.set({ page: window.location.pathname });
     ReactGA.pageview(window.location.pathname);
+};
+
+class TrackPageView extends React.Component {
+    componentWillMount() { logPageView(); }
+    componentWillUpdate() { logPageView(); }
+    render() { return <Route children={this.props.children}/> }
 }
 
 const Routes = () => (
     <Router>
-        <StickyContainer>
-            <Header></Header>
-            <CSSTransitionGroup
-                transitionName="fade"
-                transitionAppear={true}
-                transitionEnter={true}
-                transitionLeave={true}
-                transitionAppearTimeout={500}
-                transitionEnterTimeout={500}
-                transitionLeaveTimeout={500}
-            >
-                <main>
-                    <div className="wrapper">
-                        <Switch>
+        <TrackPageView>
+            <StickyContainer>
+                <Header></Header>
+                <CSSTransitionGroup
+                    transitionName="fade"
+                    transitionAppear={true}
+                    transitionEnter={true}
+                    transitionLeave={true}
+                    transitionAppearTimeout={500}
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}
+                >
+                    <main>
+                        <div className="wrapper">
+                            <Switch>
 
-                            <Route exact path="/projects" component={ProjectList} />
-                            <Route path="/projects/:id" component={ProjectSingle} />
+                                <Route exact path="/projects" component={ProjectList} />
+                                <Route path="/projects/:id" component={ProjectSingle} />
 
-                            <Route exact path="/about" component={AboutList} />
-                            <Route path="/about/:id" component={AboutSingle} />
+                                <Route exact path="/about" component={AboutList} />
+                                <Route path="/about/:id" component={AboutSingle} />
 
-                            <Route exact path="/cv" component={CvSingle} />
+                                <Route exact path="/cv" component={CvSingle} />
 
-                            <Route exact path="/logs" component={DiaryList} />
-                            <Route path="/logs/:id" component={DiarySingle} />
+                                <Route exact path="/logs" component={DiaryList} />
+                                <Route path="/logs/:id" component={DiarySingle} />
 
-                            <Route path="/ligoj" component={LigojList} />
+                                <Route path="/ligoj" component={LigojList} />
 
-                            <Route component={Home} />
-                        </Switch>
-                    </div>
-                </main>
-            </CSSTransitionGroup>
-        </StickyContainer>
+                                <Route component={Home} />
+                            </Switch>
+                        </div>
+                    </main>
+                </CSSTransitionGroup>
+            </StickyContainer>
+        </TrackPageView>
     </Router>
 );
 

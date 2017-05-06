@@ -1,44 +1,54 @@
 import { connect } from 'react-redux';
 import { setCategoryFilter } from '../actions/category_filter_actions';
 import { apiFetchIfNeeded } from '../actions/api_actions';
-import  Project from '../components/project.jsx';
+import  Single from '../components/single__container.jsx';
 
 const mapStateToProps = (state, ownProps) => {
     const { id } = ownProps.match.params;
-    console.table(ownProps.match);
     const { apiCalls } = state;
-    const projects = apiCalls['portfolio/projects'] || {
+    const list = apiCalls['portfolio/projects'] || {
         isFetching: true,
         items: []
     };
 
-    let project = {
+    let item = {
         id: 0,
         name: '',
         description: '',
-        tags: []
+        tags: [],
     };
+
     var i = 0;
-    for(i; i < projects.items.length; i++){
-        if (projects.items[i].id === parseInt(id)){
-            project = projects.items[i];
+    for(i; i < list.items.length; i++){
+        if (list.items[i].id === parseInt(id)){
+            item = list.items[i];
             break;
         }
     }
+
     const links = apiCalls['portfolio/projectsLinks/?project__id=' + id] || {
         isFetching: true,
         items: []
     };
-    const images = apiCalls['portfolio/projectsImages?imgType=gal&project__id=' + id] || {
+
+    const images = apiCalls['portfolio/projectsImages/?imgType=gal&project__id=' + id] || {
         isFetching: true,
         items: []
     };
-    const isFetching = projects.isFetching && images.isFetching && links.isFetching;
+
+    const tags =  item.tags || [];
+    console.log(tags);
+
+    const isFetching = list.isFetching && images.isFetching && links.isFetching && tags.apiCalls;
+
     return {
-        isFetching: isFetching,
-        project: project,
-        links: links,
-        images: images
+        id: 'p',
+        title: item.name,
+        isFetching: false,
+        item: item,
+        links: links.items,
+        images: images.items,
+        tags: tags,
     };
 };
 
@@ -47,15 +57,16 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     dispatch(apiFetchIfNeeded('portfolio/projects'));
     dispatch(apiFetchIfNeeded('portfolio/projectsLinks/?project__id=' + id));
     dispatch(apiFetchIfNeeded('portfolio/projectsImages?imgType=gal&project__id=' + id));
+    dispatch(apiFetchIfNeeded('portfolio/projectTags'));
     return {
         onTagClick: (id) => { console.log(id); },
         onImageClick : () => { console.log('ImageClick'); }
     };
 };
 
-const ProjectV = connect(
+const Project = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Project);
+)(Single);
 
-export default ProjectV;
+export default Project;
