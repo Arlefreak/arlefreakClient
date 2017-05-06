@@ -1,6 +1,6 @@
-import { ADD_TAG_FILTER, DELETE_TAG_FILTER, CLEAR_ALL_TAG_FILTERS } from '../actions';
+import { ADD_TAG_FILTER, DELETE_TAG_FILTER, CLEAR_ALL_TAG_FILTERS } from '../actions/tag_filter_actions';
 
-const tagFilter = (state = [], action) => {
+export const tagFilter = (state = [], action) => {
 
     var exists = false;
     var i = 0;

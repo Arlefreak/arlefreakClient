@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
-import { addTagFilter, filterProjects, apiFetchIfNeeded, clearTagFilter } from '../actions';
-import FilterList from '../components/filter__list.jsx';;
+import { addTagFilter, clearTagFilter } from '../actions/tag_filter_actions';
+import { apiFetchIfNeeded } from '../actions/api_actions';
+import { filterItems } from '../actions/items_actions';
+import FilterList from '../components/filter__list.jsx';
 
 const mapStateToProps = (state, ownProps) => {
     const { apiCalls, tagFilter } = state;
@@ -54,12 +56,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onClick: (tag_id, name) => {
             dispatch(addTagFilter(tag_id, name));
-            dispatch(filterProjects());
+            dispatch(filterItems());
         },
 
         clearAll: () =>{
             dispatch(clearTagFilter());
-            dispatch(filterProjects());
+            dispatch(filterItems());
         }
     };
 };

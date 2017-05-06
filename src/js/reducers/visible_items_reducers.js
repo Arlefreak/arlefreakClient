@@ -1,9 +1,9 @@
-import { SET_VISIBLE_ITEMS } from '../actions';
+import { SET_VISIBLE_ITEMS } from '../actions/items_actions';
 
-const visibleItems = (state = [], action) => {
+export const visibleItems = (state = [], action) => {
     switch (action.type){
         case SET_VISIBLE_ITEMS:
-            return action.projects;
+            return action.items;
             break;
         default:
             return state;

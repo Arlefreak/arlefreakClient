@@ -45,7 +45,7 @@ export function clearTagFilter() {
     };
 }
 
-function filterByTags (projects, tags) {
+export function filterByTags (projects, tags) {
     var filteredProjects = [];
     var i = 0;
     var j = 0;

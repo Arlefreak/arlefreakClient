@@ -1,3 +1,6 @@
+import fetch from 'isomorphic-fetch';
+import constants from '../constants.js';
+
 export const FILE_REQUEST  = 'FILE_REQUEST ';
 function fileRequest(endPoint) {
     return {

@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import constants from '../constants.js';
+
 const apiURL = constants.APIURL;
 
 export const API_REQUEST = 'API_REQUEST';
@@ -32,12 +33,6 @@ export function apiFetch(endPoint) {
 }
 
 export function apiFetchIfNeeded(endPoint){
-    // Note that the function also receives getState()
-    // which lets you choose what to dispatch next.
-
-    // This is useful for avoiding a network request if
-    // a cached value is already available.
-
     return (dispatch, getState) => {
         if (apiShouldFetch(getState(), endPoint)) {
             // Dispatch a thunk from thunk!
@@ -59,4 +54,3 @@ function apiShouldFetch(state, endPoint) {
         return false;
     }
 }
-

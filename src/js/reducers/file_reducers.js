@@ -1,6 +1,6 @@
-import { FILE_REQUEST, FILE_RESPONSE } from '../actions';
+import { FILE_REQUEST, FILE_RESPONSE } from '../actions/file_actions';
 
-function fileCalls(state = {}, action) {
+export function fileCalls(state = {}, action) {
     switch (action.type) {
         case FILE_RESPONSE:
             return Object.assign({}, state, {
@@ -11,7 +11,7 @@ function fileCalls(state = {}, action) {
     }
 };
 
-const file = (state = {
+export const file = (state = {
     isFetching: false,
     file: ''
 }, action) => {

@@ -19,7 +19,7 @@ export function setCategoryFilter(id, name) {
     };
 }
 
-function filterByCategory (projects, category) {
+export function filterByCategory (projects, category) {
     if(projects.length > 0){
         if(category.id === 0){
             return projects;

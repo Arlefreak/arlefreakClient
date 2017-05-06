@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { apiFetchIfNeeded } from '../actions';
+import { apiFetchIfNeeded } from '../actions/api_actions';
 import  ImageList from '../components/image__list.jsx';;
 
 const getVisibleImages  = (items, projects) => {
@@ -22,7 +22,7 @@ const getVisibleImages  = (items, projects) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-    const { apiCalls, visibleProjects, tagFilter, categoryFilter } = state;
+    const { apiCalls, visibleItems, tagFilter, categoryFilter } = state;
     const {
         isFetching,
         lastUpdated,
@@ -34,12 +34,12 @@ const mapStateToProps = (state, ownProps) => {
 
     const _list = ownProps.items || [];
 
-    let filterProjects = visibleProjects;
-    if(visibleProjects.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0){
-        filterProjects = _list;
+    let filterItems = visibleItems;
+    if(visibleItems.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0){
+        filterItems = _list;
     }
 
-    const filteredImages = getVisibleImages(items, filterProjects);
+    const filteredImages = getVisibleImages(items, filterItems);
 
     return {
         images: filteredImages,

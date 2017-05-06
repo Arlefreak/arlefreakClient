@@ -1,6 +1,6 @@
-import { API_REQUEST, API_RESPONSE} from '../actions';
+import { API_REQUEST, API_RESPONSE} from '../actions/api_actions';
 
-function apiCalls(state = {}, action) {
+export function apiCalls(state = {}, action) {
     switch (action.type) {
         case API_RESPONSE:
             return Object.assign({}, state, {
@@ -11,7 +11,7 @@ function apiCalls(state = {}, action) {
     }
 };
 
-const items = (state = {
+export const items = (state = {
     isFetching: false,
     items: []
 }, action) => {

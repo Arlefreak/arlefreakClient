@@ -1,5 +1,5 @@
-import filterByCategory from './category_filter_actions.js';
-import filterByTags from './tag_filter_actions.js';
+import { filterByCategory } from './category_filter_actions.js';
+import { filterByTags } from './tag_filter_actions.js';
 
 export const SET_VISIBLE_ITEMS = 'SET_VISIBLE_ITEMS';
 export function setVisibleItems(items) {

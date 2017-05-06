@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import HomePage from '../components/home.jsx';
-import { apiFetchIfNeeded } from '../actions';
+import { apiFetchIfNeeded } from '../actions/api_actions';
 
 const mapStateToProps = (state) => {
-    const { apiCalls, visibleProjects } = state;
+    const { apiCalls, visibleItems } = state;
     const {
         isFetching,
         lastUpdated,

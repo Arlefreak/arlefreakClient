@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { StickyContainer, Sticky } from 'react-sticky';
+import { Sticky } from 'react-sticky';
 
 class Header extends React.Component {
     render() {

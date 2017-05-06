@@ -28,7 +28,7 @@ import ProjectList from '../containers/project__list.js';
 import ProjectSingle from '../containers/project__single.js';
 
 import ReactGA from 'react-ga';
-import { StickyContainer, Sticky } from 'react-sticky';
+import { StickyContainer } from 'react-sticky';
 
 // TODO: React router 4 fix https://github.com/react-ga/react-ga/issues/122
 ReactGA.initialize('UA-43222844-2');

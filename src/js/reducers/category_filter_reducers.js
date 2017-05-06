@@ -1,6 +1,6 @@
-import { SET_CATEGORY_FILTER } from '../actions';
+import { SET_CATEGORY_FILTER } from '../actions/category_filter_actions';
 
-const categoryFilter = (state = {
+export const categoryFilter = (state = {
     id: 0,
     name: 'All'
 }, action) => {

@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
-import { setCategoryFilter, filterProjects, apiFetchIfNeeded } from '../actions';
+import { filterItems } from '../actions/items_actions';
+import { setCategoryFilter}  from '../actions/category_filter_actions';
+import { apiFetchIfNeeded } from '../actions/api_actions';
 import FilterList from '../components/filter__list.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
@@ -44,11 +46,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onClick: (id, name) => {
             dispatch(setCategoryFilter(id, name));
-            dispatch(filterProjects());
+            dispatch(filterItems());
         },
         clearAll: () =>{
             dispatch(setCategoryFilter(0, 'All'));
-            dispatch(filterProjects());
+            dispatch(filterItems());
         }
     };
 };

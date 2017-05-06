@@ -96,13 +96,10 @@ gulp.task('browserify', function() {
 
 gulp.task('js', function() {
     return gulp.src(['src/js/**/*.js', '!src/js/templates/**/*.js'])
-        .pipe(lint({
-            devel: DEBUG
-        }))
-        .pipe(lint.format())
-        .pipe(gulpif(!DEBUG, uglify()))
-        .pipe(concat('script.js'))
-        .pipe(gulp.dest(DEST_PATH + 'js/'));
+        .pipe(lint.format());
+        // .pipe(gulpif(!DEBUG, uglify()))
+        // .pipe(concat('script.js'))
+        // .pipe(gulp.dest(DEST_PATH + 'js/'));
 });
 
 gulp.task('css', function() {
@@ -161,7 +158,7 @@ gulp.task('generate-favicon', function(done) {
     realFavicon.generateFavicon({
         masterPicture: 'src/img/favicon.png',
         dest: DEST_PATH + 'img/favicons/',
-        iconsPath: '/img/favicon/',
+        iconsPath: '/img/favicons/',
         design: {
             ios: {
                 pictureAspect: 'backgroundAndMargin',
@@ -230,7 +227,7 @@ gulp.task('generate-favicon', function(done) {
 // this task whenever you modify a page. You can keep this task
 // as is or refactor your existing HTML pipeline.
 gulp.task('inject-favicon-markups', function() {
-    return gulp.src(['views/head.html'])
+    return gulp.src(['views/favicon.html'])
         .pipe(realFavicon.injectFaviconMarkups(JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).favicon.html_code))
         .pipe(gulp.dest('views/'));
 });
@@ -248,14 +245,18 @@ gulp.task('check-for-favicon-update', function(done) {
     });
 });
 
+gulp.task('favicon', function() {
+    runSequence('generate-favicon', 'inject-favicon-markups');
+});
 
-gulp.task('init', ['css', 'bower', 'react', 'img', 'html', 'files']);
+gulp.task('init', ['css', 'bower', 'react', 'img', 'html', 'files', 'favicon']);
 
-gulp.task('watch', ['css', 'react', 'img', 'html'], function() {
+gulp.task('watch', () => {
     gulp.watch('src/css/**/*.styl', ['css']);
     gulp.watch('src/js/**/*.js', ['react']);
     gulp.watch('src/js/**/*.jsx', ['react']);
-    gulp.watch('src/img/**/*', ['img']);
+    gulp.watch(['src/img/**/*', '!src/img/favicon.png'], ['img']);
+    gulp.watch(['src/img/favicon.png'], ['favicon']);
     gulp.watch('src/*.html', ['html']);
 });
 

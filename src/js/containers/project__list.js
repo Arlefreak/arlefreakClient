@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import ListCointainer from '../components/list__container.jsx';
-import { apiFetchIfNeeded } from '../actions';
+import { apiFetchIfNeeded } from '../actions/api_actions';
 
 const mapStateToProps = (state) => {
-    const { apiCalls, visibleProjects, tagFilter, categoryFilter } = state;
+    const { apiCalls, visibleItems, tagFilter, categoryFilter } = state;
     const {
         isFetching,
         lastUpdated,
@@ -28,10 +28,10 @@ const mapStateToProps = (state) => {
         items: []
     };
 
-    let filterProjects = visibleProjects;
+    let filterItems = visibleItems;
 
-    if(visibleProjects.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0){
-        filterProjects = items;
+    if(visibleItems.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0){
+        filterItems = items;
     }
 
     let finalFetch = isFetching &&
@@ -42,7 +42,7 @@ const mapStateToProps = (state) => {
     return {
         id: 'p',
         isFetching: finalFetch,
-        items: filterProjects,
+        items: filterItems,
         categories: categories,
         tags: tags,
         images: images,
