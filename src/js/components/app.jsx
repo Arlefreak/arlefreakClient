@@ -11,11 +11,13 @@ import {
     tagFilter,
     categoryFilter,
     apiCalls,
-    fileCalls
+    fileCalls,
+    route,
 } from '../reducers';
 
 
 const app = combineReducers({
+    route,
     visibleItems,
     tagFilter,
     categoryFilter,

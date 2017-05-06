@@ -14,36 +14,36 @@ const FilterList = ({ items, onClick, className, active, allActive, clearAll }) 
             transitionAppearTimeout={500}
             transitionEnterTimeout={500}
             transitionLeaveTimeout={500}
+            component="ul"
+            className = { className }
         >
-            <ul className = { className }>
-                {
-                    <Row 
-                        key={0}
-                        className={ allClass }
-                        name='All'
-                        onClick={
-                            () => clearAll()
-                        }
-                    />
-                }
-                {
-                    items.map((item, index) => {
-                        let id = item.id || item.tag_id;
-                        let name =  item.name || item.tag;
-                        let className = active[index] ? 'active' : '';
+            {
+                <Row 
+                    key={0}
+                    className={ allClass }
+                    name='All'
+                    onClick={
+                        () => clearAll()
+                    }
+                />
+            }
+            {
+                items.map((item, index) => {
+                    let id = item.id || item.tag_id;
+                    let name =  item.name || item.tag;
+                    let className = active[index] ? 'active' : '';
 
-                        return <Row
-                            key={ id }
-                            className={ className }
-                            name={ name }
-                            {...item}
-                            onClick={
-                                () => onClick(id, name)
-                            }
-                        />;
-                    })
-                }
-            </ul>
+                    return <Row
+                        key={ id }
+                        className={ className }
+                        name={ name }
+                        {...item}
+                        onClick={
+                            () => onClick(id, name)
+                        }
+                    />;
+                })
+            }
         </CSSTransitionGroup>
     );};
 

@@ -15,18 +15,18 @@ const List = ({ items, route, className }) => {
             transitionAppearTimeout={500}
             transitionEnterTimeout={500}
             transitionLeaveTimeout={500}
+            component = 'ul'
+            className = { classes }
         >
-            <ul className={ classes }>
-                {
-                    items.map( item =>
-                        <Row
-                            key={item.id}
-                            route={route}
-                            {...item}
-                        />
-                    )
-                }
-            </ul>
+            {
+                items.map( item =>
+                    <Row
+                        key={item.id}
+                        route={route}
+                        {...item}
+                    />
+                )
+            }
         </CSSTransitionGroup>
     );
 };

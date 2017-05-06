@@ -32,6 +32,7 @@ import { StickyContainer } from 'react-sticky';
 
 import { clearTagFilter } from '../actions/tag_filter_actions';
 import { setCategoryFilter } from '../actions/category_filter_actions';
+import { routeChanged } from '../actions/routes_actions';
 import { store } from './app.jsx';
 
 // TODO: React router 4 fix https://github.com/react-ga/react-ga/issues/122
@@ -40,6 +41,9 @@ ReactGA.initialize('UA-43222844-2');
 const logPageView = () => {
     store.dispatch(clearTagFilter());
     store.dispatch(setCategoryFilter(0, 'All'));
+
+    store.dispatch(routeChanged(window.location.pathname));
+
     ReactGA.set({ page: window.location.pathname });
     ReactGA.pageview(window.location.pathname);
 };
@@ -63,28 +67,26 @@ const Routes = () => (
                     transitionAppearTimeout={500}
                     transitionEnterTimeout={500}
                     transitionLeaveTimeout={500}
+                    component="main"
                 >
-                    <main>
-                        <div className="wrapper">
-                            <Switch>
+                    <div className="wrapper">
+                        <Switch className="poop">
+                            <Route exact path="/projects" component={ProjectList} />
+                            <Route path="/projects/:id" component={ProjectSingle} />
 
-                                <Route exact path="/projects" component={ProjectList} />
-                                <Route path="/projects/:id" component={ProjectSingle} />
+                            <Route exact path="/about" component={AboutList} />
+                            <Route path="/about/:id" component={AboutSingle} />
 
-                                <Route exact path="/about" component={AboutList} />
-                                <Route path="/about/:id" component={AboutSingle} />
+                            <Route exact path="/cv" component={CvSingle} />
 
-                                <Route exact path="/cv" component={CvSingle} />
+                            <Route exact path="/logs" component={DiaryList} />
+                            <Route path="/logs/:id" component={DiarySingle} />
 
-                                <Route exact path="/logs" component={DiaryList} />
-                                <Route path="/logs/:id" component={DiarySingle} />
+                            <Route path="/ligoj" component={LigojList} />
 
-                                <Route path="/ligoj" component={LigojList} />
-
-                                <Route component={Home} />
-                            </Switch>
-                        </div>
-                    </main>
+                            <Route component={Home} />
+                        </Switch>
+                    </div>
                 </CSSTransitionGroup>
             </StickyContainer>
         </TrackPageView>

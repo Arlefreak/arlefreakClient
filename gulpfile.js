@@ -97,9 +97,9 @@ gulp.task('browserify', function() {
 gulp.task('js', function() {
     return gulp.src(['src/js/**/*.js', '!src/js/templates/**/*.js'])
         .pipe(lint.format());
-        // .pipe(gulpif(!DEBUG, uglify()))
-        // .pipe(concat('script.js'))
-        // .pipe(gulp.dest(DEST_PATH + 'js/'));
+    // .pipe(gulpif(!DEBUG, uglify()))
+    // .pipe(concat('script.js'))
+    // .pipe(gulp.dest(DEST_PATH + 'js/'));
 });
 
 gulp.task('css', function() {

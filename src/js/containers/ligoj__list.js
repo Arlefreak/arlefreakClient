@@ -3,7 +3,7 @@ import { apiFetchIfNeeded } from '../actions/api_actions';
 import ListCointainer from '../components/list__container.jsx';
 
 const mapStateToProps = (state) => {
-    const { apiCalls } = state;
+    const { apiCalls, visibleItems, tagFilter, categoryFilter } = state;
     const {
         isFetching,
         lastUpdated,
@@ -18,10 +18,16 @@ const mapStateToProps = (state) => {
         items: []
     };
 
+    let filterItems = visibleItems;
+
+    if(visibleItems.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0){
+        filterItems = items;
+    }
+
     return {
         id: 'ligoj',
         isFetching: isFetching && tags.isFetching,
-        items: items,
+        items: filterItems,
         tags: tags,
         route: 'H'
     };

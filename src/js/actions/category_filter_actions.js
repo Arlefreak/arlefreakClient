@@ -6,7 +6,7 @@ ReactGA.initialize('UA-43222844-2');
 
 export const SET_CATEGORY_FILTER = 'SET_CATEGORY_FILTER';
 export function setCategoryFilter(id, name) {
-    ReactGA.event({
+   ReactGA.event({
         category: 'Filter',
         action: 'setCategoryFilter',
         value: id,

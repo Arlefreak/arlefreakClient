@@ -379,6 +379,22 @@ aside.right {
   -ms-transform: rotate(90deg) translate(-100%, 0);
   transform: rotate(90deg) translate(-100%, 0);
 }
+ul.categories {
+  display: block;
+  width: 100%;
+  margin: 0 0 15px 0;
+  clear: both;
+  overflow: hidden;
+}
+ul.categories li {
+  display: block;
+  float: left;
+  margin: 0 10px 0 0;
+  cursor: pointer;
+}
+ul.categories li .active {
+  color: #f04250;
+}
 main {
   overflow: hidden;
   margin: 0 0 90px 0;
@@ -1563,22 +1579,6 @@ ul.tags li a.active {
 ul.tags li a.active::before {
   width: 100%;
   background: #72dec2;
-}
-ul.categories {
-  display: block;
-  width: 100%;
-  margin: 15px 0 15px 0;
-  clear: both;
-  overflow: hidden;
-}
-ul.categories li {
-  display: block;
-  float: left;
-  margin: 0 10px 0 0;
-  cursor: pointer;
-}
-ul.categories li .active {
-  color: #f04250;
 }
 .fade-enter {
   opacity: 0.1;

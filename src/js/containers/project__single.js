@@ -37,7 +37,6 @@ const mapStateToProps = (state, ownProps) => {
     };
 
     const tags =  item.tags || [];
-    console.log(tags);
 
     const isFetching = list.isFetching && images.isFetching && links.isFetching && tags.apiCalls;
 
@@ -58,9 +57,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     dispatch(apiFetchIfNeeded('portfolio/projectsLinks/?project__id=' + id));
     dispatch(apiFetchIfNeeded('portfolio/projectsImages?imgType=gal&project__id=' + id));
     dispatch(apiFetchIfNeeded('portfolio/projectTags'));
+
     return {
-        onTagClick: (id) => { console.log(id); },
-        onImageClick : () => { console.log('ImageClick'); }
     };
 };
 

@@ -24,19 +24,18 @@ const Page = ({ id, title, isFetching, children }) => {
     }
 
     return (
-        <div>
-            <CSSTransitionGroup
-                transitionName="fade"
-                transitionAppear={true}
-                transitionEnter={true}
-                transitionLeave={true}
-                transitionAppearTimeout={500}
-                transitionEnterTimeout={500}
-                transitionLeaveTimeout={500}
-            >
-                {child}
-            </CSSTransitionGroup>
-        </div>
+        <CSSTransitionGroup
+            transitionName="fade"
+            transitionAppear={true}
+            transitionEnter={true}
+            transitionLeave={true}
+            transitionAppearTimeout={500}
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={500}
+            component = "div"
+        >
+            {child}
+        </CSSTransitionGroup>
     );
 };
 
