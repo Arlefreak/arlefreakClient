@@ -442,7 +442,7 @@ h4 {
 }
 p {
   font-size: 1em;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.8em;
   margin: 0 0 25px 0;
 }
@@ -468,7 +468,7 @@ a:hover {
 em {
   color: #333;
   font-style: italic;
-  font-weight: 500;
+  font-weight: 400;
 }
 strong {
   font-style: italic;
@@ -820,10 +820,10 @@ svg {
 }
 @-moz-keyframes glitch {
   0% {
-    text-shadow: 1px 0px 2px #fff200;
+    text-shadow: 1px 0px 2px #00aeef;
   }
   6% {
-    text-shadow: -2px 2px 3px $color3;
+    text-shadow: -2px 2px 3px #ec008c;
   }
   17% {
     text-shadow: 3px -2px 0 #fff200;
@@ -832,13 +832,13 @@ svg {
     text-shadow: 0px 2px 0 #fff;
   }
   22% {
-    text-shadow: 3px -2px 0 $color3;
+    text-shadow: 3px -2px 0 #00aeef;
   }
   28% {
     text-shadow: -2px 3px 0 #fff200;
   }
   37% {
-    text-shadow: 3px 0px 0 $color3;
+    text-shadow: 3px 0px 0 #ec008c;
   }
   39% {
     text-shadow: -1px -2px 0 #fff;
@@ -847,7 +847,7 @@ svg {
     text-shadow: 0px 0px 0 #fff200;
   }
   47% {
-    text-shadow: 4px -4px 0 #fff200;
+    text-shadow: 4px -4px 0 #00aeef;
   }
   52% {
     text-shadow: 0px 0px 0px #000;
@@ -858,10 +858,10 @@ svg {
 }
 @-webkit-keyframes glitch {
   0% {
-    text-shadow: 1px 0px 2px #fff200;
+    text-shadow: 1px 0px 2px #00aeef;
   }
   6% {
-    text-shadow: -2px 2px 3px $color3;
+    text-shadow: -2px 2px 3px #ec008c;
   }
   17% {
     text-shadow: 3px -2px 0 #fff200;
@@ -870,13 +870,13 @@ svg {
     text-shadow: 0px 2px 0 #fff;
   }
   22% {
-    text-shadow: 3px -2px 0 $color3;
+    text-shadow: 3px -2px 0 #00aeef;
   }
   28% {
     text-shadow: -2px 3px 0 #fff200;
   }
   37% {
-    text-shadow: 3px 0px 0 $color3;
+    text-shadow: 3px 0px 0 #ec008c;
   }
   39% {
     text-shadow: -1px -2px 0 #fff;
@@ -885,7 +885,7 @@ svg {
     text-shadow: 0px 0px 0 #fff200;
   }
   47% {
-    text-shadow: 4px -4px 0 #fff200;
+    text-shadow: 4px -4px 0 #00aeef;
   }
   52% {
     text-shadow: 0px 0px 0px #000;
@@ -896,10 +896,10 @@ svg {
 }
 @-o-keyframes glitch {
   0% {
-    text-shadow: 1px 0px 2px #fff200;
+    text-shadow: 1px 0px 2px #00aeef;
   }
   6% {
-    text-shadow: -2px 2px 3px $color3;
+    text-shadow: -2px 2px 3px #ec008c;
   }
   17% {
     text-shadow: 3px -2px 0 #fff200;
@@ -908,13 +908,13 @@ svg {
     text-shadow: 0px 2px 0 #fff;
   }
   22% {
-    text-shadow: 3px -2px 0 $color3;
+    text-shadow: 3px -2px 0 #00aeef;
   }
   28% {
     text-shadow: -2px 3px 0 #fff200;
   }
   37% {
-    text-shadow: 3px 0px 0 $color3;
+    text-shadow: 3px 0px 0 #ec008c;
   }
   39% {
     text-shadow: -1px -2px 0 #fff;
@@ -923,7 +923,7 @@ svg {
     text-shadow: 0px 0px 0 #fff200;
   }
   47% {
-    text-shadow: 4px -4px 0 #fff200;
+    text-shadow: 4px -4px 0 #00aeef;
   }
   52% {
     text-shadow: 0px 0px 0px #000;
@@ -934,10 +934,10 @@ svg {
 }
 @keyframes glitch {
   0% {
-    text-shadow: 1px 0px 2px #fff200;
+    text-shadow: 1px 0px 2px #00aeef;
   }
   6% {
-    text-shadow: -2px 2px 3px $color3;
+    text-shadow: -2px 2px 3px #ec008c;
   }
   17% {
     text-shadow: 3px -2px 0 #fff200;
@@ -946,13 +946,13 @@ svg {
     text-shadow: 0px 2px 0 #fff;
   }
   22% {
-    text-shadow: 3px -2px 0 $color3;
+    text-shadow: 3px -2px 0 #00aeef;
   }
   28% {
     text-shadow: -2px 3px 0 #fff200;
   }
   37% {
-    text-shadow: 3px 0px 0 $color3;
+    text-shadow: 3px 0px 0 #ec008c;
   }
   39% {
     text-shadow: -1px -2px 0 #fff;
@@ -961,7 +961,7 @@ svg {
     text-shadow: 0px 0px 0 #fff200;
   }
   47% {
-    text-shadow: 4px -4px 0 #fff200;
+    text-shadow: 4px -4px 0 #00aeef;
   }
   52% {
     text-shadow: 0px 0px 0px #000;
@@ -1417,7 +1417,7 @@ svg:hover #stick {
   font-style: italic;
   margin-left: 1.5em;
   padding-left: 1em;
-  border-left: 3px solid #00aeef;
+  border-left: 2px solid #00aeef;
 }
 .markdown blockquote p {
   color: #999;
