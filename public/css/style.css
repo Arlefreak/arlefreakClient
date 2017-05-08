@@ -393,7 +393,7 @@ ul.categories li {
   cursor: pointer;
 }
 ul.categories li .active {
-  color: #f04250;
+  color: #ec008c;
 }
 main {
   overflow: hidden;
@@ -463,7 +463,7 @@ a {
   transition: all 0.2s ease;
 }
 a:hover {
-  color: #f04250;
+  color: #ec008c;
 }
 em {
   color: #333;
@@ -557,7 +557,7 @@ ul.vertical-list li a::before {
   width: 0%;
   height: 100%;
   z-index: -1;
-  background: #72dec2;
+  background: rgba(255,229,0,0.5);
   content: "";
   position: absolute;
   bottom: 0;
@@ -820,13 +820,13 @@ svg {
 }
 @-moz-keyframes glitch {
   0% {
-    text-shadow: 1px 0px 2px #72dec2;
+    text-shadow: 1px 0px 2px #fff200;
   }
   6% {
     text-shadow: -2px 2px 3px $color3;
   }
   17% {
-    text-shadow: 3px -2px 0 #72dec2;
+    text-shadow: 3px -2px 0 #fff200;
   }
   16% {
     text-shadow: 0px 2px 0 #fff;
@@ -835,7 +835,7 @@ svg {
     text-shadow: 3px -2px 0 $color3;
   }
   28% {
-    text-shadow: -2px 3px 0 #72dec2;
+    text-shadow: -2px 3px 0 #fff200;
   }
   37% {
     text-shadow: 3px 0px 0 $color3;
@@ -844,10 +844,10 @@ svg {
     text-shadow: -1px -2px 0 #fff;
   }
   43% {
-    text-shadow: 0px 0px 0 #72dec2;
+    text-shadow: 0px 0px 0 #fff200;
   }
   47% {
-    text-shadow: 4px -4px 0 #72dec2;
+    text-shadow: 4px -4px 0 #fff200;
   }
   52% {
     text-shadow: 0px 0px 0px #000;
@@ -858,13 +858,13 @@ svg {
 }
 @-webkit-keyframes glitch {
   0% {
-    text-shadow: 1px 0px 2px #72dec2;
+    text-shadow: 1px 0px 2px #fff200;
   }
   6% {
     text-shadow: -2px 2px 3px $color3;
   }
   17% {
-    text-shadow: 3px -2px 0 #72dec2;
+    text-shadow: 3px -2px 0 #fff200;
   }
   16% {
     text-shadow: 0px 2px 0 #fff;
@@ -873,7 +873,7 @@ svg {
     text-shadow: 3px -2px 0 $color3;
   }
   28% {
-    text-shadow: -2px 3px 0 #72dec2;
+    text-shadow: -2px 3px 0 #fff200;
   }
   37% {
     text-shadow: 3px 0px 0 $color3;
@@ -882,10 +882,10 @@ svg {
     text-shadow: -1px -2px 0 #fff;
   }
   43% {
-    text-shadow: 0px 0px 0 #72dec2;
+    text-shadow: 0px 0px 0 #fff200;
   }
   47% {
-    text-shadow: 4px -4px 0 #72dec2;
+    text-shadow: 4px -4px 0 #fff200;
   }
   52% {
     text-shadow: 0px 0px 0px #000;
@@ -896,13 +896,13 @@ svg {
 }
 @-o-keyframes glitch {
   0% {
-    text-shadow: 1px 0px 2px #72dec2;
+    text-shadow: 1px 0px 2px #fff200;
   }
   6% {
     text-shadow: -2px 2px 3px $color3;
   }
   17% {
-    text-shadow: 3px -2px 0 #72dec2;
+    text-shadow: 3px -2px 0 #fff200;
   }
   16% {
     text-shadow: 0px 2px 0 #fff;
@@ -911,7 +911,7 @@ svg {
     text-shadow: 3px -2px 0 $color3;
   }
   28% {
-    text-shadow: -2px 3px 0 #72dec2;
+    text-shadow: -2px 3px 0 #fff200;
   }
   37% {
     text-shadow: 3px 0px 0 $color3;
@@ -920,10 +920,10 @@ svg {
     text-shadow: -1px -2px 0 #fff;
   }
   43% {
-    text-shadow: 0px 0px 0 #72dec2;
+    text-shadow: 0px 0px 0 #fff200;
   }
   47% {
-    text-shadow: 4px -4px 0 #72dec2;
+    text-shadow: 4px -4px 0 #fff200;
   }
   52% {
     text-shadow: 0px 0px 0px #000;
@@ -934,13 +934,13 @@ svg {
 }
 @keyframes glitch {
   0% {
-    text-shadow: 1px 0px 2px #72dec2;
+    text-shadow: 1px 0px 2px #fff200;
   }
   6% {
     text-shadow: -2px 2px 3px $color3;
   }
   17% {
-    text-shadow: 3px -2px 0 #72dec2;
+    text-shadow: 3px -2px 0 #fff200;
   }
   16% {
     text-shadow: 0px 2px 0 #fff;
@@ -949,7 +949,7 @@ svg {
     text-shadow: 3px -2px 0 $color3;
   }
   28% {
-    text-shadow: -2px 3px 0 #72dec2;
+    text-shadow: -2px 3px 0 #fff200;
   }
   37% {
     text-shadow: 3px 0px 0 $color3;
@@ -958,10 +958,10 @@ svg {
     text-shadow: -1px -2px 0 #fff;
   }
   43% {
-    text-shadow: 0px 0px 0 #72dec2;
+    text-shadow: 0px 0px 0 #fff200;
   }
   47% {
-    text-shadow: 4px -4px 0 #72dec2;
+    text-shadow: 4px -4px 0 #fff200;
   }
   52% {
     text-shadow: 0px 0px 0px #000;
@@ -1413,6 +1413,40 @@ svg:hover #stick {
 .markdown p:first-child img {
   display: none;
 }
+.markdown blockquote {
+  font-style: italic;
+  margin-left: 1.5em;
+  padding-left: 1em;
+  border-left: 3px solid #00aeef;
+}
+.markdown blockquote p {
+  color: #999;
+}
+.markdown pre {
+  background-color: #e3e3e3;
+  display: block;
+  padding: 1em;
+  overflow-x: auto;
+}
+.markdown pre > code {
+  padding: 0;
+  background-color: transparent;
+  white-space: pre;
+}
+.markdown hr {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+  border-color: #00aeef;
+}
+.markdown code {
+  font-size: 0.9em;
+  padding: 0 0.5em;
+  background-color: #f1f1f1;
+  white-space: pre-wrap;
+}
 .markdown img {
   width: 99%;
   height: auto;
@@ -1449,7 +1483,7 @@ svg:hover #stick {
 .markdown a:hover::before,
 .markdown a.active::before {
   width: 100%;
-  background: #72dec2;
+  background: rgba(255,229,0,0.5);
 }
 nav {
   display: block;
@@ -1483,11 +1517,11 @@ nav a {
 }
 nav a:hover {
   color: #000;
-  border-bottom: 1px solid #000;
+  border-bottom: 2px solid #000;
 }
 nav a.active {
   color: #000;
-  border-bottom: 1px solid #f04250;
+  border-bottom: 2px solid #ec008c;
 }
 .projects a,
 .project a {
@@ -1578,7 +1612,7 @@ ul.tags li a.active {
 }
 ul.tags li a.active::before {
   width: 100%;
-  background: #72dec2;
+  background: #fff200;
 }
 .fade-enter {
   opacity: 0.1;

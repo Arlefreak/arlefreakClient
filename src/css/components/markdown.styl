@@ -38,6 +38,32 @@
         &:first-child
             img
                 display none
+    blockquote
+        font-style italic
+        margin-left 1.5em
+        padding-left 1em
+        border-left 3px solid $highlight-blue
+        p
+            color $gray3
+    pre
+        background-color $gray2
+        display block
+        padding 1em
+        overflow-x auto
+        & > code
+            padding 0
+            background-color transparent
+            white-space pre
+    hr
+        box-sizing content-box
+        height 0
+        overflow visible
+        border-color $highlight-blue
+    code
+        font-size 0.9em
+        padding 0 0.5em
+        background-color #f1f1f1
+        white-space pre-wrap
     img
         width 99%
         height auto
@@ -63,5 +89,5 @@
             color $color1
             &::before
                 width 100%
-                background $merveilles
+                background $highlight-soft
 
