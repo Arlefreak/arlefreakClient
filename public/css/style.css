@@ -1423,10 +1423,12 @@ svg:hover #stick {
   color: #999;
 }
 .markdown pre {
-  background-color: #e3e3e3;
+  background-color: #f0f0f0;
   display: block;
   padding: 1em;
   overflow-x: auto;
+  margin: 20px auto 20px auto;
+  border-left: 2px solid #00aeef;
 }
 .markdown pre > code {
   padding: 0;
@@ -1448,10 +1450,13 @@ svg:hover #stick {
   white-space: pre-wrap;
 }
 .markdown img {
-  width: 99%;
+  width: 100%;
   height: auto;
   display: block;
   margin: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 .markdown a {
   color: #000;
