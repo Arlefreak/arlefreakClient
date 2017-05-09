@@ -14,7 +14,7 @@ class Header extends React.Component {
                     <Sticky stickyClassName="sticky">
                         <nav>
                             <ul>
-                                <li><NavLink exact to="/" activeClassName="active">▲</NavLink></li>
+                                <li><NavLink exact to="/" activeClassName="active"><img src="img/h.svg" alt="home"/></NavLink></li>
                                 <li><NavLink to="/projects" activeClassName="active">Projects</NavLink></li>
                                 <li><NavLink to="/about" activeClassName="active">About</NavLink></li>
                                 <li><NavLink to="/logs" activeClassName="active">Logs</NavLink></li>
