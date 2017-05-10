@@ -1373,6 +1373,9 @@ svg:hover #stick {
 .markdown>:last-child {
   margin-bottom: 0px;
 }
+.markdown.no-margin>:first-child {
+  margin-top: 0px;
+}
 .markdown ul {
   margin: 20px 0 20px 0;
 }
