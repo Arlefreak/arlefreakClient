@@ -43256,6 +43256,7 @@ var Container = function Container(_ref) {
         images != null && _react2.default.createElement(_gallery__list2.default, {
             images: images
         }),
+        tags != null && _react2.default.createElement('div', { className: 'margin' }),
         tags != null && _react2.default.createElement(_single_tags_list2.default, {
             tags: tags,
             className: 'tags'

@@ -33,6 +33,10 @@ const Container = ({ id, title, isFetching, item, images, links, tags }) => {
             }
             {
                 tags != null &&
+                    <div className="margin"></div>
+            }
+            {
+                tags != null &&
                     <TagList
                         tags={ tags }
                         className="tags"
