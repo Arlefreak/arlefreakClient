@@ -1437,6 +1437,7 @@ svg:hover #stick {
 }
 .markdown blockquote p {
   color: #999;
+  margin: 0;
 }
 .markdown pre {
   background-color: #f0f0f0;
