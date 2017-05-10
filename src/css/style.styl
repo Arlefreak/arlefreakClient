@@ -13,12 +13,14 @@ body
     word-spacing 0.2em
     letter-spacing 0.0825em
     .wrapper
-        width 80%
+        width calc(100% - 175px)
         height auto
         display block
         margin auto
+        @media screen and (max-width: $mobile-width)
+            width 80%
     .hideMobile
-        @media screen and (max-width: 820px)
+        @media screen and (max-width: $mobile-width)
             display none !important
 
 @import 'components/*'

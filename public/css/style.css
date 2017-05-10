@@ -336,12 +336,18 @@ body {
 }
 html .wrapper,
 body .wrapper {
-  width: 80%;
+  width: calc(100% - 175px);
   height: auto;
   display: block;
   margin: auto;
 }
-@media screen and (max-width: 820px) {
+@media screen and (max-width: 800px) {
+  html .wrapper,
+  body .wrapper {
+    width: 80%;
+  }
+}
+@media screen and (max-width: 800px) {
   html .hideMobile,
   body .hideMobile {
     display: none !important;
