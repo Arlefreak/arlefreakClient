@@ -18,6 +18,11 @@ const mapStateToProps = (state) => {
         items: []
     };
 
+    const config = apiCalls['web_client/config/'] || {
+        isFetching: true,
+        items: {},
+    };
+
     let finalFetch = isFetching && images.isFetching;
 
     return {
@@ -25,6 +30,7 @@ const mapStateToProps = (state) => {
         isFetching: finalFetch,
         items: items,
         images: images,
+        config: config,
         route: ''
     };
 };
@@ -32,6 +38,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     dispatch(apiFetchIfNeeded('portfolio/projects'));
     dispatch(apiFetchIfNeeded('portfolio/projectsImages/?imgType=mni'));
+    dispatch(apiFetchIfNeeded('web_client/config/'));
     return {};
 };
 

@@ -522,6 +522,12 @@ a.center {
 .sticky {
   z-index: 1000;
 }
+.margin {
+  display: block;
+  width: 100%;
+  height: 30px;
+  background: transparent;
+}
 ul {
   width: 100%;
   padding: 0;

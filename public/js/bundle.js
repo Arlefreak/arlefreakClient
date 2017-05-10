@@ -42266,6 +42266,10 @@ var _project__images__list = require('../containers/project__images__list.js');
 
 var _project__images__list2 = _interopRequireDefault(_project__images__list);
 
+var _remarkable = require('remarkable');
+
+var _remarkable2 = _interopRequireDefault(_remarkable);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Container = function Container(_ref) {
@@ -42274,7 +42278,13 @@ var Container = function Container(_ref) {
         isFetching = _ref.isFetching,
         items = _ref.items,
         images = _ref.images,
+        config = _ref.config,
         route = _ref.route;
+
+    var md = new _remarkable2.default();
+    var text = config ? config.items.longDescription : '';
+    console.log(text);
+    var mdr = md.render(text);
 
     return _react2.default.createElement(
         _page2.default,
@@ -42284,6 +42294,8 @@ var Container = function Container(_ref) {
             isFetching: isFetching
         },
         _react2.default.createElement(_soon2.default, null),
+        config != null && _react2.default.createElement('div', { className: 'margin' }),
+        config != null && _react2.default.createElement('div', { className: 'markdown', dangerouslySetInnerHTML: { __html: mdr } }),
         images != null && _react2.default.createElement(_project__images__list2.default, { className: 'full-width', images: images, items: items })
     );
 };
@@ -42298,12 +42310,13 @@ Container.propTypes = {
         title: _propTypes2.default.string
     }).isRequired).isRequired,
     images: _propTypes2.default.PropTypes.shape(),
+    config: _propTypes2.default.PropTypes.shape(),
     route: _propTypes2.default.string.isRequired
 };
 
 exports.default = Container;
 
-},{"../containers/project__images__list.js":416,"./page.jsx":400,"./soon.jsx":405,"prop-types":50,"react":295}],392:[function(require,module,exports){
+},{"../containers/project__images__list.js":416,"./page.jsx":400,"./soon.jsx":405,"prop-types":50,"react":295,"remarkable":309}],392:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43572,6 +43585,11 @@ var mapStateToProps = function mapStateToProps(state) {
         items: []
     };
 
+    var config = apiCalls['web_client/config/'] || {
+        isFetching: true,
+        items: {}
+    };
+
     var finalFetch = isFetching && images.isFetching;
 
     return {
@@ -43579,6 +43597,7 @@ var mapStateToProps = function mapStateToProps(state) {
         isFetching: finalFetch,
         items: items,
         images: images,
+        config: config,
         route: ''
     };
 };
@@ -43586,6 +43605,7 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     dispatch((0, _api_actions.apiFetchIfNeeded)('portfolio/projects'));
     dispatch((0, _api_actions.apiFetchIfNeeded)('portfolio/projectsImages/?imgType=mni'));
+    dispatch((0, _api_actions.apiFetchIfNeeded)('web_client/config/'));
     return {};
 };
 

@@ -3,8 +3,14 @@ import React from 'react';
 import Page from './page.jsx';
 import Soon from './soon.jsx';
 import ImageList from '../containers/project__images__list.js';
+import Remarkable from 'remarkable';
 
-const Container = ({ id, title, isFetching, items, images, route }) => {
+const Container = ({ id, title, isFetching, items, images, config, route }) => {
+    var md = new Remarkable();
+    var text = config ? config.items.longDescription : '';
+    console.log(text);
+    var mdr = md.render(text);
+
     return (
     <Page 
         id = { id }
@@ -12,6 +18,8 @@ const Container = ({ id, title, isFetching, items, images, route }) => {
         isFetching = { isFetching }
     >
         <Soon></Soon>
+        { config != null && <div className="margin"></div> }
+        { config != null && <div className="markdown" dangerouslySetInnerHTML={{ __html: mdr }}/> }
         { images != null && <ImageList className="full-width" images={ images } items={ items }></ImageList> }
     </Page>
     );
@@ -27,6 +35,7 @@ Container.propTypes = {
         title: PropTypes.string
     }).isRequired).isRequired,
     images: PropTypes.PropTypes.shape(),
+    config: PropTypes.PropTypes.shape(),
     route: PropTypes.string.isRequired
 };
 
