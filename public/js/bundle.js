@@ -42214,7 +42214,7 @@ var Header = function (_React$Component) {
                                     _react2.default.createElement(
                                         _reactRouterDom.NavLink,
                                         { exact: true, to: '/', activeClassName: 'active' },
-                                        _react2.default.createElement('img', { src: 'img/h.svg', alt: 'home' })
+                                        _react2.default.createElement('img', { src: '/img/h.svg', alt: 'home' })
                                     )
                                 ),
                                 _react2.default.createElement(
