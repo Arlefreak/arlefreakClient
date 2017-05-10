@@ -42319,7 +42319,6 @@ var Container = function Container(_ref) {
 
     var md = new _remarkable2.default();
     var text = config ? config.items.longDescription : '';
-    console.log(text);
     var mdr = md.render(text);
 
     return _react2.default.createElement(

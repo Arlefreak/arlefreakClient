@@ -8,7 +8,6 @@ import Remarkable from 'remarkable';
 const Container = ({ id, title, isFetching, items, images, config, route }) => {
     var md = new Remarkable();
     var text = config ? config.items.longDescription : '';
-    console.log(text);
     var mdr = md.render(text);
 
     return (
