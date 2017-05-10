@@ -1361,6 +1361,12 @@ svg:hover #stick {
     filter: alpha(opacity=0);
   }
 }
+.markdown>:first-child {
+  margin-top: 20px;
+}
+.markdown>:last-child {
+  margin-bottom: 20px;
+}
 .markdown ul {
   margin: 20px 0 20px 0;
 }
@@ -1421,9 +1427,6 @@ svg:hover #stick {
 }
 .markdown p:first-child img {
   display: none;
-}
-.markdown p:last-of-type {
-  margin: 0;
 }
 .markdown blockquote {
   font-style: italic;
