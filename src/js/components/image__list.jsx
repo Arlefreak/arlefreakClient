@@ -23,7 +23,7 @@ ImageList.propTypes = {
         id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
         image: PropTypes.string.isRequired,
-        project: PropTypes.number.isRequired
+        project: PropTypes.string.isRequired
     }).isRequired).isRequired,
     onImageClick: PropTypes.func.isRequired,
     className: PropTypes.string,

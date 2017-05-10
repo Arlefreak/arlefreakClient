@@ -10,7 +10,7 @@ const getVisibleImages  = (items, projects) => {
         for(i; i < items.length; i++){
             j = 0;
             for(j; j < projects.length; j++){
-                if(items[i].project === projects[j].id ){
+                if(items[i].project === projects[j].slug ){
                     filteredImages.push(items[i]);
                 }
             } 

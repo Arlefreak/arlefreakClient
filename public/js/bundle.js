@@ -42391,7 +42391,7 @@ ImageList.propTypes = {
         id: _propTypes2.default.number.isRequired,
         name: _propTypes2.default.string.isRequired,
         image: _propTypes2.default.string.isRequired,
-        project: _propTypes2.default.number.isRequired
+        project: _propTypes2.default.string.isRequired
     }).isRequired).isRequired,
     onImageClick: _propTypes2.default.func.isRequired,
     className: _propTypes2.default.string
@@ -42994,12 +42994,12 @@ var Routes = function Routes() {
                             _reactRouterDom.Switch,
                             { className: 'poop' },
                             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/projects', component: _project__list2.default }),
-                            _react2.default.createElement(_reactRouterDom.Route, { path: '/projects/:id', component: _project__single2.default }),
+                            _react2.default.createElement(_reactRouterDom.Route, { path: '/projects/:slug', component: _project__single2.default }),
                             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/about', component: _about__list2.default }),
-                            _react2.default.createElement(_reactRouterDom.Route, { path: '/about/:id', component: _about__single2.default }),
+                            _react2.default.createElement(_reactRouterDom.Route, { path: '/about/:slug', component: _about__single2.default }),
                             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/cv', component: _cv__single2.default }),
                             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/logs', component: _diary__list2.default }),
-                            _react2.default.createElement(_reactRouterDom.Route, { path: '/logs/:id', component: _diary__single2.default }),
+                            _react2.default.createElement(_reactRouterDom.Route, { path: '/logs/:slug', component: _diary__single2.default }),
                             _react2.default.createElement(_reactRouterDom.Route, { path: '/ligoj', component: _ligoj__list2.default }),
                             _react2.default.createElement(_reactRouterDom.Route, { component: _home__page2.default })
                         )
@@ -43037,6 +43037,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var ItemRow = function ItemRow(_ref) {
     var id = _ref.id,
+        slug = _ref.slug,
         route = _ref.route,
         name = _ref.name,
         title = _ref.title,
@@ -43055,7 +43056,7 @@ var ItemRow = function ItemRow(_ref) {
         null,
         link && _react2.default.createElement(
             'a',
-            { href: link, target: '_blank' },
+            { href: link, target: '_blank', rel: 'noopener noreferrer' },
             _react2.default.createElement(
                 'span',
                 { className: 'date hideMobile' },
@@ -43066,7 +43067,7 @@ var ItemRow = function ItemRow(_ref) {
         ),
         !link && _react2.default.createElement(
             _reactRouterDom.Link,
-            { to: '/' + route + '/' + id },
+            { to: '/' + route + '/' + slug },
             _react2.default.createElement(
                 'span',
                 { className: 'date hideMobile' },
@@ -43080,6 +43081,7 @@ var ItemRow = function ItemRow(_ref) {
 
 ItemRow.propTypes = {
     id: _propTypes2.default.number.isRequired,
+    slug: _propTypes2.default.string.isRequired,
     route: _propTypes2.default.string.isRequired,
     name: _propTypes2.default.string,
     title: _propTypes2.default.string,
@@ -43347,7 +43349,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 ;
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-    var id = ownProps.match.params.id;
+    var slug = ownProps.match.params.slug;
     var apiCalls = state.apiCalls;
 
     var list = apiCalls['about/entry'] || {
@@ -43356,14 +43358,14 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     };
 
     var item = {
-        id: 0,
+        slug: 0,
         name: 'Loading',
         text: 'Loading'
     };
 
     var i = 0;
     for (i; i < list.items.length; i++) {
-        if (list.items[i].id === parseInt(id)) {
+        if (list.items[i].slug === slug) {
             item = list.items[i];
             break;
         }
@@ -43379,8 +43381,6 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
-    var id = ownProps.match.params.id;
-
     dispatch((0, _api_actions.apiFetchIfNeeded)('about/entry'));
     return {};
 };
@@ -43509,7 +43509,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 ;
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-    var id = ownProps.match.params.id;
+    var slug = ownProps.match.params.slug;
     var apiCalls = state.apiCalls;
 
     var list = apiCalls['diary/posts'] || {
@@ -43525,7 +43525,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
     var i = 0;
     for (i; i < list.items.length; i++) {
-        if (list.items[i].id === parseInt(id)) {
+        if (list.items[i].slug === slug) {
             item = list.items[i];
             break;
         }
@@ -43541,8 +43541,6 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
-    var id = ownProps.match.params.id;
-
     dispatch((0, _api_actions.apiFetchIfNeeded)('diary/posts'));
     return {};
 };
@@ -43866,7 +43864,7 @@ var getVisibleImages = function getVisibleImages(items, projects) {
         for (i; i < items.length; i++) {
             j = 0;
             for (j; j < projects.length; j++) {
-                if (items[i].project === projects[j].id) {
+                if (items[i].project === projects[j].slug) {
                     filteredImages.push(items[i]);
                 }
             }
@@ -44014,7 +44012,7 @@ var _single__container2 = _interopRequireDefault(_single__container);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-    var id = ownProps.match.params.id;
+    var slug = ownProps.match.params.slug;
     var apiCalls = state.apiCalls;
 
     var list = apiCalls['portfolio/projects'] || {
@@ -44024,6 +44022,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
     var item = {
         id: 0,
+        slug: 0,
         name: '',
         description: '',
         tags: []
@@ -44031,18 +44030,18 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
     var i = 0;
     for (i; i < list.items.length; i++) {
-        if (list.items[i].id === parseInt(id)) {
+        if (list.items[i].slug === slug) {
             item = list.items[i];
             break;
         }
     }
 
-    var links = apiCalls['portfolio/projectsLinks/?project__id=' + id] || {
+    var links = apiCalls['portfolio/projectsLinks/?project__slug=' + slug] || {
         isFetching: true,
         items: []
     };
 
-    var images = apiCalls['portfolio/projectsImages/?imgType=gal&project__id=' + id] || {
+    var images = apiCalls['portfolio/projectsImages/?imgType=gal&project__slug=' + slug] || {
         isFetching: true,
         items: []
     };
@@ -44063,12 +44062,12 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
-    var _ref = ownProps.match.params || 0,
-        id = _ref.id;
+    var _ref = ownProps.match.params || '',
+        slug = _ref.slug;
 
     dispatch((0, _api_actions.apiFetchIfNeeded)('portfolio/projects'));
-    dispatch((0, _api_actions.apiFetchIfNeeded)('portfolio/projectsLinks/?project__id=' + id));
-    dispatch((0, _api_actions.apiFetchIfNeeded)('portfolio/projectsImages?imgType=gal&project__id=' + id));
+    dispatch((0, _api_actions.apiFetchIfNeeded)('portfolio/projectsLinks/?project__slug=' + slug));
+    dispatch((0, _api_actions.apiFetchIfNeeded)('portfolio/projectsImages?imgType=gal&project__slug=' + slug));
     dispatch((0, _api_actions.apiFetchIfNeeded)('portfolio/projectTags'));
 
     return {};

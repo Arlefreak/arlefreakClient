@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ItemRow = ({ id, route, name, title, dateUpdated, dateCreated, link }) => {
+const ItemRow = ({ id, slug, route, name, title, dateUpdated, dateCreated, link }) => {
     var content = name;
     var toRoute = link;
     if(!content){
@@ -12,12 +12,12 @@ const ItemRow = ({ id, route, name, title, dateUpdated, dateCreated, link }) => 
     return(
         <li>
             { link &&
-                <a href={ link } target="_blank">
+                <a href={ link } target="_blank" rel="noopener noreferrer">
                     <span className="date hideMobile">{ dateCreated } </span>{ content }
                 </a>
             }
             { !link &&
-                <Link to={ '/' + route + '/' + id }>
+                <Link to={ '/' + route + '/' + slug }>
                     <span className="date hideMobile">{ dateCreated } </span>{ content }
                 </Link>
             }
@@ -27,6 +27,7 @@ const ItemRow = ({ id, route, name, title, dateUpdated, dateCreated, link }) => 
 
 ItemRow.propTypes = {
     id: PropTypes.number.isRequired,
+    slug: PropTypes.string.isRequired,
     route: PropTypes.string.isRequired,
     name: PropTypes.string,
     title: PropTypes.string,

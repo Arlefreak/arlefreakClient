@@ -72,15 +72,15 @@ const Routes = () => (
                     <div className="wrapper">
                         <Switch className="poop">
                             <Route exact path="/projects" component={ProjectList} />
-                            <Route path="/projects/:id" component={ProjectSingle} />
+                            <Route path="/projects/:slug" component={ProjectSingle} />
 
                             <Route exact path="/about" component={AboutList} />
-                            <Route path="/about/:id" component={AboutSingle} />
+                            <Route path="/about/:slug" component={AboutSingle} />
 
                             <Route exact path="/cv" component={CvSingle} />
 
                             <Route exact path="/logs" component={DiaryList} />
-                            <Route path="/logs/:id" component={DiarySingle} />
+                            <Route path="/logs/:slug" component={DiarySingle} />
 
                             <Route path="/ligoj" component={LigojList} />
 

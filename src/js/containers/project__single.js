@@ -4,7 +4,7 @@ import { apiFetchIfNeeded } from '../actions/api_actions';
 import  Single from '../components/single__container.jsx';
 
 const mapStateToProps = (state, ownProps) => {
-    const { id } = ownProps.match.params;
+    const { slug } = ownProps.match.params;
     const { apiCalls } = state;
     const list = apiCalls['portfolio/projects'] || {
         isFetching: true,
@@ -13,6 +13,7 @@ const mapStateToProps = (state, ownProps) => {
 
     let item = {
         id: 0,
+        slug: 0,
         name: '',
         description: '',
         tags: [],
@@ -20,18 +21,18 @@ const mapStateToProps = (state, ownProps) => {
 
     var i = 0;
     for(i; i < list.items.length; i++){
-        if (list.items[i].id === parseInt(id)){
+        if (list.items[i].slug === slug){
             item = list.items[i];
             break;
         }
     }
 
-    const links = apiCalls['portfolio/projectsLinks/?project__id=' + id] || {
+    const links = apiCalls['portfolio/projectsLinks/?project__slug=' + slug] || {
         isFetching: true,
         items: []
     };
 
-    const images = apiCalls['portfolio/projectsImages/?imgType=gal&project__id=' + id] || {
+    const images = apiCalls['portfolio/projectsImages/?imgType=gal&project__slug=' + slug] || {
         isFetching: true,
         items: []
     };
@@ -52,10 +53,10 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    const { id } = ownProps.match.params || 0;
+    const { slug } = ownProps.match.params || '';
     dispatch(apiFetchIfNeeded('portfolio/projects'));
-    dispatch(apiFetchIfNeeded('portfolio/projectsLinks/?project__id=' + id));
-    dispatch(apiFetchIfNeeded('portfolio/projectsImages?imgType=gal&project__id=' + id));
+    dispatch(apiFetchIfNeeded('portfolio/projectsLinks/?project__slug=' + slug));
+    dispatch(apiFetchIfNeeded('portfolio/projectsImages?imgType=gal&project__slug=' + slug));
     dispatch(apiFetchIfNeeded('portfolio/projectTags'));
 
     return {
