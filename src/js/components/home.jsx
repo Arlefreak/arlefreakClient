@@ -18,7 +18,6 @@ const Container = ({ id, title, isFetching, items, images, config, route }) => {
         isFetching = { isFetching }
     >
         <Soon></Soon>
-        { config != null && <div className="margin"></div> }
         { config != null && <div className="markdown" dangerouslySetInnerHTML={{ __html: mdr }}/> }
         { images != null && <div className="margin"></div> }
         { images != null && <ImageList className="full-width" images={ images } items={ items }></ImageList> }
