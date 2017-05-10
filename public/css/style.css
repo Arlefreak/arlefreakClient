@@ -525,7 +525,7 @@ a.center {
 .margin {
   display: block;
   width: 100%;
-  height: 30px;
+  height: 20px;
   background: transparent;
 }
 ul {
@@ -1421,6 +1421,9 @@ svg:hover #stick {
 }
 .markdown p:first-child img {
   display: none;
+}
+.markdown p:last-of-type {
+  margin: 0;
 }
 .markdown blockquote {
   font-style: italic;
