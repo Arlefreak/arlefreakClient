@@ -13,28 +13,39 @@ footer
         height 5vh
         padding 1vh 0 1vh 0
     .wrapper
-        vertical-align middle
-        position relative
+        display flex
+        flex-flow row
+        align-items center
+        justify-content space-between
+        height 100%
+        max-width $max-text-width
+        margin 0 0 0 calc(175px / 2)
+        @media screen and (max-width: $mobile-width)
+            margin 0 0 0 10%
     p
         font-size 0.6em
         width 50%
         color $gray3
         display inline-block
         line-height 1.5em
+        display flex
+        margin 0
     ul
         width 20%
+        max-width 120px
         display inline-block
         box-sizing border-box
-        position absolute
-        bottom 28%
-        right 0%
+        display flex
+        flex-flow row
+        align-items center
+        justify-content space-between
         li
-            display inline-block
-        @media screen and (max-width: 820px)
+            display flex
+        @media screen and (max-width: $mobile-width)
             width 100%
             text-align center
-            position inherit
-            transform translate(0,0)
+            /* position inherit */
+            /* transform translate(0,0) */
     a
         color $gray2
         transition color 0.5s ease
