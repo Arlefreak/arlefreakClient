@@ -1321,6 +1321,9 @@ svg:hover #stick {
     filter: alpha(opacity=0);
   }
 }
+.markdown {
+  max-width: 1000px;
+}
 .markdown>:first-child {
   margin-top: 20px;
 }
