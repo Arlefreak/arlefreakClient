@@ -36,7 +36,7 @@ import { routeChanged } from '../actions/routes_actions';
 import { store } from './app.jsx';
 
 // TODO: React router 4 fix https://github.com/react-ga/react-ga/issues/122
-ReactGA.initialize('UA-43222844-2');
+ReactGA.initialize('UA-43222844-13');
 
 const logPageView = () => {
     store.dispatch(clearTagFilter());

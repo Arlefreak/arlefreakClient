@@ -2,7 +2,7 @@ import fetch from 'isomorphic-fetch';
 import constants from '../constants.js';
 const apiURL = constants.APIURL;
 import ReactGA from 'react-ga';
-ReactGA.initialize('UA-43222844-2');
+ReactGA.initialize('UA-43222844-13');
 
 export const ADD_TAG_FILTER = 'ADD_TAG_FILTER';
 export const DELETE_TAG_FILTER = 'DELETE_TAG_FILTER';
