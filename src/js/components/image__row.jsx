@@ -26,7 +26,7 @@ ImageRow.propTypes = {
     image: PropTypes.string.isRequired,
     thumbnail: PropTypes.string.isRequired,
     thumbnailBW: PropTypes.string.isRequired,
-    project: PropTypes.number.isRequired,
+    project: PropTypes.string.isRequired,
     onImageClick: PropTypes.func.isRequired
 };
 

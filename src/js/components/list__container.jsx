@@ -15,8 +15,8 @@ const Container = ({ id, title, isFetching, items, categories, tags, images, rou
         title = { title }
         isFetching = { isFetching }
     >
-        { categories != null && <CategoryList categories={ categories } className="categories" /> }
-        { tags != null && <TagList tags={ tags } className="tags" /> }
+        { categories != null && <CategoryList categories={ categories } className="categories" all={ true }/> }
+        { tags != null && <TagList tags={ tags } className="tags" all={ true }/> }
         { images != null && <ImageList images={ images } items={ items } className="half-width"></ImageList> }
         <List items={ items } route={ route }  className={ listClasses } />
     </Page>

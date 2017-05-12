@@ -29,7 +29,7 @@ const mapStateToProps = (state) => {
         isFetching: isFetching && tags.isFetching,
         items: filterItems,
         tags: tags,
-        route: 'H'
+        route: 'ligoj'
     };
 };
 

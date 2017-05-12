@@ -32,6 +32,7 @@ import { StickyContainer } from 'react-sticky';
 
 import { clearTagFilter } from '../actions/tag_filter_actions';
 import { setCategoryFilter } from '../actions/category_filter_actions';
+import { filterItems } from '../actions/items_actions';
 import { routeChanged } from '../actions/routes_actions';
 import { store } from './app.jsx';
 
@@ -39,10 +40,11 @@ import { store } from './app.jsx';
 ReactGA.initialize('UA-43222844-13');
 
 const logPageView = () => {
+    store.dispatch(routeChanged(window.location.pathname));
+
     store.dispatch(clearTagFilter());
     store.dispatch(setCategoryFilter(0, 'All'));
-
-    store.dispatch(routeChanged(window.location.pathname));
+    store.dispatch(filterItems());
 
     ReactGA.set({ page: window.location.pathname });
     ReactGA.pageview(window.location.pathname);

@@ -12,8 +12,10 @@ const mapStateToProps = (state, ownProps) => {
 
     let item = {
         id: 0,
+        slug: '',
         title: 'Loading',
-        text: 'Loading'
+        text: 'Loading',
+        tags: [],
     };
 
     var i = 0;
@@ -23,6 +25,9 @@ const mapStateToProps = (state, ownProps) => {
             break;
         }
     }
+
+    const tags =  item.tags || [];
+
     const isFetching = list.isFetching;
 
     return {
@@ -30,6 +35,7 @@ const mapStateToProps = (state, ownProps) => {
         title: item.title,
         isFetching,
         item: item,
+        tags: tags,
     };
 };
 

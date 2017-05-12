@@ -249,14 +249,13 @@ gulp.task('favicon', function() {
     runSequence('generate-favicon', 'inject-favicon-markups');
 });
 
-gulp.task('init', ['css', 'bower', 'react', 'img', 'html', 'files', 'favicon']);
+gulp.task('init', ['css', 'bower', 'react', 'img', 'html', 'files']);
 
 gulp.task('watch', () => {
     gulp.watch('src/css/**/*.styl', ['css']);
     gulp.watch('src/js/**/*.js', ['react']);
     gulp.watch('src/js/**/*.jsx', ['react']);
     gulp.watch(['src/img/**/*', '!src/img/favicon.png'], ['img']);
-    gulp.watch(['src/img/favicon.png'], ['favicon']);
     gulp.watch('src/*.html', ['html']);
 });
 

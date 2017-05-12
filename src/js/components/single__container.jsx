@@ -40,6 +40,7 @@ const Container = ({ id, title, isFetching, item, images, links, tags }) => {
                     <TagList
                         tags={ tags }
                         className="tags"
+                        all={ false }
                     />
             }
         </Page>

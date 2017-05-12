@@ -13,7 +13,7 @@ const mapStateToProps = (state, ownProps) => {
 
     let item = {
         id: 0,
-        slug: 0,
+        slug: '',
         name: '',
         description: '',
         tags: [],

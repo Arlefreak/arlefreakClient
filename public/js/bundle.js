@@ -41966,7 +41966,8 @@ var FilterList = function FilterList(_ref) {
         className = _ref.className,
         active = _ref.active,
         allActive = _ref.allActive,
-        clearAll = _ref.clearAll;
+        clearAll = _ref.clearAll,
+        all = _ref.all;
 
     var allClass = allActive ? 'active' : '';
     return _react2.default.createElement(
@@ -41982,7 +41983,7 @@ var FilterList = function FilterList(_ref) {
             component: 'ul',
             className: className
         },
-        _react2.default.createElement(_filter__row2.default, {
+        all && _react2.default.createElement(_filter__row2.default, {
             key: 0,
             className: allClass,
             name: 'All',
@@ -42019,7 +42020,8 @@ FilterList.propTypes = {
     className: _propTypes2.default.string,
     active: _propTypes2.default.arrayOf(_propTypes2.default.bool).isRequired,
     allActive: _propTypes2.default.bool.isRequired,
-    clearAll: _propTypes2.default.func.isRequired
+    clearAll: _propTypes2.default.func.isRequired,
+    all: _propTypes2.default.bool.isRequired
 };
 
 exports.default = FilterList;
@@ -42486,7 +42488,7 @@ ImageRow.propTypes = {
     image: _propTypes2.default.string.isRequired,
     thumbnail: _propTypes2.default.string.isRequired,
     thumbnailBW: _propTypes2.default.string.isRequired,
-    project: _propTypes2.default.number.isRequired,
+    project: _propTypes2.default.string.isRequired,
     onImageClick: _propTypes2.default.func.isRequired
 };
 
@@ -42717,8 +42719,8 @@ var Container = function Container(_ref) {
             title: title,
             isFetching: isFetching
         },
-        categories != null && _react2.default.createElement(_project__filter__categories2.default, { categories: categories, className: 'categories' }),
-        tags != null && _react2.default.createElement(_project__filter__tags2.default, { tags: tags, className: 'tags' }),
+        categories != null && _react2.default.createElement(_project__filter__categories2.default, { categories: categories, className: 'categories', all: true }),
+        tags != null && _react2.default.createElement(_project__filter__tags2.default, { tags: tags, className: 'tags', all: true }),
         images != null && _react2.default.createElement(_project__images__list2.default, { images: images, items: items, className: 'half-width' }),
         _react2.default.createElement(_list2.default, { items: items, route: route, className: listClasses })
     );
@@ -42946,6 +42948,8 @@ var _tag_filter_actions = require('../actions/tag_filter_actions');
 
 var _category_filter_actions = require('../actions/category_filter_actions');
 
+var _items_actions = require('../actions/items_actions');
+
 var _routes_actions = require('../actions/routes_actions');
 
 var _app = require('./app.jsx');
@@ -42962,10 +42966,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 _reactGa2.default.initialize('UA-43222844-13');
 
 var logPageView = function logPageView() {
+    _app.store.dispatch((0, _routes_actions.routeChanged)(window.location.pathname));
     _app.store.dispatch((0, _tag_filter_actions.clearTagFilter)());
     _app.store.dispatch((0, _category_filter_actions.setCategoryFilter)(0, 'All'));
-
-    _app.store.dispatch((0, _routes_actions.routeChanged)(window.location.pathname));
+    _app.store.dispatch((0, _items_actions.filterItems)());
 
     _reactGa2.default.set({ page: window.location.pathname });
     _reactGa2.default.pageview(window.location.pathname);
@@ -43052,7 +43056,7 @@ Routes.propTypes = {
 
 exports.default = Routes;
 
-},{"../actions/category_filter_actions":371,"../actions/routes_actions":374,"../actions/tag_filter_actions":375,"../containers/about__list.js":399,"../containers/about__single.js":400,"../containers/cv__single.js":401,"../containers/diary__list.js":402,"../containers/diary__single.js":403,"../containers/home__page.js":404,"../containers/ligoj__list.js":405,"../containers/project__list.js":409,"../containers/project__single.js":410,"./app.jsx":377,"./header.jsx":382,"./soon.jsx":397,"prop-types":74,"react":287,"react-ga":203,"react-router-dom":239,"react-sticky":255,"react-transition-group/CSSTransitionGroup":257}],394:[function(require,module,exports){
+},{"../actions/category_filter_actions":371,"../actions/items_actions":373,"../actions/routes_actions":374,"../actions/tag_filter_actions":375,"../containers/about__list.js":399,"../containers/about__single.js":400,"../containers/cv__single.js":401,"../containers/diary__list.js":402,"../containers/diary__single.js":403,"../containers/home__page.js":404,"../containers/ligoj__list.js":405,"../containers/project__list.js":409,"../containers/project__single.js":410,"./app.jsx":377,"./header.jsx":382,"./soon.jsx":397,"prop-types":74,"react":287,"react-ga":203,"react-router-dom":239,"react-sticky":255,"react-transition-group/CSSTransitionGroup":257}],394:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43259,7 +43263,8 @@ var Container = function Container(_ref) {
         tags != null && _react2.default.createElement('div', { className: 'margin' }),
         tags != null && _react2.default.createElement(_single_tags_list2.default, {
             tags: tags,
-            className: 'tags'
+            className: 'tags',
+            all: false
         })
     );
 };
@@ -43498,7 +43503,10 @@ var _list__container2 = _interopRequireDefault(_list__container);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
-    var apiCalls = state.apiCalls;
+    var apiCalls = state.apiCalls,
+        visibleItems = state.visibleItems,
+        tagFilter = state.tagFilter,
+        categoryFilter = state.categoryFilter;
 
     var _ref = apiCalls['diary/posts'] || {
         isFetching: true,
@@ -43508,16 +43516,29 @@ var mapStateToProps = function mapStateToProps(state) {
         lastUpdated = _ref.lastUpdated,
         items = _ref.items;
 
+    var tags = apiCalls['diary/postTags'] || {
+        isFetching: true,
+        items: []
+    };
+
+    var filterItems = visibleItems;
+
+    if (visibleItems.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0) {
+        filterItems = items;
+    }
+
     return {
         id: 'd',
-        isFetching: isFetching,
-        items: items,
+        isFetching: isFetching && tags.isFetching,
+        items: filterItems,
+        tags: tags,
         route: 'logs'
     };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     dispatch((0, _api_actions.apiFetchIfNeeded)('diary/posts'));
+    dispatch((0, _api_actions.apiFetchIfNeeded)('diary/postTags'));
     return {};
 };
 
@@ -43555,8 +43576,10 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
     var item = {
         id: 0,
+        slug: '',
         title: 'Loading',
-        text: 'Loading'
+        text: 'Loading',
+        tags: []
     };
 
     var i = 0;
@@ -43566,13 +43589,17 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
             break;
         }
     }
+
+    var tags = item.tags || [];
+
     var isFetching = list.isFetching;
 
     return {
         id: 'd',
         title: item.title,
         isFetching: isFetching,
-        item: item
+        item: item,
+        tags: tags
     };
 };
 
@@ -43694,7 +43721,7 @@ var mapStateToProps = function mapStateToProps(state) {
         isFetching: isFetching && tags.isFetching,
         items: filterItems,
         tags: tags,
-        route: 'H'
+        route: 'ligoj'
     };
 };
 
@@ -44058,7 +44085,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
     var item = {
         id: 0,
-        slug: 0,
+        slug: '',
         name: '',
         description: '',
         tags: []
