@@ -1755,5 +1755,6 @@ ul.vertical-list li a:hover::before {
 }
 ul.full-width {
   width: 100%;
+  max-width: 1000px;
   float: none;
 }
