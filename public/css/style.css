@@ -1087,7 +1087,7 @@ header .logo {
   display: block;
   height: 100%;
   width: auto;
-  max-height: 25px;
+  height: 25px;
 }
 header h1 {
   font-size: 1em;
