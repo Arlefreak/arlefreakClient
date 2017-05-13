@@ -663,6 +663,7 @@ ul.images.half-width {
 ul.images.full-width {
   float: none;
   width: 100%;
+  max-width: none;
 }
 ul.images li {
   display: block;

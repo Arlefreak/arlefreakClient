@@ -42967,6 +42967,7 @@ _reactGa2.default.initialize('UA-43222844-13');
 
 var logPageView = function logPageView() {
     _app.store.dispatch((0, _routes_actions.routeChanged)(window.location.pathname));
+
     _app.store.dispatch((0, _tag_filter_actions.clearTagFilter)());
     _app.store.dispatch((0, _category_filter_actions.setCategoryFilter)(0, 'All'));
     _app.store.dispatch((0, _items_actions.filterItems)());
