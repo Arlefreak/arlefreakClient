@@ -2,18 +2,20 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Image from './gallery__row.jsx';
 
-const ImageList = ({ images }) => (
-    <section className="gallery">
-        {
-            images.map( image =>
-                         <Image
-                             key={image.id}
-                             {...image}
-                         />
-                         )
-        }
-    </section>
-);
+const ImageList = ({ images }) => {
+    return (
+        <section className="gallery">
+            {
+                images.map( image =>
+                    <Image
+                        key={image.id}
+                        {...image}
+                    />
+                )
+            }
+        </section>
+    );
+};
 
 ImageList.propTypes = {
     images: PropTypes.arrayOf(PropTypes.shape({

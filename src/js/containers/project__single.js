@@ -32,7 +32,8 @@ const mapStateToProps = (state, ownProps) => {
         items: []
     };
 
-    const images = apiCalls['portfolio/projectsImages/?imgType=gal&project__slug=' + slug] || {
+    const images = apiCalls['portfolio/projectsImages?imgType=gal&project__slug=' + slug] || {
+
         isFetching: true,
         items: []
     };

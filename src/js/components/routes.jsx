@@ -13,6 +13,7 @@ import Header from './header.jsx';
 import Soon from './soon.jsx';
 
 import Home from '../containers/home__page.js';
+import Subscribe from '../containers/subscribe__page.js';
 
 import AboutList from '../containers/about__list.js';
 import AboutSingle from '../containers/about__single.js';
@@ -79,10 +80,12 @@ const Routes = () => (
                             <Route exact path="/about" component={AboutList} />
                             <Route path="/about/:slug" component={AboutSingle} />
 
-                            <Route exact path="/cv" component={CvSingle} />
-
                             <Route exact path="/logs" component={DiaryList} />
                             <Route path="/logs/:slug" component={DiarySingle} />
+
+                            <Route exact path="/cv" component={CvSingle} />
+
+                            <Route path="/subscribe" component={Subscribe} />
 
                             <Route path="/ligoj" component={LigojList} />
 

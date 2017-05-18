@@ -41477,7 +41477,7 @@ function apiShouldFetch(state, endPoint) {
     }
 }
 
-},{"../constants.js":406,"isomorphic-fetch":38}],379:[function(require,module,exports){
+},{"../constants.js":408,"isomorphic-fetch":38}],379:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41534,7 +41534,7 @@ function filterByCategory(projects, category) {
     }
 };
 
-},{"../constants.js":406,"isomorphic-fetch":38,"react-ga":205}],380:[function(require,module,exports){
+},{"../constants.js":408,"isomorphic-fetch":38,"react-ga":205}],380:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41613,7 +41613,7 @@ function fileShouldFetch(state, endPoint) {
     }
 }
 
-},{"../constants.js":406,"isomorphic-fetch":38}],381:[function(require,module,exports){
+},{"../constants.js":408,"isomorphic-fetch":38}],381:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41795,7 +41795,7 @@ function filterByTags(projects, tags) {
     return filteredProjects;
 };
 
-},{"../constants.js":406,"isomorphic-fetch":38,"react-ga":205}],384:[function(require,module,exports){
+},{"../constants.js":408,"isomorphic-fetch":38,"react-ga":205}],384:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -41897,7 +41897,7 @@ var App = function (_Component) {
 
 exports.default = App;
 
-},{"../reducers":423,"./routes.jsx":401,"prop-types":50,"react":295,"react-redux":224,"redux":307,"redux-logger":300,"redux-thunk":301}],386:[function(require,module,exports){
+},{"../reducers":426,"./routes.jsx":401,"prop-types":50,"react":295,"react-redux":224,"redux":307,"redux-logger":300,"redux-thunk":301}],386:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42057,6 +42057,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var ImageList = function ImageList(_ref) {
     var images = _ref.images;
+
     return _react2.default.createElement(
         'section',
         { className: 'gallery' },
@@ -42317,7 +42318,7 @@ Container.propTypes = {
 
 exports.default = Container;
 
-},{"../containers/project__images__list.js":416,"./page.jsx":400,"./soon.jsx":405,"prop-types":50,"react":295,"remarkable":309}],392:[function(require,module,exports){
+},{"../containers/project__images__list.js":418,"./page.jsx":400,"./soon.jsx":405,"prop-types":50,"react":295,"remarkable":309}],392:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42707,7 +42708,7 @@ Container.propTypes = {
 
 exports.default = Container;
 
-},{"../containers/project__filter__categories.js":414,"../containers/project__filter__tags.js":415,"../containers/project__images__list.js":416,"./list.jsx":397,"./page.jsx":400,"prop-types":50,"react":295}],399:[function(require,module,exports){
+},{"../containers/project__filter__categories.js":416,"../containers/project__filter__tags.js":417,"../containers/project__images__list.js":418,"./list.jsx":397,"./page.jsx":400,"prop-types":50,"react":295}],399:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42870,6 +42871,10 @@ var _home__page = require('../containers/home__page.js');
 
 var _home__page2 = _interopRequireDefault(_home__page);
 
+var _subscribe__page = require('../containers/subscribe__page.js');
+
+var _subscribe__page2 = _interopRequireDefault(_subscribe__page);
+
 var _about__list = require('../containers/about__list.js');
 
 var _about__list2 = _interopRequireDefault(_about__list);
@@ -43002,9 +43007,10 @@ var Routes = function Routes() {
                             _react2.default.createElement(_reactRouterDom.Route, { path: '/projects/:slug', component: _project__single2.default }),
                             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/about', component: _about__list2.default }),
                             _react2.default.createElement(_reactRouterDom.Route, { path: '/about/:slug', component: _about__single2.default }),
-                            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/cv', component: _cv__single2.default }),
                             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/logs', component: _diary__list2.default }),
                             _react2.default.createElement(_reactRouterDom.Route, { path: '/logs/:slug', component: _diary__single2.default }),
+                            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/cv', component: _cv__single2.default }),
+                            _react2.default.createElement(_reactRouterDom.Route, { path: '/subscribe', component: _subscribe__page2.default }),
                             _react2.default.createElement(_reactRouterDom.Route, { path: '/ligoj', component: _ligoj__list2.default }),
                             _react2.default.createElement(_reactRouterDom.Route, { component: _home__page2.default })
                         )
@@ -43021,7 +43027,7 @@ Routes.propTypes = {
 
 exports.default = Routes;
 
-},{"../actions/category_filter_actions":379,"../actions/items_actions":381,"../actions/routes_actions":382,"../actions/tag_filter_actions":383,"../containers/about__list.js":407,"../containers/about__single.js":408,"../containers/cv__single.js":409,"../containers/diary__list.js":410,"../containers/diary__single.js":411,"../containers/home__page.js":412,"../containers/ligoj__list.js":413,"../containers/project__list.js":417,"../containers/project__single.js":418,"./app.jsx":385,"./header.jsx":390,"./soon.jsx":405,"prop-types":50,"react":295,"react-ga":205,"react-router-dom":241,"react-sticky":259,"react-transition-group/CSSTransitionGroup":261}],402:[function(require,module,exports){
+},{"../actions/category_filter_actions":379,"../actions/items_actions":381,"../actions/routes_actions":382,"../actions/tag_filter_actions":383,"../containers/about__list.js":409,"../containers/about__single.js":410,"../containers/cv__single.js":411,"../containers/diary__list.js":412,"../containers/diary__single.js":413,"../containers/home__page.js":414,"../containers/ligoj__list.js":415,"../containers/project__list.js":419,"../containers/project__single.js":420,"../containers/subscribe__page.js":422,"./app.jsx":385,"./header.jsx":390,"./soon.jsx":405,"prop-types":50,"react":295,"react-ga":205,"react-router-dom":241,"react-sticky":259,"react-transition-group/CSSTransitionGroup":261}],402:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43246,7 +43252,7 @@ Container.propTypes = {
 
 exports.default = Container;
 
-},{"../containers/single_tags_list.js":419,"./gallery__list.jsx":388,"./link__list.jsx":395,"./page.jsx":400,"./single.jsx":403,"prop-types":50,"react":295}],405:[function(require,module,exports){
+},{"../containers/single_tags_list.js":421,"./gallery__list.jsx":388,"./link__list.jsx":395,"./page.jsx":400,"./single.jsx":403,"prop-types":50,"react":295}],405:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43285,12 +43291,99 @@ exports.default = Soon;
 },{"prop-types":50,"react":295}],406:[function(require,module,exports){
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Subscribe = function Subscribe() {
+    return _react2.default.createElement(
+        'div',
+        { id: 'mc_embed_signup', className: 'subscribe-form' },
+        _react2.default.createElement(
+            'form',
+            { action: '//ellugar.us10.list-manage.com/subscribe/post?u=3d6bfe919b1589eeacd4b646e&id=0d53f511b1', method: 'post', id: 'mc-embedded-subscribe-form', name: 'mc-embedded-subscribe-form', className: 'validate', target: '_blank', novalidate: true },
+            _react2.default.createElement('input', { type: 'email', name: 'EMAIL', className: 'required email', placeholder: 'email', id: 'mce-EMAIL' }),
+            _react2.default.createElement(
+                'div',
+                {
+                    className: 'hidden',
+                    'aria-hidden': 'true' },
+                _react2.default.createElement('input', { type: 'text', name: 'b_3d6bfe919b1589eeacd4b646e_0d53f511b1', tabIndex: '-1', value: '' })
+            ),
+            _react2.default.createElement('input', { type: 'submit', value: 'Subscribe', name: 'subscribe', id: 'mc-embedded-subscribe', className: 'button' })
+        )
+    );
+};
+
+exports.default = Subscribe;
+
+},{"prop-types":50,"react":295}],407:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _page = require('./page.jsx');
+
+var _page2 = _interopRequireDefault(_page);
+
+var _subscribe = require('./subscribe.jsx');
+
+var _subscribe2 = _interopRequireDefault(_subscribe);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Container = function Container(_ref) {
+    var id = _ref.id,
+        title = _ref.title;
+
+
+    return _react2.default.createElement(
+        _page2.default,
+        {
+            id: id,
+            title: title,
+            isFetching: false
+        },
+        _react2.default.createElement(_subscribe2.default, null)
+    );
+};
+
+Container.propTypes = {
+    id: _propTypes2.default.string.isRequired,
+    title: _propTypes2.default.string
+};
+
+exports.default = Container;
+
+},{"./page.jsx":400,"./subscribe.jsx":406,"prop-types":50,"react":295}],408:[function(require,module,exports){
+'use strict';
+
 var APIURL = 'https://api.ellugar.co/';
 module.exports = {
     APIURL: APIURL
 };
 
-},{}],407:[function(require,module,exports){
+},{}],409:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43335,7 +43428,7 @@ var aboutPage = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_l
 
 exports.default = aboutPage;
 
-},{"../actions/api_actions":378,"../components/list__container.jsx":398,"react-redux":224}],408:[function(require,module,exports){
+},{"../actions/api_actions":378,"../components/list__container.jsx":398,"react-redux":224}],410:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43395,7 +43488,7 @@ var AboutSingle = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 exports.default = AboutSingle;
 
-},{"../actions/api_actions":378,"../components/single__container.jsx":404,"react-redux":224}],409:[function(require,module,exports){
+},{"../actions/api_actions":378,"../components/single__container.jsx":404,"react-redux":224}],411:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43450,7 +43543,7 @@ var CvSingle = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_si
 
 exports.default = CvSingle;
 
-},{"../actions/file_actions":380,"../components/single__container.jsx":404,"react-redux":224}],410:[function(require,module,exports){
+},{"../actions/file_actions":380,"../components/single__container.jsx":404,"react-redux":224}],412:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43511,7 +43604,7 @@ var diaryPage = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_l
 
 exports.default = diaryPage;
 
-},{"../actions/api_actions":378,"../components/list__container.jsx":398,"react-redux":224}],411:[function(require,module,exports){
+},{"../actions/api_actions":378,"../components/list__container.jsx":398,"react-redux":224}],413:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43577,7 +43670,7 @@ var DiarySingle = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 exports.default = DiarySingle;
 
-},{"../actions/api_actions":378,"../components/single__container.jsx":404,"react-redux":224}],412:[function(require,module,exports){
+},{"../actions/api_actions":378,"../components/single__container.jsx":404,"react-redux":224}],414:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43639,7 +43732,7 @@ var Home = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_home2.
 
 exports.default = Home;
 
-},{"../actions/api_actions":378,"../components/home.jsx":391,"react-redux":224}],413:[function(require,module,exports){
+},{"../actions/api_actions":378,"../components/home.jsx":391,"react-redux":224}],415:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43700,7 +43793,7 @@ var diaryPage = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_l
 
 exports.default = diaryPage;
 
-},{"../actions/api_actions":378,"../components/list__container.jsx":398,"react-redux":224}],414:[function(require,module,exports){
+},{"../actions/api_actions":378,"../components/list__container.jsx":398,"react-redux":224}],416:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43779,7 +43872,7 @@ var ProjectFilterCategory = (0, _reactRedux.connect)(mapStateToProps, mapDispatc
 
 exports.default = ProjectFilterCategory;
 
-},{"../actions/api_actions":378,"../actions/category_filter_actions":379,"../actions/items_actions":381,"../components/filter__list.jsx":386,"react-redux":224}],415:[function(require,module,exports){
+},{"../actions/api_actions":378,"../actions/category_filter_actions":379,"../actions/items_actions":381,"../components/filter__list.jsx":386,"react-redux":224}],417:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43865,7 +43958,7 @@ var ProjectFilterTag = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToPr
 
 exports.default = ProjectFilterTag;
 
-},{"../actions/api_actions":378,"../actions/items_actions":381,"../actions/tag_filter_actions":383,"../components/filter__list.jsx":386,"react-redux":224}],416:[function(require,module,exports){
+},{"../actions/api_actions":378,"../actions/items_actions":381,"../actions/tag_filter_actions":383,"../components/filter__list.jsx":386,"react-redux":224}],418:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43943,7 +44036,7 @@ var Images = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_imag
 
 exports.default = Images;
 
-},{"../actions/api_actions":378,"../components/image__list.jsx":393,"react-redux":224}],417:[function(require,module,exports){
+},{"../actions/api_actions":378,"../components/image__list.jsx":393,"react-redux":224}],419:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44020,7 +44113,7 @@ var projectsPage = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)
 
 exports.default = projectsPage;
 
-},{"../actions/api_actions":378,"../components/list__container.jsx":398,"react-redux":224}],418:[function(require,module,exports){
+},{"../actions/api_actions":378,"../components/list__container.jsx":398,"react-redux":224}],420:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44069,7 +44162,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
         items: []
     };
 
-    var images = apiCalls['portfolio/projectsImages/?imgType=gal&project__slug=' + slug] || {
+    var images = apiCalls['portfolio/projectsImages?imgType=gal&project__slug=' + slug] || {
+
         isFetching: true,
         items: []
     };
@@ -44105,7 +44199,7 @@ var Project = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_sin
 
 exports.default = Project;
 
-},{"../actions/api_actions":378,"../actions/category_filter_actions":379,"../components/single__container.jsx":404,"react-redux":224}],419:[function(require,module,exports){
+},{"../actions/api_actions":378,"../actions/category_filter_actions":379,"../components/single__container.jsx":404,"react-redux":224}],421:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44184,7 +44278,36 @@ var ProjectFilterTag = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToPr
 
 exports.default = ProjectFilterTag;
 
-},{"../actions/api_actions":378,"../actions/items_actions":381,"../actions/tag_filter_actions":383,"../components/filter__list.jsx":386,"react-redux":224}],420:[function(require,module,exports){
+},{"../actions/api_actions":378,"../actions/items_actions":381,"../actions/tag_filter_actions":383,"../components/filter__list.jsx":386,"react-redux":224}],422:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _reactRedux = require('react-redux');
+
+var _subscribe__page = require('../components/subscribe__page.jsx');
+
+var _subscribe__page2 = _interopRequireDefault(_subscribe__page);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state) {
+    return {
+        id: 'h'
+    };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    return {};
+};
+
+var Home = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_subscribe__page2.default);
+
+exports.default = Home;
+
+},{"../components/subscribe__page.jsx":407,"react-redux":224}],423:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44232,7 +44355,7 @@ var items = exports.items = function items() {
     }
 };
 
-},{"../actions/api_actions":378}],421:[function(require,module,exports){
+},{"../actions/api_actions":378}],424:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44260,7 +44383,7 @@ var categoryFilter = exports.categoryFilter = function categoryFilter() {
     }
 };
 
-},{"../actions/category_filter_actions":379}],422:[function(require,module,exports){
+},{"../actions/category_filter_actions":379}],425:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44308,7 +44431,7 @@ var file = exports.file = function file() {
     }
 };
 
-},{"../actions/file_actions":380}],423:[function(require,module,exports){
+},{"../actions/file_actions":380}],426:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44387,7 +44510,7 @@ Object.keys(_routes_reducers).forEach(function (key) {
   });
 });
 
-},{"./api_reducers.js":420,"./category_filter_reducers.js":421,"./file_reducers.js":422,"./routes_reducers.js":424,"./tag_filter_reducers.js":425,"./visible_items_reducers.js":426}],424:[function(require,module,exports){
+},{"./api_reducers.js":423,"./category_filter_reducers.js":424,"./file_reducers.js":425,"./routes_reducers.js":427,"./tag_filter_reducers.js":428,"./visible_items_reducers.js":429}],427:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44413,7 +44536,7 @@ var route = exports.route = function route() {
     }
 };
 
-},{"../actions/routes_actions":382}],425:[function(require,module,exports){
+},{"../actions/routes_actions":382}],428:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44458,7 +44581,7 @@ var tagFilter = exports.tagFilter = function tagFilter() {
     }
 };
 
-},{"../actions/tag_filter_actions":383}],426:[function(require,module,exports){
+},{"../actions/tag_filter_actions":383}],429:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
