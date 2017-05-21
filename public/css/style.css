@@ -703,6 +703,7 @@ footer a .active {
 form {
   width: 100%;
   display: block;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 fieldset {
   width: 49%;
@@ -733,6 +734,7 @@ textarea {
   background: transparent;
   font-weight: 600;
   font-size: 1em;
+  font-family: 'Source Sans Pro', sans-serif;
   text-transform: uppercase;
   border-radius: 0;
   border: none;
