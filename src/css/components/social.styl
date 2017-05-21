@@ -1,0 +1,33 @@
+.social-subscribe
+    width 100%
+    margin 20px 0 0 0
+    p
+        width 100%
+        display block
+        position relative
+        margin 5px 0 5px 0
+        margin 0px
+        cursor pointer
+        a
+            display flex
+            flex-flow row wrap
+            align-items center
+            justify-content space-between
+            width 100%
+            padding 5px 0 5px 0
+            padding 0px
+            position relative
+            z-index 2
+            &::before
+                width 0%
+                height 100%
+                z-index -1
+                background $highlight-soft
+                content ""
+                position absolute
+                bottom 0
+                transition all 0.2s ease
+            &:hover
+                color $black
+                &::before
+                    width 100%

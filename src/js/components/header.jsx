@@ -19,7 +19,8 @@ class Header extends React.Component {
                                 <li><NavLink to="/about" activeClassName="active">About</NavLink></li>
                                 <li><NavLink to="/logs" activeClassName="active">Logs</NavLink></li>
                                 <li><NavLink to="/cv" activeClassName="active">CV</NavLink></li>
-                                <li><NavLink to="/ligoj" activeClassName="active">Φ</NavLink></li>
+                                <li><NavLink to="/subscribe" activeClassName="active"><img src="/img/rss.svg" alt="subscribe"/></NavLink></li>
+                                <li><NavLink to="/ligoj" activeClassName="active"><img src="/img/ligoj.svg" alt="Φ"/></NavLink></li>
                             </ul>
                         </nav>
                     </Sticky>
