@@ -16,7 +16,7 @@ const Container = ({ id, title, isFetching, items }) => {
             title = { title }
             isFetching = { false }
         >
-            <div className="markdown" dangerouslySetInnerHTML={{ __html: mdr }}/>
+            <div className="markdown no-margin" dangerouslySetInnerHTML={{ __html: mdr }}/>
             <div className="subscribe">
                 <Subscribe></Subscribe>
                 <Social config={ items }></Social>

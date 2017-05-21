@@ -43494,7 +43494,7 @@ var Container = function Container(_ref) {
             title: title,
             isFetching: false
         },
-        _react2.default.createElement('div', { className: 'markdown', dangerouslySetInnerHTML: { __html: mdr } }),
+        _react2.default.createElement('div', { className: 'markdown no-margin', dangerouslySetInnerHTML: { __html: mdr } }),
         _react2.default.createElement(
             'div',
             { className: 'subscribe' },
