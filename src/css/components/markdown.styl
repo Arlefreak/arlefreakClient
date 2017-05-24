@@ -7,6 +7,12 @@
     &.no-margin
         &>:first-child
             margin-top 0px
+    & *::selection
+        color $color1
+        background $highlight-soft
+    & *::-moz-selection
+        color $color1
+        background $highlight-soft
     ul
         margin 20px 0 20px 0
         li

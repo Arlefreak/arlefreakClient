@@ -1545,6 +1545,14 @@ svg:hover #stick {
 .markdown.no-margin>:first-child {
   margin-top: 0px;
 }
+.markdown *::selection {
+  color: #000;
+  background: rgba(255,229,0,0.5);
+}
+.markdown *::-moz-selection {
+  color: #000;
+  background: rgba(255,229,0,0.5);
+}
 .markdown ul {
   margin: 20px 0 20px 0;
 }
