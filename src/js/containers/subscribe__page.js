@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 
 
     return {
-        id: 'rss',
+        id: 'subscribe',
         isFetching: config.isFetching,
         items: config.items,
     };

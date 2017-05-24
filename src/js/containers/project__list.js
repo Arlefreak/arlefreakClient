@@ -40,7 +40,7 @@ const mapStateToProps = (state) => {
         images.isFetching;
 
     return {
-        id: 'p',
+        id: 'projects',
         isFetching: finalFetch,
         items: filterItems,
         categories: categories,

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500px" height="500px" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>web/routes/subscribe</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Web" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="subscribe" fill-rule="nonzero" fill="#010202">
+            <ellipse id="Oval" cx="68.2699966" cy="431.267857" rx="68.2699966" ry="68.2678571"></ellipse>
+            <g id="lines">
+                <path d="M0,101.5 C201.732143,101.5 384.5,298.267857 384.5,500 L487.5,500 C487.5,241.982143 258.035714,-2.36249589e-17 1.10519705e-12,3.46944695e-18 L0,101.5 Z" id="Shape"></path>
+                <path d="M0,163.5 L0,261 C113.607143,261 225,386.410714 225,500 L322.5,500 C322.482143,332.553571 167.464286,163.5 0,163.5 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

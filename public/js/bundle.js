@@ -42217,7 +42217,7 @@ var Header = function (_React$Component) {
                                     _react2.default.createElement(
                                         _reactRouterDom.NavLink,
                                         { exact: true, to: '/', activeClassName: 'active' },
-                                        _react2.default.createElement('img', { src: '/img/h.svg', alt: 'home' })
+                                        _react2.default.createElement('img', { src: '/img/routes/home.svg', alt: 'home' })
                                     )
                                 ),
                                 _react2.default.createElement(
@@ -42262,7 +42262,7 @@ var Header = function (_React$Component) {
                                     _react2.default.createElement(
                                         _reactRouterDom.NavLink,
                                         { to: '/subscribe', activeClassName: 'active' },
-                                        _react2.default.createElement('img', { src: '/img/rss.svg', alt: 'subscribe' })
+                                        _react2.default.createElement('img', { src: '/img/routes/subscribe.svg', alt: 'subscribe' })
                                     )
                                 ),
                                 _react2.default.createElement(
@@ -42271,7 +42271,7 @@ var Header = function (_React$Component) {
                                     _react2.default.createElement(
                                         _reactRouterDom.NavLink,
                                         { to: '/ligoj', activeClassName: 'active' },
-                                        _react2.default.createElement('img', { src: '/img/ligoj.svg', alt: '\u03A6' })
+                                        _react2.default.createElement('img', { src: '/img/routes/ligoj.svg', alt: '\u03A6' })
                                     )
                                 )
                             )
@@ -42383,7 +42383,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Id = function Id(_ref) {
     var index = _ref.index;
 
-    var src = '/img/' + index + '.svg';
+    var src = '/img/routes/' + index + '.svg';
     return _react2.default.createElement('img', { className: 'index', src: src, alt: 'Icono' });
 };
 
@@ -43398,8 +43398,7 @@ var Soon = function Soon() {
                 null,
                 'ALWAYS \u2C6F WIP'
             )
-        ),
-        _react2.default.createElement('img', { className: 'index', src: '/img/h.svg', alt: 'Icono' })
+        )
     );
 };
 
@@ -43550,7 +43549,7 @@ var mapStateToProps = function mapStateToProps(state) {
         items = _ref.items;
 
     return {
-        id: 'a',
+        id: 'about',
         isFetching: isFetching,
         items: items,
         route: 'about'
@@ -43724,7 +43723,7 @@ var mapStateToProps = function mapStateToProps(state) {
     }
 
     return {
-        id: 'd',
+        id: 'logs',
         isFetching: isFetching && tags.isFetching,
         items: filterItems,
         tags: tags,
@@ -43850,7 +43849,7 @@ var mapStateToProps = function mapStateToProps(state) {
     var finalFetch = isFetching && images.isFetching;
 
     return {
-        id: 'h',
+        id: 'home',
         isFetching: finalFetch,
         items: items,
         images: images,
@@ -44229,7 +44228,7 @@ var mapStateToProps = function mapStateToProps(state) {
     var finalFetch = isFetching && tags.isFetching && categories.isFetching && images.isFetching;
 
     return {
-        id: 'p',
+        id: 'projects',
         isFetching: finalFetch,
         items: filterItems,
         categories: categories,
@@ -44442,7 +44441,7 @@ var mapStateToProps = function mapStateToProps(state) {
     };
 
     return {
-        id: 'rss',
+        id: 'subscribe',
         isFetching: config.isFetching,
         items: config.items
     };

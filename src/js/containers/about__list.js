@@ -14,7 +14,7 @@ const mapStateToProps = (state) => {
     };
 
     return {
-        id: 'a',
+        id: 'about',
         isFetching,
         items: items,
         route: 'about'

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500px" height="500px" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>web/routes/cv</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M60,252.95858 C60,213.017552 65.9171006,177.391675 77.7514793,146.079882 C89.585858,114.768088 105.857885,88.2644083 126.568047,66.5680473 C147.27821,44.8716864 171.68625,28.3531139 199.792899,17.0118343 C227.899549,5.67055473 257.978143,0 290.029586,0 C321.09483,0 348.584693,6.28691938 372.5,18.8609467 C396.415307,31.4349741 416.508794,45.6113609 432.781065,61.3905325 L372.869822,128.698225 C361.528543,118.343143 349.20125,109.960584 335.887574,103.550296 C322.573898,97.1400074 307.288055,93.9349112 290.029586,93.9349112 C272.771117,93.9349112 256.992182,97.5098262 242.692308,104.659763 C228.392433,111.8097 215.941868,122.041354 205.340237,135.35503 C194.738606,148.668706 186.47932,164.940732 180.56213,184.171598 C174.644941,203.402463 171.686391,225.098499 171.686391,249.260355 C171.686391,299.063365 183.0275,337.647792 205.710059,365.014793 C228.392618,392.381794 257.978121,406.065089 294.467456,406.065089 C311.725925,406.065089 327.381587,402.120355 341.434911,394.230769 C355.488236,386.341183 368.431893,375.986257 380.266272,363.16568 L440.177515,428.994083 C399.743388,476.331598 348.954941,500 287.810651,500 C256.745407,500 227.40645,494.699264 199.792899,484.097633 C172.179349,473.496002 148.017855,457.84034 127.307692,437.130178 C106.59753,416.420015 90.20223,390.655973 78.1213018,359.837278 C66.0403735,329.018584 60,293.392707 60,252.95858 Z" id="path-1"></path>
+        <filter x="-0.5%" y="-0.4%" width="101.1%" height="100.8%" filterUnits="objectBoundingBox" id="filter-2">
+            <feGaussianBlur stdDeviation="1.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Web" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="cv">
+            <g id="C">
+                <use fill="#000000" fill-rule="evenodd" xlink:href="#path-1"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>

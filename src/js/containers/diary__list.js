@@ -25,7 +25,7 @@ const mapStateToProps = (state) => {
     }
 
     return {
-        id: 'd',
+        id: 'logs',
         isFetching: isFetching && tags.isFetching,
         items: filterItems,
         tags: tags,

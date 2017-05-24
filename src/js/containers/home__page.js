@@ -26,7 +26,7 @@ const mapStateToProps = (state) => {
     let finalFetch = isFetching && images.isFetching;
 
     return {
-        id: 'h',
+        id: 'home',
         isFetching: finalFetch,
         items: items,
         images: images,
