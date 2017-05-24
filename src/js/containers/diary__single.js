@@ -31,7 +31,7 @@ const mapStateToProps = (state, ownProps) => {
     const isFetching = list.isFetching;
 
     return {
-        id: 'd',
+        id: 'logs',
         title: item.title,
         isFetching,
         item: item,

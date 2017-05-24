@@ -43609,7 +43609,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     var isFetching = list.isFetching;
 
     return {
-        id: 'a',
+        id: 'about',
         title: item.name,
         isFetching: isFetching,
         item: item
@@ -43790,7 +43790,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     var isFetching = list.isFetching;
 
     return {
-        id: 'd',
+        id: 'logs',
         title: item.title,
         isFetching: isFetching,
         item: item,
@@ -44310,7 +44310,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     var isFetching = list.isFetching && images.isFetching && links.isFetching && tags.apiCalls;
 
     return {
-        id: 'p',
+        id: 'projects',
         title: item.name,
         isFetching: false,
         item: item,
