@@ -4,7 +4,7 @@ import { apiFetchIfNeeded } from '../actions/api_actions';
 
 const mapStateToProps = (state) => {
     const { apiCalls } = state;
-    const config = apiCalls['web_client/config/'] || {
+    const config = apiCalls['web_client/config/1/'] || {
         isFetching: true,
         items: {},
     };
@@ -18,7 +18,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    dispatch(apiFetchIfNeeded('web_client/config/'));
+    dispatch(apiFetchIfNeeded('web_client/config/1/'));
     return {};
 };
 

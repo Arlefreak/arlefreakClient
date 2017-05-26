@@ -1,5 +1,5 @@
 const https = require('https');
-const URL = 'https://api.ellugar.co/web_client/config/';
+const URL = 'https://api.ellugar.co/web_client/config/1/';
 
 exports.index = (req, res)=>{
     let date = new Date(Date.now());

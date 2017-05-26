@@ -43841,7 +43841,7 @@ var mapStateToProps = function mapStateToProps(state) {
         items: []
     };
 
-    var config = apiCalls['web_client/config/'] || {
+    var config = apiCalls['web_client/config/1/'] || {
         isFetching: true,
         items: {}
     };
@@ -43861,7 +43861,7 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     dispatch((0, _api_actions.apiFetchIfNeeded)('portfolio/projects'));
     dispatch((0, _api_actions.apiFetchIfNeeded)('portfolio/projectsImages/?imgType=mni'));
-    dispatch((0, _api_actions.apiFetchIfNeeded)('web_client/config/'));
+    dispatch((0, _api_actions.apiFetchIfNeeded)('web_client/config/1/'));
     return {};
 };
 
@@ -44435,7 +44435,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mapStateToProps = function mapStateToProps(state) {
     var apiCalls = state.apiCalls;
 
-    var config = apiCalls['web_client/config/'] || {
+    var config = apiCalls['web_client/config/1/'] || {
         isFetching: true,
         items: {}
     };
@@ -44448,7 +44448,7 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-    dispatch((0, _api_actions.apiFetchIfNeeded)('web_client/config/'));
+    dispatch((0, _api_actions.apiFetchIfNeeded)('web_client/config/1/'));
     return {};
 };
 
