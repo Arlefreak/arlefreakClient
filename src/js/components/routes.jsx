@@ -28,6 +28,10 @@ import LigojList from '../containers/ligoj__list.js';
 import ProjectList from '../containers/project__list.js';
 import ProjectSingle from '../containers/project__single.js';
 
+import PodcastList from '../containers/podcast__list.js';
+import EpisodeList from '../containers/episode__list.js';
+import EpisodeSingle from '../containers/episode__single.js';
+
 import ReactGA from 'react-ga';
 import { StickyContainer } from 'react-sticky';
 
@@ -88,6 +92,10 @@ const Routes = () => (
                             <Route path="/subscribe" component={Subscribe} />
 
                             <Route path="/ligoj" component={LigojList} />
+
+                            <Route exact path="/podcasts" component={PodcastList} />
+                            <Route exact path="/podcasts/:slug" component={EpisodeList} />
+                            <Route exact path="/podcasts/:slug/:episode_slug" component={EpisodeSingle} />
 
                             <Route component={Home} />
                         </Switch>

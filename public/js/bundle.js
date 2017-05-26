@@ -41933,7 +41933,7 @@ var App = function (_Component) {
 
 exports.default = App;
 
-},{"../reducers":419,"./routes.jsx":393,"prop-types":74,"react":287,"react-redux":222,"redux":299,"redux-logger":292,"redux-thunk":293}],378:[function(require,module,exports){
+},{"../reducers":422,"./routes.jsx":393,"prop-types":74,"react":287,"react-redux":222,"redux":299,"redux-logger":292,"redux-thunk":293}],378:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42363,7 +42363,7 @@ Container.propTypes = {
 
 exports.default = Container;
 
-},{"../containers/project__images__list.js":411,"./page.jsx":392,"./soon.jsx":398,"prop-types":74,"react":287,"remarkable":301}],384:[function(require,module,exports){
+},{"../containers/project__images__list.js":414,"./page.jsx":392,"./soon.jsx":398,"prop-types":74,"react":287,"remarkable":301}],384:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42753,7 +42753,7 @@ Container.propTypes = {
 
 exports.default = Container;
 
-},{"../containers/project__filter__categories.js":409,"../containers/project__filter__tags.js":410,"../containers/project__images__list.js":411,"./list.jsx":389,"./page.jsx":392,"prop-types":74,"react":287}],391:[function(require,module,exports){
+},{"../containers/project__filter__categories.js":412,"../containers/project__filter__tags.js":413,"../containers/project__images__list.js":414,"./list.jsx":389,"./page.jsx":392,"prop-types":74,"react":287}],391:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42952,6 +42952,18 @@ var _project__single = require('../containers/project__single.js');
 
 var _project__single2 = _interopRequireDefault(_project__single);
 
+var _podcast__list = require('../containers/podcast__list.js');
+
+var _podcast__list2 = _interopRequireDefault(_podcast__list);
+
+var _episode__list = require('../containers/episode__list.js');
+
+var _episode__list2 = _interopRequireDefault(_episode__list);
+
+var _episode__single = require('../containers/episode__single.js');
+
+var _episode__single2 = _interopRequireDefault(_episode__single);
+
 var _reactGa = require('react-ga');
 
 var _reactGa2 = _interopRequireDefault(_reactGa);
@@ -43057,6 +43069,9 @@ var Routes = function Routes() {
                             _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/cv', component: _cv__single2.default }),
                             _react2.default.createElement(_reactRouterDom.Route, { path: '/subscribe', component: _subscribe__page2.default }),
                             _react2.default.createElement(_reactRouterDom.Route, { path: '/ligoj', component: _ligoj__list2.default }),
+                            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/podcasts', component: _podcast__list2.default }),
+                            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/podcasts/:slug', component: _episode__list2.default }),
+                            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/podcasts/:slug/:episode_slug', component: _episode__single2.default }),
                             _react2.default.createElement(_reactRouterDom.Route, { component: _home__page2.default })
                         )
                     )
@@ -43072,7 +43087,7 @@ Routes.propTypes = {
 
 exports.default = Routes;
 
-},{"../actions/category_filter_actions":371,"../actions/items_actions":373,"../actions/routes_actions":374,"../actions/tag_filter_actions":375,"../containers/about__list.js":402,"../containers/about__single.js":403,"../containers/cv__single.js":404,"../containers/diary__list.js":405,"../containers/diary__single.js":406,"../containers/home__page.js":407,"../containers/ligoj__list.js":408,"../containers/project__list.js":412,"../containers/project__single.js":413,"../containers/subscribe__page.js":415,"./app.jsx":377,"./header.jsx":382,"./soon.jsx":398,"prop-types":74,"react":287,"react-ga":203,"react-router-dom":239,"react-sticky":255,"react-transition-group/CSSTransitionGroup":257}],394:[function(require,module,exports){
+},{"../actions/category_filter_actions":371,"../actions/items_actions":373,"../actions/routes_actions":374,"../actions/tag_filter_actions":375,"../containers/about__list.js":402,"../containers/about__single.js":403,"../containers/cv__single.js":404,"../containers/diary__list.js":405,"../containers/diary__single.js":406,"../containers/episode__list.js":407,"../containers/episode__single.js":408,"../containers/home__page.js":409,"../containers/ligoj__list.js":410,"../containers/podcast__list.js":411,"../containers/project__list.js":415,"../containers/project__single.js":416,"../containers/subscribe__page.js":418,"./app.jsx":377,"./header.jsx":382,"./soon.jsx":398,"prop-types":74,"react":287,"react-ga":203,"react-router-dom":239,"react-sticky":255,"react-transition-group/CSSTransitionGroup":257}],394:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43297,7 +43312,7 @@ Container.propTypes = {
 
 exports.default = Container;
 
-},{"../containers/single_tags_list.js":414,"./gallery__list.jsx":380,"./link__list.jsx":387,"./page.jsx":392,"./single.jsx":395,"prop-types":74,"react":287}],397:[function(require,module,exports){
+},{"../containers/single_tags_list.js":417,"./gallery__list.jsx":380,"./link__list.jsx":387,"./page.jsx":392,"./single.jsx":395,"prop-types":74,"react":287}],397:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43816,6 +43831,129 @@ Object.defineProperty(exports, "__esModule", {
 
 var _reactRedux = require('react-redux');
 
+var _list__container = require('../components/list__container.jsx');
+
+var _list__container2 = _interopRequireDefault(_list__container);
+
+var _api_actions = require('../actions/api_actions');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+    var apiCalls = state.apiCalls,
+        visibleItems = state.visibleItems,
+        tagFilter = state.tagFilter;
+    var slug = ownProps.match.params.slug;
+
+    var _ref = apiCalls['podcast/json/episodes/' + slug] || {
+        isFetching: true,
+        items: []
+    },
+        isFetching = _ref.isFetching,
+        lastUpdated = _ref.lastUpdated,
+        items = _ref.items;
+
+    var finalFetch = isFetching;
+
+    return {
+        id: 'projects',
+        isFetching: finalFetch,
+        items: items,
+        route: 'podcasts/' + slug
+    };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+    var _ref2 = ownProps.match.params || '',
+        slug = _ref2.slug;
+
+    dispatch((0, _api_actions.apiFetchIfNeeded)('podcast/json/episodes/' + slug));
+    return {};
+};
+
+var podcastPage = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_list__container2.default);
+
+exports.default = podcastPage;
+
+},{"../actions/api_actions":370,"../components/list__container.jsx":390,"react-redux":222}],408:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _reactRedux = require('react-redux');
+
+var _api_actions = require('../actions/api_actions');
+
+var _single__container = require('../components/single__container.jsx');
+
+var _single__container2 = _interopRequireDefault(_single__container);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+;
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+    var _ownProps$match$param = ownProps.match.params,
+        slug = _ownProps$match$param.slug,
+        episode_slug = _ownProps$match$param.episode_slug;
+    var apiCalls = state.apiCalls;
+
+    var _ref = apiCalls['podcast/json/episodes/' + slug] || {
+        isFetching: true,
+        items: []
+    },
+        isFetching = _ref.isFetching,
+        lastUpdated = _ref.lastUpdated,
+        items = _ref.items;
+
+    var item = {
+        id: 0,
+        name: 'Loading',
+        text: 'Loading'
+    };
+
+    var i = 0;
+    if (items.length > 0) {
+        for (i; i < items.length; i++) {
+            if (items[i].slug === episode_slug) {
+                item = items[i];
+                break;
+            }
+        }
+    }
+
+    return {
+        id: 'projects',
+        title: item.title,
+        isFetching: isFetching,
+        item: item
+    };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
+    var _ownProps$match$param2 = ownProps.match.params,
+        slug = _ownProps$match$param2.slug,
+        episode_slug = _ownProps$match$param2.episode_slug;
+
+    dispatch((0, _api_actions.apiFetchIfNeeded)('podcast/json/episodes/' + slug));
+    return {};
+};
+
+var EpisodeSingle = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_single__container2.default);
+
+exports.default = EpisodeSingle;
+
+},{"../actions/api_actions":370,"../components/single__container.jsx":396,"react-redux":222}],409:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _reactRedux = require('react-redux');
+
 var _home = require('../components/home.jsx');
 
 var _home2 = _interopRequireDefault(_home);
@@ -43869,7 +44007,7 @@ var Home = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_home2.
 
 exports.default = Home;
 
-},{"../actions/api_actions":370,"../components/home.jsx":383,"react-redux":222}],408:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/home.jsx":383,"react-redux":222}],410:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43930,7 +44068,63 @@ var diaryPage = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_l
 
 exports.default = diaryPage;
 
-},{"../actions/api_actions":370,"../components/list__container.jsx":390,"react-redux":222}],409:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/list__container.jsx":390,"react-redux":222}],411:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _reactRedux = require('react-redux');
+
+var _list__container = require('../components/list__container.jsx');
+
+var _list__container2 = _interopRequireDefault(_list__container);
+
+var _api_actions = require('../actions/api_actions');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state) {
+    var apiCalls = state.apiCalls,
+        visibleItems = state.visibleItems,
+        tagFilter = state.tagFilter;
+
+    var _ref = apiCalls['podcast/json/podcast'] || {
+        isFetching: true,
+        items: []
+    },
+        isFetching = _ref.isFetching,
+        lastUpdated = _ref.lastUpdated,
+        items = _ref.items;
+
+    var tags = apiCalls['podcast/json/podcastTags'] || {
+        isFetching: true,
+        items: []
+    };
+
+    var finalFetch = isFetching && tags.isFetching;
+
+    return {
+        id: 'projects',
+        isFetching: finalFetch,
+        items: items,
+        // tags: tags,
+        route: 'podcasts'
+    };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+    dispatch((0, _api_actions.apiFetchIfNeeded)('podcast/json/podcast'));
+    dispatch((0, _api_actions.apiFetchIfNeeded)('podcast/json/podcastTags'));
+    return {};
+};
+
+var podcastPage = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_list__container2.default);
+
+exports.default = podcastPage;
+
+},{"../actions/api_actions":370,"../components/list__container.jsx":390,"react-redux":222}],412:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44009,7 +44203,7 @@ var ProjectFilterCategory = (0, _reactRedux.connect)(mapStateToProps, mapDispatc
 
 exports.default = ProjectFilterCategory;
 
-},{"../actions/api_actions":370,"../actions/category_filter_actions":371,"../actions/items_actions":373,"../components/filter__list.jsx":378,"react-redux":222}],410:[function(require,module,exports){
+},{"../actions/api_actions":370,"../actions/category_filter_actions":371,"../actions/items_actions":373,"../components/filter__list.jsx":378,"react-redux":222}],413:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44095,7 +44289,7 @@ var ProjectFilterTag = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToPr
 
 exports.default = ProjectFilterTag;
 
-},{"../actions/api_actions":370,"../actions/items_actions":373,"../actions/tag_filter_actions":375,"../components/filter__list.jsx":378,"react-redux":222}],411:[function(require,module,exports){
+},{"../actions/api_actions":370,"../actions/items_actions":373,"../actions/tag_filter_actions":375,"../components/filter__list.jsx":378,"react-redux":222}],414:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44173,7 +44367,7 @@ var Images = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_imag
 
 exports.default = Images;
 
-},{"../actions/api_actions":370,"../components/image__list.jsx":385,"react-redux":222}],412:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/image__list.jsx":385,"react-redux":222}],415:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44250,7 +44444,7 @@ var projectsPage = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)
 
 exports.default = projectsPage;
 
-},{"../actions/api_actions":370,"../components/list__container.jsx":390,"react-redux":222}],413:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/list__container.jsx":390,"react-redux":222}],416:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44336,7 +44530,7 @@ var Project = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_sin
 
 exports.default = Project;
 
-},{"../actions/api_actions":370,"../actions/category_filter_actions":371,"../components/single__container.jsx":396,"react-redux":222}],414:[function(require,module,exports){
+},{"../actions/api_actions":370,"../actions/category_filter_actions":371,"../components/single__container.jsx":396,"react-redux":222}],417:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44415,7 +44609,7 @@ var ProjectFilterTag = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToPr
 
 exports.default = ProjectFilterTag;
 
-},{"../actions/api_actions":370,"../actions/items_actions":373,"../actions/tag_filter_actions":375,"../components/filter__list.jsx":378,"react-redux":222}],415:[function(require,module,exports){
+},{"../actions/api_actions":370,"../actions/items_actions":373,"../actions/tag_filter_actions":375,"../components/filter__list.jsx":378,"react-redux":222}],418:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44456,7 +44650,7 @@ var Home = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_subscr
 
 exports.default = Home;
 
-},{"../actions/api_actions":370,"../components/subscribe__page.jsx":400,"react-redux":222}],416:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/subscribe__page.jsx":400,"react-redux":222}],419:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44504,7 +44698,7 @@ var items = exports.items = function items() {
     }
 };
 
-},{"../actions/api_actions":370}],417:[function(require,module,exports){
+},{"../actions/api_actions":370}],420:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44532,7 +44726,7 @@ var categoryFilter = exports.categoryFilter = function categoryFilter() {
     }
 };
 
-},{"../actions/category_filter_actions":371}],418:[function(require,module,exports){
+},{"../actions/category_filter_actions":371}],421:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44580,7 +44774,7 @@ var file = exports.file = function file() {
     }
 };
 
-},{"../actions/file_actions":372}],419:[function(require,module,exports){
+},{"../actions/file_actions":372}],422:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44659,7 +44853,7 @@ Object.keys(_routes_reducers).forEach(function (key) {
   });
 });
 
-},{"./api_reducers.js":416,"./category_filter_reducers.js":417,"./file_reducers.js":418,"./routes_reducers.js":420,"./tag_filter_reducers.js":421,"./visible_items_reducers.js":422}],420:[function(require,module,exports){
+},{"./api_reducers.js":419,"./category_filter_reducers.js":420,"./file_reducers.js":421,"./routes_reducers.js":423,"./tag_filter_reducers.js":424,"./visible_items_reducers.js":425}],423:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44685,7 +44879,7 @@ var route = exports.route = function route() {
     }
 };
 
-},{"../actions/routes_actions":374}],421:[function(require,module,exports){
+},{"../actions/routes_actions":374}],424:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44730,7 +44924,7 @@ var tagFilter = exports.tagFilter = function tagFilter() {
     }
 };
 
-},{"../actions/tag_filter_actions":375}],422:[function(require,module,exports){
+},{"../actions/tag_filter_actions":375}],425:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
