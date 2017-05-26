@@ -1,0 +1,34 @@
+.podcast
+.episode
+    width 100%
+    img
+        height auto
+        display block
+    audio
+        height auto
+
+.episode-info
+.podcast-info
+    display flex
+    flex-flow row wrap
+    justify-content space-between
+
+.episode-info
+    align-items flex-end
+.podcast-info
+    align-items flex-start
+
+.podcast-cover
+.episode-cover
+    width 30%
+    @media screen and (max-width: $mobile-width)
+        width 100%
+
+.episode-description
+    width 100%
+
+.episode-player
+    width calc(70% - 20px)
+
+.podcast-description
+    width calc(70% - 20px)

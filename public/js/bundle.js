@@ -41513,7 +41513,7 @@ function apiShouldFetch(state, endPoint) {
     }
 }
 
-},{"../constants.js":401,"isomorphic-fetch":56}],371:[function(require,module,exports){
+},{"../constants.js":404,"isomorphic-fetch":56}],371:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41570,7 +41570,7 @@ function filterByCategory(projects, category) {
     }
 };
 
-},{"../constants.js":401,"isomorphic-fetch":56,"react-ga":203}],372:[function(require,module,exports){
+},{"../constants.js":404,"isomorphic-fetch":56,"react-ga":203}],372:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41649,7 +41649,7 @@ function fileShouldFetch(state, endPoint) {
     }
 }
 
-},{"../constants.js":401,"isomorphic-fetch":56}],373:[function(require,module,exports){
+},{"../constants.js":404,"isomorphic-fetch":56}],373:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41831,7 +41831,7 @@ function filterByTags(projects, tags) {
     return filteredProjects;
 };
 
-},{"../constants.js":401,"isomorphic-fetch":56,"react-ga":203}],376:[function(require,module,exports){
+},{"../constants.js":404,"isomorphic-fetch":56,"react-ga":203}],376:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -41933,7 +41933,188 @@ var App = function (_Component) {
 
 exports.default = App;
 
-},{"../reducers":422,"./routes.jsx":393,"prop-types":74,"react":287,"react-redux":222,"redux":299,"redux-logger":292,"redux-thunk":293}],378:[function(require,module,exports){
+},{"../reducers":425,"./routes.jsx":395,"prop-types":74,"react":287,"react-redux":222,"redux":299,"redux-logger":292,"redux-thunk":293}],378:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _loading = require('./loading.jsx');
+
+var _loading2 = _interopRequireDefault(_loading);
+
+var _remarkable = require('remarkable');
+
+var _remarkable2 = _interopRequireDefault(_remarkable);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Episode = function Episode(_ref) {
+    var item = _ref.item;
+
+    var md = new _remarkable2.default();
+    var text = item.text;
+    var mdr = md.render(text);
+    return _react2.default.createElement(
+        'section',
+        { className: 'episode' },
+        item.dateCreated != null && _react2.default.createElement(
+            'div',
+            { className: 'date-container' },
+            _react2.default.createElement(
+                'span',
+                { className: 'date' },
+                item.dateCreated,
+                ' |'
+            ),
+            _react2.default.createElement(
+                'span',
+                { className: 'date' },
+                ' ',
+                item.dateUpdated
+            )
+        ),
+        _react2.default.createElement(
+            'div',
+            { className: 'episode-info' },
+            _react2.default.createElement('img', { className: 'episode-cover', src: item.image, alt: item.title }),
+            _react2.default.createElement(
+                'audio',
+                { className: 'episode-player', controls: true },
+                _react2.default.createElement('source', { src: item.file_mp3, type: item.audio_type })
+            )
+        ),
+        _react2.default.createElement('div', { className: 'episode-description markdown', dangerouslySetInnerHTML: { __html: mdr } })
+    );
+};
+
+Episode.propTypes = {
+    item: _propTypes2.default.shape({
+        id: _propTypes2.default.number.isRequired,
+        title: _propTypes2.default.string,
+        text: _propTypes2.default.string,
+        duration: _propTypes2.default.string,
+        file_mp3: _propTypes2.default.string,
+        audio_type: _propTypes2.default.string,
+        audio_size: _propTypes2.default.string
+    }).isRequired
+};
+exports.default = Episode;
+
+},{"./loading.jsx":393,"prop-types":74,"react":287,"remarkable":301}],379:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _remarkable = require('remarkable');
+
+var _remarkable2 = _interopRequireDefault(_remarkable);
+
+var _page = require('./page.jsx');
+
+var _page2 = _interopRequireDefault(_page);
+
+var _list = require('./list.jsx');
+
+var _list2 = _interopRequireDefault(_list);
+
+var _project__filter__categories = require('../containers/project__filter__categories.js');
+
+var _project__filter__categories2 = _interopRequireDefault(_project__filter__categories);
+
+var _project__filter__tags = require('../containers/project__filter__tags.js');
+
+var _project__filter__tags2 = _interopRequireDefault(_project__filter__tags);
+
+var _project__images__list = require('../containers/project__images__list.js');
+
+var _project__images__list2 = _interopRequireDefault(_project__images__list);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Container = function Container(_ref) {
+    var id = _ref.id,
+        isFetching = _ref.isFetching,
+        item = _ref.item,
+        items = _ref.items,
+        route = _ref.route;
+
+    var md = new _remarkable2.default();
+    var text = item.text || '';
+    var mdr = md.render(text);
+
+    return _react2.default.createElement(
+        _page2.default,
+        {
+            id: id,
+            title: item.title,
+            isFetching: isFetching
+        },
+        item.dateCreated != null && _react2.default.createElement(
+            'div',
+            { className: 'date-container' },
+            _react2.default.createElement(
+                'span',
+                { className: 'date' },
+                item.dateCreated,
+                ' |'
+            ),
+            _react2.default.createElement(
+                'span',
+                { className: 'date' },
+                ' ',
+                item.dateUpdated
+            )
+        ),
+        _react2.default.createElement(
+            'div',
+            { className: 'podcast-info' },
+            _react2.default.createElement('img', { className: 'podcast-cover', src: item.image, alt: item.title }),
+            _react2.default.createElement('div', { className: 'podcast-description no-margin markdown', dangerouslySetInnerHTML: { __html: mdr } })
+        ),
+        _react2.default.createElement(
+            'h3',
+            null,
+            'Episodes'
+        ),
+        _react2.default.createElement(_list2.default, { items: items, route: route, className: 'full-width' })
+    );
+};
+
+Container.propTypes = {
+    id: _propTypes2.default.string.isRequired,
+    isFetching: _propTypes2.default.bool.isRequired,
+    item: _propTypes2.default.shape().isRequired,
+    items: _propTypes2.default.arrayOf(_propTypes2.default.shape({
+        id: _propTypes2.default.number.isRequired,
+        name: _propTypes2.default.string,
+        title: _propTypes2.default.string
+    }).isRequired).isRequired,
+    route: _propTypes2.default.string.isRequired
+};
+
+exports.default = Container;
+
+},{"../containers/project__filter__categories.js":415,"../containers/project__filter__tags.js":416,"../containers/project__images__list.js":417,"./list.jsx":391,"./page.jsx":394,"prop-types":74,"react":287,"remarkable":301}],380:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42026,7 +42207,7 @@ FilterList.propTypes = {
 
 exports.default = FilterList;
 
-},{"./filter__row.jsx":379,"prop-types":74,"react":287,"react-transition-group/CSSTransitionGroup":257}],379:[function(require,module,exports){
+},{"./filter__row.jsx":381,"prop-types":74,"react":287,"react-transition-group/CSSTransitionGroup":257}],381:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42068,7 +42249,7 @@ FilterRow.propTypes = {
 
 exports.default = FilterRow;
 
-},{"prop-types":74,"react":287}],380:[function(require,module,exports){
+},{"prop-types":74,"react":287}],382:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42115,7 +42296,7 @@ ImageList.propTypes = {
 
 exports.default = ImageList;
 
-},{"./gallery__row.jsx":381,"prop-types":74,"react":287}],381:[function(require,module,exports){
+},{"./gallery__row.jsx":383,"prop-types":74,"react":287}],383:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42145,7 +42326,7 @@ ImageRow.propTypes = {
 
 exports.default = ImageRow;
 
-},{"prop-types":74,"react":287}],382:[function(require,module,exports){
+},{"prop-types":74,"react":287}],384:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42287,7 +42468,7 @@ var Header = function (_React$Component) {
 
 exports.default = Header;
 
-},{"react":287,"react-router-dom":239,"react-sticky":255}],383:[function(require,module,exports){
+},{"react":287,"react-router-dom":239,"react-sticky":255}],385:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42363,7 +42544,7 @@ Container.propTypes = {
 
 exports.default = Container;
 
-},{"../containers/project__images__list.js":414,"./page.jsx":392,"./soon.jsx":398,"prop-types":74,"react":287,"remarkable":301}],384:[function(require,module,exports){
+},{"../containers/project__images__list.js":417,"./page.jsx":394,"./soon.jsx":401,"prop-types":74,"react":287,"remarkable":301}],386:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42393,7 +42574,7 @@ Id.propTypes = {
 
 exports.default = Id;
 
-},{"prop-types":74,"react":287}],385:[function(require,module,exports){
+},{"prop-types":74,"react":287}],387:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42447,7 +42628,7 @@ ImageList.propTypes = {
 
 exports.default = ImageList;
 
-},{"./image__row.jsx":386,"prop-types":74,"react":287}],386:[function(require,module,exports){
+},{"./image__row.jsx":388,"prop-types":74,"react":287}],388:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42504,7 +42685,7 @@ ImageRow.propTypes = {
 
 exports.default = ImageRow;
 
-},{"prop-types":74,"react":287,"react-router-dom":239}],387:[function(require,module,exports){
+},{"prop-types":74,"react":287,"react-router-dom":239}],389:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42554,7 +42735,7 @@ LinkList.propTypes = {
 
 exports.default = LinkList;
 
-},{"./link__row.jsx":388,"prop-types":74,"react":287}],388:[function(require,module,exports){
+},{"./link__row.jsx":390,"prop-types":74,"react":287}],390:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42610,7 +42791,7 @@ LinkRow.propTypes = {
 
 exports.default = LinkRow;
 
-},{"prop-types":74,"react":287,"react-inlinesvg":211}],389:[function(require,module,exports){
+},{"prop-types":74,"react":287,"react-inlinesvg":211}],391:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42674,7 +42855,7 @@ List.propTypes = {
 
 exports.default = List;
 
-},{"./page.jsx":392,"./row.jsx":394,"prop-types":74,"react":287,"react-transition-group/CSSTransitionGroup":257}],390:[function(require,module,exports){
+},{"./page.jsx":394,"./row.jsx":396,"prop-types":74,"react":287,"react-transition-group/CSSTransitionGroup":257}],392:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42688,6 +42869,10 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _remarkable = require('remarkable');
+
+var _remarkable2 = _interopRequireDefault(_remarkable);
 
 var _page = require('./page.jsx');
 
@@ -42718,10 +42903,15 @@ var Container = function Container(_ref) {
         items = _ref.items,
         categories = _ref.categories,
         tags = _ref.tags,
+        description = _ref.description,
         images = _ref.images,
         route = _ref.route;
 
     var listClasses = !images ? 'full-width' : '';
+    var md = new _remarkable2.default();
+    var text = description || '';
+    var mdr = md.render(text);
+
     return _react2.default.createElement(
         _page2.default,
         {
@@ -42731,6 +42921,8 @@ var Container = function Container(_ref) {
         },
         categories != null && _react2.default.createElement(_project__filter__categories2.default, { categories: categories, className: 'categories', all: true }),
         tags != null && _react2.default.createElement(_project__filter__tags2.default, { tags: tags, className: 'tags', all: true }),
+        description != null && _react2.default.createElement('div', { className: 'markdown no-margin', dangerouslySetInnerHTML: { __html: mdr } }),
+        description != null && _react2.default.createElement('div', { className: 'margin' }),
         images != null && _react2.default.createElement(_project__images__list2.default, { images: images, items: items, className: 'half-width' }),
         _react2.default.createElement(_list2.default, { items: items, route: route, className: listClasses })
     );
@@ -42746,14 +42938,15 @@ Container.propTypes = {
         title: _propTypes2.default.string
     }).isRequired).isRequired,
     categories: _propTypes2.default.shape(),
-    tags: _propTypes2.default.PropTypes.shape(),
-    images: _propTypes2.default.PropTypes.shape(),
+    tags: _propTypes2.default.shape(),
+    images: _propTypes2.default.shape(),
+    description: _propTypes2.default.string,
     route: _propTypes2.default.string.isRequired
 };
 
 exports.default = Container;
 
-},{"../containers/project__filter__categories.js":412,"../containers/project__filter__tags.js":413,"../containers/project__images__list.js":414,"./list.jsx":389,"./page.jsx":392,"prop-types":74,"react":287}],391:[function(require,module,exports){
+},{"../containers/project__filter__categories.js":415,"../containers/project__filter__tags.js":416,"../containers/project__images__list.js":417,"./list.jsx":391,"./page.jsx":394,"prop-types":74,"react":287,"remarkable":301}],393:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42799,7 +42992,7 @@ var Loading = function (_React$Component) {
 
 exports.default = Loading;
 
-},{"react":287}],392:[function(require,module,exports){
+},{"react":287}],394:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42881,7 +43074,7 @@ Page.propTypes = {
 
 exports.default = Page;
 
-},{"./id.jsx":384,"./loading.jsx":391,"prop-types":74,"react":287,"react-transition-group/CSSTransitionGroup":257}],393:[function(require,module,exports){
+},{"./id.jsx":386,"./loading.jsx":393,"prop-types":74,"react":287,"react-transition-group/CSSTransitionGroup":257}],395:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43087,7 +43280,7 @@ Routes.propTypes = {
 
 exports.default = Routes;
 
-},{"../actions/category_filter_actions":371,"../actions/items_actions":373,"../actions/routes_actions":374,"../actions/tag_filter_actions":375,"../containers/about__list.js":402,"../containers/about__single.js":403,"../containers/cv__single.js":404,"../containers/diary__list.js":405,"../containers/diary__single.js":406,"../containers/episode__list.js":407,"../containers/episode__single.js":408,"../containers/home__page.js":409,"../containers/ligoj__list.js":410,"../containers/podcast__list.js":411,"../containers/project__list.js":415,"../containers/project__single.js":416,"../containers/subscribe__page.js":418,"./app.jsx":377,"./header.jsx":382,"./soon.jsx":398,"prop-types":74,"react":287,"react-ga":203,"react-router-dom":239,"react-sticky":255,"react-transition-group/CSSTransitionGroup":257}],394:[function(require,module,exports){
+},{"../actions/category_filter_actions":371,"../actions/items_actions":373,"../actions/routes_actions":374,"../actions/tag_filter_actions":375,"../containers/about__list.js":405,"../containers/about__single.js":406,"../containers/cv__single.js":407,"../containers/diary__list.js":408,"../containers/diary__single.js":409,"../containers/episode__list.js":410,"../containers/episode__single.js":411,"../containers/home__page.js":412,"../containers/ligoj__list.js":413,"../containers/podcast__list.js":414,"../containers/project__list.js":418,"../containers/project__single.js":419,"../containers/subscribe__page.js":421,"./app.jsx":377,"./header.jsx":384,"./soon.jsx":401,"prop-types":74,"react":287,"react-ga":203,"react-router-dom":239,"react-sticky":255,"react-transition-group/CSSTransitionGroup":257}],396:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43163,7 +43356,7 @@ ItemRow.propTypes = {
 
 exports.default = ItemRow;
 
-},{"prop-types":74,"react":287,"react-router-dom":239}],395:[function(require,module,exports){
+},{"prop-types":74,"react":287,"react-router-dom":239}],397:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43226,7 +43419,7 @@ Single.propTypes = {
 };
 exports.default = Single;
 
-},{"./loading.jsx":391,"prop-types":74,"react":287,"remarkable":301}],396:[function(require,module,exports){
+},{"./loading.jsx":393,"prop-types":74,"react":287,"remarkable":301}],398:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43312,7 +43505,85 @@ Container.propTypes = {
 
 exports.default = Container;
 
-},{"../containers/single_tags_list.js":417,"./gallery__list.jsx":380,"./link__list.jsx":387,"./page.jsx":392,"./single.jsx":395,"prop-types":74,"react":287}],397:[function(require,module,exports){
+},{"../containers/single_tags_list.js":420,"./gallery__list.jsx":382,"./link__list.jsx":389,"./page.jsx":394,"./single.jsx":397,"prop-types":74,"react":287}],399:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _page = require('./page.jsx');
+
+var _page2 = _interopRequireDefault(_page);
+
+var _single = require('./single.jsx');
+
+var _single2 = _interopRequireDefault(_single);
+
+var _episode = require('./episode.jsx');
+
+var _episode2 = _interopRequireDefault(_episode);
+
+var _single_tags_list = require('../containers/single_tags_list.js');
+
+var _single_tags_list2 = _interopRequireDefault(_single_tags_list);
+
+var _link__list = require('./link__list.jsx');
+
+var _link__list2 = _interopRequireDefault(_link__list);
+
+var _gallery__list = require('./gallery__list.jsx');
+
+var _gallery__list2 = _interopRequireDefault(_gallery__list);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Container = function Container(_ref) {
+    var id = _ref.id,
+        title = _ref.title,
+        isFetching = _ref.isFetching,
+        item = _ref.item,
+        images = _ref.images,
+        links = _ref.links,
+        tags = _ref.tags;
+
+    return _react2.default.createElement(
+        _page2.default,
+        {
+            id: id,
+            title: title,
+            isFetching: isFetching
+        },
+        links != null && _react2.default.createElement(_link__list2.default, {
+            links: links
+        }),
+        _react2.default.createElement(_episode2.default, {
+            item: item
+        })
+    );
+};
+
+Container.propTypes = {
+    id: _propTypes2.default.string.isRequired,
+    title: _propTypes2.default.string,
+    isFetching: _propTypes2.default.bool.isRequired,
+    item: _propTypes2.default.object.isRequired,
+    links: _propTypes2.default.arrayOf(_propTypes2.default.shape),
+    images: _propTypes2.default.arrayOf(_propTypes2.default.shape),
+    tags: _propTypes2.default.arrayOf(_propTypes2.default.shape)
+};
+
+exports.default = Container;
+
+},{"../containers/single_tags_list.js":420,"./episode.jsx":378,"./gallery__list.jsx":382,"./link__list.jsx":389,"./page.jsx":394,"./single.jsx":397,"prop-types":74,"react":287}],400:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43384,7 +43655,7 @@ Container.propTypes = {
 
 exports.default = Container;
 
-},{"prop-types":74,"react":287}],398:[function(require,module,exports){
+},{"prop-types":74,"react":287}],401:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43419,7 +43690,7 @@ var Soon = function Soon() {
 
 exports.default = Soon;
 
-},{"prop-types":74,"react":287}],399:[function(require,module,exports){
+},{"prop-types":74,"react":287}],402:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43458,7 +43729,7 @@ var Container = function Container() {
 
 exports.default = Container;
 
-},{"prop-types":74,"react":287}],400:[function(require,module,exports){
+},{"prop-types":74,"react":287}],403:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43527,7 +43798,7 @@ Container.propTypes = {
 
 exports.default = Container;
 
-},{"./page.jsx":392,"./social.jsx":397,"./subscribe.jsx":399,"prop-types":74,"react":287,"remarkable":301}],401:[function(require,module,exports){
+},{"./page.jsx":394,"./social.jsx":400,"./subscribe.jsx":402,"prop-types":74,"react":287,"remarkable":301}],404:[function(require,module,exports){
 'use strict';
 
 var APIURL = 'https://api.ellugar.co/';
@@ -43535,7 +43806,7 @@ module.exports = {
     APIURL: APIURL
 };
 
-},{}],402:[function(require,module,exports){
+},{}],405:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43580,7 +43851,7 @@ var aboutPage = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_l
 
 exports.default = aboutPage;
 
-},{"../actions/api_actions":370,"../components/list__container.jsx":390,"react-redux":222}],403:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/list__container.jsx":392,"react-redux":222}],406:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43640,7 +43911,7 @@ var AboutSingle = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 exports.default = AboutSingle;
 
-},{"../actions/api_actions":370,"../components/single__container.jsx":396,"react-redux":222}],404:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/single__container.jsx":398,"react-redux":222}],407:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43695,7 +43966,7 @@ var CvSingle = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_si
 
 exports.default = CvSingle;
 
-},{"../actions/file_actions":372,"../components/single__container.jsx":396,"react-redux":222}],405:[function(require,module,exports){
+},{"../actions/file_actions":372,"../components/single__container.jsx":398,"react-redux":222}],408:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43756,7 +44027,7 @@ var diaryPage = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_l
 
 exports.default = diaryPage;
 
-},{"../actions/api_actions":370,"../components/list__container.jsx":390,"react-redux":222}],406:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/list__container.jsx":392,"react-redux":222}],409:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43822,7 +44093,7 @@ var DiarySingle = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 exports.default = DiarySingle;
 
-},{"../actions/api_actions":370,"../components/single__container.jsx":396,"react-redux":222}],407:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/single__container.jsx":398,"react-redux":222}],410:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43831,9 +44102,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _reactRedux = require('react-redux');
 
-var _list__container = require('../components/list__container.jsx');
+var _episode__list__container = require('../components/episode__list__container.jsx');
 
-var _list__container2 = _interopRequireDefault(_list__container);
+var _episode__list__container2 = _interopRequireDefault(_episode__list__container);
 
 var _api_actions = require('../actions/api_actions');
 
@@ -43845,6 +44116,12 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
         tagFilter = state.tagFilter;
     var slug = ownProps.match.params.slug;
 
+
+    var podcasts = apiCalls['podcast/json/podcast'] || {
+        isFetching: true,
+        items: []
+    };
+
     var _ref = apiCalls['podcast/json/episodes/' + slug] || {
         isFetching: true,
         items: []
@@ -43853,11 +44130,28 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
         lastUpdated = _ref.lastUpdated,
         items = _ref.items;
 
-    var finalFetch = isFetching;
+    var i = 0;
+    var item = {
+        title: '',
+        text: '',
+        image: ''
+    };
+
+    if (podcasts.items.length > 0) {
+        for (i; i < podcasts.items.length; i++) {
+            if (podcasts.items[i].slug === slug) {
+                item = podcasts.items[i];
+                break;
+            }
+        }
+    }
+
+    var finalFetch = isFetching && podcasts.isFetching;
 
     return {
         id: 'projects',
         isFetching: finalFetch,
+        item: item,
         items: items,
         route: 'podcasts/' + slug
     };
@@ -43867,15 +44161,16 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     var _ref2 = ownProps.match.params || '',
         slug = _ref2.slug;
 
+    dispatch((0, _api_actions.apiFetchIfNeeded)('podcast/json/podcast'));
     dispatch((0, _api_actions.apiFetchIfNeeded)('podcast/json/episodes/' + slug));
     return {};
 };
 
-var podcastPage = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_list__container2.default);
+var podcastPage = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_episode__list__container2.default);
 
 exports.default = podcastPage;
 
-},{"../actions/api_actions":370,"../components/list__container.jsx":390,"react-redux":222}],408:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/episode__list__container.jsx":379,"react-redux":222}],411:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -43886,9 +44181,9 @@ var _reactRedux = require('react-redux');
 
 var _api_actions = require('../actions/api_actions');
 
-var _single__container = require('../components/single__container.jsx');
+var _single__episode__container = require('../components/single__episode__container.jsx');
 
-var _single__container2 = _interopRequireDefault(_single__container);
+var _single__episode__container2 = _interopRequireDefault(_single__episode__container);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -43941,11 +44236,11 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
     return {};
 };
 
-var EpisodeSingle = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_single__container2.default);
+var EpisodeSingle = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_single__episode__container2.default);
 
 exports.default = EpisodeSingle;
 
-},{"../actions/api_actions":370,"../components/single__container.jsx":396,"react-redux":222}],409:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/single__episode__container.jsx":399,"react-redux":222}],412:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44007,7 +44302,7 @@ var Home = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_home2.
 
 exports.default = Home;
 
-},{"../actions/api_actions":370,"../components/home.jsx":383,"react-redux":222}],410:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/home.jsx":385,"react-redux":222}],413:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44068,7 +44363,7 @@ var diaryPage = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_l
 
 exports.default = diaryPage;
 
-},{"../actions/api_actions":370,"../components/list__container.jsx":390,"react-redux":222}],411:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/list__container.jsx":392,"react-redux":222}],414:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44124,7 +44419,7 @@ var podcastPage = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 exports.default = podcastPage;
 
-},{"../actions/api_actions":370,"../components/list__container.jsx":390,"react-redux":222}],412:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/list__container.jsx":392,"react-redux":222}],415:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44203,7 +44498,7 @@ var ProjectFilterCategory = (0, _reactRedux.connect)(mapStateToProps, mapDispatc
 
 exports.default = ProjectFilterCategory;
 
-},{"../actions/api_actions":370,"../actions/category_filter_actions":371,"../actions/items_actions":373,"../components/filter__list.jsx":378,"react-redux":222}],413:[function(require,module,exports){
+},{"../actions/api_actions":370,"../actions/category_filter_actions":371,"../actions/items_actions":373,"../components/filter__list.jsx":380,"react-redux":222}],416:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44289,7 +44584,7 @@ var ProjectFilterTag = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToPr
 
 exports.default = ProjectFilterTag;
 
-},{"../actions/api_actions":370,"../actions/items_actions":373,"../actions/tag_filter_actions":375,"../components/filter__list.jsx":378,"react-redux":222}],414:[function(require,module,exports){
+},{"../actions/api_actions":370,"../actions/items_actions":373,"../actions/tag_filter_actions":375,"../components/filter__list.jsx":380,"react-redux":222}],417:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44367,7 +44662,7 @@ var Images = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_imag
 
 exports.default = Images;
 
-},{"../actions/api_actions":370,"../components/image__list.jsx":385,"react-redux":222}],415:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/image__list.jsx":387,"react-redux":222}],418:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44444,7 +44739,7 @@ var projectsPage = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)
 
 exports.default = projectsPage;
 
-},{"../actions/api_actions":370,"../components/list__container.jsx":390,"react-redux":222}],416:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/list__container.jsx":392,"react-redux":222}],419:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44530,7 +44825,7 @@ var Project = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_sin
 
 exports.default = Project;
 
-},{"../actions/api_actions":370,"../actions/category_filter_actions":371,"../components/single__container.jsx":396,"react-redux":222}],417:[function(require,module,exports){
+},{"../actions/api_actions":370,"../actions/category_filter_actions":371,"../components/single__container.jsx":398,"react-redux":222}],420:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44609,7 +44904,7 @@ var ProjectFilterTag = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToPr
 
 exports.default = ProjectFilterTag;
 
-},{"../actions/api_actions":370,"../actions/items_actions":373,"../actions/tag_filter_actions":375,"../components/filter__list.jsx":378,"react-redux":222}],418:[function(require,module,exports){
+},{"../actions/api_actions":370,"../actions/items_actions":373,"../actions/tag_filter_actions":375,"../components/filter__list.jsx":380,"react-redux":222}],421:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44650,7 +44945,7 @@ var Home = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_subscr
 
 exports.default = Home;
 
-},{"../actions/api_actions":370,"../components/subscribe__page.jsx":400,"react-redux":222}],419:[function(require,module,exports){
+},{"../actions/api_actions":370,"../components/subscribe__page.jsx":403,"react-redux":222}],422:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44698,7 +44993,7 @@ var items = exports.items = function items() {
     }
 };
 
-},{"../actions/api_actions":370}],420:[function(require,module,exports){
+},{"../actions/api_actions":370}],423:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44726,7 +45021,7 @@ var categoryFilter = exports.categoryFilter = function categoryFilter() {
     }
 };
 
-},{"../actions/category_filter_actions":371}],421:[function(require,module,exports){
+},{"../actions/category_filter_actions":371}],424:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44774,7 +45069,7 @@ var file = exports.file = function file() {
     }
 };
 
-},{"../actions/file_actions":372}],422:[function(require,module,exports){
+},{"../actions/file_actions":372}],425:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44853,7 +45148,7 @@ Object.keys(_routes_reducers).forEach(function (key) {
   });
 });
 
-},{"./api_reducers.js":419,"./category_filter_reducers.js":420,"./file_reducers.js":421,"./routes_reducers.js":423,"./tag_filter_reducers.js":424,"./visible_items_reducers.js":425}],423:[function(require,module,exports){
+},{"./api_reducers.js":422,"./category_filter_reducers.js":423,"./file_reducers.js":424,"./routes_reducers.js":426,"./tag_filter_reducers.js":427,"./visible_items_reducers.js":428}],426:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44879,7 +45174,7 @@ var route = exports.route = function route() {
     }
 };
 
-},{"../actions/routes_actions":374}],424:[function(require,module,exports){
+},{"../actions/routes_actions":374}],427:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -44924,7 +45219,7 @@ var tagFilter = exports.tagFilter = function tagFilter() {
     }
 };
 
-},{"../actions/tag_filter_actions":375}],425:[function(require,module,exports){
+},{"../actions/tag_filter_actions":375}],428:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

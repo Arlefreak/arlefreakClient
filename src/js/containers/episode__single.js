@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { apiFetchIfNeeded } from '../actions/api_actions';
-import SingleContainer from '../components/single__container.jsx';;
+import SingleContainer from '../components/single__episode__container.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
     const { slug, episode_slug} = ownProps.match.params;

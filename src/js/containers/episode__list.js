@@ -1,10 +1,16 @@
 import { connect } from 'react-redux';
-import ListCointainer from '../components/list__container.jsx';
+import ListCointainer from '../components/episode__list__container.jsx';
 import { apiFetchIfNeeded } from '../actions/api_actions';
 
 const mapStateToProps = (state, ownProps) => {
     const { apiCalls, visibleItems, tagFilter } = state;
     const { slug } = ownProps.match.params;
+
+    const podcasts = apiCalls['podcast/json/podcast'] || {
+        isFetching: true,
+        items: []
+    };
+
     const {
         isFetching,
         lastUpdated,
@@ -14,11 +20,29 @@ const mapStateToProps = (state, ownProps) => {
         items: []
     };
 
-    let finalFetch = isFetching;
+    var i = 0;
+    let item = {
+        title: '',
+        text: '',
+        image: '',
+    };
+
+    if(podcasts.items.length > 0) {
+        for(i; i < podcasts.items.length; i++){
+            if (podcasts.items[i].slug === slug){
+                item = podcasts.items[i];
+                break;
+            }
+        }
+    }
+
+
+    let finalFetch = isFetching && podcasts.isFetching;
 
     return {
         id: 'projects',
         isFetching: finalFetch,
+        item: item,
         items: items,
         route: 'podcasts/' + slug,
     };
@@ -26,6 +50,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     const { slug } = ownProps.match.params || '';
+    dispatch(apiFetchIfNeeded('podcast/json/podcast'));
     dispatch(apiFetchIfNeeded('podcast/json/episodes/' + slug));
     return {};
 };
