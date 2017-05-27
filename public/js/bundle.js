@@ -41990,7 +41990,8 @@ var Episode = function Episode(_ref) {
             _react2.default.createElement(
                 'audio',
                 { className: 'episode-player', controls: true },
-                _react2.default.createElement('source', { src: item.file_mp3, type: item.audio_type })
+                _react2.default.createElement('source', { src: item.audio_mp3, type: item.audio_type }),
+                _react2.default.createElement('source', { src: item.audio_ogg, type: item.audio_type })
             )
         ),
         _react2.default.createElement('div', { className: 'episode-description markdown', dangerouslySetInnerHTML: { __html: mdr } })
@@ -42089,7 +42090,38 @@ var Container = function Container(_ref) {
             'div',
             { className: 'podcast-info' },
             _react2.default.createElement('img', { className: 'podcast-cover', src: item.image, alt: item.title }),
-            _react2.default.createElement('div', { className: 'podcast-description no-margin markdown', dangerouslySetInnerHTML: { __html: mdr } })
+            _react2.default.createElement(
+                'div',
+                { className: 'podcast-column' },
+                _react2.default.createElement('div', { className: 'podcast-description no-margin markdown', dangerouslySetInnerHTML: { __html: mdr } }),
+                _react2.default.createElement(
+                    'h3',
+                    null,
+                    'Subscribe'
+                ),
+                _react2.default.createElement(
+                    'ul',
+                    { className: 'subscribe-buttons' },
+                    _react2.default.createElement(
+                        'li',
+                        null,
+                        _react2.default.createElement(
+                            'a',
+                            { rel: 'noopener noreferrer', target: '_blank', className: 'button rss', href: item.feed },
+                            'rss'
+                        )
+                    ),
+                    item.iTunesURL != null && _react2.default.createElement(
+                        'li',
+                        null,
+                        _react2.default.createElement(
+                            'a',
+                            { rel: 'noopener noreferrer', target: '_blank', className: 'button iTunes', href: item.iTunesURL },
+                            'iTunes'
+                        )
+                    )
+                )
+            )
         ),
         _react2.default.createElement(
             'h3',
@@ -42453,6 +42485,15 @@ var Header = function (_React$Component) {
                                         _reactRouterDom.NavLink,
                                         { to: '/ligoj', activeClassName: 'active' },
                                         _react2.default.createElement('img', { src: '/img/routes/ligoj.svg', alt: '\u03A6' })
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    'li',
+                                    null,
+                                    _react2.default.createElement(
+                                        _reactRouterDom.NavLink,
+                                        { to: '/podcasts/behind-the-pixel' },
+                                        _react2.default.createElement('img', { src: '/img/routes/btp.svg', alt: '' })
                                     )
                                 )
                             )
@@ -44149,7 +44190,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     var finalFetch = isFetching && podcasts.isFetching;
 
     return {
-        id: 'projects',
+        id: 'btp',
         isFetching: finalFetch,
         item: item,
         items: items,
@@ -44220,7 +44261,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     }
 
     return {
-        id: 'projects',
+        id: 'btp',
         title: item.title,
         isFetching: isFetching,
         item: item
@@ -44401,7 +44442,7 @@ var mapStateToProps = function mapStateToProps(state) {
     var finalFetch = isFetching && tags.isFetching;
 
     return {
-        id: 'projects',
+        id: 'btp',
         isFetching: finalFetch,
         items: items,
         // tags: tags,

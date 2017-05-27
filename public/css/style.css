@@ -385,6 +385,23 @@ aside.right {
   -ms-transform: rotate(90deg) translate(-100%, 0);
   transform: rotate(90deg) translate(-100%, 0);
 }
+.button {
+  color: #00aeef;
+  border: 2px solid #00aeef;
+  background-color: transparent;
+  margin: 0;
+  cursor: pointer;
+  -webkit-transition: background-color 0.2s ease;
+  -moz-transition: background-color 0.2s ease;
+  -o-transition: background-color 0.2s ease;
+  -ms-transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease;
+  display: inline-block;
+}
+.button:hover {
+  background-color: #00aeef;
+  color: #000;
+}
 ul.categories {
   display: block;
   width: 100%;
@@ -632,11 +649,105 @@ ul {
 .episode-description {
   width: 100%;
 }
+.podcast-column {
+  width: calc(70% - 20px);
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-flow: column;
+  -ms-flex-flow: column;
+  flex-flow: column;
+}
+@media screen and (max-width: 800px) {
+  .podcast-column {
+    margin: 20px 0 0 0;
+    width: 100%;
+  }
+}
 .episode-player {
   width: calc(70% - 20px);
 }
+@media screen and (max-width: 800px) {
+  .episode-player {
+    margin: 20px 0 0 0;
+    width: 100%;
+  }
+}
 .podcast-description {
-  width: calc(70% - 20px);
+  width: 100%;
+}
+.subscribe-buttons {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-box-lines: multiple;
+  -moz-box-lines: multiple;
+  -o-box-lines: multiple;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -o-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+@media screen and (max-width: 800px) {
+  .subscribe-buttons {
+    max-width: none;
+  }
+}
+.subscribe-buttons li {
+  width: 49%;
+}
+.subscribe-buttons a {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+  margin: 0;
+  display: block;
+}
+.subscribe-buttons .rss {
+  border-color: #ec008c;
+  color: #ec008c;
+  text-transform: uppercase;
+}
+.subscribe-buttons .rss:hover {
+  background-color: #ec008c;
+  color: #000;
+}
+.subscribe-buttons .itunes {
+  border-color: #00aeef;
+  color: #00aeef;
+  text-transform: uppercase;
+}
+.subscribe-buttons .itunes:hover {
+  background-color: #00aeef;
+  color: #000;
 }
 .error img {
   margin: 15vh 0 0 0;
@@ -759,7 +870,7 @@ footer ul li {
   }
 }
 footer a {
-  color: #e3e3e3;
+  color: #999;
   -webkit-transition: color 0.5s ease;
   -moz-transition: color 0.5s ease;
   -o-transition: color 0.5s ease;

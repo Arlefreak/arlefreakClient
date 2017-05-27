@@ -31,7 +31,7 @@ const mapStateToProps = (state, ownProps) => {
     }
 
     return {
-        id: 'projects',
+        id: 'btp',
         title: item.title,
         isFetching,
         item: item,

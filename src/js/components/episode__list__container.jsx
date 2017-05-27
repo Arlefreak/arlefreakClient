@@ -28,7 +28,16 @@ const Container = ({ id, isFetching, item, items, route }) => {
             }
             <div className="podcast-info">
                 <img className="podcast-cover" src={ item.image } alt={ item.title } />
-                <div className="podcast-description no-margin markdown" dangerouslySetInnerHTML={{ __html: mdr }}/>
+                <div className="podcast-column">
+                    <div className="podcast-description no-margin markdown" dangerouslySetInnerHTML={{ __html: mdr }}/>
+                    <h3>Subscribe</h3>
+                    <ul className="subscribe-buttons">
+                        <li><a rel="noopener noreferrer" target="_blank" className="button rss" href={ item.feed }>rss</a></li>
+                        { item.iTunesURL != null &&
+                                <li><a rel="noopener noreferrer" target="_blank" className="button iTunes" href={ item.iTunesURL }>iTunes</a></li>
+                        }
+                    </ul>
+                </div>
             </div>
             <h3>Episodes</h3>
             <List items={ items } route={ route }  className="full-width" />

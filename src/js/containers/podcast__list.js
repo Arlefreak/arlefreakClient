@@ -22,7 +22,7 @@ const mapStateToProps = (state) => {
         tags.isFetching;
 
     return {
-        id: 'projects',
+        id: 'btp',
         isFetching: finalFetch,
         items: items,
         // tags: tags,

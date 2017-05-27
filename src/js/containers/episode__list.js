@@ -40,7 +40,7 @@ const mapStateToProps = (state, ownProps) => {
     let finalFetch = isFetching && podcasts.isFetching;
 
     return {
-        id: 'projects',
+        id: 'btp',
         isFetching: finalFetch,
         item: item,
         items: items,

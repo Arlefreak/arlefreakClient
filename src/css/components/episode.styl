@@ -27,8 +27,52 @@
 .episode-description
     width 100%
 
+.podcast-column
+    width calc(70% - 20px)
+    display flex
+    flex-flow column
+    @media screen and (max-width: $mobile-width)
+        margin 20px 0 0 0
+        width 100%
+
 .episode-player
     width calc(70% - 20px)
+    @media screen and (max-width: $mobile-width)
+        margin 20px 0 0 0
+        width 100%
 
 .podcast-description
-    width calc(70% - 20px)
+    width 100%
+
+.subscribe-buttons
+    width 100%
+    max-width 400px
+    text-align center
+    display flex
+    flex-flow row wrap
+    align-items center
+    justify-content space-between
+    @media screen and (max-width: $mobile-width)
+        max-width none
+    li
+        width 49%
+    a
+        box-sizing border-box
+        padding 10px
+        width 100%
+        margin 0
+        display block
+    .rss
+        border-color $highlight-pink
+        color $highlight-pink
+        text-transform uppercase
+        &:hover
+            background-color $highlight-pink
+            color $black
+    .itunes
+        border-color $highlight-blue
+        color $highlight-blue
+        text-transform uppercase
+        &:hover
+            background-color $highlight-blue
+            color $black

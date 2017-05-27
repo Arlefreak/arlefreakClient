@@ -20,7 +20,8 @@ const Episode = ({
             <div className="episode-info">
                 <img className="episode-cover" src={ item.image } alt={ item.title } />
                 <audio className="episode-player" controls>
-                    <source src={ item.file_mp3 } type={ item.audio_type } />
+                    <source src={ item.audio_mp3 } type={ item.audio_type } />
+                    <source src={ item.audio_ogg } type={ item.audio_type } />
                 </audio> 
             </div>
 
