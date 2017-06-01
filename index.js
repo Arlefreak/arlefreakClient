@@ -27,7 +27,7 @@ const app = express()
 
 app.engine('.html', require('ejs').__express);
 app.set('views', __dirname + '/views');
-app.set('view engine', 'html');
+app.set('view engine', 'ejs');
 
 app.use(express.static(__dirname + '/public'));
 

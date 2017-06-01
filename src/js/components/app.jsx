@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import Routes from './routes.jsx';
 import {
     visibleItems,
@@ -29,12 +30,26 @@ const logger = createLogger({
     collapsed: true,
 });
 
+let middleware;
+
+if (process.env.NODE_ENV !== 'production') {
+    middleware = composeWithDevTools(
+        applyMiddleware(
+            thunkMiddleware,
+            logger,
+        )
+    );
+} else {
+    middleware = composeWithDevTools(
+        applyMiddleware(
+            thunkMiddleware,
+        )
+    );
+}
+
 export const store =  createStore(
     app,
-    applyMiddleware(
-        thunkMiddleware,
-        logger, 
-    ),
+    middleware,
 );
 
 

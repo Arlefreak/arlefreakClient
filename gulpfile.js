@@ -227,7 +227,7 @@ gulp.task('generate-favicon', function(done) {
 // this task whenever you modify a page. You can keep this task
 // as is or refactor your existing HTML pipeline.
 gulp.task('inject-favicon-markups', function() {
-    return gulp.src(['views/favicon.html'])
+    return gulp.src(['views/favicon.ejs'])
         .pipe(realFavicon.injectFaviconMarkups(JSON.parse(fs.readFileSync(FAVICON_DATA_FILE)).favicon.html_code))
         .pipe(gulp.dest('views/'));
 });
@@ -249,12 +249,12 @@ gulp.task('favicon', function() {
     runSequence('generate-favicon', 'inject-favicon-markups');
 });
 
-gulp.task('init', ['css', 'bower', 'react', 'img', 'html', 'files']);
+gulp.task('init', ['css', 'bower', 'img', 'html', 'files']);
 
 gulp.task('watch', () => {
     gulp.watch('src/css/**/*.styl', ['css']);
-    gulp.watch('src/js/**/*.js', ['react']);
-    gulp.watch('src/js/**/*.jsx', ['react']);
+    // gulp.watch('src/js/**/*.js', ['react']);
+    // gulp.watch('src/js/**/*.jsx', ['react']);
     gulp.watch(['src/img/**/*', '!src/img/favicon.png'], ['img']);
     gulp.watch('src/*.html', ['html']);
 });

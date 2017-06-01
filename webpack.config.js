@@ -7,14 +7,9 @@ module.exports = {
         path: path.resolve(__dirname, 'public/js/')
     },
     module: {
-        rules: [
-            {
-                test: /\.jsx$/,
-                exclude: /(node_modules|bower_components)/,
-                use: {
-                    loader: 'babel-loader',
-                }
-            }
+        loaders: [
+            { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
+            { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }
         ]
-    }
+    },
 };
