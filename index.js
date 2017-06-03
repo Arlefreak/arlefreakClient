@@ -41,7 +41,8 @@ app.get('/sitemap.xml', function(req, res) {
     });
 });
 
-app.get('/*', require('./routes').index);
+import routes from './routes/index';
+app.get('*', routes);
 
 app.use(methodOverride());
 

@@ -1,20 +1,20 @@
 import fetch from 'isomorphic-fetch';
 import constants from '../constants.js';
 const apiURL = constants.APIURL;
-import ReactGA from 'react-ga';
-ReactGA.initialize('UA-43222844-13');
+// import ReactGA from 'react-ga';
+// ReactGA.initialize('UA-43222844-13');
 
 export const ADD_TAG_FILTER = 'ADD_TAG_FILTER';
 export const DELETE_TAG_FILTER = 'DELETE_TAG_FILTER';
 export const CLEAR_ALL_TAG_FILTERS = 'CLEAR_ALL_TAG_FILTERS';
 
 export function addTagFilter(tag_id, tag) {
-    ReactGA.event({
-        category: 'Filter',
-        action: 'addTagFilter',
-        value: tag_id,
-        label: tag,
-    });
+    // ReactGA.event({
+    //     category: 'Filter',
+    //     action: 'addTagFilter',
+    //     value: tag_id,
+    //     label: tag,
+    // });
     return { 
         type: ADD_TAG_FILTER,
         tag_id,
@@ -23,12 +23,12 @@ export function addTagFilter(tag_id, tag) {
 }
 
 export function deleteTagFilter(tag_id) {
-    ReactGA.event({
-        category: 'Filter',
-        action: 'deleteTagFilter',
-        value: tag_id,
-        label: tag,
-    });
+    // ReactGA.event({
+    //     category: 'Filter',
+    //     action: 'deleteTagFilter',
+    //     value: tag_id,
+    //     label: tag,
+    // });
     return {
         type: DELETE_TAG_FILTER,
         tag_id
@@ -36,10 +36,10 @@ export function deleteTagFilter(tag_id) {
 }
 
 export function clearTagFilter() {
-    ReactGA.event({
-        category: 'Filter',
-        action: 'clearTagFilter'
-    });
+    // ReactGA.event({
+    //     category: 'Filter',
+    //     action: 'clearTagFilter'
+    // });
     return {
         type: CLEAR_ALL_TAG_FILTERS
     };
