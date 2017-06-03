@@ -95,7 +95,7 @@ router.get('*', (req, res) => {
                     </Provider>
                 );
 
-                res.render('home', Object.assign(config, { state: preloadedState, react, year }));
+                res.render('home', Object.assign(config, { title: route.title ,state: preloadedState, react, year }));
             });
 
         }).catch(err => {
