@@ -26,10 +26,10 @@ const app = express()
 
 
 app.engine('.html', require('ejs').__express);
-app.set('views', __dirname + '/views');
+app.set('views', path.resolve(__dirname, '../views'));
 app.set('view engine', 'ejs');
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.resolve(__dirname, '../public')));
 
 app.get('/sitemap.xml', function(req, res) {
     sitemap.toXML( function (err, xml) {
@@ -41,7 +41,7 @@ app.get('/sitemap.xml', function(req, res) {
     });
 });
 
-import routes from './routes/index';
+import routes from '../routes/index.jsx';
 app.get('*', routes);
 
 app.use(methodOverride());

@@ -4,10 +4,14 @@
     "description": "website for ellugar.co",
     "main": "index.js",
     "scripts": {
-        "start:dev": "nodemon index.js --exec babel-node",
-        "start:prod": "NODE_ENV=production nodemon index.js --exec babel-node",
+        "start:dev": "nodemon ./server/index.js --exec babel-node",
+        "start:prod": "NODE_ENV=production nodemon ./server/index.js --exec babel-node",
+        "build-server": "babel -d ./build ./server -s",
         "build:dev": "webpack --watch --progress",
-        "build:prod": "webpack -p"
+        "build:prod": "webpack -p",
+        "build:server": "npm run clean && npm run build-server",
+        "clean": "rm -rf build && mkdir build",
+        "start": "node ./build/index.js"
     },
     "pre-commit": [
         "build:prod"

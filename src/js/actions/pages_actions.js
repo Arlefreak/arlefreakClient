@@ -1,4 +1,5 @@
 import { apiFetchIfNeeded } from './api_actions';
+import { fileFetchIfNeeded } from './file_actions';
 
 export function homeAction() {
     return dispatch => {
