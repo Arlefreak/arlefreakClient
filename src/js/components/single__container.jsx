@@ -1,18 +1,35 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import Page from './page.jsx';
+import Page from '../containers/page.js';
 import Single from './single.jsx';
 import TagList from '../containers/single_tags_list.js';
 import LinkList from './link__list.jsx';
 import ImageList from './gallery__list.jsx';
 
-const Container = ({ id, title, meta_description, isFetching, item, images, links, tags }) => {
+const Container = ({
+    id,
+    title,
+    isFetching,
+    item,
+    images,
+    links,
+    tags,
+
+    meta_url,
+    meta_title,
+    meta_description,
+    meta_preview,
+}) => {
     return (
         <Page 
             id = { id }
             title = { title }
             isFetching = { isFetching }
-            meta_description= { meta_description }
+
+            meta_url = { meta_url }
+            meta_title = { meta_title }
+            meta_description = { meta_description }
+            meta_preview = { meta_preview }
         >
             {
                 links != null &&
@@ -57,6 +74,11 @@ Container.propTypes = {
     links: PropTypes.arrayOf(PropTypes.shape),
     images: PropTypes.arrayOf(PropTypes.shape),
     tags: PropTypes.arrayOf(PropTypes.shape),
+
+    meta_description: PropTypes.string,
+    meta_url: PropTypes.string,
+    meta_title: PropTypes.string,
+    meta_preview: PropTypes.string,
 };
 
 export default Container;

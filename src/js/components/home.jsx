@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import Page from './page.jsx';
+import Page from '../containers/page.js';
 import Soon from './soon.jsx';
 import ImageList from '../containers/project__images__list.js';
 import Remarkable from 'remarkable';
 
-const Container = ({ id, title, meta_description, isFetching, items, images, config, route }) => {
+const Container = ({ id, title, isFetching, items, images, config, route }) => {
     var md = new Remarkable();
     var text = config ? config.items.longDescription : '';
     var mdr = md.render(text);
@@ -16,7 +16,6 @@ const Container = ({ id, title, meta_description, isFetching, items, images, con
             id = { id }
             title = { title }
             isFetching = { isFetching }
-            meta_description = { meta_description }
         >
             <Soon></Soon>
             { config != null && <div className="markdown" dangerouslySetInnerHTML={{ __html: mdr }}/> }
@@ -29,7 +28,6 @@ const Container = ({ id, title, meta_description, isFetching, items, images, con
 Container.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string,
-    meta_description: PropTypes.string.isRequired,
     isFetching: PropTypes.bool.isRequired,
     items: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,

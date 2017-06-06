@@ -9,13 +9,16 @@ const mapStateToProps = (state) => {
         items: {},
     };
 
-    const meta_description = config.items.description || '';
+    const meta_title = 'Subscribe';
+    const meta_description = config.items.subscribeDescription || '';
 
     return {
         id: 'subscribe',
-        meta_description: meta_description,
         isFetching: config.isFetching,
         items: config.items,
+
+        meta_title,
+        meta_description,
     };
 };
 

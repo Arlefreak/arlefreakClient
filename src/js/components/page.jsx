@@ -5,9 +5,18 @@ import Loading from './loading.jsx';
 import Id from './id.jsx';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
-const Page = ({ id, title, isFetching, children, meta_description}) => {
+const Page = ({ 
+    id,
+    title,
+    isFetching,
+    children,
+
+    meta_url,
+    meta_title,
+    meta_description,
+    meta_preview,
+}) => {
     let child;
-    const meta_title = title || 'ellugar.co';
 
     if(isFetching) {
         child = 
@@ -42,6 +51,13 @@ const Page = ({ id, title, isFetching, children, meta_description}) => {
                 meta={[
                     {'property': 'og:title', 'content': meta_title},
                     {'name': 'twitter:title', 'content': meta_title},
+
+                    {'property': 'og:url', 'content': meta_url},
+                    {'name': 'twitter:url', 'content': meta_url},
+
+                    {'property': 'og:image', 'content': meta_preview},
+                    {'name': 'twitter:image', 'content': meta_preview},
+
                     {'name': 'description', 'content': meta_description},
                     {'property': 'og:description', 'content': meta_description},
                     {'name': 'twitter:description', 'content': meta_description},
@@ -58,7 +74,11 @@ Page.propTypes = {
     title: PropTypes.string,
     isFetching: PropTypes.bool.isRequired,
     children: PropTypes.node.isRequired,
+
     meta_description: PropTypes.string.isRequired,
+    meta_url: PropTypes.string.isRequired,
+    meta_title: PropTypes.string.isRequired,
+    meta_preview: PropTypes.string.isRequired,
 };
 
 export default Page;

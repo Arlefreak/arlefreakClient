@@ -16,8 +16,9 @@ const mapStateToProps = (state, ownProps) => {
 
     let item = {
         id: 0,
-        name: 'Loading',
-        text: 'Loading'
+        title: 'Loading',
+        text: 'Loading',
+        image: 'Loading',
     };
 
     var i = 0;
@@ -30,14 +31,19 @@ const mapStateToProps = (state, ownProps) => {
         }
     }
 
+    const meta_title = item.title;
     const meta_description = item.text;
+    const meta_preview = item.image;
 
     return {
         id: 'btp',
         title: item.title,
-        meta_description: meta_description,
         isFetching,
         item: item,
+
+        meta_title,
+        meta_description,
+        meta_preview,
     };
 };
 

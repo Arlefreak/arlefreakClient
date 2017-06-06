@@ -41,6 +41,10 @@ const mapStateToProps = (state, ownProps) => {
 
     const isFetching = list.isFetching && images.isFetching && links.isFetching && tags.apiCalls;
 
+
+    const meta_title = item.name;
+    const meta_description = item.description;
+
     return {
         id: 'projects',
         title: item.name,
@@ -50,6 +54,9 @@ const mapStateToProps = (state, ownProps) => {
         links: links.items,
         images: images.items,
         tags: tags,
+
+        meta_title,
+        meta_description,
     };
 };
 

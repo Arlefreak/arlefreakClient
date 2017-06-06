@@ -39,14 +39,19 @@ const mapStateToProps = (state, ownProps) => {
 
     let finalFetch = isFetching && podcasts.isFetching;
     const meta_description = item.description || '';
+    const meta_title  = item.title || '';
+    const meta_preview  = item.image || '';
 
     return {
         id: 'btp',
         isFetching: finalFetch,
-        meta_description: meta_description,
         item: item,
         items: items,
         route: 'podcasts/' + slug,
+
+        meta_title,
+        meta_description,
+        meta_preview,
     };
 };
 

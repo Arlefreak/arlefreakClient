@@ -2,14 +2,25 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Remarkable from 'remarkable';
 
-import Page from './page.jsx';
+import Page from '../containers/page.js';
 import List from './list.jsx';
 
 import CategoryList from '../containers/project__filter__categories.js';
 import TagList from '../containers/project__filter__tags.js';
 import ImageList from '../containers/project__images__list.js';
 
-const Container = ({ id, isFetching, meta_description, item, items, route }) => {
+const Container = ({
+    id,
+    isFetching,
+    item,
+    items,
+    route,
+
+    meta_url,
+    meta_title,
+    meta_description,
+    meta_preview,
+}) => {
     var md = new Remarkable();
     var text = item.text || '';
     var mdr = md.render(text);
@@ -18,8 +29,12 @@ const Container = ({ id, isFetching, meta_description, item, items, route }) => 
         <Page 
             id = { id }
             title = { item.title }
-            meta_description = { meta_description }
             isFetching = { isFetching }
+
+            meta_url = { meta_url }
+            meta_title = { meta_title }
+            meta_description = { meta_description }
+            meta_preview = { meta_preview }
         >
             { item.dateCreated != null && 
                     <div className="date-container">
@@ -57,6 +72,11 @@ Container.propTypes = {
         title: PropTypes.string
     }).isRequired).isRequired,
     route: PropTypes.string.isRequired,
+
+    meta_description: PropTypes.string,
+    meta_url: PropTypes.string,
+    meta_title: PropTypes.string,
+    meta_preview: PropTypes.string,
 };
 
 export default Container;

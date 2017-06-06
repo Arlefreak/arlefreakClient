@@ -24,11 +24,7 @@ const mapStateToProps = (state) => {
         filterItems = items;
     }
 
-    const config = apiCalls['web_client/config/1/'] || {
-        isFetching: true,
-        items: {},
-    };
-    const meta_description = config.items.description || '';
+    const meta_title = 'Logs';
 
     return {
         id: 'logs',
@@ -36,7 +32,8 @@ const mapStateToProps = (state) => {
         isFetching: isFetching && tags.isFetching,
         items: filterItems,
         tags: tags,
-        route: 'logs'
+        route: 'logs',
+        meta_title,
     };
 };
 

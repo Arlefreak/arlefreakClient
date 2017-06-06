@@ -26,6 +26,7 @@ const mapStateToProps = (state, ownProps) => {
 
     const isFetching = list.isFetching;
 
+    const meta_title = item.name;
     const meta_description = item.text;
 
     return {
@@ -34,6 +35,8 @@ const mapStateToProps = (state, ownProps) => {
         meta_description: meta_description,
         isFetching,
         item: item,
+        meta_title,
+        meta_description,
     };
 };
 
