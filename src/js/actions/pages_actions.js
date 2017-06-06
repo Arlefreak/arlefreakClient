@@ -37,7 +37,8 @@ export function projectsAction() {
     };
 }
 
-export function projectSingleAction(slug) {
+export function projectSingleAction(params) {
+    let slug = params.slug;
     return dispatch => {
         return dispatch(apiFetchIfNeeded('web_client/config/1/')).then(
             response => {
@@ -120,6 +121,25 @@ export function podcastAction() {
                 return dispatch(apiFetchIfNeeded('podcast/json/podcast')).then(
                     response => {
                         return dispatch(apiFetchIfNeeded('podcast/json/podcastTags'));
+                    }
+                );
+            }
+        );
+    };
+}
+
+export function singlePodcastAction(params) {
+    let slug = params.slug;
+    return dispatch => {
+        return dispatch(apiFetchIfNeeded('web_client/config/1/')).then(
+            response => {
+                return dispatch(apiFetchIfNeeded('podcast/json/podcast')).then(
+                    response => {
+                        return dispatch(apiFetchIfNeeded('podcast/json/podcastTags')).then(
+                            response => {
+                                return dispatch(apiFetchIfNeeded('podcast/json/episodes/' + slug));
+                            }
+                        );
                     }
                 );
             }

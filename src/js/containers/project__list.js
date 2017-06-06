@@ -44,7 +44,6 @@ const mapStateToProps = (state) => {
 
     return {
         id: 'projects',
-        meta_description: meta_description,
         isFetching: finalFetch,
         items: filterItems,
         categories: categories,

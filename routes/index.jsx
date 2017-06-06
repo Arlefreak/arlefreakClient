@@ -62,16 +62,18 @@ const context = {
 /* GET home page. */
 router.get('*', (req, res) => {
     let route;
+    let match;
 
-    const match = routes.some(_route => {
-        const match = matchPath(req.url, _route);
-        if (match)
+    const does_match = routes.some(_route => {
+        match = matchPath(req.url, _route);
+        if (match) {
             route = _route;
-        return match;
+            return match;
+        }
     });
 
 
-    if (!match) {
+    if (!does_match) {
         res.status(404).send('Not Found');
         return;
     }
@@ -84,8 +86,10 @@ router.get('*', (req, res) => {
                 middleware,
             );
 
+            // console.log(route);
+            // console.log(match);
             store.dispatch(
-                route.loadData()
+                route.loadData(match.params)
             ).then(() => {
                 const preloadedState = store.getState();
                 const react = renderToString(

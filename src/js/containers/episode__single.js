@@ -17,8 +17,8 @@ const mapStateToProps = (state, ownProps) => {
     let item = {
         id: 0,
         title: 'Loading',
+        slug: '',
         text: 'Loading',
-        image: 'Loading',
     };
 
     var i = 0;

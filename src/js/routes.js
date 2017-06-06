@@ -28,6 +28,7 @@ import {
     subscribeAction,
     ligojAction,
     podcastAction,
+    singlePodcastAction,
 } from './actions/pages_actions.js';
 
 export const routes = [
@@ -40,7 +41,7 @@ export const routes = [
         path: '/projects/:slug',
         exact: true,
         component: ProjectSingle,
-        loadData: (slug) => projectSingleAction(slug),
+        loadData: (params) => projectSingleAction(params),
     },{
         path: '/about',
         exact: true,
@@ -60,7 +61,7 @@ export const routes = [
         path: '/logs/:slug',
         exact: true,
         component: DiarySingle,
-        loadData: () => diaryAction(),
+        loadData: (params) => diaryAction(params),
     },{
         path: '/cv',
         exact: true,
@@ -85,12 +86,12 @@ export const routes = [
         path: '/podcasts/:slug',
         exact: true,
         component: EpisodeList,
-        loadData: () => podcastAction(),
+        loadData: (params) => singlePodcastAction(params),
     },{
         path: '/podcasts/:slug/:episode_slug',
         exact: true,
         component: EpisodeSingle,
-        loadData: () => podcastAction(),
+        loadData: (params) => singlePodcastAction(params),
     },{
         path: '/',
         exact: true,
