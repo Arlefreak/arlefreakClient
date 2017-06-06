@@ -13,15 +13,23 @@ const mapStateToProps = (state) => {
         items: []
     };
 
+    const config = apiCalls['web_client/config/1/'] || {
+        isFetching: true,
+        items: {},
+    };
+    const meta_description = config.items.description || '';
+
     return {
         id: 'about',
         isFetching,
         items: items,
+        meta_description: meta_description,
         route: 'about'
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
+    dispatch(apiFetchIfNeeded('web_client/config/1/'));
     dispatch(apiFetchIfNeeded('about/entry'));
     return {};
 };

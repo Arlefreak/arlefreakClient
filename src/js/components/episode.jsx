@@ -38,7 +38,7 @@ Episode.propTypes = {
         duration: PropTypes.string,
         file_mp3: PropTypes.string,
         audio_type: PropTypes.string,
-        audio_size: PropTypes.string,
+        audio_size: PropTypes.number,
     }).isRequired,
 };
 export default Episode;

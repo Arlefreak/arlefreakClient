@@ -36,78 +36,65 @@ export const routes = [
         exact: true,
         component: ProjectList,
         loadData: () => projectsAction(),
-        title: 'Projects',
     },{
         path: '/projects/:slug',
         exact: true,
         component: ProjectSingle,
         loadData: (slug) => projectSingleAction(slug),
-        title: 'Projects',
     },{
         path: '/about',
         exact: true,
         component: AboutList,
         loadData: () => aboutAction(),
-        title: 'About',
     },{
         path: '/about/:slug',
         exact: true,
         component: AboutSingle,
         loadData: () => aboutAction(),
-        title: 'About',
     },{
         path: '/logs',
         exact: true,
         component: DiaryList,
         loadData: () => diaryAction(),
-        title: 'Logs',
     },{
         path: '/logs/:slug',
         exact: true,
         component: DiarySingle,
         loadData: () => diaryAction(),
-        title: 'Logs',
     },{
         path: '/cv',
         exact: true,
         component: CvSingle,
         loadData: () => cvAction(),
-        title: 'CV',
     },{
         path: '/subscribe',
         exact: true,
         component: Subscribe,
         loadData: () => subscribeAction(),
-        title: 'Subscribe',
     },{
         path: '/ligoj',
         exact: true,
         component: LigojList,
         loadData: () => ligojAction(),
-        title: 'Ligo',
     },{
         path: '/podcasts',
         exact: true,
         component: PodcastList,
         loadData: () => podcastAction(),
-        title: 'Podcast',
     },{
         path: '/podcasts/:slug',
         exact: true,
         component: EpisodeList,
         loadData: () => podcastAction(),
-        title: 'Podcast',
     },{
         path: '/podcasts/:slug/:episode_slug',
         exact: true,
         component: EpisodeSingle,
         loadData: () => podcastAction(),
-        title: 'Podcast',
     },{
         path: '/',
         exact: true,
         component: Home,
         loadData: () => homeAction(),
-        title: 'ellugar.co',
     }
 ];

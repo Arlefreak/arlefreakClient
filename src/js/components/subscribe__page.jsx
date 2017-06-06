@@ -5,7 +5,7 @@ import Subscribe from './subscribe.jsx';
 import Social from './social.jsx';
 import Remarkable from 'remarkable';
 
-const Container = ({ id, title, isFetching, items }) => {
+const Container = ({ id, title, meta_description, isFetching, items }) => {
     var md = new Remarkable();
     var text = items.subscribeDescription ? items.subscribeDescription : '';
     var mdr = md.render(text);
@@ -14,6 +14,7 @@ const Container = ({ id, title, isFetching, items }) => {
         <Page 
             id = { id }
             title = { title }
+            meta_description = { meta_description}
             isFetching = { false }
         >
             <div className="markdown no-margin" dangerouslySetInnerHTML={{ __html: mdr }}/>
@@ -28,6 +29,7 @@ const Container = ({ id, title, isFetching, items }) => {
 Container.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string,
+    meta_description: PropTypes.string.isRequired,
     isFetching: PropTypes.bool.isRequired,
     items: PropTypes.shape().isRequired,
 };

@@ -6,6 +6,7 @@ import {renderToString} from 'react-dom/server';
 import { StaticRouter as Router, matchPath } from 'react-router';
 import fetch from 'node-fetch';
 import { Provider } from 'react-redux';
+import { Helmet } from 'react-helmet';
 
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunkMiddleware from 'redux-thunk';
@@ -30,7 +31,7 @@ if (process.env.NODE_ENV !== 'production') {
     middleware = composeWithDevTools(
         applyMiddleware(
             thunkMiddleware,
-            logger,
+            // logger,
         )
     );
 } else {
@@ -95,7 +96,10 @@ router.get('*', (req, res) => {
                     </Provider>
                 );
 
-                res.render('home', Object.assign(config, { title: route.title ,state: preloadedState, react, year }));
+                const helmet = Helmet.renderStatic();
+                let title = helmet.title.toString();
+                let meta = helmet.meta.toString();
+                res.render('home', Object.assign(config, { title, meta, state: preloadedState, react, year }));
             });
 
         }).catch(err => {

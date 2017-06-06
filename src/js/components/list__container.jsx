@@ -9,7 +9,7 @@ import CategoryList from '../containers/project__filter__categories.js';
 import TagList from '../containers/project__filter__tags.js';
 import ImageList from '../containers/project__images__list.js';
 
-const Container = ({ id, title, isFetching, items, categories, tags, description, images, route }) => {
+const Container = ({ id, title, meta_description, isFetching, items, categories, tags, description, images, route }) => {
     var listClasses = !images ? 'full-width' : '';
     var md = new Remarkable();
     var text = description || '';
@@ -20,6 +20,7 @@ const Container = ({ id, title, isFetching, items, categories, tags, description
         id = { id }
         title = { title }
         isFetching = { isFetching }
+        meta_description = { meta_description }
     >
         { categories != null && <CategoryList categories={ categories } className="categories" all={ true }/> }
         { tags != null && <TagList tags={ tags } className="tags" all={ true }/> }
@@ -34,6 +35,7 @@ const Container = ({ id, title, isFetching, items, categories, tags, description
 Container.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string,
+    meta_description: PropTypes.string.isRequired,
     isFetching: PropTypes.bool.isRequired,
     items: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,

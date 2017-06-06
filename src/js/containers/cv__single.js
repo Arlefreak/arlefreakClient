@@ -22,8 +22,15 @@ const mapStateToProps = (state, ownProps) => {
         item.text = file;
     }
 
+    const config = apiCalls['web_client/config/1/'] || {
+        isFetching: true,
+        items: {},
+    };
+    const meta_description = config.items.description || '';
+
     return {
         id: 'cv',
+        meta_description: meta_description,
         isFetching,
         item: item,
     };

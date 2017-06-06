@@ -30,9 +30,12 @@ const mapStateToProps = (state, ownProps) => {
         }
     }
 
+    const meta_description = item.text;
+
     return {
         id: 'btp',
         title: item.title,
+        meta_description: meta_description,
         isFetching,
         item: item,
     };

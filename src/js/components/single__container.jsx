@@ -6,12 +6,13 @@ import TagList from '../containers/single_tags_list.js';
 import LinkList from './link__list.jsx';
 import ImageList from './gallery__list.jsx';
 
-const Container = ({ id, title, isFetching, item, images, links, tags }) => {
+const Container = ({ id, title, meta_description, isFetching, item, images, links, tags }) => {
     return (
         <Page 
             id = { id }
             title = { title }
             isFetching = { isFetching }
+            meta_description= { meta_description }
         >
             {
                 links != null &&
@@ -50,6 +51,7 @@ const Container = ({ id, title, isFetching, item, images, links, tags }) => {
 Container.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string,
+    meta_description: PropTypes.string.isRequired,
     isFetching: PropTypes.bool.isRequired,
     item: PropTypes.object.isRequired,
     links: PropTypes.arrayOf(PropTypes.shape),

@@ -23,7 +23,9 @@ const mapStateToProps = (state) => {
         items: {},
     };
 
-    let finalFetch = isFetching && images.isFetching;
+    const finalFetch = isFetching && images.isFetching;
+
+    const meta_description = config.items.description || '';
 
     return {
         id: 'home',
@@ -31,14 +33,15 @@ const mapStateToProps = (state) => {
         items: items,
         images: images,
         config: config,
+        meta_description: meta_description,
         route: ''
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
+    dispatch(apiFetchIfNeeded('web_client/config/1/'));
     dispatch(apiFetchIfNeeded('portfolio/projects'));
     dispatch(apiFetchIfNeeded('portfolio/projectsImages/?imgType=mni'));
-    dispatch(apiFetchIfNeeded('web_client/config/1/'));
     return {};
 };
 

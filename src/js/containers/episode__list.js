@@ -38,10 +38,12 @@ const mapStateToProps = (state, ownProps) => {
 
 
     let finalFetch = isFetching && podcasts.isFetching;
+    const meta_description = item.description || '';
 
     return {
         id: 'btp',
         isFetching: finalFetch,
+        meta_description: meta_description,
         item: item,
         items: items,
         route: 'podcasts/' + slug,

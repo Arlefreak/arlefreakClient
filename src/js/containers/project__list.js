@@ -28,6 +28,12 @@ const mapStateToProps = (state) => {
         items: []
     };
 
+    const config = apiCalls['web_client/config/1/'] || {
+        isFetching: true,
+        items: {},
+    };
+    const meta_description = config.items.description || '';
+
     let filterItems = visibleItems;
 
     if(visibleItems.length === 0 && tagFilter.length === 0 && categoryFilter.id === 0){
@@ -41,6 +47,7 @@ const mapStateToProps = (state) => {
 
     return {
         id: 'projects',
+        meta_description: meta_description,
         isFetching: finalFetch,
         items: filterItems,
         categories: categories,
@@ -51,6 +58,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
+    dispatch(apiFetchIfNeeded('web_client/config/1/'));
     dispatch(apiFetchIfNeeded('portfolio/projects'));
     dispatch(apiFetchIfNeeded('portfolio/projectTags'));
     dispatch(apiFetchIfNeeded('portfolio/projectsCategories'));

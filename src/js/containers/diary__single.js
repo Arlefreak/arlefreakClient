@@ -27,12 +27,13 @@ const mapStateToProps = (state, ownProps) => {
     }
 
     const tags =  item.tags || [];
-
     const isFetching = list.isFetching;
+    const meta_description = item.text;
 
     return {
         id: 'logs',
         title: item.title,
+        meta_description: meta_description,
         isFetching,
         item: item,
         tags: tags,

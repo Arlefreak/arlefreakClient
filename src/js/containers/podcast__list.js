@@ -18,14 +18,22 @@ const mapStateToProps = (state) => {
         items: []
     };
 
+    const config = apiCalls['web_client/config/1/'] || {
+        isFetching: true,
+        items: {},
+    };
+
     let finalFetch = isFetching &&
         tags.isFetching;
 
+    let meta_description = config.items.description || '';
+
     return {
         id: 'btp',
+        meta_description: meta_description,
         isFetching: finalFetch,
         items: items,
-        // tags: tags,
+        description: description,
         route: 'podcasts'
     };
 };

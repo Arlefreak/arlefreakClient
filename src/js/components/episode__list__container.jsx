@@ -9,7 +9,7 @@ import CategoryList from '../containers/project__filter__categories.js';
 import TagList from '../containers/project__filter__tags.js';
 import ImageList from '../containers/project__images__list.js';
 
-const Container = ({ id, isFetching, item, items, route }) => {
+const Container = ({ id, isFetching, meta_description, item, items, route }) => {
     var md = new Remarkable();
     var text = item.text || '';
     var mdr = md.render(text);
@@ -18,6 +18,7 @@ const Container = ({ id, isFetching, item, items, route }) => {
         <Page 
             id = { id }
             title = { item.title }
+            meta_description = { meta_description }
             isFetching = { isFetching }
         >
             { item.dateCreated != null && 
@@ -49,12 +50,13 @@ Container.propTypes = {
     id: PropTypes.string.isRequired,
     isFetching: PropTypes.bool.isRequired,
     item: PropTypes.shape().isRequired,
+    meta_description: PropTypes.string.isRequired,
     items: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
         name: PropTypes.string,
         title: PropTypes.string
     }).isRequired).isRequired,
-    route: PropTypes.string.isRequired
+    route: PropTypes.string.isRequired,
 };
 
 export default Container;

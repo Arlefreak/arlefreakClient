@@ -24,8 +24,15 @@ const mapStateToProps = (state) => {
         filterItems = items;
     }
 
+    const config = apiCalls['web_client/config/1/'] || {
+        isFetching: true,
+        items: {},
+    };
+    const meta_description = config.items.description || '';
+
     return {
         id: 'ligoj',
+        meta_description: meta_description,
         isFetching: isFetching && tags.isFetching,
         items: filterItems,
         tags: tags,

@@ -17,13 +17,17 @@ export function homeAction() {
 
 export function projectsAction() {
     return dispatch => {
-        return dispatch(apiFetchIfNeeded('portfolio/projects')).then(
+        return dispatch(apiFetchIfNeeded('web_client/config/1/')).then(
             response => {
-                return dispatch(apiFetchIfNeeded('portfolio/projectTags')).then(
+                return dispatch(apiFetchIfNeeded('portfolio/projects')).then(
                     response => {
-                        return dispatch(apiFetchIfNeeded('portfolio/projectsCategories')).then(
+                        return dispatch(apiFetchIfNeeded('portfolio/projectTags')).then(
                             response => {
-                                return dispatch(apiFetchIfNeeded('portfolio/projectsImages/?imgType=mni'));
+                                return dispatch(apiFetchIfNeeded('portfolio/projectsCategories')).then(
+                                    response => {
+                                        return dispatch(apiFetchIfNeeded('portfolio/projectsImages/?imgType=mni'));
+                                    }
+                                );
                             }
                         );
                     }
@@ -35,13 +39,17 @@ export function projectsAction() {
 
 export function projectSingleAction(slug) {
     return dispatch => {
-        return dispatch(apiFetchIfNeeded('portfolio/projects')).then(
+        return dispatch(apiFetchIfNeeded('web_client/config/1/')).then(
             response => {
-                return dispatch(apiFetchIfNeeded('portfolio/projectTags')).then(
+                return dispatch(apiFetchIfNeeded('portfolio/projects')).then(
                     response => {
-                        return dispatch(apiFetchIfNeeded('portfolio/projectsLinks/?project__slug=' + slug)).then(
+                        return dispatch(apiFetchIfNeeded('portfolio/projectTags')).then(
                             response => {
-                                return dispatch(apiFetchIfNeeded('portfolio/projectsImages?imgType=gal&project__slug=' + slug));
+                                return dispatch(apiFetchIfNeeded('portfolio/projectsImages?imgType=gal&project__slug=' + slug)).then(
+                                    response => {
+                                        return dispatch(apiFetchIfNeeded('portfolio/projectsLinks/?project__slug=' + slug));
+                                    }
+                                );
                             }
                         );
                     }
@@ -53,15 +61,23 @@ export function projectSingleAction(slug) {
 
 export function aboutAction() {
     return dispatch => {
-        return dispatch(apiFetchIfNeeded('about/entry'));
+        return dispatch(apiFetchIfNeeded('web_client/config/1/')).then(
+            response => {
+                return dispatch(apiFetchIfNeeded('about/entry'));
+            }
+        );
     };
 }
 
 export function diaryAction() {
     return dispatch => {
-        return dispatch(apiFetchIfNeeded('diary/posts')).then(
+        return dispatch(apiFetchIfNeeded('web_client/config/1/')).then(
             response => {
-                return dispatch(apiFetchIfNeeded('diary/postTags'));
+                return dispatch(apiFetchIfNeeded('diary/posts')).then(
+                    response => {
+                        return dispatch(apiFetchIfNeeded('diary/postTags'));
+                    }
+                );
             }
         );
     };
@@ -69,7 +85,11 @@ export function diaryAction() {
 
 export function cvAction() {
     return dispatch => {
-        return dispatch(fileFetchIfNeeded('https://raw.githubusercontent.com/Arlefreak/Resume/master/README.md'));
+        return dispatch(apiFetchIfNeeded('web_client/config/1/')).then(
+            response => {
+                return dispatch(fileFetchIfNeeded('https://raw.githubusercontent.com/Arlefreak/Resume/master/README.md'));
+            }
+        );
     };
 }
 
@@ -81,9 +101,13 @@ export function subscribeAction() {
 
 export function ligojAction() {
     return dispatch => {
-        return dispatch(apiFetchIfNeeded('ligoj/link')).then(
+        return dispatch(apiFetchIfNeeded('web_client/config/1/')).then(
             response => {
-                return dispatch(apiFetchIfNeeded('ligoj/linkTags'));
+                return dispatch(apiFetchIfNeeded('ligoj/link')).then(
+                    response => {
+                        return dispatch(apiFetchIfNeeded('ligoj/linkTags'));
+                    }
+                );
             }
         );
     };
@@ -91,9 +115,13 @@ export function ligojAction() {
 
 export function podcastAction() {
     return dispatch => {
-        return dispatch(apiFetchIfNeeded('podcast/json/podcast')).then(
+        return dispatch(apiFetchIfNeeded('web_client/config/1/')).then(
             response => {
-                return dispatch(apiFetchIfNeeded('podcast/json/podcastTags'));
+                return dispatch(apiFetchIfNeeded('podcast/json/podcast')).then(
+                    response => {
+                        return dispatch(apiFetchIfNeeded('podcast/json/podcastTags'));
+                    }
+                );
             }
         );
     };
