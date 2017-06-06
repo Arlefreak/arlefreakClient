@@ -42,7 +42,7 @@ const Page = ({ id, title, isFetching, children, meta_description}) => {
                 meta={[
                     {'property': 'og:title', 'content': meta_title},
                     {'name': 'twitter:title', 'content': meta_title},
-                    {'property': 'description', 'content': meta_description},
+                    {'name': 'description', 'content': meta_description},
                     {'property': 'og:description', 'content': meta_description},
                     {'name': 'twitter:description', 'content': meta_description},
                 ]}
