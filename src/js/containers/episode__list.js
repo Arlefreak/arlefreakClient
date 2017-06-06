@@ -38,7 +38,7 @@ const mapStateToProps = (state, ownProps) => {
 
 
     let finalFetch = isFetching && podcasts.isFetching;
-    const meta_description = item.description || '';
+    const meta_description = item.text || '';
     const meta_title  = item.title || '';
     const meta_preview  = item.image || '';
 
