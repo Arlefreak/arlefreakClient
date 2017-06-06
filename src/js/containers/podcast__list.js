@@ -25,10 +25,8 @@ const mapStateToProps = (state) => {
 
     return {
         id: 'btp',
-        meta_description: meta_description,
         isFetching: finalFetch,
         items: items,
-        description: description,
         route: 'podcasts',
         meta_title,
     };

@@ -22,11 +22,10 @@ const mapStateToProps = (state, ownProps) => {
         item.text = file;
     }
 
-    meta_title = 'CV';
+    const meta_title = 'CV';
 
     return {
         id: 'cv',
-        meta_description: meta_description,
         isFetching,
         item: item,
         meta_title,

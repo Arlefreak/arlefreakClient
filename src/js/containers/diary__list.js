@@ -28,7 +28,6 @@ const mapStateToProps = (state) => {
 
     return {
         id: 'logs',
-        meta_description: meta_description,
         isFetching: isFetching && tags.isFetching,
         items: filterItems,
         tags: tags,
