@@ -41,11 +41,10 @@ const Page = ({ id, title, isFetching, children, meta_description}) => {
                 title={ meta_title }
                 meta={[
                     {'property': 'og:title', 'content': meta_title},
-                    {'property': 'twitter:title', 'content': meta_title},
+                    {'name': 'twitter:title', 'content': meta_title},
                     {'property': 'description', 'content': meta_description},
                     {'property': 'og:description', 'content': meta_description},
-                    {'property': 'twitter:description', 'content': meta_description},
-                    {'property': 'twitter:description', 'content': meta_description},
+                    {'name': 'twitter:description', 'content': meta_description},
                 ]}
             >
             </Helmet>
