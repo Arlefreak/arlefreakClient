@@ -16,6 +16,12 @@ const Container = ({
     links,
     tags,
 
+    slug,
+    iTunesURL,
+    feed,
+    prev,
+    next,
+
     meta_url,
     meta_title,
     meta_description,
@@ -40,6 +46,12 @@ const Container = ({
             }
             <Episode 
                 item={ item }
+
+                slug = { slug }
+                iTunesURL = { iTunesURL }
+                feed = { feed }
+                next = { next }
+                prev = { prev }
             />
         </Page>
     );
@@ -54,6 +66,12 @@ Container.propTypes = {
     links: PropTypes.arrayOf(PropTypes.shape),
     images: PropTypes.arrayOf(PropTypes.shape),
     tags: PropTypes.arrayOf(PropTypes.shape),
+
+    slug: PropTypes.string.isRequired,
+    iTunesURL: PropTypes.string,
+    feed: PropTypes.string.isRequired,
+    prev: PropTypes.string,
+    next: PropTypes.string,
 
     meta_description: PropTypes.string,
     meta_url: PropTypes.string,

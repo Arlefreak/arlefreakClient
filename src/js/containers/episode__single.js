@@ -14,6 +14,18 @@ const mapStateToProps = (state, ownProps) => {
         items: []
     };
 
+    const podcasts = apiCalls['podcast/json/podcast'] || {
+        isFetching: true,
+        items: []
+    };
+
+    let podcast = {
+        title: '',
+        slug: '',
+        text: '',
+        image: '',
+    };
+
     let item = {
         id: 0,
         title: 'Loading',
@@ -21,11 +33,29 @@ const mapStateToProps = (state, ownProps) => {
         text: 'Loading',
     };
 
+    if(podcasts.items.length > 0) {
+        for(i; i < podcasts.items.length; i++){
+            if (podcasts.items[i].slug === slug){
+                podcast = podcasts.items[i];
+                break;
+            }
+        }
+    }
+
+    let iTunesURL = podcast.iTunesURL || null;
+    let feed = podcast.feed || '';
+
     var i = 0;
+    let prev;
+    let next;
     if(items.length > 0) {
         for(i; i < items.length; i++){
             if (items[i].slug === episode_slug){
                 item = items[i];
+                if(i > 0)
+                    prev = items[i-1].slug;
+                if(i < items.length -1)
+                    next = items[i+1].slug;
                 break;
             }
         }
@@ -40,6 +70,12 @@ const mapStateToProps = (state, ownProps) => {
         title: item.title,
         isFetching,
         item: item,
+
+        slug: slug,
+        feed: feed,
+        iTunesURL: iTunesURL,
+        next: next,
+        prev: prev,
 
         meta_title,
         meta_description,

@@ -1,10 +1,16 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Loading from './loading.jsx';
 import Remarkable from 'remarkable';
 
 const Episode = ({ 
     item,
+    slug,
+    iTunesURL,
+    feed,
+    prev,
+    next,
 }) => {
     var md = new Remarkable();
     var text = item.text;
@@ -19,6 +25,21 @@ const Episode = ({
             }
             <div className="episode-info">
                 <img className="episode-cover" src={ item.image } alt={ item.title } />
+                <div className="podcast-column">
+                    <h3>Subscribe</h3>
+                    <ul className="subscribe-buttons">
+                        { prev != null &&
+                                <li><Link to={ `/podcasts/${slug}/${prev}` }>prev</Link></li>
+                        }
+                        <li><a rel="noopener noreferrer" target="_blank" className="button rss" href={ item.feed }>rss</a></li>
+                        { item.iTunesURL != null &&
+                                <li><a rel="noopener noreferrer" target="_blank" className="button iTunes" href={ item.iTunesURL }>iTunes</a></li>
+                        }
+                        { next != null &&
+                                <li><Link to={ `/podcasts/${slug}/${next}` }>next</Link></li>
+                        }
+                    </ul>
+                </div>
                 <audio className="episode-player" controls>
                     <source src={ item.audio_mp3 } type={ item.audio_type } />
                     <source src={ item.audio_ogg } type={ item.audio_type } />
@@ -40,5 +61,10 @@ Episode.propTypes = {
         audio_type: PropTypes.string,
         audio_size: PropTypes.number,
     }).isRequired,
+    slug: PropTypes.string.isRequired,
+    iTunesURL: PropTypes.string,
+    feed: PropTypes.string.isRequired,
+    prev: PropTypes.string,
+    next: PropTypes.string,
 };
 export default Episode;
