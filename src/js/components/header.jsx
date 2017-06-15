@@ -21,7 +21,7 @@ class Header extends React.Component {
                                 <li><NavLink to="/cv" activeClassName="active">CV</NavLink></li>
                                 <li><NavLink to="/subscribe" activeClassName="active"><img src="/img/routes/subscribe.svg" alt="subscribe"/></NavLink></li>
                                 <li><NavLink to="/ligoj" activeClassName="active"><img src="/img/routes/ligoj.svg" alt="Φ"/></NavLink></li>
-                                <li><NavLink to="/podcasts/behind-the-pixel"><img src="/img/routes/btp.svg" alt=""/></NavLink></li>
+                                <li><NavLink to="/podcasts/detras-del-pixel"><img src="/img/routes/btp.svg" alt="podcasts"/></NavLink></li>
                             </ul>
                         </nav>
                     </Sticky>

@@ -32,7 +32,7 @@ const mapStateToProps = (state, ownProps) => {
     }
 
     const meta_title = item.title;
-    const meta_description = item.text;
+    const meta_description = item.small_text;
     const meta_preview = item.image;
 
     return {
