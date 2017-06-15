@@ -662,7 +662,7 @@ input[type=range]:-moz-focusring {
 }
 .progressbar.total {
   width: 100%;
-  background: #999;
+  background: #e3e3e3;
 }
 .progressbar.loading {
   width: 0%;
@@ -674,7 +674,7 @@ input[type=range]:-moz-focusring {
 }
 .progressbar.volume {
   width: 0%;
-  background-color: #00aeef;
+  background-color: #000;
 }
 .volume-bar-lines {
   width: auto;
