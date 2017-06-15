@@ -1022,7 +1022,7 @@ ul {
   }
 }
 .subscribe-buttons li {
-  width: 24%;
+  width: 48%;
   margin: 0 1% 0 0;
 }
 .subscribe-buttons a {
@@ -1077,6 +1077,9 @@ ul {
   -ms-flex-pack: justify;
   -webkit-justify-content: space-between;
   justify-content: space-between;
+}
+.episode-buttons ul.subscribe-buttons li {
+  width: 24%;
 }
 @media screen and (max-width: 800px) {
   .episode-buttons ul.subscribe-buttons li {
