@@ -5,7 +5,9 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { routeChanged } from './actions/routes_actions';
 import ReactGA from 'react-ga';
 
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import Sound from 'react-sound';
+
+import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -13,6 +15,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { clearTagFilter } from './actions/tag_filter_actions';
 import { setCategoryFilter } from './actions/category_filter_actions';
 import { filterItems } from './actions/items_actions';
+import { setAudioPosition, setPlayStatus, setAudioBytesLoaded, setAudioBytesTotal } from './actions/audio_actions';
 
 import { reducer } from './reducers';
 import Routes from './app.jsx';
@@ -63,6 +66,11 @@ const logPageView = () => {
     store.dispatch(clearTagFilter());
     store.dispatch(setCategoryFilter(0, 'All'));
     store.dispatch(filterItems());
+
+    store.dispatch(setAudioPosition(0));
+    store.dispatch(setPlayStatus(Sound.status.STOPPED));
+    store.dispatch(setAudioBytesLoaded(0));
+    store.dispatch(setAudioBytesTotal(0));
 
     ReactGA.set({ page: window.location.pathname });
     ReactGA.pageview(window.location.pathname);

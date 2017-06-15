@@ -33,6 +33,8 @@ const mapStateToProps = (state, ownProps) => {
         text: 'Loading',
     };
 
+
+    var i = 0;
     if(podcasts.items.length > 0) {
         for(i; i < podcasts.items.length; i++){
             if (podcasts.items[i].slug === slug){
@@ -45,9 +47,10 @@ const mapStateToProps = (state, ownProps) => {
     let iTunesURL = podcast.iTunesURL || null;
     let feed = podcast.feed || '';
 
-    var i = 0;
     let prev;
     let next;
+    i = 0;
+
     if(items.length > 0) {
         for(i; i < items.length; i++){
             if (items[i].slug === episode_slug){
@@ -86,6 +89,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     const { slug, episode_slug} = ownProps.match.params;
     dispatch(apiFetchIfNeeded('podcast/json/episodes/' + slug ));
+    dispatch(apiFetchIfNeeded('podcast/json/podcast'));
     return {};
 };
 

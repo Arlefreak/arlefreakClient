@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Loading from './loading.jsx';
 import Remarkable from 'remarkable';
+import AudioPlayer from '../containers/audio__player.js';
 
 const Episode = ({ 
     item,
@@ -25,25 +26,28 @@ const Episode = ({
             }
             <div className="episode-info">
                 <img className="episode-cover" src={ item.image } alt={ item.title } />
-                <div className="podcast-column">
-                    <h3>Subscribe</h3>
+                <div className="podcast-column episode-buttons">
                     <ul className="subscribe-buttons">
                         { prev != null &&
-                                <li><Link to={ `/podcasts/${slug}/${prev}` }>prev</Link></li>
+                                <li><Link className="button yellow" to={ `/podcasts/${slug}/${prev}` }>prev</Link></li>
                         }
-                        <li><a rel="noopener noreferrer" target="_blank" className="button rss" href={ item.feed }>rss</a></li>
-                        { item.iTunesURL != null &&
-                                <li><a rel="noopener noreferrer" target="_blank" className="button iTunes" href={ item.iTunesURL }>iTunes</a></li>
+                        { prev == null &&
+                                <li><Link className="button yellow" to={ `/podcasts/${slug}/` }>all</Link></li>
                         }
                         { next != null &&
-                                <li><Link to={ `/podcasts/${slug}/${next}` }>next</Link></li>
+                                <li><Link className="button yellow" to={ `/podcasts/${slug}/${next}` }>next</Link></li>
+                        }
+                        { next == null &&
+                                <li><Link className="button yellow" to={ `/podcasts/${slug}/` }>all</Link></li>
+                        }
+                        <li><a rel="noopener noreferrer" target="_blank" className="button pink" href={ feed }>rss</a></li>
+                        { iTunesURL != null &&
+                                <li><a rel="noopener noreferrer" target="_blank" className="button blue" href={ iTunesURL }>iTunes</a></li>
                         }
                     </ul>
                 </div>
-                <audio className="episode-player" controls>
-                    <source src={ item.audio_mp3 } type={ item.audio_type } />
-                    <source src={ item.audio_ogg } type={ item.audio_type } />
-                </audio> 
+                <div className="margin"></div>
+                <AudioPlayer url={ item.audio_ogg } duration={ item.duration } />
             </div>
 
             <div className="episode-description markdown" dangerouslySetInnerHTML={{ __html: mdr }}/>

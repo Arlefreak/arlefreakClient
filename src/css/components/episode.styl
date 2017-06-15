@@ -35,8 +35,10 @@
         margin 20px 0 0 0
         width 100%
 
+
 .episode-player
-    width calc(70% - 20px)
+    /* width calc(70% - 20px) */
+    width 100%
     @media screen and (max-width: $mobile-width)
         margin 20px 0 0 0
         width 100%
@@ -51,28 +53,51 @@
     display flex
     flex-flow row wrap
     align-items center
-    justify-content space-between
+    justify-content flex-start
     @media screen and (max-width: $mobile-width)
         max-width none
     li
-        width 49%
+        width 24%
+        margin 0 1% 0 0
     a
         box-sizing border-box
         padding 10px
         width 100%
         margin 0
         display block
-    .rss
+    .yellow
+        border-color $black
+        color $black
+        text-transform uppercase
+        &:hover
+            background-color $highlight
+            color $black
+    .pink
         border-color $highlight-pink
         color $highlight-pink
         text-transform uppercase
         &:hover
             background-color $highlight-pink
             color $black
-    .itunes
+    .blue
         border-color $highlight-blue
         color $highlight-blue
         text-transform uppercase
         &:hover
             background-color $highlight-blue
             color $black
+
+.episode-buttons
+    align-self flex-end
+    h3
+        margin 0 0 20px 0
+    ul.subscribe-buttons
+        max-width none
+        justify-content space-between
+        @media screen and (max-width: $mobile-width)
+            li
+                width 48%
+                margin 20px 0 0 0
+                &:nth-child(1)
+                &:nth-child(2)
+                    margin 0

@@ -16,6 +16,7 @@ import { categoryFilter } from './category_filter_reducers.js';
 import { tagFilter } from './tag_filter_reducers.js';
 import { apiCalls } from './api_reducers.js';
 import { fileCalls } from './file_reducers.js';
+import { audio } from './audio_reducers.js';
 
 export const reducer = combineReducers({
     route,
@@ -24,4 +25,5 @@ export const reducer = combineReducers({
     categoryFilter,
     apiCalls,
     fileCalls,
+    audio,
 });
