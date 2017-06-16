@@ -74,7 +74,7 @@ const AudioPlayer = ({
             { !isPlaying &&
                     <li className="button" onClick={ onPlay }><i className="fa fa-play" aria-hidden="true"></i></li>
             }
-            <li className="button" onClick={ onStop}><i className="fa fa-stop" aria-hidden="true"></i></li>
+            { /* <li className="button" onClick={ onStop}><i className="fa fa-stop" aria-hidden="true"></i></li> */}
         </ul>
 
         <div className="audio-bar">

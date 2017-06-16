@@ -79,21 +79,8 @@ input[type=range]
         outline 1px solid white
         outline-offset -1px
 
-.volume-controls
-    width 18%
-    color $black
-    display flex
-    flex-flow row no-wrap
-    justify-content flex-end
-    align-items center
-    @media screen and (max-width: $mobile-width)
-        width auto
-        flex 1
-    input
-        width 100%
-
 .player-controls
-    width 35px
+    width 15px
     color $black
     display flex
     flex-flow row wrap
@@ -146,3 +133,17 @@ input[type=range]
     width auto
     flex 1
     position relative
+
+.volume-controls
+    width 18%
+    min-width 100px
+    color $black
+    display flex
+    flex-flow row no-wrap
+    justify-content flex-end
+    align-items center
+    @media screen and (max-width: $mobile-width)
+        width auto
+        flex 1
+    input
+        width 100%
