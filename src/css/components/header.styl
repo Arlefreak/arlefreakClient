@@ -13,6 +13,8 @@ header
         display inline-block
         height 12px
         width auto
+        @media screen and (max-width: $mobile-width)
+            height 10px
     .title
         overflow hidden
         a
@@ -32,3 +34,7 @@ header
         text-align right
         vertical-align top
         padding 5px 0 5px 0
+    nav
+        a
+            @media screen and (max-width: $mobile-width)
+                font-size 0.8em

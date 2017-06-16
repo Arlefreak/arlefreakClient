@@ -87,7 +87,8 @@ input[type=range]
     justify-content flex-end
     align-items center
     @media screen and (max-width: $mobile-width)
-        width 100%
+        width auto
+        flex 1
     input
         width 100%
 
@@ -102,24 +103,26 @@ input[type=range]
         width 15%
 
 .audio-bar
-    width 70%
+    width 65%
     display block
     display flex
     flex-flow row no-wrap
     justify-content space-between
     align-items center
-    flex 1
-    margin 0 0 0 20px
+    margin 0 2% 0 2%
+    @media screen and (max-width: $mobile-width)
+        margin 0 0 0 2%
+        flex-grow 1
     .audio-bar-lines
         width auto
         flex 1
-        margin 0 20px 0 0
         position relative
-    span
-        width auto
-        font-family $fontCode
-        font-weight bold
-        font-size 0.6em
+
+.progress-time
+    width auto
+    font-family $fontCode
+    font-weight bold
+    font-size 0.6em
 
 .progressbar
     height 2px
@@ -138,6 +141,7 @@ input[type=range]
     &.volume
         width 0%
         background-color $black
+
 .volume-bar-lines
     width auto
     flex 1

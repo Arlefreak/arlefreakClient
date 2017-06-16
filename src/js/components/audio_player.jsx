@@ -68,13 +68,13 @@ const AudioPlayer = ({
             />
 
         <ul className="player-controls">
-            <li className="button" onClick={ onStop}><i className="fa fa-stop" aria-hidden="true"></i></li>
             { isPlaying &&
                     <li className="button" onClick={ onPause }><i className="fa fa-pause" aria-hidden="true"></i></li>
             }
             { !isPlaying &&
                     <li className="button" onClick={ onPlay }><i className="fa fa-play" aria-hidden="true"></i></li>
             }
+            <li className="button" onClick={ onStop}><i className="fa fa-stop" aria-hidden="true"></i></li>
         </ul>
 
         <div className="audio-bar">
@@ -91,8 +91,8 @@ const AudioPlayer = ({
                     onChange={ onSeek }
                 />
             </div>
-            <span>{ `${position_h}:${position_m}:${position_s}/${duration}`}</span>
         </div>
+        <span className="progress-time">{ `${position_h}:${position_m}:${position_s}/${duration}`}</span>
 
         <div className="volume-controls">
             { volume == 0 && <a className="button yellow"><i className="fa fa-volume-off" aria-hidden="true"></i></a> }
