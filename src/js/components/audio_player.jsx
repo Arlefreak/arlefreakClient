@@ -52,7 +52,7 @@ const AudioPlayer = ({
 
 
     if (typeof window === 'undefined')
-        global.window = {}
+        global.window = {};
     if(typeof window.soundManager !== 'undefined')
         window.soundManager.setup({ignoreMobileRestrictions: true});
 

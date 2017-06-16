@@ -890,6 +890,7 @@ ul {
 }
 .podcast img,
 .episode img {
+  width: 100%;
   height: auto;
   display: block;
 }
