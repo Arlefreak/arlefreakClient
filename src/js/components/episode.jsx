@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Loading from './loading.jsx';
 import Remarkable from 'remarkable';
 import AudioPlayer from '../containers/audio__player.js';
+import Img from 'react-image';
 
 const Episode = ({ 
     item,
@@ -25,7 +26,12 @@ const Episode = ({
                     </div>
             }
             <div className="episode-info">
-                <img className="episode-cover" src={ item.image } alt={ item.title } />
+                <Img
+                    className="episode-cover"
+                    src={ item.image }
+                    alt={ item.title }
+                    loader= { <Loading/> }
+                />
                 <div className="podcast-column episode-buttons">
                     <ul className="subscribe-buttons">
                         { prev != null &&
