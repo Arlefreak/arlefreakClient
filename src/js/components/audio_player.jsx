@@ -50,6 +50,12 @@ const AudioPlayer = ({
         width: `${volume}%`
     };
 
+
+    if (typeof window === 'undefined')
+        global.window = {}
+    if(typeof window.soundManager !== 'undefined')
+        window.soundManager.setup({ignoreMobileRestrictions: true});
+
     return(
         <div className="audio-player">
             <Sound
