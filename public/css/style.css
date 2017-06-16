@@ -699,6 +699,9 @@ input[type=range]:-moz-focusring {
 .volume-controls input {
   width: 100%;
 }
+.volume-controls .button {
+  width: 25px;
+}
 .button {
   color: #00aeef;
   border: 2px solid #00aeef;
