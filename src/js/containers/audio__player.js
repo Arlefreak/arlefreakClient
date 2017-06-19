@@ -1,6 +1,12 @@
-import Sound from 'react-sound';
 import { connect } from 'react-redux';
-import { setPlayStatus, setAudioPosition, setAudioVolume, setAudioBytesLoaded, setAudioBytesTotal } from '../actions/audio_actions';
+import {
+    setPlayStatus,
+    setAudioPosition,
+    setAudioVolume,
+    setAudioBytesLoaded,
+    setAudioBytesTotal,
+    setAudioDurationTotal,
+} from '../actions/audio_actions';
 import AudioPlayerComponent from '../components/audio_player.jsx';;
 
 const mapStateToProps = (state) => {
@@ -17,17 +23,27 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onPlay: () => {
-            dispatch(setPlayStatus(Sound.status.PLAYING));
+            dispatch(setPlayStatus(true));
         },
+
         onStop: () => {
-            dispatch(setPlayStatus(Sound.status.STOPPED));
+            dispatch(setPlayStatus(false));
+            dispatch(setAudioPosition(0));
+        },
+
+        onDestroy: () => {
+            dispatch(setPlayStatus(false));
+            dispatch(setAudioPosition(0));
+            dispatch(setAudioDurationTotal(0));
+            dispatch(setAudioBytesLoaded(0));
+            dispatch(setAudioBytesTotal(0));
         },
 
         onPause: () => {
-            dispatch(setPlayStatus(Sound.status.PAUSED));
+            dispatch(setPlayStatus(false));
         },
         onResume: () => {
-            dispatch(setPlayStatus(Sound.status.PLAYING));
+            dispatch(setPlayStatus(false));
         },
 
         onVolumeUp: () => {
@@ -38,7 +54,7 @@ const mapDispatchToProps = (dispatch) => {
         },
 
         onVolumeChange: (event) => {
-            dispatch(setAudioVolume(event.target.value));
+            dispatch(setAudioVolume(parseFloat(event.target.value)));
         },
 
         onProgress: (position) => {
@@ -49,10 +65,14 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(setAudioPosition(event.target.value * 1000));
         },
 
-        onLoad: (bytesLoaded, bytesTotal) => {
-            dispatch(setAudioBytesLoaded(bytesLoaded));
-            dispatch(setAudioBytesTotal(bytesTotal));
-        }
+        onLoad: (duration) => {
+            dispatch(setAudioDurationTotal(duration));
+        },
+
+        // onLoad: (bytesLoaded, bytesTotal) => {
+        //     dispatch(setAudioBytesLoaded(bytesLoaded));
+        //     dispatch(setAudioBytesTotal(bytesTotal));
+        // }
     };
 };
 

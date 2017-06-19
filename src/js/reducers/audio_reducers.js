@@ -1,13 +1,20 @@
-import Sound from 'react-sound';
-import { SET_PLAY_STATUS, SET_AUDIO_POSITION, SET_AUDIO_VOLUME, SET_AUDIO_BYTES_LOADED, SET_AUDIO_BYTES_TOTAL } from '../actions/audio_actions';
+import { 
+    SET_PLAY_STATUS,
+    SET_AUDIO_POSITION,
+    SET_AUDIO_VOLUME,
+    SET_AUDIO_BYTES_LOADED,
+    SET_AUDIO_BYTES_TOTAL,
+    SET_AUDIO_DURATION_TOTAL,
+} from '../actions/audio_actions';
 
 export function audio(
     state = {
-        playStatus: Sound.status.STOPPED,
+        playStatus: false,
         audioPosition: 0,
-        audioVolume: 100,
+        audioVolume: 1,
         audioBytesLoaded: 0,
         audioBytesTotal: 0,
+        audioDurationTotal: 0,
     },
     action
 ) {
@@ -37,6 +44,13 @@ export function audio(
                 ...state,
                 audioBytesTotal: action.bytes,
             };
+
+        case SET_AUDIO_DURATION_TOTAL:
+            return {
+                ...state,
+                audioDurationTotal: action.duration,
+            };
+
         default:
             return state;
     }

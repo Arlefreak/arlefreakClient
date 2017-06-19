@@ -3,6 +3,7 @@ export const SET_AUDIO_POSITION = 'SET_AUDIO_POSITION';
 export const SET_AUDIO_VOLUME = 'SET_AUDIO_VOLUME';
 export const SET_AUDIO_BYTES_LOADED = 'SET_AUDIO_BYTES_LOADED';
 export const SET_AUDIO_BYTES_TOTAL = 'SET_AUDIO_BYTES_TOTAL';
+export const SET_AUDIO_DURATION_TOTAL = 'SET_AUDIO_BYTES_TOTAL';
 
 export function setPlayStatus(status) {
     return {
@@ -36,5 +37,12 @@ export function setAudioBytesTotal(bytes) {
     return {
         type: SET_AUDIO_BYTES_TOTAL,
         bytes
+    };
+}
+
+export function setAudioDurationTotal(duration) {
+    return {
+        type: SET_AUDIO_DURATION_TOTAL,
+        duration
     };
 }

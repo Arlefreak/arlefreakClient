@@ -52,7 +52,7 @@ const Episode = ({
                     </ul>
                 </div>
                 <div className="margin"></div>
-                <AudioPlayer url={ item.audio_ogg } duration={ item.duration } />
+                <AudioPlayer url_mp3={ item.audio_ogg } url_ogg={ item.audio_mp3 } duration={ item.duration } />
             </div>
 
             <div className="episode-description markdown" dangerouslySetInnerHTML={{ __html: mdr }}/>

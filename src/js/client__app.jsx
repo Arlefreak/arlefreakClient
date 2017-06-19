@@ -5,8 +5,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { routeChanged } from './actions/routes_actions';
 import ReactGA from 'react-ga';
 
-import Sound from 'react-sound';
-
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
@@ -68,7 +66,7 @@ const logPageView = () => {
     store.dispatch(filterItems());
 
     store.dispatch(setAudioPosition(0));
-    store.dispatch(setPlayStatus(Sound.status.STOPPED));
+    store.dispatch(setPlayStatus(false));
     store.dispatch(setAudioBytesLoaded(0));
     store.dispatch(setAudioBytesTotal(0));
 
