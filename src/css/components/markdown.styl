@@ -83,11 +83,14 @@
         background-color #f1f1f1
         white-space pre-wrap
     img
-        width 100%
+        max-width 100%
         height auto
         display block
         margin auto
         box-sizing border-box
+        @media screen and (max-width: $mobile-width)
+            width 100%
+            max-width none
     a
         color $color1
         box-sizing border-box

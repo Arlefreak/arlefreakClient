@@ -2205,13 +2205,19 @@ svg:hover #stick {
   white-space: pre-wrap;
 }
 .markdown img {
-  width: 100%;
+  max-width: 100%;
   height: auto;
   display: block;
   margin: auto;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+@media screen and (max-width: 800px) {
+  .markdown img {
+    width: 100%;
+    max-width: none;
+  }
 }
 .markdown a {
   color: #000;
