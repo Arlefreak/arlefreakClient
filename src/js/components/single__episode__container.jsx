@@ -37,6 +37,7 @@ const Container = ({
             meta_title = { meta_title }
             meta_description = { meta_description }
             meta_preview = { meta_preview }
+            meta_audio = { item.audio_mp3 }
         >
             {
                 links != null &&

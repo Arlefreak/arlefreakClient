@@ -15,6 +15,7 @@ const Page = ({
     meta_title,
     meta_description,
     meta_preview,
+    meta_audio,
 }) => {
     let child;
 
@@ -36,9 +37,26 @@ const Page = ({
     }
 
     let description = meta_description;
-
     if(meta_description.length > 140)
         description = `${description.substring(0, 140)} ...`;
+
+    let meta= [
+        {'property': 'og:title', 'content': meta_title},
+        {'name': 'twitter:title', 'content': meta_title},
+
+        {'property': 'og:url', 'content': meta_url},
+        {'name': 'twitter:url', 'content': meta_url},
+
+        {'property': 'og:image', 'content': meta_preview},
+        {'name': 'twitter:image', 'content': meta_preview},
+
+        {'name': 'description', 'content': description},
+        {'property': 'og:description', 'content': description},
+        {'name': 'twitter:description', 'content': description},
+    ];
+
+    if(meta_audio)
+        meta.push({'property': 'og:audio', 'content': meta_audio});
 
     return (
         <CSSTransitionGroup
@@ -53,20 +71,7 @@ const Page = ({
         >
             <Helmet
                 title={ meta_title }
-                meta={[
-                    {'property': 'og:title', 'content': meta_title},
-                    {'name': 'twitter:title', 'content': meta_title},
-
-                    {'property': 'og:url', 'content': meta_url},
-                    {'name': 'twitter:url', 'content': meta_url},
-
-                    {'property': 'og:image', 'content': meta_preview},
-                    {'name': 'twitter:image', 'content': meta_preview},
-
-                    {'name': 'description', 'content': description},
-                    {'property': 'og:description', 'content': description},
-                    {'name': 'twitter:description', 'content': description},
-                ]}
+                meta={ meta }
             >
             </Helmet>
             {child}
@@ -84,6 +89,7 @@ Page.propTypes = {
     meta_url: PropTypes.string.isRequired,
     meta_title: PropTypes.string.isRequired,
     meta_preview: PropTypes.string.isRequired,
+    meta_audio: PropTypes.string,
 };
 
 export default Page;
