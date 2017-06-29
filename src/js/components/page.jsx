@@ -35,6 +35,11 @@ const Page = ({
             </div>;
     }
 
+    let description = meta_description;
+
+    if(meta_description.length > 140)
+        description = `${description.substring(0, 140)} ...`;
+
     return (
         <CSSTransitionGroup
             transitionName="fade"
@@ -58,9 +63,9 @@ const Page = ({
                     {'property': 'og:image', 'content': meta_preview},
                     {'name': 'twitter:image', 'content': meta_preview},
 
-                    {'name': 'description', 'content': meta_description},
-                    {'property': 'og:description', 'content': meta_description},
-                    {'name': 'twitter:description', 'content': meta_description},
+                    {'name': 'description', 'content': description},
+                    {'property': 'og:description', 'content': description},
+                    {'name': 'twitter:description', 'content': description},
                 ]}
             >
             </Helmet>
