@@ -5,11 +5,11 @@ import { Sticky } from 'react-sticky';
 class Header extends React.Component {
     render() {
         return (
-            <header>
+            <header id="header">
                 <div className="wrapper">
                     <div className="title">
                         <Link to="/"><img className="logo" src="/img/logo.svg" alt="arlefreak"/></Link>
-                        <h1 className="hideMobile">Mario Carballo Zama</h1>
+                        <h2 className="hideMobile">Mario Carballo Zama</h2>
                     </div>
                     <Sticky stickyClassName="sticky">
                         <nav>

@@ -15,13 +15,14 @@
         background $highlight-soft
     ul
         margin 20px 0 20px 0
+        columns 2
         li
             font-size 1em
             max-width $max-text-width
             line-height 1.8em
-            margin 10px 0 10px 0
-            /* padding 0 0 0 10px */
+            margin 0 0 10px 0
             box-sizing border-box
+            width 100%
             &:before
                 content: '- '
             @media screen and (max-width: $mobile-width)

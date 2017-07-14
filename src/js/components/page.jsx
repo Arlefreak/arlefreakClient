@@ -29,7 +29,7 @@ const Page = ({
         child = 
             <div>
                 { title != null && 
-                        <h2>{title}</h2>
+                        <h1>{title}</h1>
                 }
                 { children }
                 <Id index={id}/>

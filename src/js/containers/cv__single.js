@@ -1,39 +1,37 @@
 import { connect } from 'react-redux';
-import { fileFetchIfNeeded } from '../actions/file_actions';
+import { apiFetchIfNeeded } from '../actions/api_actions';
 import SingleContainer from '../components/single__container.jsx';;
 
 const mapStateToProps = (state, ownProps) => {
-    const { fileCalls } = state;
-    const {
-        isFetching,
-        lastUpdated,
-        file: file
-    } = fileCalls['https://raw.githubusercontent.com/Arlefreak/Resume/master/README.md'] || {
+    const { apiCalls } = state;
+
+    const config = apiCalls['web_client/config/1/'] || {
         isFetching: true,
-        file: ''
+        items: {
+            id: 0,
+            cv: '',
+        },
     };
 
-    let item = {
-        id: 0,
-        text: ''
-    };
-
-    if (file != item.text ){
-        item.text = file;
-    }
-
+    const meta_description = config.items.description || '';
     const meta_title = 'CV';
+    const item = {
+        id: 0,
+        text: config.items.cv,
+    };
 
     return {
         id: 'cv',
-        isFetching,
+        title: 'Mario Carballo Zama',
+        isFetching: config.isFetching,
         item: item,
+        meta_description,
         meta_title,
     };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    dispatch(fileFetchIfNeeded('https://raw.githubusercontent.com/Arlefreak/Resume/master/README.md'));
+    dispatch(apiFetchIfNeeded('web_client/config/1/'));
     return {};
 };
 
