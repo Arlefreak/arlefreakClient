@@ -2450,9 +2450,23 @@ ul.full-width {
   float: none;
 }
 @media print {
-  #header,
   #footer,
   .index {
+    display: none;
+  }
+  #header {
+    position: absolute;
+    width: auto;
+    height: auto;
+    background: transparent;
+    top: 5px;
+    padding: 0;
+    left: initial;
+    right: 0.5%;
+  }
+  #header h2,
+  #header .sticky,
+  #header nav {
     display: none;
   }
   html body {
@@ -2463,18 +2477,28 @@ ul.full-width {
   }
   html body main {
     margin: 0;
-    font-size: 0.8em;
+    font-size: 0.75em;
   }
   html body h1 {
     font-size: 2.5em;
   }
   html body .markdown h2 {
     font-size: 1.2em;
-    margin: 0 auto 20px 0;
+    margin: 15px auto 15px 0;
+  }
+  html body .markdown ul {
+    margin: 0;
   }
   html body .markdown ul li {
-    line-height: 2em;
+    line-height: 1.8em;
     margin: 0;
+  }
+  html body .markdown p {
+    margin: 0 0 0 0;
+    line-height: 1.5em;
+  }
+  html body .markdown blockquote {
+    margin: 10px 0 0 0;
   }
   html body .markdown blockquote p {
     color: #000;
