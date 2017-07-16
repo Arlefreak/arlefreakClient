@@ -14,6 +14,7 @@ const Container = ({
     images,
     links,
     tags,
+    className,
 
     meta_url,
     meta_title,
@@ -30,6 +31,7 @@ const Container = ({
             meta_title = { meta_title }
             meta_description = { meta_description }
             meta_preview = { meta_preview }
+            className = { className }
         >
             {
                 links != null &&
@@ -74,6 +76,7 @@ Container.propTypes = {
     links: PropTypes.arrayOf(PropTypes.shape),
     images: PropTypes.arrayOf(PropTypes.shape),
     tags: PropTypes.arrayOf(PropTypes.shape),
+    className: PropTypes.string,
 
     meta_description: PropTypes.string,
     meta_url: PropTypes.string,

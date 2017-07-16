@@ -708,13 +708,8 @@ ul {
   width: 100%;
   padding: 0;
 }
-.cv img {
-  display: none;
-}
-.cv img.index {
-  display: block;
-  width: 15vw;
-  max-width: 100px;
+.cv .markdown ul {
+  columns: 2;
 }
 .diary div {
   margin: 0 0 10px 0;
@@ -1258,7 +1253,7 @@ ul.images li {
   background-position: center;
   background-color: #fff;
   float: left;
-  border: 1px solid #f0f0f0;
+  border: 2px solid #f0f0f0;
   -webkit-transition: border-color 0.5s ease;
   -moz-transition: border-color 0.5s ease;
   -o-transition: border-color 0.5s ease;
@@ -1271,7 +1266,7 @@ ul.images li {
   box-sizing: border-box;
 }
 ul.images li:hover {
-  border: 1px solid #666;
+  border: 2px solid #666;
 }
 ul.images a {
   display: block;
@@ -1307,7 +1302,7 @@ section.gallery img {
   max-width: 100%;
   height: auto;
   margin: 2vh auto 0 auto;
-  border: 1px solid #333;
+  border: 2px solid #333;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -1941,7 +1936,6 @@ svg:hover #stick {
 }
 .markdown ul {
   margin: 20px 0 20px 0;
-  columns: 2;
 }
 .markdown ul li {
   font-size: 1em;
@@ -1959,8 +1953,6 @@ svg:hover #stick {
 @media screen and (max-width: 800px) {
   .markdown ul li {
     width: 100%;
-    font-size: 0.8em;
-    line-height: 1.6em;
   }
 }
 .markdown ul li a {
@@ -2451,7 +2443,9 @@ ul.full-width {
 }
 @media print {
   #footer,
-  .index {
+  .index,
+  .tags,
+  .links {
     display: none;
   }
   #header {
@@ -2459,7 +2453,7 @@ ul.full-width {
     width: auto;
     height: auto;
     background: transparent;
-    top: 5px;
+    top: 12px;
     padding: 0;
     left: initial;
     right: 0.5%;
@@ -2469,38 +2463,52 @@ ul.full-width {
   #header nav {
     display: none;
   }
+  #header main {
+    margin: 0;
+  }
   html body {
     margin: 0;
   }
   html body .wrapper {
     width: 100%;
   }
-  html body main {
-    margin: 0;
-    font-size: 0.75em;
-  }
   html body h1 {
     font-size: 2.5em;
   }
-  html body .markdown h2 {
+  html body .markdown img,
+  html body .gallery img {
+    max-width: 500px;
+    margin: 25px auto 25px auto;
+    page-break-before: auto /* 'always,' 'avoid,' 'left,' 'inherit,' or 'right' */;
+    page-break-after: auto /* 'always,' 'avoid,' 'left,' 'inherit,' or 'right' */;
+    page-break-inside: avoid;
+  }
+  html body .markdown img[src$=".gif"],
+  html body .gallery img[src$=".gif"] {
+    display: none;
+  }
+  html body .cv .markdown {
+    font-size: 0.75em;
+  }
+  html body .cv .markdown h2 {
     font-size: 1.2em;
     margin: 15px auto 15px 0;
   }
-  html body .markdown ul {
+  html body .cv .markdown ul {
     margin: 0;
   }
-  html body .markdown ul li {
+  html body .cv .markdown ul li {
     line-height: 1.8em;
     margin: 0;
   }
-  html body .markdown p {
+  html body .cv .markdown p {
     margin: 0 0 0 0;
     line-height: 1.5em;
   }
-  html body .markdown blockquote {
+  html body .cv .markdown blockquote {
     margin: 10px 0 0 0;
   }
-  html body .markdown blockquote p {
+  html body .cv .markdown blockquote p {
     color: #000;
   }
 }

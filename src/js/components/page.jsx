@@ -10,6 +10,7 @@ const Page = ({
     title,
     isFetching,
     children,
+    className,
 
     meta_url,
     meta_title,
@@ -23,11 +24,11 @@ const Page = ({
         child = 
             <div>
                 <Loading/>
-                <Id index={id}/>
+                <Id index={ id }/>
             </div>;
     } else {
         child = 
-            <div>
+            <div className={ className }>
                 { title != null && 
                         <h1>{title}</h1>
                 }
@@ -84,6 +85,7 @@ Page.propTypes = {
     title: PropTypes.string,
     isFetching: PropTypes.bool.isRequired,
     children: PropTypes.node.isRequired,
+    className: PropTypes.string,
 
     meta_description: PropTypes.string.isRequired,
     meta_url: PropTypes.string.isRequired,

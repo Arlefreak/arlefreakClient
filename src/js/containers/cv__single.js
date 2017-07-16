@@ -14,7 +14,7 @@ const mapStateToProps = (state, ownProps) => {
     };
 
     const meta_description = config.items.description || '';
-    const meta_title = 'CV';
+    const meta_title = 'Mario Carballo Zama';
     const item = {
         id: 0,
         text: config.items.cv,
@@ -23,6 +23,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
         id: 'cv',
         title: 'Mario Carballo Zama',
+        className: 'cv',
         isFetching: config.isFetching,
         item: item,
         meta_description,
