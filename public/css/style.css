@@ -711,6 +711,11 @@ ul {
 .cv .markdown ul {
   columns: 2;
 }
+@media screen and (max-width: 800px) {
+  .cv .markdown ul {
+    columns: 1;
+  }
+}
 .diary div {
   margin: 0 0 10px 0;
 }
