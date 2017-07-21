@@ -536,6 +536,35 @@ input[type=range]:-moz-focusring {
 .volume-controls .button {
   width: 25px;
 }
+.box {
+  border: 4px solid;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 20px;
+  margin: 0 auto 40px auto;
+  font-size: 1.2em;
+  -webkit-transition: border-color 0.2s ease;
+  -moz-transition: border-color 0.2s ease;
+  -o-transition: border-color 0.2s ease;
+  -ms-transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease;
+}
+.box.blue {
+  border-color: #00aeef;
+}
+.box.blue:hover {
+  border-color: #ec008c;
+}
+.box.yellow {
+  border-color: #fff200;
+}
+.box.pink {
+  border-color: #ec008c;
+}
+.box .markdown>:first-child {
+  margin-top: 0;
+}
 .button {
   color: #00aeef;
   border: 2px solid #00aeef;
