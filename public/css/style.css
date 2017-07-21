@@ -542,7 +542,7 @@ input[type=range]:-moz-focusring {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   padding: 20px;
-  margin: 0 auto 40px auto;
+  margin: 0 auto 35px auto;
   font-size: 1.2em;
   -webkit-transition: border-color 0.2s ease;
   -moz-transition: border-color 0.2s ease;
