@@ -2542,7 +2542,7 @@ ul.full-width {
   html body .cv .markdown blockquote {
     margin: 10px 0 0 0;
   }
-  html body .cv .markdown blockquote p {
-    color: #000;
+  html body .cv .markdown blockquote + ul {
+    margin: 10px 0 10px 0;
   }
 }
