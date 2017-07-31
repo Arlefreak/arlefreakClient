@@ -7,6 +7,7 @@ import AboutSingle from './containers/about__single.js';
 import DiaryList from './containers/diary__list.js';
 import DiarySingle from './containers/diary__single.js';
 
+import CvList from './containers/cv__list.js';
 import CvSingle from './containers/cv__single.js';
 
 import LigojList from './containers/ligoj__list.js';
@@ -64,6 +65,11 @@ export const routes = [
         loadData: (params) => diaryAction(params),
     },{
         path: '/cv',
+        exact: true,
+        component: CvList,
+        loadData: () => cvAction(),
+    },{
+        path: '/cv/:slug',
         exact: true,
         component: CvSingle,
         loadData: () => cvAction(),

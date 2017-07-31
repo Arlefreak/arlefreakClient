@@ -88,7 +88,7 @@ export function cvAction() {
     return dispatch => {
         return dispatch(apiFetchIfNeeded('web_client/config/1/')).then(
             response => {
-                return dispatch(fileFetchIfNeeded('https://raw.githubusercontent.com/Arlefreak/Resume/master/README.md'));
+                return dispatch(apiFetchIfNeeded('cv/cv'));
             }
         );
     };
