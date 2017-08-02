@@ -652,7 +652,7 @@ p {
   font-size: 1em;
   font-weight: 400;
   line-height: 1.8em;
-  margin: 0 0 25px 0;
+  margin: 0 0 20px 0;
 }
 @media screen and (max-width: 800px) {
   p {
@@ -739,6 +739,11 @@ ul {
 }
 .cv .markdown ul {
   columns: 2;
+}
+.cv .markdown ul li {
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 @media screen and (max-width: 800px) {
   .cv .markdown ul {
@@ -2006,7 +2011,7 @@ svg:hover #stick {
   }
 }
 .markdown h2 {
-  margin: 20px 0 20px 0;
+  margin: 10px 0 10px 0;
 }
 @media screen and (max-width: 800px) {
   .markdown h2 {
@@ -2497,7 +2502,7 @@ ul.full-width {
   #header nav {
     display: none;
   }
-  #header main {
+  main {
     margin: 0;
   }
   html body {
@@ -2512,7 +2517,7 @@ ul.full-width {
   html body .markdown img,
   html body .gallery img {
     max-width: 500px;
-    margin: 25px auto 25px auto;
+    margin: 20px auto 20px auto;
     page-break-before: auto /* 'always,' 'avoid,' 'left,' 'inherit,' or 'right' */;
     page-break-after: auto /* 'always,' 'avoid,' 'left,' 'inherit,' or 'right' */;
     page-break-inside: avoid;
@@ -2526,23 +2531,29 @@ ul.full-width {
   }
   html body .cv .markdown h2 {
     font-size: 1.2em;
-    margin: 15px auto 15px 0;
+    margin: 15px 0 10px 0;
   }
   html body .cv .markdown ul {
     margin: 0;
   }
   html body .cv .markdown ul li {
-    line-height: 1.8em;
+    line-height: 1.6em;
     margin: 0;
   }
   html body .cv .markdown p {
-    margin: 0 0 0 0;
-    line-height: 1.5em;
+    line-height: 1.6em;
+    margin: 0;
   }
   html body .cv .markdown blockquote {
     margin: 10px 0 0 0;
   }
   html body .cv .markdown blockquote + ul {
     margin: 10px 0 10px 0;
+  }
+  html body .cv .markdown blockquote + ul p {
+    color: #999;
+  }
+  html body .cv .markdown p + ul {
+    margin: 10px 0 0 0;
   }
 }
