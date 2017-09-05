@@ -146,3 +146,13 @@ export function singlePodcastAction(params) {
         );
     };
 }
+
+export function nomadAction() {
+    return dispatch => {
+        return dispatch(apiFetchIfNeeded('web_client/config/1/')).then(
+            response => {
+                return dispatch(apiFetchIfNeeded('nomad/city/'));
+            }
+        );
+    };
+}

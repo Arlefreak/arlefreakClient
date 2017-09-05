@@ -186,6 +186,12 @@ body .wrapper {
     display: none !important;
   }
 }
+@media screen and (min-width: 800px) {
+  html .hideDesktop,
+  body .hideDesktop {
+    display: none !important;
+  }
+}
 aside {
   display: block;
   width: 10vw;
@@ -1951,6 +1957,20 @@ svg:hover #stick {
     opacity: 0;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     filter: alpha(opacity=0);
+  }
+}
+.map {
+  background: #000;
+  width: 48%;
+  height: 100px;
+  float: right;
+  overflow: hidden;
+  display: block;
+}
+@media screen and (max-width: 800px) {
+  .map {
+    float: none;
+    width: 100%;
   }
 }
 .markdown {

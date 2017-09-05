@@ -19,6 +19,8 @@ import PodcastList from './containers/podcast__list.js';
 import EpisodeList from './containers/episode__list.js';
 import EpisodeSingle from './containers/episode__single.js';
 
+import CityList from './containers/city__list.js';
+
 import {
     homeAction,
     projectsAction,
@@ -30,6 +32,7 @@ import {
     ligojAction,
     podcastAction,
     singlePodcastAction,
+    nomadAction,
 } from './actions/pages_actions.js';
 
 export const routes = [
@@ -98,6 +101,11 @@ export const routes = [
         exact: true,
         component: EpisodeSingle,
         loadData: (params) => singlePodcastAction(params),
+    },{
+        path: '/nomad',
+        exact: true,
+        component: CityList,
+        loadData: () => nomadAction(),
     },{
         path: '/',
         exact: true,

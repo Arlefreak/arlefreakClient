@@ -22,6 +22,9 @@ body
     .hideMobile
         @media screen and (max-width: $mobile-width)
             display none !important
+    .hideDesktop
+        @media screen and (min-width: $mobile-width)
+            display none !important
 
 @import 'components/*'
 @import 'print.styl'
