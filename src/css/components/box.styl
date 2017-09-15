@@ -1,8 +1,51 @@
+@keyframes shadow-color-box
+    0%
+        box-shadow 0 0 0 $highlight-blue
+    100%
+        box-shadow 1em 1em 0 $highlight-pink
+
+@keyframes glitch-box
+    0%
+        box-shadow 2px 0px 0 $highlight-blue
+    6%
+        box-shadow -4px 4px 0 $highlight-pink
+    17%
+        box-shadow 6px 4px 0 $highlight-yellow
+    16%
+        box-shadow 0px 4px 0 $white
+    22%
+        box-shadow -6px 4px 0 $highlight-blue
+    28%
+        box-shadow 4px -6px 0 $highlight-yellow
+    37%
+        box-shadow 6px 0px 0 $highlight-pink
+    39%
+        box-shadow -1px 4px 0 $white
+    43%
+        box-shadow 0px 0px 0 $highlight-yellow
+    47%
+        box-shadow 4px -4px 0 $highlight-blue
+    52%
+        box-shadow 0px 0px 0px $black
+    100%
+        box-shadow 0px 0px 0px $black
+
+
+@keyframes animated-box-border
+    0%
+        border-color $highlight-pink
+    33%
+        border-color $highlight-yellow
+    66%
+        border-color $highlight-blue
+    100%
+        border-color $highlight-pink
+
 .box
     border 4px solid
     box-sizing border-box
     padding 20px
-    margin 0 auto 35px auto
+    margin 0 0 10px 0
     font-size 1.2em
     transition border-color 0.2s ease
     &.blue
@@ -13,6 +56,17 @@
         border-color $highlight-yellow
     &.pink
         border-color $highlight-pink
+    &.shadow
+        width calc(100% - 0.3em)
+        box-shadow 0.3em 0.3em 0 $black
+    &.animated
+        border-color $black
+        box-shadow 0.5em 0.5em 0 $highlight-blue
+        transition box-shadow 0.2s ease
+        &:hover
+            box-shadow 0.6em 0.6em 0 $highlight-pink
+            /* animation shadow-color-box 0.2s 1 ease-in-out */
+            /* animation-fill-mode forwards */
     .markdown
         &>:first-child
             margin-top 0

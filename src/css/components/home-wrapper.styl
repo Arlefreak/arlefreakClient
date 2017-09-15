@@ -1,0 +1,18 @@
+.home-wrapper
+    display flex
+    flex-flow row wrap
+    align-items center
+    justify-content space-between
+    @media screen and (max-width: $mobile-width)
+        flex-flow column wrap
+    img
+        width 30%
+        max-width 225px
+        height auto
+        display block
+        @media screen and (max-width: $mobile-width)
+            margin 0 0 20px 0
+    .markdown
+        width 68%
+        @media screen and (max-width: $mobile-width)
+            width 100%

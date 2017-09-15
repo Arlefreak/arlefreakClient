@@ -17,9 +17,14 @@ const Container = ({ id, title, isFetching, items, images, config, route }) => {
             title = { title }
             isFetching = { isFetching }
         >
-            { config != null && <div className="box blue"><div className="markdown" dangerouslySetInnerHTML={{ __html: mdr }}/></div> }
-            <Soon></Soon>
-            { images != null && <div className="margin"></div> }
+            { config != null &&
+                    <div className="box shadow home-wrapper">
+                        <img className="avatar" src="https://www.gravatar.com/avatar/ca9850d5f37fdc233a6dcd03ad211886?s=1024" alt="avatar" title="avatar"/>
+                        <div className="markdown" dangerouslySetInnerHTML={{ __html: mdr }}/>
+                    </div>
+            }
+            {/* <Soon></Soon> */}
+            {/* { images != null && <div className="margin"></div> } */}
             { images != null && <ImageList className="full-width" images={ images } items={ items }></ImageList> }
         </Page>
     );
