@@ -7,7 +7,7 @@ const Container = ({ config }) => {
             <p><a rel="noopener noreferrer" target="_blank" href={ config.twitter }>twitter<i className="fa fa-twitter"/></a></p>
             <p><a rel="noopener noreferrer" target="_blank" href={ 'mailto:' + config.email }>afk@ellugar.co<i className="fa fa-envelope-o"/></a></p>
             <p><a rel="noopener noreferrer" target="_blank" href={ config.github }>github<i className="fa fa-github"/></a></p>
-            <p><a rel="noopener noreferrer" target="_blank" href={ config.linkdn }>linkdin<i className="fa fa-linkedin"/></a></p>
+            <p><a rel="noopener noreferrer" target="_blank" href={ config.linkdn }>linkedIn<i className="fa fa-linkedin"/></a></p>
         </section>
     );
 };
