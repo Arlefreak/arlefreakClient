@@ -177,7 +177,7 @@ body .wrapper {
 @media screen and (max-width: 800px) {
   html .wrapper,
   body .wrapper {
-    width: 80%;
+    width: 90%;
   }
 }
 @media screen and (max-width: 800px) {
@@ -1020,6 +1020,11 @@ pre {
 }
 .index {
   top: 1.5vw;
+}
+@media screen and (max-width: 800px) {
+  .index {
+    position: absolute;
+  }
 }
 article {
   min-height: 70vh;
