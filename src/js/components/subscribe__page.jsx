@@ -31,7 +31,9 @@ const Container = ({
             meta_description = { meta_description }
             meta_preview = { meta_preview }
         >
-            <div className="markdown no-margin" dangerouslySetInnerHTML={{ __html: mdr }}/>
+            <div className="box shadow">
+                <div className="markdown no-margin" dangerouslySetInnerHTML={{ __html: mdr }}/>
+            </div>
             <div className="subscribe">
                 <Subscribe></Subscribe>
                 <Social config={ items }></Social>

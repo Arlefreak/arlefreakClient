@@ -1470,6 +1470,9 @@ textarea {
   border: none;
   -webkit-box-shadow: none;
   box-shadow: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   outline: none;
   border: 2px solid #000;
   margin: 20px auto 20px auto;
@@ -2592,8 +2595,14 @@ ul.links li img {
   height: 100%;
 }
 .social-subscribe {
-  width: 100%;
-  margin: 20px 0 0 0;
+  width: 49%;
+  margin: 0;
+}
+@media screen and (max-width: 800px) {
+  .social-subscribe {
+    width: 100%;
+    margin: 20px 0 0 0;
+  }
 }
 .social-subscribe p {
   width: 100%;
@@ -2691,7 +2700,12 @@ ul.links li img {
   margin: 20px 0 20px 0;
 }
 .subscribe-form {
-  width: 100%;
+  width: 49%;
+}
+@media screen and (max-width: 800px) {
+  .subscribe-form {
+    width: 100%;
+  }
 }
 .subscribe-form form {
   display: -webkit-box;
@@ -2700,15 +2714,15 @@ ul.links li img {
   display: -ms-flexbox;
   display: box;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -moz-box-orient: horizontal;
-  -o-box-orient: horizontal;
-  -webkit-box-lines: multiple;
-  -moz-box-lines: multiple;
-  -o-box-lines: multiple;
-  -webkit-flex-flow: row wrap;
-  -ms-flex-flow: row wrap;
-  flex-flow: row wrap;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-box-lines: single;
+  -moz-box-lines: single;
+  -o-box-lines: single;
+  -webkit-flex-flow: column nowrap;
+  -ms-flex-flow: column nowrap;
+  flex-flow: column nowrap;
   -webkit-box-align: center;
   -moz-box-align: center;
   -o-box-align: center;
@@ -2723,6 +2737,9 @@ ul.links li img {
   justify-content: space-between;
   margin: 40px 0 20px 0;
   margin: 0px;
+}
+.subscribe-form form input:first-child {
+  margin: 0 auto 18px auto;
 }
 ul.tags {
   margin: 0 0 10px 0;
