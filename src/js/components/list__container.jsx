@@ -64,7 +64,7 @@ Container.propTypes = {
     tags: PropTypes.shape(),
     images: PropTypes.shape(),
     description: PropTypes.string,
-    route: PropTypes.string.isRequired,
+    route: PropTypes.string,
 
     meta_description: PropTypes.string,
     meta_url: PropTypes.string,

@@ -1,3 +1,6 @@
+import { React } from 'react';
+import { Redirect } from 'react-router-dom';
+
 import Home from './containers/home__page.js';
 import Subscribe from './containers/subscribe__page.js';
 
@@ -39,10 +42,22 @@ export const routes = [
     { 
         path: '/projects',
         exact: true,
+        //component: (props) => <Redirect to='/portfolio' />,
         component: ProjectList,
         loadData: () => projectsAction(),
     },{
         path: '/projects/:slug',
+        exact: true,
+        /* component: (props) => <Redirect to={`/portfolio/${props.match.params.slug }`} />, */
+        component: ProjectSingle,
+        loadData: (params) => projectSingleAction(params),
+    },{
+        path: '/portfolio',
+        exact: true,
+        component: ProjectList,
+        loadData: () => projectsAction(),
+    },{
+        path: '/portfolio/:slug',
         exact: true,
         component: ProjectSingle,
         loadData: (params) => projectSingleAction(params),
@@ -83,6 +98,11 @@ export const routes = [
         loadData: () => subscribeAction(),
     },{
         path: '/ligoj',
+        exact: true,
+        component: LigojList,
+        loadData: () => ligojAction(),
+    },{
+        path: '/ligo',
         exact: true,
         component: LigojList,
         loadData: () => ligojAction(),

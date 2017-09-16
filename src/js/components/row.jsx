@@ -27,8 +27,8 @@ const ItemRow = ({ id, slug, route, name, title, dateUpdated, dateCreated, link 
 
 ItemRow.propTypes = {
     id: PropTypes.number.isRequired,
-    slug: PropTypes.string.isRequired,
-    route: PropTypes.string.isRequired,
+    slug: PropTypes.string,
+    route: PropTypes.string,
     name: PropTypes.string,
     title: PropTypes.string,
     dateUpdated: PropTypes.string,

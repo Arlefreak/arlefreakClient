@@ -15,12 +15,12 @@ class Header extends React.Component {
                         <nav>
                             <ul>
                                 <li><NavLink exact to="/" activeClassName="active"><img src="/img/routes/home.svg" alt="home"/></NavLink></li>
-                                <li><NavLink to="/projects" activeClassName="active">Projects</NavLink></li>
+                                <li><NavLink to="/portfolio" activeClassName="active">Portfolio</NavLink></li>
                                 <li><NavLink to="/about" activeClassName="active">About</NavLink></li>
                                 <li><NavLink to="/logs" activeClassName="active">Logs</NavLink></li>
                                 <li><NavLink to="/cv/en-games" activeClassName="active">CV</NavLink></li>
                                 <li><NavLink to="/subscribe" activeClassName="active"><img src="/img/routes/subscribe.svg" alt="subscribe"/></NavLink></li>
-                                <li><NavLink to="/ligoj" activeClassName="active"><img src="/img/routes/ligoj.svg" alt="Φ"/></NavLink></li>
+                                <li><NavLink to="/ligo" activeClassName="active"><img src="/img/routes/ligoj.svg" alt="Φ"/></NavLink></li>
                                 <li><NavLink to="/podcasts/detras-del-pixel"><img src="/img/routes/btp.svg" alt="podcasts"/></NavLink></li>
                             </ul>
                         </nav>

@@ -31,7 +31,7 @@ List.propTypes = {
         dateUpdated: PropTypes.string
     }).isRequired).isRequired,
     className: PropTypes.string,
-    route: PropTypes.string.isRequired
+    route: PropTypes.string
 };
 
 export default List;

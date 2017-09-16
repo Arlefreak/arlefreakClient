@@ -40,7 +40,7 @@ const mapStateToProps = (state) => {
         images.isFetching;
 
 
-    const meta_title = 'Projects';
+    const meta_title = 'Portfolio';
 
     return {
         id: 'projects',
@@ -49,7 +49,7 @@ const mapStateToProps = (state) => {
         categories: categories,
         tags: tags,
         images: images,
-        route: 'projects',
+        route: 'portfolio',
         meta_title,
     };
 };
