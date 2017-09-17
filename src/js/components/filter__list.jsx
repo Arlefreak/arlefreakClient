@@ -1,22 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Row from './filter__row.jsx';
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 const FilterList = ({ items, onClick, className, active, allActive, clearAll, all }) => {
     let allClass = allActive ? 'active' : '';
     return(
-        <CSSTransitionGroup
-            transitionName="fade"
-            transitionAppear={true}
-            transitionEnter={true}
-            transitionLeave={true}
-            transitionAppearTimeout={500}
-            transitionEnterTimeout={500}
-            transitionLeaveTimeout={500}
-            component="ul"
-            className = { className }
-        >
+        <ul className={ className } >
             { all &&
                 <Row 
                     key={0}
@@ -44,7 +33,7 @@ const FilterList = ({ items, onClick, className, active, allActive, clearAll, al
                     />;
                 })
             }
-        </CSSTransitionGroup>
+        </ul>
     );};
 
 FilterList.propTypes = {

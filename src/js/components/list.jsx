@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Page from './page.jsx';
 import Row from './row.jsx';
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 const List = ({ items, route, className }) => {
     let classes = className + ' vertical-list';

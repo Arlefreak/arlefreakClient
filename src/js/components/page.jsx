@@ -3,7 +3,6 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import Loading from './loading.jsx';
 import Id from './id.jsx';
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 const Page = ({ 
     id,
@@ -60,23 +59,14 @@ const Page = ({
         meta.push({'property': 'og:audio', 'content': meta_audio});
 
     return (
-        <CSSTransitionGroup
-            transitionName="fade"
-            transitionAppear={true}
-            transitionEnter={true}
-            transitionLeave={true}
-            transitionAppearTimeout={500}
-            transitionEnterTimeout={500}
-            transitionLeaveTimeout={500}
-            component = "div"
-        >
+        <div>
             <Helmet
                 title={ meta_title }
                 meta={ meta }
             >
             </Helmet>
             {child}
-        </CSSTransitionGroup>
+        </div>
     );
 };
 
