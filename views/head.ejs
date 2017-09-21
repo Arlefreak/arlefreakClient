@@ -5,6 +5,7 @@
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
         <%- title -%>
         <%- meta -%>
 
@@ -26,5 +27,6 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <body>
-        <% include tag_manager_body.ejs %>
+        <% include google_analytics.ejs %>
+        <body>
+            <% include tag_manager_body.ejs %>

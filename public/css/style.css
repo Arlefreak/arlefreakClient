@@ -921,11 +921,13 @@ ul.categories li {
 ul.categories li .active {
   color: #ec008c;
 }
+#application,
 main {
   overflow: hidden;
   margin: 0 0 90px 0;
 }
 @media screen and (max-width: 800px) {
+  #application,
   main {
     margin: 0 0 calc(5vh + 10px) 0;
   }
