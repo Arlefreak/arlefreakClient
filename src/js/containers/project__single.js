@@ -46,7 +46,7 @@ const mapStateToProps = (state, ownProps) => {
     const meta_description = item.description;
 
     return {
-        id: 'projects',
+        id: 'portfolio',
         title: item.name,
         meta_description: item.description,
         isFetching: false,

@@ -43,7 +43,7 @@ const mapStateToProps = (state) => {
     const meta_title = 'Portfolio';
 
     return {
-        id: 'projects',
+        id: 'portfolio',
         isFetching: finalFetch,
         items: filterItems,
         categories: categories,

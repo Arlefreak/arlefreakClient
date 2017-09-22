@@ -1,10 +1,36 @@
 .map
-    background black
-    width 48%
-    height 100px
-    float right
-    overflow hidden
+    height 80vh
     display block
-    @media screen and (max-width: $mobile-width)
-        float none
-        width 100%
+    z-index 1
+
+.leaflet-control-container
+    .leaflet-bar
+        a
+            border-radius 0
+            background $black
+            color $white
+            border none
+
+.leaflet-container
+    height 100%
+    .leaflet-control-attribution
+        display none
+    svg
+        height auto
+        width auto
+
+.map-popup
+    .leaflet-popup-content-wrapper
+        box-sizing border-box
+        text-align center
+        font-family $fontSans
+        color $black
+        background $white
+        font-weight 700
+        font-size 1.2em
+        border-radius 0
+        .leaflet-popup-content
+            padding 0
+    .leaflet-container
+        a.leaflet-popup-close-button
+            color $black

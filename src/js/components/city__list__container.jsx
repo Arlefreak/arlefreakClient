@@ -9,7 +9,7 @@ import CategoryList from '../containers/project__filter__categories.js';
 import TagList from '../containers/project__filter__tags.js';
 import ImageList from '../containers/project__images__list.js';
 
-// import Map from './map.jsx';
+import Map from './map.jsx';
 
 const Container = ({
     id,
@@ -38,7 +38,10 @@ const Container = ({
             meta_description = { meta_description }
             meta_preview = { meta_preview }
         >
-            <List items={ items } />
+            <div className='two-child'>
+                <Map items={ items }/>
+                <List items={ items } />
+            </div>
         </Page>
     );
 };

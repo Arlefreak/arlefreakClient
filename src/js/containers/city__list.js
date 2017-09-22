@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
     const meta_title = 'Nomad';
 
     return {
-        id: 'cv',
+        id: 'nomad',
         isFetching: cities.isFetching,
         items: cities.items,
         meta_title,

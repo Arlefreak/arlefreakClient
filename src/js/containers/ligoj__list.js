@@ -27,7 +27,7 @@ const mapStateToProps = (state) => {
     const meta_title = 'Ligo';
 
     return {
-        id: 'ligoj',
+        id: 'ligo',
         isFetching: isFetching && tags.isFetching,
         items: filterItems,
         tags: tags,
