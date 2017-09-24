@@ -20,7 +20,8 @@ const app = express()
             { url: '/about/',  changefreq: 'daily',  priority: 0.7 },
             { url: '/logs/',  changefreq: 'daily',  priority: 0.6 },
             { url: '/cv/',  changefreq: 'monthly',  priority: 0.5 },
-            { url: '/ligoj/',  changefreq: 'daily',  priority: 0.4 },
+            { url: '/ligo/',  changefreq: 'daily',  priority: 0.4 },
+            { url: '/nomad/',  changefreq: 'daily',  priority: 0.4 },
         ]
     });
 

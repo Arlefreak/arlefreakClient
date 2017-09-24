@@ -23,10 +23,10 @@ export function filterItems() {
 
         if(route.name.includes('projects')){
             current_object = apiCalls['portfolio/projects'] || {};
-        } else if(route.name.includes('ligoj')) {
-            current_object = apiCalls['ligoj/link'] || {};
+        } else if(route.name.includes('ligo')) {
+            current_object = apiCalls['ligo/link'] || {};
         } else if(route.name.includes('about')) {
-            current_object = apiCalls['ligoj/entry'] || {};
+            current_object = apiCalls['ligo/entry'] || {};
         } else if(route.name.includes('logs')) {
             current_object = apiCalls['diary/posts'] || {};
         } else {
