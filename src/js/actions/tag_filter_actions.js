@@ -45,39 +45,16 @@ export function clearTagFilter() {
     };
 }
 
-export function filterByTags (projects, tags) {
-    var filteredProjects = [];
-    var i = 0;
-    var j = 0;
-    var k = 0;
-    var project;
-    if(projects && tags){
-        if(projects.length > 0 && tags.length > 0){
-            for(i; i < projects.length; i++){
-                project = projects[i];
-                j = 0;
-                if(project){
-                    for(j; j < project.tags.length; j++){
-                        var b = false;
-                        k = 0;
-                        for(k; k < tags.length; k++){
-                            if(project.tags[j].id === tags[k].tag_id){
-                                filteredProjects.push(project);
-                                b = true;
-                                break;
-                            }
-                        }
-                        if(b){
-                            break;
-                        }
-                    }
-                }
-            }
-        }else{
-            filteredProjects = projects;
-        }
-    }else{
-        filteredProjects = projects;
-    }
-    return filteredProjects;
+export function filterByTags (items, tags) {
+    if(!items || !tags) return [];
+    if(items.length < 1 || tags.length < 1) return [];
+
+    // Return a list of filtered objects that have a tag that matches one of the tags filter array
+    return items.filter((item) => {
+        return item.tags.some((item_tag) => {
+            return tags.some((tags_tag) => {
+                return ( item_tag.tag_id === tags_tag.tag_id );
+            });
+        });
+    });
 };
