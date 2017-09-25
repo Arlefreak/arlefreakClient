@@ -20,14 +20,9 @@ export function setCategoryFilter(id, name) {
 }
 
 export function filterByCategory (projects, category) {
-    if(projects.length > 0){
-        if(category.id === 0){
-            return projects;
-        }else{
-            return projects.filter(t => t.category === category.id);
-        }
-    }else{
-        return projects;
-    }
+    if(projects.length < 1) return projects;
+    if(category.id === 0) return projects;
+
+    return projects.filter(t => t.category === category.id);
 };
 

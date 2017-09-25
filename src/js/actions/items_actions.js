@@ -24,9 +24,9 @@ export function filterItems() {
         if(route.name.includes('projects')){
             current_object = apiCalls['portfolio/projects'] || {};
         } else if(route.name.includes('ligo')) {
-            current_object = apiCalls['ligo/link'] || {};
+            current_object = apiCalls['ligoj/link'] || {};
         } else if(route.name.includes('about')) {
-            current_object = apiCalls['ligo/entry'] || {};
+            current_object = apiCalls['about/entry'] || {};
         } else if(route.name.includes('logs')) {
             current_object = apiCalls['diary/posts'] || {};
         } else {
