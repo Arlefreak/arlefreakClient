@@ -11,8 +11,13 @@ let CircleMarker;
 let ToolTip;
 
 class LeafletMap extends Component {
+    constructor(props) {
+        super(props);
+        this.GetPolyLines = this.GetPolyLines.bind(this);
+        this.GetMarkers = this.GetMarkers.bind(this);
+    }
+
     componentWillMount() {
-        console.log('componentWillMount');
         Map = require('react-leaflet').Map;
         TileLayer = require('react-leaflet').TileLayer;
         Marker = require('react-leaflet').Marker;
@@ -22,16 +27,66 @@ class LeafletMap extends Component {
         ToolTip = require('react-leaflet').ToolTip;
     }
 
+    GetPolyLines() {
+        const { items } = this.props;
+
+        let arr = [];
+        items.map((trip, i) => {
+            let positions = [];
+            trip.cities.map(city => positions.push(city.coordinates));
+            arr.push(
+                <Polyline
+                    key={ i }
+                    positions={ positions }
+                    color={ trip.color }
+                    opacity={ 0.9 }
+                    lineJoin='bevel'
+                    lineCap='butt'
+                    dashArray='10,5'
+                    weight={ 2 }
+                />
+            );
+        });
+        return arr;
+    }
+
+    GetMarkers() {
+        const { items } = this.props;
+
+        let arr = [];
+        items.map((trip, i) => {
+            let positions = [];
+            trip.cities.map((city) => {
+                arr.push(
+                    <CircleMarker
+                        key={ city.id }
+                        center={ city.coordinates }
+                        fillColor={ trip.color }
+                        stroke={ true }
+                        color='#0e0e0e'
+                        weight={ 2 }
+                        radius={ 3 }
+                        opacity={ 1 }
+                        fillOpacity={ 1 }
+                    >
+                        <Popup
+                            className='map-popup'
+                        >
+                            <span>{city.city}{ trip.name && ` - ${trip.name}` }</span>
+                        </Popup>
+                    </CircleMarker>
+                );
+            });
+        });
+        return arr;
+    }
+
     render() {
         const { items } = this.props;
-        const center = items[0].coordinates;
+        const center = items[0].cities[0].coordinates;
 
-        let positions = [];
-        items.map((item) => {
-            positions.push(item.coordinates);
-        });
-
-        const { city, coordinates, title } = items[0];
+        const polyLines = this.GetPolyLines();
+        const markers = this.GetMarkers();
 
         return (
             <div className='map'>
@@ -45,36 +100,8 @@ class LeafletMap extends Component {
                         maxZoom={ 12 }
                         minZoom={ 1 }
                     />
-                    <Polyline
-                        positions={ positions }
-                        color='white'
-                        opacity={ 0.9 }
-                        lineJoin='bevel'
-                        lineCap='butt'
-                        dashArray='10,5'
-                        weight={ 2 }
-                    />
-                    {
-                        items.map((item, i) => 
-                            <CircleMarker
-                                key={ i }
-                                center={item.coordinates}
-                                fillColor='white'
-                                stroke={ true }
-                                color='#0e0e0e'
-                                weight={ 2 }
-                                radius={ 3 }
-                                opacity={ 1 }
-                                fillOpacity={ 1 }
-                            >
-                                <Popup
-                                    className='map-popup'
-                                >
-                                    <span>{ item.city }{ item.title && ` - ${item.title}` }</span>
-                                </Popup>
-                            </CircleMarker>
-                        )
-                    }
+                    { polyLines }
+                    { markers }
                 </Map>
             </div>
         );

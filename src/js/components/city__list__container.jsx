@@ -16,6 +16,7 @@ const Container = ({
     title,
     isFetching,
     items,
+    trips,
     categories,
     tags,
     description,
@@ -39,7 +40,7 @@ const Container = ({
             meta_preview = { meta_preview }
         >
             <div className='two-child'>
-                <Map items={ items }/>
+                <Map items={ trips }/>
                 <List items={ items } />
             </div>
         </Page>
@@ -52,8 +53,11 @@ Container.propTypes = {
     isFetching: PropTypes.bool.isRequired,
     items: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
+    }).isRequired).isRequired,
+    trips: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number.isRequired,
         name: PropTypes.string,
-        title: PropTypes.string
+        color: PropTypes.string.isRequired,
     }).isRequired).isRequired,
     categories: PropTypes.shape(),
     tags: PropTypes.shape(),

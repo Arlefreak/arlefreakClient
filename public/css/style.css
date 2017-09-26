@@ -2386,6 +2386,15 @@ svg:hover #stick {
   color: #fff;
   border: none;
 }
+.leaflet-control-container .leaflet-bar a:hover {
+  background: #333;
+  color: #fff;
+  border: none;
+}
+.leaflet-control-container .leaflet-bar a.leaflet-disabled {
+  color: #999;
+  background: #333;
+}
 .leaflet-container {
   height: 100%;
 }

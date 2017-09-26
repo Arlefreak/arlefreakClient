@@ -10,6 +10,13 @@
             background $black
             color $white
             border none
+            &:hover
+                background $gray5
+                color $white
+                border none
+            &.leaflet-disabled
+                color $gray3
+                background $gray5
 
 .leaflet-container
     height 100%
@@ -34,3 +41,4 @@
     .leaflet-container
         a.leaflet-popup-close-button
             color $black
+

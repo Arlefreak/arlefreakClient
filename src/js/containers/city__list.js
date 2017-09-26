@@ -10,17 +10,24 @@ const mapStateToProps = (state) => {
         items: []
     };
 
+    const trips = apiCalls['nomad/trip'] || {
+        isFetching: true,
+        items: []
+    };
+
     const meta_title = 'Nomad';
 
     return {
         id: 'nomad',
-        isFetching: cities.isFetching,
+        isFetching: cities.isFetching || trips.isFetching,
         items: cities.items,
+        trips: trips.items,
         meta_title,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
+    dispatch(apiFetchIfNeeded('nomad/trip'));
     dispatch(apiFetchIfNeeded('nomad/city'));
     return {};
 };
