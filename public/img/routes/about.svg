@@ -1,12 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="500px" height="500px" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
-    <title>web/routes/about</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Web" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="about" fill-rule="nonzero" fill="#1E1E1C">
-            <path d="M116.688941,500 L149.12552,404.084606 L347.995571,404.084606 L380.446624,500 L475.643135,500 L300.047523,0 L299.130827,0 L200.600436,0 L106.537734,0 L106.537734,72.6457789 L175.082503,72.6457789 L25,500 L116.688941,500 Z M248.553308,110.722453 L319.795094,321.586753 L177.335646,321.586753 L248.553308,110.722453 Z" id="Shape"></path>
-        </g>
-    </g>
-</svg>
+<svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><title>web/routes/about</title><path d="M116.689 500l32.437-95.915h198.87L380.446 500h95.197L300.048 0h-193.51v72.646h68.545L25 500h91.689zm131.864-389.278l71.242 210.865h-142.46l71.218-210.865z" fill="#1E1E1C"/></svg>

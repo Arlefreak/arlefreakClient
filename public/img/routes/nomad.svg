@@ -1,12 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="500px" height="500px" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
-    <title>web/routes/nomad</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Web" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="nomad" fill="#000000">
-            <path d="M71,0 L186.030675,0 L334.803681,358.895706 L337.871166,358.895706 C336.166999,341.172372 336.166999,221.54047 337.871166,0 L429.895706,0 L429.895706,500 L314.865031,500 L166.092025,141.871166 L163.02454,141.871166 L163.02454,500 L71,500 L71,0 Z" id="N"></path>
-        </g>
-    </g>
-</svg>
+<svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><title>web/routes/nomad</title><path d="M71 0h115.03l148.774 358.896h3.067c-1.704-17.724-1.704-137.356 0-358.896h92.025v500H314.865L166.092 141.871h-3.067V500H71V0z" fill-rule="evenodd"/></svg>
