@@ -10,5 +10,5 @@ Api to track projects and the life of Mario Carballo Zama.
 - url: [ellugar.co](https://ellugar.co/)
 - tools: [React](http://facebook.github.io/react/), [Redux](redux.js.org)
 
-ellugar.cois a web client for the ellugar's API, it's on the constant rework.
+ellugar.co is a web client for the ellugar's API, it's on the constant rework.
 
