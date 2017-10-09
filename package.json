@@ -1,6 +1,6 @@
 {
   "name": "web_client.afk",
-  "version": "0.0.1",
+  "version": "1.2.0",
   "description": "website for ellugar.co",
   "main": "index.js",
   "scripts": {
@@ -13,20 +13,16 @@
     "clean": "rm -rf build && mkdir build",
     "start": "node ./build/index.js"
   },
-  "repository": "git+https://github.com/Arlefreak/bp.afk.git",
+  "repository": "git+https://github.com/afk-mcz/web_client.ellu.git",
   "keywords": [
-    "Html5",
-    "stylus",
-    "bower",
-    "gulp",
-    "boilerplate"
+    "ellugar"
   ],
   "author": "afk",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Arlefreak/bp.afk/issues"
+    "url": "https://github.com/afk-mcz/web_client.ellu/issues"
   },
-  "homepage": "https://github.com/Arlefreak/bp.afk#readme",
+  "homepage": "https://github.com/afk-mcz/web_client.ellu#readme",
   "dependencies": {
     "babel-plugin-transform-react-remove-prop-types": "^0.4.9",
     "babel-preset-env": "^1.6.0",
@@ -37,7 +33,6 @@
     "ejs": "^2.5.6",
     "errorhandler": "^1.5.0",
     "express": "^4.16.1",
-    "fs": "^0.0.1-security",
     "isomorphic-fetch": "^2.2.1",
     "leaflet": "^1.2.0",
     "method-override": "^2.3.10",
@@ -69,10 +64,8 @@
     "babel-loader": "^7.0.0",
     "babel-register": "^6.24.1",
     "eslint": "^4.8.0",
+    "fs": "^0.0.1-security",
     "eslint-config-airbnb": "^16.0.0",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-react": "^7.4.0",
     "gulp": "^3.9.1",
     "gulp-imagemin": "^3.4.0",
     "gulp-real-favicon": "^0.2.2",
@@ -89,5 +82,10 @@
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "webpack": "^3.6.0"
+  },
+  "peerDependencies": {
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
   }
 }
