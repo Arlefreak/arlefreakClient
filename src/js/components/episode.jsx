@@ -11,12 +11,6 @@ const Episode = ({ item, slug, iTunesURL, feed, prev, next }) => {
   var mdr = md.render(text);
   return (
     <section className="episode">
-      {item.dateCreated != null && (
-        <div className="date-container">
-          <span className="date">{item.dateCreated} |</span>
-          <span className="date"> {item.dateUpdated}</span>
-        </div>
-      )}
       <div className="episode-info">
         <div className="episode-cover">
           <img src={item.image} alt={item.title} />
