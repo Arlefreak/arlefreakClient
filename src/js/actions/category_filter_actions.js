@@ -6,23 +6,22 @@ const apiURL = constants.APIURL;
 
 export const SET_CATEGORY_FILTER = 'SET_CATEGORY_FILTER';
 export function setCategoryFilter(id, name) {
-    // ReactGA.event({
-    //     category: 'Filter',
-    //     action: 'setCategoryFilter',
-    //     value: id,
-    //     label: name,
-    // });
-    return {
-        type: SET_CATEGORY_FILTER,
-        id,
-        name
-    };
+  // ReactGA.event({
+  //     category: 'Filter',
+  //     action: 'setCategoryFilter',
+  //     value: id,
+  //     label: name,
+  // });
+  return {
+    type: SET_CATEGORY_FILTER,
+    id,
+    name,
+  };
 }
 
-export function filterByCategory (projects, category) {
-    if(projects.length < 1) return projects;
-    if(category.id === 0) return projects;
+export function filterByCategory(projects, category) {
+  if (projects.length < 1) return projects;
+  if (category.id === 0) return projects;
 
-    return projects.filter(t => t.category === category.id);
-};
-
+  return projects.filter(t => t.category === category.id);
+}

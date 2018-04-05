@@ -5,43 +5,44 @@ export const CHANGE_ITEMS = 'CHANGE_ITEMS';
 
 export const SET_VISIBLE_ITEMS = 'SET_VISIBLE_ITEMS';
 export function setVisibleItems(items) {
-    const ITEMS = items || [];
-    return {
-        type: SET_VISIBLE_ITEMS,
-        items: ITEMS
-    };
+  const ITEMS = items || [];
+  return {
+    type: SET_VISIBLE_ITEMS,
+    items: ITEMS,
+  };
 }
 
 export function filterItems() {
-    return function (dispatch, getState){
-        const state = getState() || {};
-        const apiCalls = state['apiCalls'] || [];
+  return function(dispatch, getState) {
+    const state = getState() || {};
+    const apiCalls = state['apiCalls'] || [];
 
-        const route = state['route'] || {name:'/'};
+    const route = state['route'] || { name: '/' };
 
-        let current_object = {};
+    let current_object = {};
 
-        if(route.name.includes('projects')){
-            current_object = apiCalls['portfolio/projects'] || {};
-        } else if(route.name.includes('ligo')) {
-            current_object = apiCalls['ligoj/link'] || {};
-        } else if(route.name.includes('about')) {
-            current_object = apiCalls['about/entry'] || {};
-        } else if(route.name.includes('logs')) {
-            current_object = apiCalls['diary/posts'] || {};
-        } else {
-            current_object = apiCalls['portfolio/projects'] || {};
-        }
+    if (route.name.includes('projects')) {
+      current_object = apiCalls['portfolio/projects'] || {};
+    } else if (route.name.includes('ligo')) {
+      current_object = apiCalls['ligoj/link'] || {};
+    } else if (route.name.includes('about')) {
+      current_object = apiCalls['about/entry'] || {};
+    } else if (route.name.includes('logs')) {
+      current_object = apiCalls['diary/posts'] || {};
+    } else {
+      current_object = apiCalls['portfolio/projects'] || {};
+    }
 
-        const items = current_object.items || [];
+    const items = current_object.items || [];
 
-        const categoryFilter = state['categoryFilter'];
-        const tagFilter = state['tagFilter'] || [];
+    const categoryFilter = state['categoryFilter'];
+    const tagFilter = state['tagFilter'] || [];
 
-        let filteredItems = filterByCategory(items, categoryFilter);
-        filteredItems = filterByTags(filteredItems, tagFilter);
+    let filteredItems = filterByCategory(items, categoryFilter);
+    console.log(filteredItems);
+    filteredItems = filterByTags(filteredItems, tagFilter);
+    console.log(filteredItems);
 
-        dispatch(setVisibleItems(filteredItems));
-    };
+    dispatch(setVisibleItems(filteredItems));
+  };
 }
-
