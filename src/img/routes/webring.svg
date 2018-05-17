@@ -1,13 +1,14 @@
-<svg class="vector" width="300px" height="300px" xmlns="http://www.w3.org/2000/svg" baseProfile="full" version="1.1" style="fill:none;stroke:black;stroke-width:28px;stroke-linecap:square;">
-  <g transform="translate(0,30)">
-    <g transform="translate(150,150),rotate(120,0,0)">
-      <path d="M0,-60 a60,60 0 1,0 0,120 l100,0"></path>   
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="235px" height="211px" viewBox="0 0 235 211" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>webring</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="webring" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square">
+        <g id="Group" transform="translate(20.000000, 19.000000)" stroke="#000000" stroke-width="28">
+            <path d="M72,40 C38.862915,40 12,66.862915 12,100 C12,133.137085 38.862915,160 72,160 L172,160" id="Shape" transform="translate(92.000000, 100.000000) rotate(240.000000) translate(-92.000000, -100.000000) "></path>
+            <path d="M72,73 C38.862915,73 12,99.862915 12,133 C12,166.137085 38.862915,193 72,193 L172,193" id="Shape" transform="translate(92.000000, 133.000000) rotate(120.000000) translate(-92.000000, -133.000000) "></path>
+            <path d="M101,56 C67.862915,56 41,82.862915 41,116 C41,149.137085 67.862915,176 101,176 L201,176" id="Shape"></path>
+        </g>
     </g>
-    <g transform="translate(150,150),rotate(240,0,0)">
-      <path d="M0,-60 a60,60 0 1,0 0,120 l100,0"></path>   
-    </g>
-    <g transform="translate(150,150),rotate(0,0,0)">
-      <path d="M0,-60 a60,60 0 1,0 0,120 l100,0"></path>   
-    </g>
-  </g>
 </svg>
