@@ -58,6 +58,14 @@ class Header extends React.Component {
                     <img src="/img/routes/btp.svg" alt="podcasts" />
                   </NavLink>
                 </li>
+                <li>
+                    <a
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        href="http://webring.xxiivv.com/">
+                    <img src="/img/routes/webring.svg" alt="webring" />
+                  </a>
+                </li>
               </ul>
             </nav>
           </Sticky>
