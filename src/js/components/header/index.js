@@ -9,7 +9,7 @@ class Header extends React.Component {
         <div className="wrapper">
           <div className="title">
             <Link to="/">
-              <img className="logo" src="/img/logo.svg" alt="arlefreak" />
+              <img className="logo" src="/img/logo.svg" alt="ellugar" />
             </Link>
             <h2>
               by Mario Carballo<span className="hideMobile"> Zama</span>
