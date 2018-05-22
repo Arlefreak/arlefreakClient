@@ -39,10 +39,7 @@ export function filterItems() {
     const tagFilter = state['tagFilter'] || [];
 
     let filteredItems = filterByCategory(items, categoryFilter);
-    console.log(filteredItems);
     filteredItems = filterByTags(filteredItems, tagFilter);
-    console.log(filteredItems);
-
     dispatch(setVisibleItems(filteredItems));
   };
 }
