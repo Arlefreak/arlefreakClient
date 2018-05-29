@@ -59,10 +59,11 @@ class Header extends React.Component {
                   </NavLink>
                 </li>
                 <li>
-                    <a
-                        rel="noopener noreferrer"
-                        target="_blank"
-                        href="http://webring.xxiivv.com/">
+                  <a
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    href="http://webring.xxiivv.com/"
+                  >
                     <img src="/img/routes/webring.svg" alt="webring" />
                   </a>
                 </li>
