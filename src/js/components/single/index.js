@@ -15,7 +15,6 @@ const Single = ({ item }) => {
           <span className="date"> {item.dateUpdated}</span>
         </div>
       )}
-
       <div className="markdown" dangerouslySetInnerHTML={{ __html: mdr }} />
     </section>
   );
